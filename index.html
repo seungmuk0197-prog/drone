@@ -197,9 +197,8 @@
         .c-yellow { color: var(--trap-color); font-weight: bold; }
         .c-blue { color: #2b6cb0; font-weight: bold; }
 
-        .oral-q { font-weight: bold; color: #1a365d; margin-top: 25px; font-size: 1.05rem; background: #ebf8ff; padding: 10px; border-radius: 6px; border-left: 4px solid var(--primary-color); }
-        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 10px 0 25px 0; font-size: 0.95rem; }
-        .oral-a strong { color: var(--error-color); }
+        .oral-q { font-weight: bold; color: #1a365d; margin-top: 20px; font-size: 1.05rem; background-color: #edf2f7; padding: 10px; border-left: 4px solid var(--primary-color); border-radius: 0 4px 4px 0; }
+        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 5px 0 20px 0; background-color: #fafafa; padding-top: 8px; padding-bottom: 8px; }
 
         .result-panel {
             background-color: white;
@@ -250,6 +249,12 @@
             .footer-right { text-align: center; font-size: 0.75rem; }
         }
     </style>
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -290,117 +295,169 @@
             </ul>
             <h3>3. 입체형 양방향 이론 링크 📖</h3>
             <ul>
-                <li>문항 하단의 <strong>[이론 확인하기 📖]</strong> 링크 버튼을 누르면, 수험 자료가 완벽 단권화된 <strong>[📖 핵심이론요약]</strong> 탭의 정확한 개념 서술 단원으로 자동 스크롤 이동합니다.</li>
+                <li>문항 하단의 <strong>[이론 확인하기 📖]</strong> 링크 버튼을 누르면, 4권의 수험서가 단권화된 <strong>[📖 핵심이론요약]</strong> 탭의 정확한 개념 서술 단원으로 자동 스크롤 이동합니다.</li>
+                <li>요약집 단원 자료의 기술 기준과 개정 과태료 처분선 위치로 정확히 정렬되어 동기분들의 입체적 원리 연동 암기를 유도합니다.</li>
                 <li>요약집 단원 하단의 <strong>[↩️ 풀던 문제로 돌아가기]</strong> 버튼을 클릭하면, 직전까지 풀고 있던 원래의 문항 위치로 정확히 역스크롤 복귀합니다.</li>
             </ul>
             <h3>4. 회차별 리셋 및 전체 초기화 시스템 기능 🔄</h3>
             <ul>
                 <li><strong>회차별 리셋하기 🔄:</strong> 각 시험 하단에 위치하고 있으며, 기 마킹한 선지 및 실시간 해설, 피드백 점수 배정판 결과가 깨끗이 세척 초기화됩니다.</li>
-                <li><strong>전체회차 초기화 ⚠️:</strong> 상단 우측 대시보드 끝에 부착된 레드 스위치입니다. 구동 중인 전체 기출 문항과 오답 아카이브 저장 기록을 완전 포맷팅하여 최초 학습 전 상태로 롤백해줍니다.</li>
+                <li><strong>전체회차 초기화 ⚠️:</strong> 상단 우측 대시보드 끝에 부착된 레드 스위치입니다. 구동 중인 전체 1,400개 기출 문항과 오답 아카이브 저장 기록을 완전 포맷팅하여 최초 학습 전 상태로 롤백해줍니다.</li>
             </ul>
         </div>
     </div>
 
     <div id="oral_exam" class="tab-content">
         <div class="theory-section">
-            <h2>🗣️ 초경량비행장치 무인멀티콥터 1종 구술평가 올인원 마스터 총정리</h2>
+            <h2>🗣️ 초경량비행장치 무인멀티콥터 1종 구술평가 무누락 총정리</h2>
             <div class="info-box" style="border-left-color: var(--trap-color); background-color: #fffaf0;">
-                <p>📌 <strong>[2026년 최신 보강 패치 완료]</strong> 본 자료는 실기 구술평가장의 무조건 출제되는 예상 질문들을 올인원 요약본의 최신 안전 관리 기준 및 기술 스펙에 맞추어 완전 복원 및 교차 보완한 최종 마킹북입니다.</p>
+                <p>📌 <strong>1️⃣ 첫 번째로 기체에 관련한 사항은 여러분들이 시험보시는 기체의 형식, 제원 등을 정확히 알고 있는지, 멀티콥터의 비행원리, 부품의 명칭과 기능 등에 대해서 물어보는 항목입니다. (출제 빈도 ★★★★★)</strong></p>
+                <p><strong>저희 교육원 기준 기체 : EFT 616S-ED</strong></p>
+                <p>위의 제원표가 현재 저희가 교육용으로 사용하고 있는 EFT 616S-ED 기체의 제원표인데, 구술시험으로 많이 출제되는 것만 뽑아드리면 다음과 같습니다: <strong>FC의 역할, 시험 본 기체의 프로펠러의 규격, 시험 본 기체의 자체이륙중량과 최대이륙중량, 시험 본 기체의 모터의 KV, 시험 본 기체의 배터리의 타입</strong> 등이 있습니다. 이 5가지는 정말 자주 나오니까 완벽하게 외우고 가세요!</p>
             </div>
 
-            <h3>📌 [Part 1] 기체 제원 및 자격증 정보</h3>
-            <div class="oral-q">1. 취득하고자 하는 자격증의 정확한 명칭은 무엇입니까?</div>
-            <div class="oral-a">* <strong>초경량비행장치 무인멀티콥터 1종 조종자 증명(자격증)</strong>입니다.</div>
+            <h3>📌 [Category 1] 교육원 기준 기체 제원 5대 필수 질문</h3>
             
-            <div class="oral-q">2. 초경량비행장치란 무엇입니까?</div>
-            <div class="oral-a">* 항공기와 경량항공기 외에 공기의 반작용으로 뜰 수 있는 장치로서, 국토교통부령으로 정하는 기준에 해당하는 장치(무인동력비행장치 등)를 말합니다.</div>
+            <div class="oral-q">예상질문 1. "FC가 무엇이며, 어떤 역할을 하는지 설명해 보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> FC는 Flight Controller의 줄임말로, 비행제어장치입니다. GPS, 자이로, 가속도 센서로부터 값을 받아 연산 후 ESC에 속도제어 신호를 전달합니다.</div>
             
-            <div class="oral-q">3. 1종 조종자 자격증의 무게 기준은 어떻게 되나요?</div>
-            <div class="oral-a">* <strong>최대이륙중량 25kg 초과, 자체중량 150kg 이하</strong>인 무인멀티콥터 대상입니다. (자체중량이 150kg을 초과할 경우 초경량비행장치 범위를 벗어납니다.)</div>
+            <div class="oral-q">예상질문 2. "사용 중인 기체의 프로펠러 규격을 말해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 3011 규격이며 앞의 30은 30인치(프로펠러 길이), 뒤의 11은 피치(프로펠러 1회전 시 이동 거리, 단위 인치)를 의미합니다.</div>
             
-            <div class="oral-q">4. 자체중량과 최대이륙중량의 차이는 무엇이며 계산법은 어떻게 되나요?</div>
-            <div class="oral-a">* <strong>자체중량:</strong> 기체 무게에 배터리 무게를 <span class="c-red">반드시 포함</span>하여 합산한 중량입니다.<br>* <strong>최대이륙중량:</strong> 자체중량에 최대 적재량(페이로드, 임무 장비 등)까지 모두 안전하게 포함하여 이륙할 수 있는 한계 허용 중량입니다.</div>
+            <div class="oral-q">예상질문 3. "자체이륙중량과 최대이륙중량의 차이와 사용 중인 기체가 각각 몇 kg인지 말해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 자체이륙중량은 배터리만 포함한 무게로 19kg이며, 최대이륙중량은 페이로드 포함 26kg입니다.</div>
             
-            <div class="oral-q">5. 모터의 KV와 프로펠러 피치(Pitch)에 대해 명확히 기술해 보세요.</div>
-            <div class="oral-a">* <strong>KV:</strong> 모터에 무부하 상태로 1V의 전압을 가했을 때 분당 회전하는 수치(RPM)를 의미합니다.<br>* <strong>피치(Pitch):</strong> 프로펠러가 기하학적 축방향으로 완벽히 1회전(360도) 했을 때 가상으로 앞으로 전진 이동하는 직선거리를 의미합니다.</div>
+            <div class="oral-q">예상질문 4. "KV가 무엇을 의미하는지 설명하고, 사용 중인 기체가 몇 KV인지 말해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> KV는 1V 전압 인가 시 모터의 분당 회전수입니다. 사용 중인 기체의 모터는 100KV입니다.</div>
+            
+            <div class="oral-q">예상질문 5. "사용하시는 배터리의 타입이 어떻게 되나요?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 리튬폴리머(Li-Po) 배터리입니다.</div>
 
-            <h3>📌 [Part 2] 핵심 부품 및 센서 매트릭스</h3>
-            <div class="oral-q">1. FC(비행제어장치)와 수신기, ESC의 상관 위치와 역할은 무엇입니까?</div>
-            <div class="oral-a">
-                * <strong>FC (Flight Controller):</strong> 드론의 뇌(컴퓨터의 CPU 역할)에 해당하며, 수신기와 전자변속기(ESC) 사이에 논리적으로 위치합니다.<br>
-                * <strong>수신기 (Receiver):</strong> 조종기로부터 전송되는 무선 제어 명령을 수신합니다.<br>
-                * <strong>ESC (전자변속기):</strong> FC의 계산 연산 신호를 받아 배터리의 <strong>직류(DC) 전원을 교류(AC)로 변환</strong>하여 모터의 기계적인 회전 속도를 실시간 차등 조절합니다.
+            <div class="info-box" style="border-left-color: var(--success-color); background-color: #f0fff4; margin-top: 15px;">
+                <p>💡 <strong>Tip: 이 5가지는 100% 외워가세요.</strong> 여기까지가 기체의 제원에 관련한 사항이고 이외 각 부품의 명칭과 기능, 안정성인증검사, 비행계획승인, 배터리에 관련한 질문들에서도 자주 나오는 항목들을 소개시켜드리겠습니다.</p>
+            </div>
+
+            <h3>📌 [Category 2] 핵심 부품, 인증검사, 기체신고 및 비행승인</h3>
+            
+            <div class="oral-q">예상질문 6. IMU(관성측정장치)의 개념과 구성<br>"IMU가 뭔지, IMU를 이루는 센서가 뭔지 말해보세요."</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> IMU는 관성측정장치이며 가속도 센서, 자이로(각속도) 센서, 지자계 센서로 이루어져 있습니다!<br><br>가속도 센서는 중력에 대한 상대적인 위치와 움직임을 측정하여 자이로 센서의 오차를 보정, 자이로 센서는 세 축 방향의 각속도를 측정하여 수평을 유지해주는데 도움을 주며, 지자계 센서는 자북을 측정하여 드론의 방향 정보를 측정합니다!</div>
+            
+            <div class="oral-q">예상질문 7. 안전성인증검사<br>"안전성인증검사를 관할하는 기관이 어디죠?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 항공안전기술원입니다!</div>
+            
+            <div class="oral-q">예상질문 8. 안전성인증검사<br>"안전성인증검사중 네 개의 검사가 어떻게 돼나요?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 초도검사, 정기검사, 수시검사, 재검사 입니다!</div>
+            
+            <div class="oral-q">예상질문 9. 안전성인증검사<br>"안전성인증검사 기준이 어떻게 돼나요?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 최대이륙중량 25kg 초과 기체이며 유효기간은 2년입니다!</div>
+            
+            <div class="oral-q">예상질문 10-1. 기체 신고<br>"멀티콥터 장치신고 기준 중량이 어떻게 돼나요?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 최대이륙중량 2KG 초과 기체이며 사업용일 경우 2KG 이하 기체도 신고하여야 합니다!</div>
+            
+            <div class="oral-q">예상질문 10-2. 비행승인<br>"비행승인을 관할하는 기관이 어디죠?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 관할의 지방항공청입니다!</div>
+            
+            <div class="oral-q">예상질문 11. 비행승인<br>"비행승인, 촬영승인 신청방법에 대해서 말씀해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 드론원스탑 민원 서비스를 통하여 비행승인 요청서 및 촬영허가서를 작성하여 신청합니다!</div>
+            
+            <div class="oral-q">예상질문 12. 배터리에 관련한 사항<br>"사용하고 있는 배터리의 1셀당 기준전압과 완충전압이 어떻게 돼죠?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 1셀당 기준전압은 3.7V, 완충전압은 4.2V 입니다!</div>
+            
+            <div class="oral-q">예상질문 13. 배터리에 관련한 사항<br>"배터리 폐기절차에 대해서 말해보세요."</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 1:1 비율의 소금물에 담가 환기가 잘 되는 곳에서 완전히 방전시킨 후 폐배터리 수거함에 폐기합니다!</div>
+            
+            <div class="oral-q">예상질문 14. 비행원리<br>"기체가 왼쪽으로 회전 시 각 모터의 회전속도에 대해서 설명해보세요."</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 오른쪽( 시계방향 ) 으로 회전하는 모터가 빨라지고 왼쪽으로 회전하는 모터가 천천히 돕니다!<br><br><strong>이외 기체가 전,후,좌,우 이동 시 모터가 어떻게 회전하는지 꼭 알고 있으셔야 합니다!</strong></div>
+            
+            <div class="oral-q">예상질문 15. 형식<br>"운용하는 기체의 형식에 대해 말해주세요."</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 헥사콥터 입니다! (모터의 개수가 4개면 쿼드콥터입니다!)</div>
+
+            <div class="info-box" style="border-left-color: var(--primary-color); background-color: #edf2f7; margin-top: 15px;">
+                <p><strong>* 기체 관련 필수 암기 체크리스트</strong><br>
+                - FC의 역할과 기능<br>
+                - 프로펠러 규격 해석<br>
+                - 자체이륙중량 vs 최대이륙중량<br>
+                - 모터 KV의 의미<br>
+                - 배터리 타입 및 관리 (리튬폴리머 배터리, 기준전압 3.7V 완충전압 4.2V, 폐기 방법)<br>
+                - IMU 센서 구성 (가속도+자이로+지자기)<br>
+                - 안전성인증검사 (항공안전기술원, 검사 종류, 25kg초과, 2년)<br>
+                - 비행승인 (지방항공청, 드론원스탑)<br>
+                - 비행원리 ( 각 모터의 회전속도 변화 )<br>
+                - 여기까지가 구술시험 중 기체에 관련한 사항이고 자주 나오는 것을 위주로 정리해드렸습니다.</p>
+            </div>
+
+            <h3>📌 2️⃣ 조종자 준수사항 (시험에서 95% 이상 출제되는 필수 암기 항목)</h3>
+            <p>조종자 준수사항은 드론 조종자라면 누구나 반드시 준수해야 하며 준수사항들을 모두 꼭 외워 주셔야 합니다. 다음은 항공안전기술원에서 배포하는 조종자 준수사항 표 기반의 예상질문입니다!</p>
+            
+            <div class="oral-q">예상 질문. "조종자 준수사항을 5개 이상 말해보세요" (가장 자주 나오는 질문!)</div>
+            <div class="oral-a">💬 <strong>모범답변 (아래 중 5개 이상 기술):</strong><br>
+            1. 인명이나 재산에 피해를 줄 수 있는 낙하물 투하 행위 금지<br>
+            2. 인구밀집지역이나 사람이 많이 모인 상공에서 위험한 방법으로 비행하는 행위 금지<br>
+            3. 일몰 후부터 일출 전까지의 야간비행 금지<br>
+            4. 음주 및 환각물질 상태에서의 비행 금지 (혈중알코올농도 0.02% 이상)<br>
+            5. 육안으로 기체를 직접 볼 수 없는 가시권 외 비행 금지<br>
+            6. 비행장 중심 반경 9.3km 이내의 관제권 및 비행금지구역에서의 승인 없는 비행 금지<br>
+            7. 표준 비행고도 150m(500피트) 이상의 고고도 비행 금지</div>
+
+            <h3>📌 3️⃣ 공역 관련 필수 질문 (비행금지구역: P-73, P-518, P-61~P-65)</h3>
+            <p>다음이 우리나라의 비행금지구역들이니 모두 꼭 외워주셔야 합니다~!</p>
+            <ul>
+                <li>• <strong>P-73:</strong> 대통령 집무실 및 관저반경 3.7km</li>
+                <li>• <strong>P-518:</strong> 휴전선인근, 경기북부, 강원북부</li>
+                <li>• <strong>P-61:</strong> 부산 / 고리원전 (원전중심으로부터 18.6KM)</li>
+                <li>• <strong>P-62:</strong> 경주 / 월성원전 (원전중심으로부터 18.6KM)</li>
+                <li>• <strong>P-63:</strong> 영광 / 한빛원전 (원전중심으로부터 18.6KM)</li>
+                <li>• <strong>P-64:</strong> 울진 / 한울원전 (원전중심으로부터 18.6KM)</li>
+                <li>• <strong>P-65:</strong> 대전원자력연구소 (원전중심으로부터 18.6KM)</li>
+            </ul>
+
+            <h3>📌 4️⃣ 다음은 이외에 구술시험중 많이 물어보는 예상 질문들이에요.</h3>
+            
+            <div class="oral-q">1. 관제공역 예상 질문<br>“관제권이 무엇인지, 반경 몇 KM 인지 말해보세요.”</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 비행장 또는 공항과 그 주변의 공역으로, 관제탑 중심으로 반경 9.3km(5NM) 이내의 공역입니다!</div>
+            
+            <div class="oral-q">2. 기상 조건 예상 질문<br>“기상의 7대 요소중 세 개를 말해보세요.”</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 기온, 기압, 습도, 구름, 강수, 시정, 바람 입니다!</div>
+
+            <div class="info-box" style="border-left-color: var(--error-color); background-color: #fff5f5; margin-top: 15px;">
+                <p><strong>3. 공역 관련 마지막 당부!</strong><br>공역에 관련한 사항은 비행금지구역을 물어보는 질문이 많이 나오니 꼭 숙지하셔야 되는 걸 다시 강조해드립니다!<br><strong>특히 P518, P73, P61~P65는 100% 암기하고 가세요!</strong></p>
+            </div>
+
+            <h3>📌 5️⃣ 일반지식 및 비상절차 (안전 관련 지식과 위급상황 대처능력 평가)</h3>
+            
+            <div class="oral-q">1. NOTAM ( 항공고시보 ) 예상 질문<br>"NOTAM이 무엇인지 설명해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 항공종사자들이 반드시 적시에 인지해야 할 항공시설, 업무, 절차 또는 위험의 신설, 운영상태에 대해 배포되는 공고문이며 최대 유효기간은 3개월 입니다!</div>
+            
+            <div class="oral-q">2. 인명사고 발생시 대처 요령 예상 질문<br>”드론 운용 중 인명사고 발생시 대처방법을 말하세요.“</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 즉시 119에 신고 후 관할의 지방항공청, 한국교통안전공단의 초경량비행장치 사고조사업무팀에 신고합니다!</div>
+            
+            <div class="oral-q">3. 비상절차 예상 질문<br>"비행 중 비상상황 발생 시 조치사항을 설명해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 주변에 비상을 알림 후 즉시 인명, 시설에 피해가 가지 않는 장소에 빨리 착륙시킵니다! ( GPS에 오작동이 있다는 것을 명시하면 자세모드로 변경 후 착륙시킨다고 답변하면 됩니다. )</div>
+            
+            <div class="oral-q">3. 지방항공청 예상 질문<br>”우리 나라의 지방항공청 3개가 어디있는지, 서울지방항공청의 관할 지역이 어디인지 말해보세요.“</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 서울, 부산, 제주 지방항공청이며 서울지방항공청은 서울, 경기, 강원, 충남, 충북, 전북 지역입니다!</div>
+            
+            <div class="oral-q">4. 법규 예상 질문<br>”조종자 준수사항을 위반했을 때 처벌에 대해서 말해보세요.“</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 최대 300만원 이하의 과태료 입니다!<br><br>이 외 조종자 증명을 받지 않고 비행하는 행위 ( 최대 과태료 400만원 ), 안전성 인증을 받지 않은 경우 ( 최대 과태료 500 만원 ), 음주비행시 처벌 ( 혈중알코올농도 0.02% 이상일 시 , 3년 이하 징역 또는 3천만원 이하 벌금) 등에 대해 자주 물어보니 참고해주세요!</div>
+            
+            <div class="oral-q">5. 항공기에 작용하는 힘 예상 질문<br>”항공기에 작용하는 네 가지 힘에 대해 말해보세요.“</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 양력, 중력, 추력, 항력 입니다!</div>
+
+            <div class="info-box" style="border-left-color: var(--error-color); background-color: #fff5f5; margin-top: 15px;">
+                <p>마지막 카테고리인 <strong>'이륙 중 엔진 고장 및 이륙 포기'</strong>는 가장 위험한 비상상황에 대한 대처능력을 평가하는 항목입니다!</p>
             </div>
             
-            <div class="oral-q">2. FC 내장 센서 5가지의 개별 역할은 무엇인가요?</div>
-            <div class="oral-a">
-                * <strong>자이로 센서 (Gyro):</strong> 기체의 각속도를 정밀 측정하는 기울기 센서로 <strong>자세 제어</strong>를 총괄합니다.<br>
-                * <strong>가속도 센서:</strong> 선형 이동 가속도를 연산하여 드론의 <strong>절대 수평 자세 평형</strong>을 유지합니다.<br>
-                * <strong>지자기 센서 (Compass):</strong> 지구 자기장을 실시간 감지하여 기체의 <strong>진행 방향 및 방위</strong>를 산출합니다.<br>
-                * <strong>기압 센서:</strong> 대기압 변화를 체킹하여 기체의 <strong>고도를 계산 및 자동 유지</strong>합니다.<br>
-                * <strong>GPS 센서:</strong> 인공위성 좌표를 수집하여 현재 <strong>위치·속도 제어</strong> 및 비상시 출발지로 복귀하는 <strong>리턴 투 홈(RTH)</strong>을 수행합니다.
-            </div>
+            <div class="oral-q">1. 이륙 중 비상시 대처요령 예상 질문<br>"이륙 중 기체 이상 발생 시 어떻게 해야 하나요?"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 주위의 상황을 큰 소리로 알리고 즉시 이륙을 포기합니다. 사람이 없고 안전한 곳에 착륙한 후 전원을 분리합니다. 착륙 후 기체 점검을 실시합니다!</div>
             
-            <div class="oral-q">3. 브러시리스(BLDC) 모터가 드론에 필수적인 이유는 무엇인가요?</div>
-            <div class="oral-a">* 기존 BCD(브러시드 모터)는 내장 브러시 마찰로 인해 소모성 제품인 반면, <strong>BLDC 모터는 마찰이 없어 소음·발열이 적고 반영구적으로 사용이 가능</strong>하여 신뢰도가 매우 높기 때문입니다.</div>
-
-            <h3>📌 [Part 3] 비상상황 대처 및 비행 원리</h3>
-            <div class="oral-q">1. 비행 중 조종 불능(Fly-away / 노콘) 상태 직면 시 최우선 처치는 무엇입니까?</div>
-            <div class="oral-a">* <span class="c-red">조종자 제1철칙:</span> 119 신고나 강제 조작 시도보다 먼저, <strong>주변 사람들에게 큰 소리로 "위험합니다! 대피하세요!"라고 외쳐 위험 상황을 전파하고 대피시키는 것이 최우선</strong>입니다. 이후 GPS 단락 시 <strong>ATTI(자세제어) 모드</strong>로 긴급 전환하여 안전 공역으로 유도 수동 착륙시킵니다.</div>
-            
-            <div class="oral-q">2. 비행 중 특정 모터가 불시 고장 났을 때 프로펠러 개수별 기체 반응은?</div>
-            <div class="oral-a">
-                * <strong>쿼드콥터 (4개):</strong> 평형이 완전히 무너지며 고장 난 모터 방향으로 급격히 기울어 <strong>즉시 추락</strong>합니다.<br>
-                * <strong>헥사콥터 (6개):</strong> 고장 난 방향으로 제자리 회전(요잉) 현상이 발생하나 긴급 착륙 유도는 가능합니다.<br>
-                * <strong>옥타콥터 (8개):</strong> 어느 정도 제자리 호버링 및 제어력을 유지할 수 있으나, 안전을 위해 즉시 착륙시켜야 합니다.
-            </div>
-            
-            <div class="oral-q">3. 기체에 작용하는 4가지 힘과 등속 수평 비행(호버링 포함)의 역학 조건은?</div>
-            <div class="oral-a">* 4대 힘은 <strong>양력(위), 중력(아래), 추력(전진), 항력(후방 저항)</strong>입니다. <strong>양력과 중력이 완벽히 같고, 동시에 추력과 항력이 완벽히 일치할 때</strong> 등속 수평 비행 및 안정적 호버링 조건이 성립됩니다.</div>
-            
-            <div class="oral-q">4. 비행 도중 이동 속도를 2배 올렸을 때 양력과 항력, 동합은 어떻게 변화하나요?</div>
-            <div class="oral-a">* 공기역학적 속도 제곱 비례 법칙에 의거하여, <strong>속도가 2배 가속되면 양력과 항력, 동합은 모두 정확히 4배(제곱)로 폭증</strong>합니다.</div>
-
-            <h3>📌 [Part 4] 배터리(Li-Po) 관리 및 안전 가이드라인</h3>
-            <div class="oral-q">1. 사용 중인 배터리의 전압 가이드라인 수치를 말해보세요.</div>
-            <div class="oral-a">* 리튬 폴리머(Li-Po) 배터리를 사용합니다.<br>* <strong>1셀 기준 정격 전압은 3.7V, 만충 전압은 4.2V</strong>이며 과방전으로 인한 영구 손상을 막기 위한 <strong>최대 방전 한계 전압은 셀당 3.3V</strong>로 칼같이 제어해야 합니다.</div>
-            
-            <div class="oral-q">2. 배터리의 올바른 장기 보관(스토리지) 기준은 어떻게 되나요?</div>
-            <div class="oral-a">* 완충 상태로 장기 보관하면 가스가 차 부풀어 오르는 <strong>스웰링(Swelling) 현상</strong>이 발생하므로, 반드시 40~50% 잔량인 <strong>셀당 3.8V~3.85V(스토리지 모드)</strong>로 맞추어 직사광선을 피한 서늘한 상온(5℃~25℃)에 내화성 안전 주머니(리포 세이프 백)에 넣어 분리 보관합니다. <span class="c-red">60℃ 이상 고온 노출 시 폭발 위험이 급증합니다.</span></div>
-            
-            <div class="oral-q">3. [중요] 수명이 다한 리튬 배터리의 올바른 폐기 방법은 무엇인가요?</div>
-            <div class="oral-a">* <span class="c-red">🚨 과거 관행이었던 소금물 방전 폐기법은 절대 금지(지양)합니다.</span> 소금물은 내부 화학 반응을 불필요하게 촉진하여 발열, 누액, 유독 가스를 유발해 화재 위험을 가중시킵니다. 현재 가이드라인은 방전기나 기체 전력 소모를 통해 <strong>전기적으로 완전히 완전 방전(0V) 처리한 후 지자체 수거 절차 및 기준에 따라 분리 배출 폐기</strong>하는 것이 원칙입니다.</div>
-            
-            <div class="oral-q">4. 리튬 배터리 화재 발생 시 화재 등급 명칭과 올바른 소화 방법은?</div>
-            <div class="oral-a">* 리튬 배터리 화재는 <strong>D급 금속 화재</strong>로 정식 분류됩니다. 일반적인 ABC 분말 소화기는 약재 침투가 불가능하므로 효과가 전혀 없으며, <strong>전용 D급 소화기를 사용하거나 대량의 물을 집중적으로 쏟아붓는 냉각 주수 소화</strong>를 단행해야 합니다.</div>
-
-            <h3>📌 [Part 5] 항공 법규 및 개정 과태료·벌칙 Matrix</h3>
-            <div class="oral-q">1. 조종자 준수사항 7가지를 명확히 읊어보세요.</div>
-            <div class="oral-a">* <strong>1) 야간 비행 금지</strong>(일몰 후부터 일출 전까지 원칙적 금지)<br><strong>2) 음주 및 약물 비행 금지</strong><br><strong>3) 비가시권 비행 금지</strong>(조종자 육안 목측 범위를 벗어난 비행 금지)<br><strong>4) 법정 고도 150m(500피트) 이상 비행 금지</strong><br><strong>5) 인구밀집지역 상공 위험 위협 비행 금지</strong><br><strong>6) 불법 낙하물 투하 행위 금지</strong><br><strong>7) 관제권 및 비행금지구역 무단 비행 금지</strong></div>
-            
-            <div class="oral-q">2. 음주 비행의 단속 기준 수치와 적발 시 법적 처벌 수위는 어떻게 되나요?</div>
-            <div class="oral-a">* <strong>단속 기준:</strong> 혈중 알코올 농도 <strong>0.02% 이상</strong> 시 처벌 대상입니다. (자동차 기준 0.03%보다 훨씬 엄격합니다.)<br>* <strong>처벌 형량:</strong> 음주 비행 적발 또는 관련 음주 측정 거부 시 <strong>3년 이하의 징역 또는 3,000만 원 이하의 벌금형</strong>에 처해지며 즉시 정과 기록이 남는 중범죄 형사 처벌 조항입니다.</div>
-            
-            <div class="oral-q">3. 안전성 인증 검사를 받지 않고 비행한 일종 기체의 최고 과태료 처분 한도액은 얼마인가요?</div>
-            <div class="oral-a">* 초경량비행장치 법정 의무인 안전성 인증 검사를 무단 패스하고 비행 시 부과되는 행정 과태료는 <strong>최대 500만 원 이하의 과태료</strong>로, 과태료 처분 항목 중 가장 단가가 비쌉니다.</div>
-            
-            <div class="oral-q">4. 정식 조종자 자격증을 소지하지 않은 상태로 무면허 비행 적발 시 과태료는 어떻게 되나요?</div>
-            <div class="oral-a">* 조종자 증명 없이 1종 의무 드론을 조종 시 <strong>최대 300만 원 이하의 과태료</strong>가 처분됩니다. (1차 위반 시 150만 원 부과)</div>
-            
-            <div class="oral-q">5. 안전성 인증 종류 4가지를 열거하고, 기체 신고의 민원 처리 기한 기준을 명시하세요.</div>
-            <div class="oral-a">
-                * <strong>안전성 인증 종류:</strong> 1) 초도 인증(최초 실시), 2) 정기 인증(유효기간 만료 시), 3) <strong>수시 인증(기체 대수리 및 대개조 후 새로 신청)</strong>, 4) 재인증(부적합 판정 후 정비 재신청)<br>
-                * <strong>기체 신고 법정 시한:</strong> 
-                - 신규 신고: 비행을 시작하기 전까지 필수<br>
-                - 변경 신고(소유주 인적 사항, 주소, 주된 보관 장소 변경): 사유 발생일로부터 <strong>30일 이내</strong><br>
-                - 말소 신고(기체 파손, 분실, 멸실 및 해체): 사유 발생일로부터 <strong>15일 이내</strong> 처리가 법정 의무 시한입니다.
-            </div>
+            <div class="oral-q">2. 페일세이프 ( Fail-safe ) 예상 질문<br>"페일세이프 기능에 대해 설명해보세요"</div>
+            <div class="oral-a">💬 <strong>모범답변:</strong> 조종기 신호가 끊어지거나 배터리가 부족할 때 자동으로 작동하는 안전 기능입니다. 이륙한 지점으로 자동 복귀( Return to home )하거나 제자리 호버링 또는 자동 착륙을 실행합니다!</div>
         </div>
     </div>
 
     <div id="theory" class="tab-content">
         <div class="info-box" style="border-left-color: var(--success-color);">
-            <h3>📖 드론 초경량비행장치 조종 자격시험 필기 핵심이론요약집 (유튜브 올인원 완벽 단권화 복원본)</h3>
+            <h3>📖 드론 초경량비행장치 조종 자격시험 필기 핵심이론요약집 (유튜브 올인원 통합 마스터 가이드)</h3>
         </div>
         
         <div class="theory-section" id="theory-law">
@@ -408,238 +465,415 @@
             
             <h3>1) 공식 용어 및 기체 분류</h3>
             <ul>
-                <li>• <span class="c-blue">공식 명칭:</span> 무인 멀티콥터의 공식적인 용어는 <strong>RPA 또는 RPAS(Remote Piloted Aircraft System)</strong>입니다. 흔히 가시적으로 통용되는 <strong>UA(Unmanned Aircraft) 또는 UAV는 학술·법적 공식 용어가 명백히 아닙니다.</strong></li>
-                <li>• 프로펠러 개수에 따른 기하학적 명칭 분류:
+                <li>• <span class="c-blue">공식 명칭:</span> 무인 멀티콥터의 공식적인 용어는 RPA 또는 RPAS(Remote Piloted Aircraft System)입니다. 흔히 쓰는 UA(Unmanned Aircraft) 또는 UAV는 공식 용어가 아닙니다. [cite: 5, 6]</li>
+                <li>• 프로펠러 개수에 따른 명칭:
                     <ul>
-                        <li>• 3개: 트라이콥터 (Tri-copter)</li>
-                        <li>• 4개: 쿼드콥터 (Quad-copter)</li>
-                        <li>• 6개: 헥사콥터 (Hexa-copter)</li>
-                        <li>• 8개: 옥타콥터 (Octa-copter)</li>
-                        <li>• 12개: 도데카콥터 (Dodeca-copter)</li>
+                        <li>• 3개: 트라이콥터 (Tri-copter) [cite: 8]</li>
+                        <li>• 4개: 쿼드콥터 (Quad-copter) [cite: 9]</li>
+                        <li>• 6개: 헥사콥터 (Hexa-copter) [cite: 10]</li>
+                        <li>• 8개: 옥타콥터 (Octa-copter) [cite: 11]</li>
+                        <li>• 12개: 도데카콥터 (Dodeca-copter) [cite: 12]</li>
                     </ul>
                 </li>
-                <li>• <span class="c-blue">프로펠러(로터)의 허용 재료:</span> 카본, 플라스틱, 나무 재질은 성형 및 비행 사용이 가능하지만, <strong>철이나 알루미늄 같은 고강도 금속 재질은 무겁고 파손 파편 비산 시 극도로 위험하므로 <span class="c-red">절대 쓰지 않는 것이 원칙</span></strong>입니다.</li>
+                <li>• <span class="c-blue">프로펠러(로터)의 재료:</span> 카본, 플라스틱, 나무는 사용이 가능하지만, 철이나 알루미늄 같은 금속 재질은 무겁고 위험하므로 절대 쓰지 않습니다. [cite: 13]</li>
             </ul>
 
-            <h3>2) 모터의 종류와 역학적 특성</h3>
+            <h3>2) 모터의 종류와 특징</h3>
             <ul>
-                <li>• <span class="c-blue">BCD (브러시드 모터):</span> 내부에 기계적 접점인 브러시가 내장되어 있어 지속적인 마찰과 스파크가 발생하므로 주기적으로 교체해야 하는 <strong>소모성 제품</strong>입니다. 단가가 저렴하고 구동 제어 구조가 간단합니다.</li>
-                <li>• <span class="c-blue">BLDC (브러시리스 모터):</span> 내부 마찰 접점인 브러시를 완전히 제거하여 마찰 저항이 전무하고 소음·발열이 극소화된 진화형 모터입니다. <strong>반영구적으로 사용이 가능</strong>하여 대형 산업용 드론에 전면 채택되며, 기계적 상반전 유도를 위해 <strong>별도의 전자변속기(ESC) 제어가 필수 결합</strong>되어야 합니다.</li>
+                <li>• <span class="c-blue">BCD (브러시드 모터):</span> 브러시가 내장되어 있어 지속적인 마찰이 발생하므로 소모성 제품입니다. 가격이 저렴하고 구조가 간단합니다. [cite: 15]</li>
+                <li>• <span class="c-blue">BLDC (브러시리스 모터):</span> 브러시가 없어 마찰이 없고 소음이 적으며 반영구적으로 사용 가능하여 진화된 형태입니다. 주로 대형 드론에 많이 쓰이며, 기계적 회전을 제어하기 위해 별도의 전자변속기(ESC)가 필수적입니다. [cite: 16, 17]</li>
             </ul>
 
-            <h3>3) 핵심 구동계 및 5대 필수 구성 요소</h3>
+            <h3>3) 핵심 구동계 및 구성 요소</h3>
             <ul>
-                <li>• <span class="c-blue">배터리:</span> 중량 대비 전력 효율성이 압도적인 <strong>리튬 폴리머(Li-Po) 배터리</strong>가 주로 사용됩니다. (납축전지는 무게가 너무 과도하게 무거워 드론 탑재용으로는 절대 부적합합니다.)</li>
-                <li>• <span class="c-blue">수신기 (리시버):</span> 조종기로부터 전송되는 무선 고주파 조작 명령 신호를 인계받습니다.</li>
-                <li>• <span class="c-blue">ESC (전자변속기, Electric Speed Controller):</span> 비행제어장치(FC)의 명령을 받아 모터가 요구하는 속도로 전력을 변환 조절합니다. 특히 배터리의 <strong>직류(DC) 전원을 기계적 회전용 교류(AC)로 변환해 주는 핵심 장치</strong>입니다.</li>
-                <li>• <span class="c-blue">FC (비행제어장치, Flight Controller):</span> 드론의 <strong>'뇌'에 해당</strong>하며, 컴퓨터의 CPU 역할을 수행합니다. 수신기로부터 인계받은 조종 명령과 각종 내장 센서 데이터를 수집·처리·모니터링하여 실시간 모터 속도를 정밀 계산 및 조작 제어합니다. 위치는 물리적으로 <strong>수신기와 전자변속기(ESC) 사이에 견고히 직렬 위치</strong>합니다.</li>
-                <li>• <span class="c-red">🚨 [시험 단골] 오답 유의 포인트 (주요 구성 요소가 명백히 아닌 것):</span> 시험 문제에서 멀티콥터의 구성 파츠가 아닌 단골 오답으로 출제되는 항목은 <strong>메인 로터, 테일 로터(일반 유인 헬리콥터 필수 부품), 라디에이터(엔진 냉각 장치), 감속기, 리서</strong> 등입니다. 이들은 멀티콥터 드론 부품이 아니므로 칼같이 골라내야 합니다.</li>
+                <li>• <span class="c-blue">배터리:</span> 드론용 배터리로는 가볍고 효율이 좋은 리튬 폴리머 배터리가 주로 사용됩니다. [cite: 19]</li>
+                <li>• <span class="c-blue">수신기 (리시버):</span> 조종기로부터 오는 무선 조작 명령을 수신합니다. [cite: 20]</li>
+                <li>• <span class="c-blue">ESC (전자변속기, Electric Speed Controller):</span> 수신된 조종 명령을 비행제어장치를 거쳐 모터의 기계적인 회전 속도로 변환·제어해주는 장치입니다. [cite: 21]</li>
+                <li>• <span class="c-blue">FC (비행제어장치, Flight Controller):</span> 드론의 '뇌'에 해당하며, 컴퓨터의 CPU(중앙처리장치) 역할을 합니다. 수신기로 전달받은 명령과 각종 센서 정보들을 수집, 처리, 모니터링하여 각 모터의 회전 속도를 계산 및 조작합니다. 수신기와 전자변속기(ESC) 사이에 위치합니다. [cite: 22, 23, 24]</li>
+                <li>• <span class="c-red">🚨 오답 유의 포인트 (주요 구성 요소가 아닌 것):</span> 드론의 주요 구성 요소가 아닌 것을 찾는 문제에서 단골 오답으로 나오는 항목: 메인 로터, 테일 로터(일반 헬리콥터 부품), 라디에이터(냉각 장치), 감속기, 리서 등은 멀티콥터의 주요 부품이 아닙니다. [cite: 27, 28]</li>
             </ul>
 
-            <h3>4) FC 내장 센서의 종류와 역할 (★초기 당락 결정 단원)</h3>
+            <h3>4) FC 내장 센서의 종류와 역할 (★초기 단골 출제) [cite: 29]</h3>
             <table class="theory-table">
-                <tr>
-                    <th>센서 명칭</th>
-                    <th>주요 측정 기준 및 핵심 제어 역할</th>
-                </tr>
-                <tr>
-                    <td class="c-blue">자이로 센서 (Gyro)</td>
-                    <td>기체의 <strong>각속도(초당 회전 각도)를 측정하는 기울기 센서</strong>로 드론의 전체 <strong>자세 제어</strong>를 전담합니다.</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">가속도 센서</td>
-                    <td>기체의 이동 <strong>선형 가속도를 측정하여 드론의 수평 평형 영점 자세</strong>를 안전하게 유지해 줍니다.</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">지자기 센서 (Compass)</td>
-                    <td>지구 자기장 물리선을 실시간 감지하여 기체의 <strong>진행 방향 및 방위각</strong>을 산출합니다.</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">기압 센서</td>
-                    <td>주변 대기 압력을 정밀 측정하여 기체의 실시간 <strong>고도 계산 및 고도 유지(Alt-Hold)</strong> 역할을 담당합니다.</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">GPS 센서</td>
-                    <td>인공위성 좌표 정보를 실시간 매칭 활용하여 현재 <strong>위치 좌표 및 비행 속도를 계산</strong>하며, 페일 세이프 비상시 출발 지점으로 자율 복귀하는 <strong>리턴 투 홈(RTH)</strong>의 핵심 주체입니다.</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">초음파 센서</td>
-                    <td>바닥면에 초음파를 쏘아 반사되어 돌아오는 시간을 측정, <strong>근거리 정밀 고도나 주위 장애물</strong>을 감지합니다.</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">이미지 센서</td>
-                    <td>카메라 렌즈로 들어오는 빛 광학 정보를 전자적 부호 신호로 전환하는 소자입니다 (CCD, CMOS 등).</td>
-                </tr>
-                <tr>
-                    <td class="c-blue">비전 포지셔닝 센서</td>
-                    <td>하부 다중 복합 센서를 연동 활용하여 실시간 <strong>바닥 지형 패턴을 광학 인식하고 위치를 강제 고정</strong>하는 홀딩 기능을 수행합니다.</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>센서 명칭</th>
+                        <th>주요 측정 기준 및 역할 [cite: 30]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">자이로 센서 (Gyro)</td>
+                        <td>기체의 각속도를 측정하는 기울기 센서로, 드론의 자세 제어를 담당합니다. [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">기압 센서</td>
+                        <td>기압을 측정하여 기체의 고도 계산 및 유지 역할을 합니다. [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">지자기 센서 (Compass)</td>
+                        <td>지구 자기장을 감지하여 기체의 진행 방향 및 방위를 산출합니다. [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">가속도 센서</td>
+                        <td>기체의 이동 가속도를 측정하여 드론의 수평을 유지해줍니다. [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">GPS 센서</td>
+                        <td>인공위성 좌표 정보를 활용하여 현재 위치 및 속도 계산을 하며, 비상시 출발 지점으로 복귀(리턴 투 홈)하는 핵심 역할을 수행합니다. [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">초음파 센서</td>
+                        <td>초음파 반사를 통해 정밀한 고도나 주위 장애물을 감지합니다. [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">IMAGE 센서</td>
+                        <td>카메라 등 렌즈를 통해 들어온 이미지 정보를 전자적 신호로 전환합니다(CCD, CMOS 등). [cite: 30]</td>
+                    </tr>
+                    <tr>
+                        <td class="c-blue" style="font-weight:bold;">비전 포지셔닝 센서</td>
+                        <td>다중 복합 센서를 활용하여 바닥 지형을 인식하고 위치를 고정하는 복합 기능을 수행합니다. [cite: 30]</td>
+                    </tr>
+                </tbody>
             </table>
+            <br>
             <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
         </div>
 
         <div class="theory-section" id="theory-theory">
-            <h2>2. 비행 원리 및 공기역학 (Aerodynamics)</h2>
+            <h2>2. 비행 원리 및 공기역학 (Aerodynamics) [cite: 31]</h2>
             
-            <h3>1) 대기 중에서 작용하는 공기역학 4대 힘</h3>
+            <h3>1) 대기 중에서 작용하는 4대 힘 [cite: 32]</h3>
+            <p>기체가 비행할 때는 상호 상대적 개념을 가진 4가지 힘이 작용합니다. [cite: 33]</p>
             <ul>
-                <li>• <span class="c-blue">중력 (Gravity):</span> 지구가 질량을 가진 드론을 중심 지면 방향(아래)으로 끌어당기는 하향 힘.</li>
-                <li>• <span class="c-blue">양력 (Lift):</span> 프로펠러 회전 압력차로 기체를 공중으로 부양시키는 상향 힘(위). <span class="c-blue">양력 > 중력이면 상승 기동, 양력 < 중력이면 하강 기동</span>을 합니다.</li>
-                <li>• <span class="c-blue">추력 (Thrust):</span> 로터면이 기울어지며 기체가 전방으로 나아가게 유도하는 추진력(전진).</li>
-                <li>• <span class="c-blue">항력 (Drag):</span> 기체 전진 비행 진행 방향의 역방향으로 끄는 공기 저항력(후방). <span class="c-yellow">추력 > 항력이면 전진 가속, 추력 < 항력이면 감속 또는 후진 성향</span>을 띱니다.</li>
-                <li>• <span class="c-red">등속 수평 비행 완벽 조건:</span> 공간 상에서 속도 변화 없이 수평을 유지하며 일정한 속도로 비행하려면 <strong>양력 = 중력 조건과 추력 = 항력 조건이 동시에 완벽하게 성립</strong>되어야 안정 유지 가능합니다.</li>
+                <li>• <span class="c-blue">중력 (Gravity):</span> 지구가 드론을 지면 방향(아래)으로 끌어당기는 힘. [cite: 34]</li>
+                <li>• <span class="c-blue">양력 (Lift):</span> 기체를 공중으로 부양시키는 힘(위). 양력 > 중력이면 기체는 상승하고, 양력 < 중력이면 기체는 하강합니다. [cite: 35]</li>
+                <li>• <span class="c-blue">추력 (Thrust):</span> 기체가 앞으로 나아가게 하는 추진력(전진). [cite: 36]</li>
+                <li>• <span class="c-blue">항력 (Drag):</span> 기체 진행 방향의 반대로 끄는 저항력(후방). 추력 > 항력이면 전진 가속하며, 추력 < 항력이면 속도가 줄어들거나 후진하게 됩니다. [cite: 37]</li>
+                <li>• <span class="c-red">등속 수평 비행:</span> 양력과 중력이 같고, 동시에 추력과 항력이 완벽하게 같아야 유지가 가능합니다. [cite: 38]</li>
             </ul>
 
-            <h3>2) 기체 기준축과 운동 상태 명칭 (★무조건 1문제 출제)</h3>
+            <h3>2) 기체 기준축과 운동 상태 명칭 (★무조건 출제) [cite: 41]</h3>
             <ul>
-                <li>• <span class="c-blue">X축 (세로축):</span> 기체의 중심 머리와 꼬리를 세로로 관통하는 기준축. 이 축을 기준으로 회전 운동 시 좌우 날개가 위아래로 출렁 흔들리는 옆놀이인 <strong>롤링(Rolling)</strong> 운동이 발현됩니다. <span class="c-yellow">💡 연상 암기법: 세로산 롤렉스</span></li>
-                <li>• <span class="c-blue">Y축 (가로축):</span> 좌우 날개 끝단을 가로로 관관 통과하는 기준축. 이 축을 기준으로 흔들릴 시 기체 머리가 앞뒤로 출렁이는 키놀이인 <strong>피칭(Pitching)</strong> 운동이 발현됩니다. <span class="c-yellow">💡 연상 암기법: 피칭 가와이</span></li>
-                <li>• <span class="c-blue">Z축 (수직축):</span> 하늘 수직과 땅 바닥 방향을 관통하는 중심 축선. 이 축을 회전축 삼아 돌면 동체가 제자리에서 뱅글 도는 빗놀이인 <strong>요잉(Yawing)</strong> 운동이 발현됩니다. <span class="c-yellow">💡 연상 암기법: 야윈 수지</span></li>
+                <li>• <span class="c-blue">X축 (세로축):</span> 기체의 중심을 세로로 관통하는 축입니다. 이 축을 중심으로 회전하면 좌우가 흔들리는 옆놀이, 즉 롤링(Rolling) 운동을 합니다. [cite: 42]
+                    <br><span class="c-yellow">💡 암기법: 세로산 롤렉스 (세로축 = 롤링 = X축) [cite: 43]</span>
+                </li>
+                <li>• <span class="c-blue">Y축 (가로축):</span> 기체를 가로로 관통하는 축입니다. 이 축을 기준으로 흔들리면 앞뒤로 출렁이는 키놀이, 즉 피칭(Pitching) 운동을 합니다. [cite: 44, 45]
+                    <br><span class="c-yellow">💡 암기법: 피칭 가와이 (피칭 = 가로축 = Y축) [cite: 46]</span>
+                </li>
+                <li>• <span class="c-blue">Z축 (수직축):</span> 하늘과 땅 방향으로 수직 관통하는 축입니다. 이 축을 기준으로 회전하면 도는 제자리 회전인 빗놀이, 즉 요잉(Yawing) 운동을 합니다. [cite: 47]
+                    <br><span class="c-yellow">💡 암기법: 야윈 수지 (요잉 = 수직축 = Z축) [cite: 48]</span>
+                </li>
             </ul>
 
-            <h3>3) 기동 세부 원리 및 이상 공력 현상</h3>
+            <h3>3) 기동 원리 및 현상 [cite: 49]</h3>
             <ul>
-                <li>• <span class="c-blue">모터 회전수와 이동 방향 상관관계:</span> 쿼드콥터 드론이 오른쪽(우측)으로 수평 이동하고자 할 때는 <strong>좌측 모터 속도가 급격히 빨라지고 우측 모터 속도는 상대적으로 느려져야</strong> 합니다. 즉, <strong>움직이고자 유도하는 타깃 방향의 정반대쪽 모터 속도가 더 빨라야</strong> 기체가 타깃 방향으로 기울어지며 양력 유도 전진 추력을 확보하게 됩니다.</li>
-                <li>• <span class="c-blue">지면 효과 (Ground Effect):</span> 드론이 지면 바닥과 매우 밀착된 저고도(대략 프로펠러 직경 거리 이내)에서 비행할 때, 아래로 뿜어진 프로펠러 하부 유도 하향 기류가 지면에 부딪힌 후 탈출하지 못하고 갇히게 되면서 일시적으로 <strong>양력이 급격히 증가(부풀어 오름)</strong>하는 현상입니다.</li>
-                <li>• <span class="c-blue">실속 현상 (Stall):</span> <strong>받음각(Angle of Attack, 날개 시위선과 상대풍 흐름 방향 사이의 사잇각)을 허용 한계 이상으로 과도하게 높이면</strong> 공기 흐름이 날개 상부 표면을 타고 흐르지 못하고 떨어져 나가는 박리 현상이 터지며 소용돌이 와류가 발생합니다. 이로 인해 <strong>양력이 아주 급격히 실종 감소하고 항력은 폭증</strong>하여 기체가 제어 불능 추락하게 됩니다.</li>
-                <li>• <span class="c-blue">윙렛 (Winglet):</span> 고정익 날개 양 끝단에 수직 구조로 꺾어 올린 작은 유선형 유도판으로, 날개 끝단 상하 압력차로 터지는 끝단 와류 유발 현상을 억제하여 <strong>유도 항력을 획기적으로 감소</strong>시킵니다.</li>
-                <li>• <span class="c-blue">공기 속도 비례 법칙:</span> 대기 속 비행 중 <strong>속도를 기존 대비 정확히 2배 속도로 가속하면 양력(Lift)과 항력(Drag)은 속도의 제곱에 비례하므로 총 4배로 폭증</strong>합니다. 유체 운동 압력인 동합 역시 속도의 제곱에 정비례합니다.</li>
-                <li>• <span class="c-blue">나선형 후류 (Spiraling Slipstream):</span> 전방 프로펠러가 시계 방향(우회전)으로 초고속 회전하면서 발생한 강력한 소용돌이 형태의 회전 후류 기류가 동체를 감싸고 회전하며 흐르다, 기체 꼬리 부분에 수직으로 솟은 수직 안정판 좌측면을 강하게 타격하게 됩니다. 이로 인해 <strong>꼬리가 우측으로 밀려 나가면서 기수(드론 머리)가 좌측 방향으로 강제 편향 치우치는 현상</strong>이 유도됩니다.</li>
-                <li>• <span class="c-blue">안정성과 조종성의 진실:</span> 항공 역학상 기체의 안정성과 조종성 스펙은 완벽한 <strong>상호 반비례 관계</strong>입니다. 안정성을 높게 튜닝하면 조종 능률 피드백이 떨어지고, 반대로 조종 반응성을 극대화하면 기체 복원 안정성이 현저히 저하됩니다.</li>
+                <li>• <span class="c-blue">모터 회전수와 이동 방향:</span> 쿼드콥터가 우측으로 이동하고자 할 때는 좌측 모터가 더 빨리 돌고 우측 모터가 느리게 돌아야 합니다. [cite: 50] 즉, 움직이려는 방향의 반대쪽 모터 속도가 더 빨라야 기체가 기울어지며 해당 방향으로 추진력을 얻습니다. [cite: 51]</li>
+                <li>• <span class="c-blue">지면 효과 (Ground Effect):</span> 드론이 지면과 매우 가까운 고도에서 비행할 때 프로펠러 하부의 유도 기류가 지면과 충돌하여 갇히게 되면서, 일시적으로 양력이 급격히 증가하는 현상입니다. [cite: 52]</li>
+                <li>• <span class="c-blue">실속 현상 (Stall):</span> 받은각(Angle of Attack, 날개 시위선과 공기 흐름 방향 사이의 각도)을 과도하게 높이면 공기 흐름이 날개 표면에서 박리되어 떨어져 나가며 와류(소용돌이)가 발생합니다. [cite: 53] 이로 인해 기체를 띄우는 양력이 급격히 감소하고 항력이 증가하여 기체가 추락할 위험에 직면하게 됩니다. [cite: 54]</li>
+                <li>• <span class="c-blue">윙렛 (Winglet):</span> 날개 끝단에 수직 형태로 설치하는 작은 날개로, 끝단 와류를 억제하여 유도 항력을 감소시키는 역할을 합니다. [cite: 55]</li>
+                <li>• <span class="c-blue">속도와 양력·항력의 관계:</span> 비행 중 속도를 2배 올리면, 양력과 항력은 속도의 제곱에 비례하므로 모두 4배 증가합니다. [cite: 56] 동합 또한 속도의 제곱에 비례합니다. [cite: 57]</li>
+                <li>• <span class="c-blue">나선형 후류 (Spiraling Slipstream):</span> 전방 프로펠러의 시계 방향 회전으로 생긴 소용돌이 형태의 후류가 기체 동체를 감싸고 흐르다 꼬리 부분의 수직 안정판 좌측을 때리게 됩니다. [cite: 58] 이로 인해 꼬리가 우측으로 밀리며 기수(머리)가 좌측으로 치우치는(편향) 현상이 발생합니다. [cite: 59]</li>
+                <li>• <span class="c-blue">비행기의 안정성과 조종성:</span> 둘은 철저히 반비례 관계입니다. 안정성이 높아지면 조종성이 떨어지고, 조종성이 극대화되면 안정성이 낮아집니다. [cite: 60]</li>
             </ul>
 
-            <h3>4) 유체역학 핵심 이론 및 항공 속도계 계기 원리</h3>
+            <h3>4) 유체역학 핵심 이론 및 속도계 원리 [cite: 61]</h3>
             <ul>
-                <li>• <span class="c-blue">베르누이의 정리 (Bernoulli's Theorem):</span> 이상 유체 흐름선 상에서 <strong>유체의 이동 속도 수치와 내부 정압 수치는 철저히 상호 반비례</strong>합니다. 즉, 공기 유속이 빨라지면 압력은 내려가고, 유속이 느려지면 정압은 치솟습니다. 에어포일(날개골) 상부 유선형 곡면을 흐르는 공기 속도가 하부 직선면 속도보다 압도적으로 빠르기 때문에 <strong>상부 압력이 낮아지고 하부 압력이 높아지는 상하 차등 압력 편차에 의해 위로 뜨는 양력이 발생</strong>합니다.</li>
-                <li>• <span class="c-blue">유체 압력 방정식 공식:</span> <strong>정압(정지 상태 대기압) + 동합(유속 속도가 가지는 가동 압력) = 전압(전체 총압)</strong> 구조가 유지됩니다. <span class="c-yellow">💡 초단기 암기 공식: 정동전</span></li>
-                <li>• <span class="c-blue">전압 보존 법칙:</span> 밀폐 유체 관로 내부나 일정한 유선 흐름 속에서 전체 총 압력값인 전압(Total Pressure)은 어느 지점에서든 항상 불변 일정하게 보존 유지됩니다. 따라서 <strong>속도가 빨라져 동합 파트가 커지면 전압 총량 유지를 위해 정압 파트는 무조건 반비례 감소</strong>하게 됩니다.</li>
-                <li>• 항공 계기별 이용 압력 소스 세트 매칭 유형 (★핵심):
+                <li>• <span class="c-blue">베르누이의 정리 (Bernoulli's Theorem):</span> 유체의 속도와 압력은 반비례합니다. 즉, 유체의 속도가 빠를수록 압력은 감소하고, 속도가 느릴수록 압력은 증가합니다. [cite: 62] 에어포일(날개골) 상부의 공기 흐름 속도가 하부보다 빠기 때문에, 상부의 압력이 낮아지고 하부의 압력이 높아져 기체가 위로 뜨는 양력이 발생합니다. [cite: 63]</li>
+                <li>• <span class="c-blue">압력 종류와 합:</span> 정압(정지 상태의 대기압) + 동합(속도를 가진 유체의 압력) = 전압(전체 압력)입니다. [cite: 64]
+                    <br><span class="c-yellow">💡 암기법: 정동전 (정압 + 동합 = 전압) [cite: 65]</span>
+                </li>
+                <li>• 유체의 흐름 속에서 전압(Total Pressure)은 어느 지점에서든 항상 일정하게 유지됩니다. [cite: 66] 따라서 속도나 밀도가 증가하여 동합이 커지면, 전압 유지를 위해 정압은 무조건 감소하게 됩니다. [cite: 67]</li>
+                <li>• 계기별 이용 압력: [cite: 68]
                     <ul>
-                        <li>- <strong>대기 속도계:</strong> 오직 <strong>동합(속도압)</strong>만을 추출 이용합니다.</li>
-                        <li>- <strong>고도계 및 승강계:</strong> 오직 대기 높낮이 압력인 <strong>정압(대기압)</strong>만을 소스로 이용합니다.</li>
-                        <li>- <strong>선회 경사계:</strong> 구조상 정압과 동합 변화 조건에 <strong>전연 영향을 받지 않는</strong> 독립 자이로 계기입니다.</li>
+                        <li>- 대기 속도계: 동합(속도압)을 이용합니다. [cite: 69]</li>
+                        <li>- 고도계 및 승강계: 정압(대기압)을 이용합니다. [cite: 70]</li>
+                        <li>- 선회 경사계: 정압과 동합 모두에 영향을 받지 않는 계기입니다. [cite: 73]</li>
                     </ul>
                 </li>
-                <li>• <span class="c-blue">유해 항력 (Parasite Drag, 기생 항력):</span> 양력 발생과는 아무런 직접 관계가 없는 동체 외형 형상 저항, 마찰 저항, 부품 간 간섭 저항, 유선형이 아니어서 생기는 압력 저항 등을 총칭합니다. <strong>주의할 점은 날개 끝단 와류 때문에 필연적으로 터지는 유도 항력(Induced Drag)은 유해 항력 분류 범주에 절대 포함되지 않는다는 사실</strong>입니다.</li>
+                <li>• <span class="c-blue">유해 항력 (Parasite Drag, 기생 항력):</span> 양력 발생과 직접 관계가 없는 불필요한 항력들을 뜻하며 압력항력, 마찰항력, 조파항력, 간섭항력, 형상항력 등이 포함됩니다. [cite: 74] 날개 끝 와류로 인해 발생하는 유도 항력(Induced Drag)은 유해 항력에 포함되지 않습니다. [cite: 75]</li>
             </ul>
             <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
         </div>
 
         <div class="theory-section" id="theory-procedure">
-            <h2>3. 조종기 모드 및 기체 운용 실무</h2>
+            <h2>3. 조종기 모드 및 기체 운용 실무 [cite: 76]</h2>
             
-            <h3>1) 조종기 모드 1 및 모드 2 세부 스틱 맵 조작 규격</h3>
+            <h3>1) 조종기 모드 1 및 모드 2 세부 기능 조작 [cite: 77]</h3>
+            <p>드론 조종에는 크게 모드 1과 모드 2가 사용되며, 스틱별 역할 지정을 완벽히 숙지해야 합니다. [cite: 78]</p>
             <table class="theory-table">
-                <tr>
-                    <th>구분</th>
-                    <th>왼쪽 스틱 (위/아래)</th>
-                    <th>왼쪽 스틱 (좌/우)</th>
-                    <th>오른쪽 스틱 (위/아래)</th>
-                    <th>오른쪽 스틱 (좌/우)</th>
-                </tr>
-                <tr>
-                    <td style="font-weight:bold; color:var(--primary-color);">모드 1</td>
-                    <td>엘리베이터 (전후진)</td>
-                    <td rowspan="2">러더 (Rudder)<br>- 제자리 좌우 회전<br>- 요잉(Yawing) 제어</td>
-                    <td>스로틀 (상승하강)</td>
-                    <td rowspan="2">에일러론 (Aileron)<br>- 좌우 수평 이동<br>- 롤링(Rolling) 제어</td>
-                </tr>
-                <tr>
-                    <td style="font-weight:bold; color:var(--trap-color);">모드 2</td>
-                    <td>스로틀 (상승하강)</td>
-                    <td>엘리베이터 (전후진)</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>왼쪽 스틱 (위/아래) [cite: 79]</th>
+                        <th>왼쪽 스틱(좌/우) [cite: 79]</th>
+                        <th>오른쪽 스틱 (위/아래) [cite: 79]</th>
+                        <th>오른쪽 스틱 (좌/우) [cite: 79]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight:bold; color:var(--primary-color);">모드 1 [cite: 79]</td>
+                        <td>엘리베이터 (전후진) [cite: 79]</td>
+                        <td rowspan="2">러더 (Rudder)<br>- 요잉(Yawing) 제어 [cite: 79]<br>- 제자리 좌우 회전 [cite: 79]</td>
+                        <td>스로틀 (상승하강) [cite: 79]</td>
+                        <td rowspan="2">에일러론 (Aileron)<br>- 롤링(Rolling) 제어 [cite: 79]<br>- 좌우 수평 이동 [cite: 79]</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold; color:var(--trap-color);">모드 2 [cite: 79]</td>
+                        <td>스로틀 (상승하강) [cite: 79]</td>
+                        <td>엘리베이터 (전후진) [cite: 79]</td>
+                    </tr>
+                </tbody>
             </table>
-            <ul>
-                <li>• <span class="c-yellow">💡 스틱 연동 모드 암기 기법:</span>
-                    <ul>
-                        <li>- <strong>모드 1 암기법 [원스 / 1-S]:</strong> 모드 1은 <strong>오른쪽 스틱에 스로틀(Throttle)</strong>이 위치합니다. 고로 왼쪽 위아래는 자동 엘리베이터 배치입니다.</li>
-                        <li>- <strong>모드 2 암기법 [투셀 / 2-EL]:</strong> 모드 2는 <strong>오른쪽 스틱에 엘리베이터(Elevator)</strong>가 배치됩니다. 고로 왼쪽 위아래는 자동 스로틀이 들어갑니다.</li>
-                    </ul>
-                </li>
-                <li>• <strong>공통 고정 스틱:</strong> 좌우 선회 <strong>러더(왼쪽 스틱 좌우)</strong>와 좌우 이동 <strong>에일러론(오른쪽 스틱 좌우)</strong>은 모드 1과 모드 2 규격 모두 위치가 완벽히 100% 동일하므로 변형 유의선에서 제외합니다.</li>
-                <li>• <strong>실무 채택 성향:</strong> 모드 2는 우측 단일 스틱 조작만으로 전·후·좌·우(엘리베이터+에일러론) 2차원 평면 이동 기동이 완벽히 직관 대칭 처리되므로 초보자 직관성 및 농업용 방제 드론에 절대 보편적으로 널리 공용 쓰이며, 모드 1은 왼손 곡선 주행성이 정밀하여 전통적 고정익이나 초고속 레이싱 드론 매니아 파트에서 가동됩니다.</li>
-            </ul>
-
-            <h3>2) 유인 헬리콥터 3대 조종 장치 메커니즘 (교차 변칙 함정 방어선)</h3>
-            <ul>
-                <li>• <span class="c-blue">콜렉티브 레버 (Collective Pitch Lever, 동시 피치 레버):</span> 메인 로터에 달린 모든 블레이드 날개 각도인 피치각을 동시에 똑같은 비율로 전부 가변하여 기체를 수직 방향으로만 <strong>상승 및 하강 제어</strong>하는 기구입니다.</li>
-                <li>• <span class="c-blue">사이클릭 레버 (Cyclic Pitch Control, 주기 피치 레버):</span> 메인 로터 가동 회전 전방위 각 비행면 기울기 방향을 주기적인 차등 각도로 변화시켜 기체의 <strong>전후진 가속 및 좌우 횡비행 축선을 조작 제어</strong>합니다.</li>
-                <li>• <span class="c-blue">방향키 페달 (Tail Rotor Pedal):</span> 꼬리 날개에 장착된 테일 로터의 블레이드 각도를 발 발판으로 조절하여 반토크 상쇄 및 기체의 <strong>좌우 머리 회전(방향 전환 요잉)을 전담</strong>합니다.</li>
-            </ul>
-
-            <h3>3) 실무 비행 운용 지침 및 안전 관리 레벨</h3>
-            <ul>
-                <li>• <span class="c-blue">안전 반경 이착륙 지점 세팅:</span> 드론 이착륙 반경은 조종자 및 민간인, 장애물 물리 경계선으로부터 <strong>최소 안전거리 15m 이상이 철저히 유격 확보</strong>되어야 정석 비행입니다. 평탄해야 하며 공항 반경 9.3km 이내 관제권 무단 진입은 불법입니다.</li>
-                <li>• <span class="c-red">🚨 [최우선 행동 순위] 조종 불능 Fly-away 돌발 대처:</span> 비행 조종 도중 드론이 통제력을 상실하고 무단 이탈 폭주하는 노콘 참사 발생 시, 조종자가 행해야 할 법적 최우선 행동 수칙은 <strong>주변 사람들에게 목청껏 큰 소리로 "위험합니다! 대피하세요!"라고 소리쳐 육상 인원을 대피시키는 안전 확보 행동</strong>입니다. 119 무전 신고나 강제 추락 유도는 명백한 차순위 후순위 업무입니다.</li>
-                <li>• <span class="c-blue">비행 전 조종기 무선 도달 전개 테스트:</span> 이륙 기동 전, 기체와 정확히 <strong>30m 유격 이격된 거리</strong>에서 조종기의 출력을 획기적으로 낮추어 무선 수신 도달 반경 상태를 체킹하는 레인지(Range) 모드 필드 테스트를 필수 루틴 수행해야 합니다.</li>
-            </ul>
             
-            <h3>4) 프로펠러 기하학 설계 및 심화 이론 팩터</h3>
+            <h3>※ 스틱 매칭 암기 팁 [cite: 80]</h3>
             <ul>
-                <li>• 피치 (Pitch) 정의: 프로펠러 블레이드가 유체 속에서 슬립이 없다고 가정 시, 축방향으로 완전하게 1회전(360도) 회전했을 때 전방 직선 축으로 전진 돌파해 나아간 가상의 기하학적 이동 거리를 뜻합니다.</li>
-                <li>• 물리 벡터(Vector)량 속성 선별: 크기 정보와 공간 방향성 정보를 동시에 결합 내포하는 물리 이동 수치량입니다. 종류는 <strong>속도, 가속도, 양력, 추력, 충격량, 전기장 세기, 자기장 강도</strong> 등이 속합니다. (주의: <strong>질량(Mass)이나 밀도, 온도는 방향성이 아예 없으므로 스칼라량에 배치되며 벡터량이 절대 아닙니다.</strong>)</li>
-                <li>• 비행기 법정 이륙 거리 구성 3대 요소: 항공기가 활주로에서 이착륙 시 총 이륙 거리 판정 기준은 <strong>지상 활주 거리 + 공중 전이 거리 + 정속 상승 거리의 3가지 물리적 수치 결합 합산 총합치</strong>로 규정합니다. 이륙 거리를 획기적으로 최소 단축하기 위해 배풍(뒷바람)이 아닌 <strong>정풍(맞바람, 헤드윈드)을 완전 정면으로 안고 이륙 양력을 받아야 절대 유용</strong>합니다.</li>
-                <li>• 지시 대기속도 (IAS, Indicated Airspeed) 측정 현실: 대기 기류 밀도 압착 오차, 피토관 기체 장착 꺾임 각도 오차, 비행 뱅크 자세 제어 변화 오차 등을 <strong>전연 기계·계산 수정 보정하지 않은 채 단순히 콕핏 조종석 속도계 바늘 지시 눈금판을 있는 그대로 목측 독출해 낸 순수 날것의 가시적 대기 속도</strong>를 의미합니다.</li>
-                <li>• 수직 이착륙기 (VTOL) 하이브리드 속성: 형태가 단단히 고정된 고정익 날개의 초고속 순항 순항 이점 특성과 양방향 로터가 회전 제어되는 회전익 드론 기체의 정밀 수직 제어를 동시에 일체 결합 겸비한 첨단 항공 비행체 아키텍처입니다.</li>
-                <li>• 프로펠러 비틀림(Twist) 설계의 항공 역학적 진실: 무인기 프로펠러 날개 블레이드 단면은 일자형이 아니라 외형이 중심축에서 끝단까지 유선형으로 뒤틀려 뒤틀려 설계 가공되어 있습니다. 이 설계의 목적은 고속 순항 비행 시 프로펠러 날개 <strong>모든 전 구간(허브부터 팁단까지)에 걸쳐 균일하고 일정한 표준 받은각(Angle of Attack)을 강제 정렬 형성시켜 줌으로써 양력 효율성을 극대화하기 위함</strong>입니다.</li>
-                <li>• 프로펠러 부위별 회전 속도 오차: 동일 회전수(RPM) 구동 조건일지라도, 날개의 실제 수평 물리 이동 비선형 속도는 중심축인 <strong>허브 근처가 회전 반경이 작아 가장 느린 속도선</strong>을 형성하고, 날개 바깥쪽 최말단 영역인 <strong>팁(Tip)단 영역으로 갈수록 원주 회전 반경이 기하학적으로 커지므로 실제 속도가 음속에 준할 만큼 압도적으로 초고속 빠릅니다.</strong></li>
-                <li>• 날개 뒤틀림 각도 배치 기준: 프로펠러가 틀어진 기하학적 장착 각도는 중심축 <strong>허브 쪽 회전 속도가 느린 단면의 뒤틀림 각도가 가장 크게 꺾여 있고, 바깥 최말단 팁단 쪽 영역의 장착 각도가 가장 작게 눕도록 점진적 테이퍼 형상 설계</strong>가 정석 공리입니다.</li>
-                <li>• 프로펠러 최대 효율 가동선: 프로펠러는 엔진이나 모터가 낼 수 있는 최대 마력 출력을 쥐어짜 뿜어낼 때가 아닌, <strong>설계 매트릭스 상 지정된 정격 표준 적정 출력을 일정하게 유지하여 정속 순항(Cruise) 비행을 전개할 때 내부 기계적 공력 효율성이 최고 조율 발휘</strong>되도록 구현되어 있습니다.</li>
-                <li>• 항공 자이로 기본 성질 필수 계기 3대장 세트: 공간 상 축선 보존 고집을 부리는 자이로스코프 물리 역학 성질을 전면 이용해 가동하는 비행 필수 3대 계기는 <strong>선회 경사계, 방향 지시계, 비행 자세계</strong>가 속합니다. (함정 유의: <strong>재빙 압력계나 흡기 압력계는 자이로 성질과 눈곱만큼도 상관없는 순수 압력 계기</strong>입니다.)</li>
-                <li>• 자이로 역학 특성의 세부 정밀 계기 매칭 Matrix:
-                    <ul>
-                        <li>- 외부 3축 비선형 회전 충격 편차력인 <strong>섭동성(Precession)</strong>을 코어 이용하는 계기: <strong>선회 경사계</strong> <span class="c-yellow">💡 암기 공식: 섭선</span></li>
-                        <li>- 우주 공간 지향 축을 스스로 꼿꼿이 고집 보존하는 성질인 <strong>강직성(Rigidity)</strong>을 코어 이용하는 계기: <strong>비행 자세계, 방향 지시계</strong> <span class="c-yellow">💡 암기 공식: 깡비방</span></li>
-                    </ul>
-                </li>
-                <li>• 동체 하중 지탱 역학 구조식 3대 대분류:
-                    <ul>
-                        <li>- <strong>모너코크 (Monocoque) 구조:</strong> 별도의 내부 트러스나 격자 골격 뼈대 설계를 완전히 배제하고, 오직 두꺼운 고강도 외부 외피 스킨(Skin)막과 정형 가공제 틀 구조물만으로 비행 시 가해지는 전체 하중 외부 응력을 일괄 집중 지탱하는 단층 방식입니다. <strong>내부에 뼈대가 없어 내부 유효 공간 공간 활용성이 아주 독보적으로 광활하게 확보된다는 최대 장점</strong>이 있습니다.</li>
-                        <li>- <strong>세미 모너코크 (Semi-Monocoque) 구조:</strong> 외피 스킨이 비행 하중 응력의 일부분만 분담 처단하고, 나머지 메인 하중 분력은 내부에 세로 방향으로 길게 종렬 부착 배치한 내부 보강 뼈대 축선인 <strong>스트링어(Stringer) 및 롱지론</strong> 무리들이 일체 분담하여 결합 지탱하는 하이브리드 설계 방식입니다. 구조 무결성이 우수하여 <strong>대부분의 현대 민항기 및 고가 대형 군용 항공기 기체에 절대 보편적으로 전면 채택되는 표준 구조</strong>입니다.</li>
-                        <li>- <strong>트러스 (Truss) 구조:</strong> 아주 강인한 강철 강관 관들을 정밀 삼각형(Tri-angle) 형태로 촘촘히 용접 가공해 짠 강인한 내부 입체형 골격 뼈대(트러스 프레임)가 비행 도중 가해지는 모든 응력 하중 전체를 100% 전담 지탱하고, 외부 기류 흐름선에는 단순히 공기 저항 방어용 천이나 아주 얇은 알루미늄 외피만 가볍게 씌워 마감하는 고전 방식입니다. 뼈대가 내부를 가득 채우므로 <strong>내부 가동 유효 공간이 극도로 협소해지고 현대적 유선형 고속 외형 형상 가공 제작이 기하학적으로 매우 난해하다는 심각한 한계</strong>를 지닙니다.</li>
-                    </ul>
-                </li>
+                <li>• 모드 1 암기법: 원스(1-5) → 모드 1은 오른쪽에 스로틀(Throttle)이 위치합니다. 고로 왼쪽은 자동으로 엘리베이터입니다. [cite: 81]</li>
+                <li>• 모드 2 암기법: 투셀(2-EL) → 모드 2는 오른쪽에 엘리베이터(Elevator)가 위치합니다. 고로 왼쪽은 자동으로 스로틀입니다. [cite: 82]</li>
+                <li>• 러더(왼쪽 좌우)와 에일러론(오른쪽 좌우)은 모드 1, 2 모두 위치가 동일하므로 고정해서 외웁니다. [cite: 83]</li>
+                <li>• 모드 2는 오른쪽 스틱 하나만으로 전·후·좌·우(엘리베이터 + 에일러론) 기동이 직관적으로 가능하므로 초보자 및 일반 방제용 드론에 널리 쓰이며, 모드 1은 왼손으로 곡선 주행 조작이 용이하여 고정익이나 레이싱 드론에 사용됩니다. [cite: 84]</li>
+            </ul>
+
+            <h3>2) 유인 헬리콥터 조종 장치 (교차 출제 포인트) [cite: 85]</h3>
+            <ul>
+                <li>• <span class="c-blue">콜렉티브 레버(동시 피치 레버):</span> 주회전 날개(메인 로터)의 모든 블레이드 피치각을 동시에 동일하게 바꾸어 기체를 수직 상승 및 하강시키는 장치입니다. [cite: 86]</li>
+                <li>• <span class="c-blue">사이클릭 레버 (주기 피치 레버):</span> 메인 로터의 회전면 방향을 주기적으로 변화시켜 기체의 전후진 및 좌우 비행을 담당합니다. [cite: 87]</li>
+                <li>• <span class="c-blue">방향키 페달:</span> 꼬리 날개(테일 로터)의 피치각을 조절하여 기체의 좌우 회전(방향 회전)을 담당합니다. [cite: 88]</li>
+            </ul>
+
+            <h3>3) 실무 비행 운용 및 점검 절차 [cite: 89]</h3>
+            <ul>
+                <li>• <span class="c-blue">이착륙 지점 선정:</span> 조종자로부터 최소 안전거리 15m가 확보되어야 하며, 평탄한 잔디나 작물·시설물 피해가 없고 사람·차량 통행이 없는 지역이어야 합니다. [cite: 90]</li>
+                <li>• <span class="c-red">🚨 조종 불능 시 최우선 조치:</span> 비행 중 드론이 통제력을 상실했을 때 최우선 행동 요령은 주변 사람들에게 큰 소리로 위험을 외쳐 대피시키는 것입니다. ("위험합니다! 대피하세요!" 소리 지르기. 119 신고나 강제 착륙 시도는 그 다음입니다.) [cite: 93, 94]</li>
+                <li>• <span class="c-blue">비행 전 조종기 테스트:</span> 비행 전 기체와 30m 떨어진 거리에서 수신 반경을 확인하는 레인지(Range) 모드 테스트를 필수공 수행해야 합니다. [cite: 95]</li>
+                <li>• <span class="c-blue">비행 전 점검 필수 사항:</span> 프로펠러 파손 여부 및 장착 상태, 일기예보 및 풍속, 배터리 충전량, 페이로드(임무 장비) 장착 상태, 통신 장비 신호 및 관제권(공항 반경 9.3km)·비행제한공역 승인 여부를 확인합니다. 야간 비행은 원칙적으로 금지됩니다. [cite: 96, 97]</li>
+                <li>• <span class="c-blue">비행 후 점검 사항:</span> 기체 및 조종기 시스템 이상 유무를 제작사·운용사 체크리스트에 맞춰 최종 확인합니다. [cite: 98]</li>
             </ul>
             <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
         </div>
 
         <div class="theory-section" id="theory-meteorology">
-            <h2>4. 배터리 관리 공식 및 항공 기상학 총정리</h2>
+            <h2>4. 배터리 관리 공식 및 화재 예방 가이드라인 (2026 개정법) [cite: 99]</h2>
             
-            <h3>1) 리튬 폴리머 배터리 정석 요건 및 안전 가이드</h3>
+            <h3>1) 리튬 폴리머 배터리의 특성 [cite: 100]</h3>
             <ul>
-                <li>• <span class="c-blue">셀 전압 수치 관리선:</span> 화학적 공칭 <strong>기본 정격 전압은 셀당 3.7V</strong>선이며, 에너지를 가득 채운 <strong>완충 전압은 셀당 4.2V</strong>가 공식 규격입니다. 내부 활물질 영구 손상 파손 및 내부 가스 쇼트를 원천 차단 방어하기 위한 <strong>최대 안전 방전 하한계 한계 전압선은 셀당 3.3V</strong>선으로 철저히 하한 관리 마킹 제어해야만 합니다.</li>
-                <li>• <span class="c-blue">메모리 효과(Memory Effect)의 유무 진실:</span> 드론용 리튬 폴리머 배터리는 전력 잔량이 어중간하게 남은 상태에서 상시 수시 충전을 가해도 총 가동 용량이 스스로 기억 감축되어 줄어들어 버리는 <strong>메모리 효과 현상이 전연 존재하지 않는 우수한 소자</strong>입니다. <span class="c-yellow">반면, 과거 산업용 니켈-카드뮴(Ni-Cd) 전지는 메모리 효과가 매우 심하므로 완벽하게 0V 근처까지 '완전 방전(완방)'을 시킨 후 다시 완충해 쓰는 것이 기계적 철칙입니다.</span></li>
-                <li>• <span class="c-blue">외관 케이스 필수 법정 의무 표기 4대 지표:</span> 안전 및 전력 연산 매칭을 위해 배터리 겉면에 마킹 표기 누락이 없어야 하는 핵심 지표 4가지는 <strong>1) 내부 팩 셀 수(S), 2) 전력 보유 용량(mAh), 3) 정격 출력 전압(V), 4) 전력 방출 성능인 방전율(C)</strong>입니다. (※ 함정 방어선: 배터리 내부를 구성하는 <strong>원재료 화학 성분 조항이나 배터리 케이스 플라스틱 상세 성분 라인은 법적 필수 의무 표기 요건 사항이 명백히 아닙니다.</strong>)</li>
-                <li>• <span class="c-blue">장기 보관 스토리지(Storage) 전압 세팅 규격:</span> 만충 4.2V 상태로 드론 가동 없이 수일 이상 장기 방치 보관 보관하게 되면 리튬 이온 활물질 내부 가스화 반응이 촉진되어 배터리 팩이 빵빵하게 부풀어 올라 화재 폭발을 야기하는 <strong>스웰링(Swelling) 현상</strong>이 직격 터지므로, 장기 보관 시에는 무조건 충방전기를 물려 40~50% 잔량 라인인 <strong>셀당 3.8V ~ 3.85V선(스토리지 세팅 모드)</strong>으로 강제 전압을 맞춘 후 습기가 없고 온도가 일정한 <strong>5℃~25℃ 범위의 상온 서늘한 응달 공간</strong>에 안전히 개별 격리 분리 보관해야 조기 퇴화 파손을 막아냅니다.</li>
-                <li>• <span class="c-red">🚨 [최신 안전 개정 가이드라인] 소금물 방전 폐기법 완전 금지:</span> 물과 소금을 1:1 결합한 염수 소금물 통에 배터리를 빠뜨려 방전시키는 과거 배터리 폐기 관행 조항은, 염수 화학 반응 도중 배터리 전극 단자 금속의 급격한 산화 부식 차단막 파괴를 일으켜 내부 발열 쇼트, 조기 누액 분출, 다량의 유독 인화성 가스 집중 발생을 유도하여 <strong>현장 화재 폭발 위험 스케일을 극도로 폭증시키므로 현재 국가 법정 가이드라인 매뉴얼에서는 <span class="c-red">절대 엄격 금지(지양)</span> 조치</strong>하고 있습니다. 올바른 최신 방침은 전용 방전기나 기체 저항 강제 구동을 통해 전압 수치를 안전하게 <strong>전기적으로 완벽하게 제로 완전 방전(0V) 스펙으로 떨어뜨린 후, 관할 지자체별 위험물 수거 기준 절차에 의거해 안전 배출 폐기</strong>하는 것이 공인 정석입니다.</li>
-                <li>• <span class="c-blue">리튬 화재 특수 진화 처치법:</span> 리튬 계열 배터리 화재 사고는 가열 물질 연소 성질상 <strong>D급 금속 화재</strong> 영역으로 공인 엄격 분류 지정됩니다. 시중의 일반적인 붉은색 <strong>ABC 분말 약재 소화기로는 리튬 내부의 리튬 금속 열화 반응막 침투 진화가 전연 불가능하여 화재 진압 불능 실패</strong>하므로, 현장 비치된 <strong>리튬 전용 특수 D급 소화기를 분사해 차단막을 형성시키거나, 아예 초기 진화 단계에서 엄청난 대량의 물 소스를 한꺼번에 집중 주수 쏟아부어 배터리 셀 온도를 강제로 이슬점 이하로 주저앉히는 냉각 주수 소화법</strong>을 긴급 전개 단행해야만 동시다발 연쇄 폭발을 완전 정지시킵니다.</li>
+                <li>• 리튬 이온 전지에 비해 두께를 얇게 제작할 수 있고 폭발 위험성이 상대적으로 낮습니다. [cite: 101]</li>
+                <li>• 완충 전압은 셀당 4.2V이며, 최대 방전 한계 전압은 셀당 3.3V로 철저히 관리해야 합니다. [cite: 102]</li>
+                <li>• 메모리 효과(Memory Effect)가 없습니다. 잔량이 40~50% 남았을 때 수시로 재충전해도 용량이 줄어들지 않습니다. [cite: 103] <span class="c-yellow">(※ 단, 니켈카드뮴 전지는 메모리 효과가 있어 완전히 방전시킨 후 충전해야 합니다.) [cite: 104]</span></li>
+                <li>• 배터리 외관에 필수적으로 표기해야 하는 사항은 셀 수, 용량, 전압, 방전율의 4가지입니다. [cite: 105] 배터리를 만든 원재료 성분은 필수 표기 사항이 아닙니다. 납축전지는 너무 무거워 드론용으로 부적합합니다. [cite: 106]</li>
             </ul>
 
-            <h3>2) 항공 기상학 및 지구 대기 환경 물리 역학 대원칙</h3>
+            <h3>2) 보관 및 폐기 가이드라인 [cite: 107]</h3>
             <ul>
-                <li>• <span class="c-blue">지구 대기 바람 생성의 근본적 근원 원인:</span> 지구 표면에서 공기가 수평 유동하는 바람(Wind) 현상이 터지는 근본적이고 독보적인 제1 원인은 오직 지역 간 대기 <strong>기압 차이(Pressure Gradient) 현상 때문</strong>에만 발생합니다. 공기는 고기압 중심부에서 저기압 중심 방향으로 수평 역류 순환 흐름을 지니며, <strong>지상 고도차 크기선이나 대륙 지각 변동 현상 기동선과는 하등 기상학적 인과 관계가 전연 없습니다.</strong></li>
-                <li>• <span class="c-blue">국제 표준 대기 (ISA) 고도별 온도 감률(Lapse Rate) 연산 공식:</span> 
+                <li>• 장기 보관 시 충전율: 완충 보관 시 가스가 차며 부풀어 오르는 스웰링(Swelling) 현상이 일어나 수명이 단축되므로, 반드시 40~50% 방전 상태인 셀당 3.8V~3.85V (스토리지 모드)로 맞추어 보관해야 합니다. [cite: 108]</li>
+                <li>• 보관 환경: 직사광선을 피하고 실온(5℃~25℃)의 서늘한 곳에 분리 보관합니다. 60℃ 이상 고온 노출 시 폭발 위험이 급증합니다. [cite: 109]</li>
+                <li>• 안전 용기 사용: 리포 세이프 백(내화성 주머니)에 넣거나 금속제 캐비닛 등 내화성 보관함을 사용하는 것이 법적 가이드라인입니다. [cite: 110]</li>
+                <li>• 🚨 폐기 조치 시 주의사항: 배터리를 폐기할 때는 전력을 완전히 방전(완방)한 후 지자체 수거 절차를 밟아야 합니다. [cite: 111] 과거 관행이었던 소금물 방전 폐기법은 내부 화학반응 촉진, 발열, 누액, 가스 발생으로 화재 위험을 오히려 높이므로 현재는 절대 금지(지양)합니다. [cite: 112]</li>
+            </ul>
+
+            <h3>3) 화재 발생 시 대처법 [cite: 113]</h3>
+            <ul>
+                <li>• 리튬 폴리머 배터리 화재는 D급 금속 화재로 분류됩니다. [cite: 114]</li>
+                <li>• 일반적인 ABC 소화기로는 약재 침투가 불가능하여 진화할 수 없으므로, 전용 D급 소화기를 사용하거나 대량의 물을 쏟아부어 냉각 소화(주수 소화)를 실시해야 합니다. [cite: 115]</li>
+                <li>• 가염물 근처 충전 금지 및 취침 중 충전 행위는 절대 금지됩니다. [cite: 116] 일종(대형) 기체의 경우 사전 비행 점검 시 커넥터 부식 및 스파크 점검이 필수 항목으로 요구됩니다. [cite: 117]</li>
+            </ul>
+
+            <h2>5. 항공 기상학 및 지구 대기 환경 [cite: 120]</h2>
+            
+            <h3>1) 기상 기초 이론 및 표준 대기 [cite: 121]</h3>
+            <ul>
+                <li>• 바람의 근원: 바람이 부는 근본적인 원인은 오직 기압차 때문입니다. 바람은 고기압에서 저기압 방향으로 흐르며 고도차나 지각변동과는 관계없습니다. [cite: 122]</li>
+                <li>• 이슬점 (노점 온도): 대기가 포화 상태에 이르러 수증기가 물방울이나 이슬로 변하기 시작할 때의 온도를 의미합니다. [cite: 123]</li>
+                <li>• 국제 표준 대기 (ISA)의 감률 기준: [cite: 124]
                     <ul>
-                        <li>- 항공 피트 피트 스케일 기준: <strong>공중 상공 고도 1,000피트(ft) 상승 전개 시마다 온도는 정확히 2℃씩 하강</strong> 차감됩니다.</li>
-                        <li>- 미터법 킬로미터 스케일 기준: <strong>상공 수직 고도 1km 상승 전개 시마다 기온은 정확히 6.5℃씩 하강</strong> 감률 처리됩니다.</li>
-                        <li>- <span class="c-yellow">💡 실전 실제 필합 기출 계산 예시:</span> 현재 드론 조종자가 서 있는 지상 활주로 표면 실측 기온이 영상 30도 상태일 때, 드론 기체가 수직 고도 3,000피트(ft) 상공 공역에 진입 시 그 고도의 대기 온도는 얼마인가? ➔ 연산법: 고도 표준 감률에 의거해 3 * 2 = 총 6도 하강 감률선을 적용하므로 30 - 6 = <strong>영상의 정확한 24도</strong>가 정답으로 도출됩니다.</li>
+                        <li>- 고도 1,000피트(ft) 상승할 때마다 온도는 2℃씩 하강합니다. [cite: 125]</li>
+                        <li>- 고도 1km 상승 시에는 온도가 6.5℃씩 하강합니다. [cite: 126]</li>
+                        <li><span class="c-yellow">💡 기출 예시: 지상 기온이 30도일 때, 3,000피트 상공의 기온은 감률(3*2=6도 하강)을 적용하여 24도가 정답입니다. [cite: 127]</span></li>
                     </ul>
                 </li>
-                <li>• <span class="c-blue">코리올리의 힘 (Coriolis Force, 전향력) 전지구적 물리 법칙:</span> 지구 자전 주기의 구동 회전 가속도 때문에 발생하는 가상의 겉보기 관성 물리 힘으로, <strong>지구 북반구 공역 내에서 직진 이동하는 모든 유체 및 구름 물체 운동선 흐름을 정진행 방향 기준 언제나 '우측(오른쪽) 방향'으로 강제 편향 휘어지게 만드는的主체</strong>입니다. 이 자전 전향력의 물리적 크기 스케일은 <strong>지구 위도 극지방(90도) 위치에서 물리적 '최대치(Max)'를 형성하고, 회전축 중심 평형선인 적도 지방선 영역에서는 전향력 크기가 정확히 '0(최소치 Zero)'</strong>으로 소멸합니다. <span class="c-yellow">💡 단기 필수 암기 부호: 극대적소</span></li>
-                <li>• <span class="c-blue">기상 청천 하늘 구름(Cloud) 세부 운형 기출 매칭 Matrix:</span> 상층운 영역(공중 6km 이상 최고층 공역)에 조밀하게 도포되는 <strong>권층운(Cs)</strong> 구름 무리들은 야간 달무리 현상이나 주간 해무리 광학 링 현상을 고유 유도 나타내며, 이는 기상 역학상 <strong>온난 전선 전면 영역에 다가와 조만간 대량의 장시간 지속성 비가 대대적으로 내릴 것임을 선제 예고 예측해 주는 과학적 지표 구름</strong>입니다. 대기 수직 불안정 수직 발달운의 제1 파괴 명칭인 <strong>적란운(Cb, 소나기구름)</strong>은 거대한 연직 타워 기둥 적층 모양새로 내부 대류 스톰을 형성하여 <strong>국지성 폭우 소나기, 강렬한 다운버스트 폭풍, 기체 대파용 대형 우박, 낙뢰 번개 현상을 100% 강제 동반하는 비행 조종사 기피 제1호 최고 위험 수직운</strong>입니다. 추가로 하층운 중 <strong>난층운(Ns)</strong> 역시 어두운 통유리 회색 장막 형태로 광범위한 지속성 비구름 폭풍을 주도하는 강수운입니다.</li>
-                <li>• <span class="c-blue">렌즈형 구름 (Lenticular Cloud) 정체:</span> 강한 바람 기류가 험준한 산악 산맥 지형 산마루를 타고 강제 월류 돌파할 때 터지는 대기 파동인 <strong>산악파(Mountain Wave) 내부의 극심한 회전 난기류 난류 구역에서 볼록 렌즈 형상이나 UFO 비행접시 모양새로 허공에 고정 정체 발현되는 극도로 위험한 난류 생성 전조 구름</strong>입니다.</li>
-                <li>• <span class="c-blue">기상정의 안개(Fog) 가시거리 시정 판정선 기준값:</span> 공중 대기 수증기가 지표면 근처에서 냉각 응결하여 조밀한 미세 물방울 무리를 형성, 인간 조종자의 전방 수평 시야(수평 가시거리) 한계선을 <strong>정밀하게 칼같이 '1km 미만' 구도로 완전 주저앉혀 가로막았을 때 비로소 국가 관측 기준상 공식 '안개(Fog)'로 정의 고지 발령 분류</strong>합니다. <span class="c-yellow">만약 수평 가시 시정 거리가 1km 이상 범위선을 회복하고 10km 미만 대역 범주 내에서 가볍게 흐린 시야 상태일 때는 안개가 아니라 공식 '박무(Mist, 엷은 안개)' 기상 부호 명칭으로 격하 변경하여 명명 부릅니다.</span></li>
-                <li>• <span class="c-blue">복사 안개 (Radiation Fog, 땅 안개) 발생 조건 메커니즘:</span> 구름 한 점 없이 허공이 맑게 뚫린 가을철 밤사이나 새벽 공역 환경에서 지 지표면 열 에너지가 차단막 없이 우주 공간 허공으로 광속 누수 방출 소실되는 <strong>'야간 복사 냉각' 물리 메커니즘이 극대화되고 풍속 기류 가동이 극도로 잔잔 고요할 때 지상 바닥에 낮고 조밀하게 침강 결착 도포되는 안개 유형</strong>입니다.</li>
-                <li>• <span class="c-blue">이류 안개 (Advection Fog, 해무) 발생 조건 메커니즘:</span> 태생적으로 온화하고 다량의 습기를 잔뜩 머금은 해양성 대형 공기 덩어리 기단 무리가, 하부 온도가 차가운 냉수대 해수면 바닥 공간이나 차가운 지표면 공역 상공 위로 수평 기류 바람을 타고 <strong>'수평 이동(이류 Advection)' 유입될 때 차가운 하부 냉각면과 충돌 응결 발현되는 대규모 바다 안개(해무)</strong>를 일컬으며, 풍속 조건이 약 4~5m/s 수준으로 수평 순환 유동 시 광범위하게 다발 장기 지속되는 특성이 있습니다.</li>
-                <li>• <span class="c-blue">비행 조종 난류(Turbulence) 강도 체감 3단계 가이드선:</span> 
+                <li>• ISA 기본 정의 조건: 해수면 표준기압은 1013.25 hPa, 해수면 기온은 15℃, 해수면 높이는 0피트를 기준으로 삼으며, 수증기를 전혀 포함하지 않은 완벽한 건조 공기를 기준으로 설계되어 있습니다. [cite: 128]</li>
+                <li>• 1기압 (1 ATM) 대등 단위: $1\text{ ATM}=29.92\text{ inHg}=760\text{ Torr}=760\text{ mmHg}=1013\text{ hPa}$ (숫자가 커질수록 정밀한 단위입니다). [cite: 129]</li>
+                <li>• 코리올리의 힘 (전향력): 지구의 자전 때문에 발생하는 겉보기 힘으로, 북반구에서 진행하는 물체를 오른쪽으로 휘게 만듭니다. [cite: 130] 전향력의 크기는 극지방에서 최대(최대치)이고 적도 지방에서는 최소(0)가 됩니다. [cite: 131]
+                    <br><span class="c-yellow">💡 암기법: 극대적소 (극지방 대, 적도 소) [cite: 132]</span>
+                </li>
+            </ul>
+
+            <h3>2) 대기권의 구조 및 구름의 종류 (10종 운형) [cite: 133]</h3>
+            <ul>
+                <li>• 대기권은 지표면에서부터 대류권 성층권 중간권 → 열권 순으로 형성되어 있습니다. (암기: 대성중열) [cite: 134]</li>
+                <li>• 대류권: 비, 눈, 구름 등 모든 실제 기상 현상이 활발하게 일어나는 공간입니다. [cite: 135]</li>
+                <li>• 열권: 가장 높이 위치하며, 장거리 무선 통신 전파 이동을 가능하게 해주는 전리층이 존재하는 권역입니다. [cite: 136]</li>
+                <li>• 높이에 따른 구름의 분류: [cite: 137]
                     <ul>
-                        <li>- <strong>약한 난류 (Light):</strong> 기체가 아주 가볍고 가끔 툭툭 흔들리는 수준의 가벼운 난류 구역.</li>
-                        <li>- <strong>중간 난류 (Moderate):</strong> 동체 흔들림 스케일이 상당히 지속 강력하게 요동치나, 숙련된 조종사가 조종간 스틱을 이용해 직접적인 기체 비행 통제 제어권 자체를 실종 상실하지는 않는 허용 안전 한도 한계선 공간.</li>
-                        <li>- <strong>심한 난류 (Severe):</strong> 순간 돌풍 돌풍 가속 전단력이 기체 고유 공력 복원 제어 성능 스펙 범위를 초과하여, 조종자가 아무리 키 조작을 전개해도 순간적으로 기체 자세 통제권 제어력을 완전히 잃어버리고 불시 추락 참사로 이어질 수 있는 최고 위험 난류 구역.</li>
+                        <li>- 상층운 (6km 이상 / 2만 피트 이상): 권운, 권적운, 권층운이 속합니다. [cite: 138] 특히 권층운은 달무리나 해무리를 나타내어 향후 비가 올 것을 예고(예측)해주는 구름입니다. [cite: 139]</li>
+                        <li>- 중층운 (2km~6km 사이): 고적운, 고층운이 속합니다. [cite: 140]</li>
+                        <li>- 하층운 (2km 이하 / 6,500피트 이하): 층적운, 층운, 난층운이 속합니다. 난층운은 어두운 먹구름 형태로 지속적인 비구름과 폭풍을 몰고 옵니다. [cite: 141]</li>
+                        <li>- 수직운 (수직 발달 구름): 적운, 적란운이 속합니다. 적란운은 거대한 기둥 모양으로 소나기, 폭풍, 우박, 번개를 무조건 동반하는 가장 위험한 비구름입니다. [cite: 142]</li>
                     </ul>
                 </li>
+            </ul>
+
+            <h3>3) 전선 체계 및 안개 기동 [cite: 143]</h3>
+            <ul>
+                <li>• 한랭전선: 찬 기단이 따뜻한 기단 밑으로 파고들며 밀어내는 전선입니다. [cite: 144] 기울기가 급하여 적운형 구름이 생기고, 좁은 지역에 강한 소나기를 뿌리며 이동 속도가 매우 빠릅니다. [cite: 145]</li>
+                <li>• 온난 전선: 따뜻한 공기가 찬 공기를 밀어내며 위로 타고 올라가는 전선입니다. [cite: 146] 기울기가 완만하고 전선 폭이 넓어 층운형 구름이 주로 발달하며, 넓은 지역에 지속적인 이슬비를 뿌립니다. [cite: 147]</li>
+                <li>• 정체 전선: 찬 기단과 따뜻한 기단의 세력이 팽팽히 비슷하여 한 지역에 오래 머무르는 전선입니다. [cite: 150] 초여름 장마전선이 대표적이며 흐린 날씨가 지속되고 집중호우를 동반합니다. 기단 특성을 유지하며 움직임이 거의 없는 전선입니다. [cite: 151]</li>
+                <li>• 폐색 전선: 이동 속도가 빠른 한랭 전선이 느린 온난 전선을 따라잡아 추월하면서 두 전선이 겹쳐진 전선입니다. [cite: 152] 결국 두 기단 중 하나의 특성만 남게 됩니다. [cite: 153]</li>
+            </ul>
+            <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
+        </div>
+
+        <div class="theory-section" id="theory-procedure-2">
+            <h2>6. 개정 항공법규 및 행정처분·벌칙 기준 (★2026 필합 핵심) [cite: 154]</h2>
+            
+            <h3>1) 항공법의 3대 축 분류 [cite: 155]</h3>
+            <ol>
+                <li>항공안전법: 항공기 및 초경량비행장치 등록, 기술 기준, 항공종사자 자격증명, 교통 안전에 관한 조항을 다룹니다. [cite: 156]</li>
+                <li>항공사업법: 항공 운송, 정비, 취급, 대여업, 초경량비행장치 사용사업 및 레저스포츠 사업에 관한 규정을 둡니다. [cite: 157]</li>
+                <li>공항시설법: 공항 및 비행장의 개발, 관리, 운영, 항행안전시설에 관한 법률입니다. [cite: 158]</li>
+            </ol>
+
+            <h3>2) 기체 무게 및 비행 한계 규정 [cite: 159]</h3>
+            <ul>
+                <li>• 무게 기준의 대원칙: 2024~2026년 개정법에 따라 기체 무게를 측정할 때는 반드시 배터리 무게를 포함하여 산정합니다. [cite: 160] 배터리를 제외하고 일종 기체 여부를 계산하면 명백한 법규 위반 처벌을 받습니다. [cite: 161]</li>
+                <li>• 무인비행장치 무게별 안전성 인증 기준: [cite: 162]
+                    <ul>
+                        <li>- 자체중량 12kg 초과 ~ 최대이륙중량 25kg 이하: 안전성 인증 면제 대상. [cite: 163]</li>
+                        <li>- 최대이륙중량 25kg 초과 ~ 자체중량 150kg 이하: 교통안전공단의 안전성 인증 필수 대상. [cite: 164]</li>
+                        <li>- 자체중량 150kg 초과 시 무인 멀티콥터는 초경량비행장치 범위를 초과하게 됨. [cite: 165]</li>
+                    </ul>
+                </li>
+                <li>• 드론법상 드론 정의: 조종자가 탑승하지 아니한 상태(무인)로 원격·자율·자동 방식에 의해 항행하는 비행체를 의미합니다. [cite: 166]</li>
+                <li>• 안전성 인증의 종류: [cite: 168]
+                    <ul>
+                        <li>- 최초로 실시하는 초도 인증 [cite: 169]</li>
+                        <li>- 유효기간 만료 시 받는 정기 인증 [cite: 170]</li>
+                        <li>- 기체의 대수리 및 대개조 후에 새로 받는 수시 인증 (★매우 중요) [cite: 171]</li>
+                        <li>- 부적합 판정 후 정비하여 다시 신청하는 재인증 [cite: 172]</li>
+                    </ul>
+                </li>
+                <li>• 공역의 분류 체계: [cite: 173]
+                    <ul>
+                        <li>- 통제 공역: 비행 금지 구역, 비행 제한 구역, 초경량비행장치 비행 제한 구역의 3가지가 명확히 분리되어 지정되어 있습니다. [cite: 174]</li>
+                        <li>- 주의 공역: 훈련 구역, 위험 구역, 경계 구역, 군 작전 구역이 포함됩니다. [cite: 175]</li>
+                        <li>- 관제 공역 A등급: 모든 항공기가 시계 비행이 불가하며 오직 계기 비행만을 수행해야 하는 최고 등급 공역입니다. [cite: 176]</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3) 벌칙 및 과태료 행정처분 기준 (★표로 완전 정복) [cite: 177]</h3>
+            <p>과거 형사처벌 조항이 행정편의와 규제 합리화로 인해 상당수 과태료 처분으로 변경되었으므로 벌금과 과태료를 엄격히 구분해야 합니다. [cite: 178]</p>
+            <table class="theory-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>위반 행위 및 내용 [cite: 181]</th>
+                        <th>처벌 수위 [cite: 181]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" style="font-weight:bold; color:var(--error-color);">형사 처벌<br>(벌금/징역형)<br>정과 기록 남음</td>
+                        <td>초경량비행장치 정상 업무 수행 불가 상태로 음주 비행을 하거나 관련 음주 측정 거부 시</td>
+                        <td>3년 이하의 징역 또는 3,000만 원 이하의 벌금</td>
+                    </tr>
+                    <tr>
+                        <td>영리 목적으로 사업자 등록 없이 무단으로 사용사업을 영위한 경우</td>
+                        <td>1년 이하의 징역 또는 1,000만 원 이하의 벌금</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="6" style="font-weight:bold; color:var(--trap-color);">행정 처분<br>(과태료)<br>과태료 납부로 종료</td>
+                        <td>일종 기체와 같이 안전성 인증을 받지 않은 장치로 비행 조작을 감행한 경우 (★가장 비싼 과태료)</td>
+                        <td>최대 500만 원 이하의 과태료</td>
+                    </tr>
+                    <tr>
+                        <td>조종자 자격 증명서 없이 비행한 경우 (무면허 비행)</td>
+                        <td>최대 300만 원 이하의 과태료 (1차 150만 원)</td>
+                    </tr>
+                    <tr>
+                        <td>관제권 및 비행 금지·제한 공역에서 사전 비행 승인 없이 비행한 경우</td>
+                        <td>최대 300만 원 이하의 과태료 (1차 150만 원)</td>
+                    </tr>
+                    <tr>
+                        <td>야간 비행 금지, 낙하물 투하 금지, 인구밀집지역 위험 비행 등 준수사항 위반</td>
+                        <td>최대 300만 원 이하의 과태료 (1차 150만 원)</td>
+                    </tr>
+                    <tr>
+                        <td>기체 신고를 하지 않고 비행하거나, 발급된 신고번호를 기체에 표시하지 않은 경우</td>
+                        <td>최대 100만 원 이하의 과태료</td>
+                    </tr>
+                    <tr>
+                        <td>비행 시 자격증이나 승인서 등 필수 서류를 미소지하고 조종한 경우</td>
+                        <td>최대 100만 원 이하의 과태료</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold; color:#718096;">행정 처분 추가</td>
+                        <td>소유자 기체 정보의 변경 신고 또는 말소 신고를 이행하지 않은 경우</td>
+                        <td>최대 50% 감액된 50만 원 이하의 과태료</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>※ 주체별 위반 수치 요약 필수 [cite: 182]</h3>
+            <ul>
+                <li>• 음주 기준 수치: 드론 조종자의 처벌 기준인 혈중 알코올 농도는 0.02% 이상입니다. (일반 자동차 면허 기준인 0.03%보다 훨씬 엄격합니다.) [cite: 183]</li>
+                <li>• 비행 계획 승인 신청 시 최대 6개월까지 기간을 연장하여 설정할 수 있습니다. [cite: 184]</li>
+            </ul>
+
+            <h2>7. 기타 상식 및 이론 심화 정리 (유관 과목 전체 수록) [cite: 185]</h2>
+            
+            <h3>1) 안과 구조 및 생리 현상 [cite: 186]</h3>
+            <ul>
+                <li>• 광수용기 (빛 수용 기관): 사람의 눈 막막에 존재하는 세포로 간상체와 추상체로 나뉩니다. [cite: 187]</li>
+                <li>• 간상체: 흑백 명암을 식별하며 야간 시에 주로 활성화됩니다. 막막 주변부에 무려 1억 개가 넓게 포진해 있으며, 파장이 짧은 녹색 계열에 민감하게 반응합니다. (암기: 간흑) [cite: 188, 189]</li>
+                <li>• 추상체: 주간에 밝은 곳에서 작동하며 천연 색상(컬러)을 구별합니다. 막막 중심부에 단 700만 개가 소수 정예로 집중되어 있으며, 파장이 긴 빨간색(적색) 계열에 적극 반응합니다. (암기: 추칼) [cite: 190, 191]</li>
+                <li>• 푸르키네 현상 (Purkinje Effect): 밝은 주간 구역에서 어두운 야간 환경으로 이동할 때 시각 특성이 변화하여, 적색 계통은 먼저 어두워 보이고 푸른색(청색) 계통의 물체가 상대적으로 훨씬 더 밝고 뚜렷하게 식별되는 현상입니다. [cite: 194, 195]</li>
+            </ul>
+
+            <h3>2) 왕복 및 가스터빈 엔진 동력학 [cite: 196]</h3>
+            <ul>
+                <li>• 가스터빈 엔진의 3대 구성품: 압축기 연소실 → 터빈 순으로 일체 구성됩니다. <span class="c-yellow">(암기법: 아연터) [cite: 197, 198]</span></li>
+                <li>• 가스터빈 윤활유 조건: 고온 안정성이 중요하므로 유동성은 낮아야 하고, 온도 변화에 따른 점도 변화가 적음을 뜻하는 점도 지수는 무조건 커야 안전합니다. [cite: 199]</li>
+                <li>• 사행정 사이클 기관 구동 순서: 흡입 → 압축 폭발(동력) → 배기 순으로 하나의 동력 사이클이 반복 회전합니다. (암기: 흡압폭배) [cite: 200]</li>
+                <li>• 출력 및 동력 규격 (마력): [cite: 201]
+                    <ul>
+                        <li>- 1 HP (영국 마력): $76\text{ kg}\cdot\text{m/s}=0.746\text{ kW}=641\text{ kcal/h}$ [cite: 202]</li>
+                        <li>- 1 PS (국제 마력): $75\text{ kg}\cdot\text{m/s}=0.735\text{ kW}=632\text{ kcal/h}$ (HP가 PS보다 숫자가 1씩 큽니다.) [cite: 203]</li>
+                    </ul>
+                </li>
+                <li>• 엔진 윤활유의 6대 핵심 기능: 윤활, 기밀, 냉각, 방청(녹 방지), 청결, 소음 방지 기능을 수행합니다. 보온 기능은 윤활유의 목적에 포함되지 않습니다. [cite: 204, 205]</li>
+            </ul>
+
+            <h3>3) 항공 자이로 계기 및 구조체 역학 [cite: 206]</h3>
+            <ul>
+                <li>• 자이로스코프 이용 계기: 선회 경사계, 방향 지시계, 비행 자세계의 3가지가 자이로 성질을 이용한 비행 필수 계기입니다. (재빙 압력계는 자이로와 무관합니다.) [cite: 207, 208]</li>
+                <li>• 자이로 특성의 세부 적용: [cite: 209]
+                    <ul>
+                        <li>- 섭동성을 이용한 계기: 선회 경사계 (암기: 섭선) [cite: 210]</li>
+                        <li>- 강직성을 이용한 계기: 비행 자세계, 방향 지시계 (암기: 깡비방) [cite: 211]</li>
+                    </ul>
+                </li>
+                <li>• 동체 구조식 분류: [cite: 212]
+                    <ul>
+                        <li>- 모너코크 구조: 별도의 내부 뼈대 없이 두꺼운 외피(스킨)와 정형제만으로 전체 외부 하중을 모두 지탱하는 방식입니다. 내부 공간이 넓다는 독보적 장점이 있습니다. [cite: 213, 214]</li>
+                        <li>- 세미 모너코크 구조: 외피가 하중의 일부만 감당하고, 나머지는 세로형 내부 뼈대인 스트링어(Stringer)가 분담하여 지탱하는 방식입니다. 대부분의 현대 고가 대형 항공기에 채택되는 보편적 구조입니다. [cite: 215, 216]</li>
+                        <li>- 트러스 구조: 삼각형 형태로 짜인 강인한 뼈대(트러스)가 비행 하중 전체를 전담하며 외부에는 아주 얇은 외피만 입히는 방식입니다. 내부 공간이 협소해지고 유선형 외형 제작이 매우 난해하다는 한계가 있습니다. [cite: 217, 218]</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4) 프로펠러 설계 및 팩터 정리 [cite: 219]</h3>
+            <ul>
+                <li>• 피치 (Pitch): 프로펠러가 축방향으로 완벽히 1회전 했을 때 가상으로 앞으로 전진 이동한 직선거리를 의미합니다. [cite: 220]</li>
+                <li>• 벡터(Vector)량 구분: 크기와 방향성을 동시에 지닌 물리량으로 속도, 가속도, 양력, 충격량, 전기장, 자기장 강도 등이 속합니다. 질량(Mass)은 방향성이 없으므로 스칼라량이며 벡터에 속하지 않습니다. [cite: 221, 222]</li>
+                <li>• 이륙 거리 공식 요소: 항공기 이륙 거리는 지상 활주 거리 + 전이 거리 + 상승 거리의 3가지 결합 합산치입니다. 이륙 거리를 획기적으로 줄이기 위해서는 배풍이 아닌 정풍(맞바람, 헤드윈드)을 안고 이륙해야 유용합니다. [cite: 223, 224]</li>
+                <li>• 지시 대기속도 (IAS): 기류 밀도 오차나 피토관 장착 오차, 자세 변화 오차 등을 전연 수정하지 않고 단순히 속도계 지시 눈금판을 있는 그대로 읽어낸 가시적 대기 속도입니다. [cite: 225]</li>
+                <li>• 수직 이착륙기 (VTOL): 형태가 고정된 고정익 날개의 고속 비행 특성과 로터가 회전하는 회전익 기체의 수직 제어 특성을 동시에 겸비한 첨단 비행체입니다. [cite: 228]</li>
+                <li>• 프로펠러 비틀림 설계의 진실: 프로펠러 날개(블레이드)는 비틀려 설계되어 있습니다. 이는 순항 비행 시 전 구간에 걸쳐 일정한 받은각을 형성하여 양력 효율을 극대화하기 위함입니다. [cite: 229, 230]</li>
+                <li>• 동회전수(RPM) 상태일 때 날개의 실제 물리적 이동 속도는 중심부인 허브 근처가 가장 느리고, 날개 바깥쪽 끝단(Tip)으로 갈수록 회전 반경이 커지므로 속도가 압도적으로 빠릅니다. [cite: 231]</li>
+                <li>• 날개가 틀어진 기하학적 각도는 중심 허브 쪽의 틀어진 각도가 가장 크고, 바깥 끝단 쪽의 각도가 가장 작게 점진 설계되어 있습니다. [cite: 232]</li>
+                <li>• 프로펠러는 최대 출력을 낼 때가 아닌, 설계상 정해진 적정 출력을 유지하여 순항할 때 최대의 기계적 효율을 발휘하도록 구현됩니다. [cite: 233]</li>
             </ul>
             <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
         </div>
@@ -663,7 +897,7 @@
         ["항공법규","theory-law","e1_4","등록신고를 완료한 초경량비행장치의 소유주 성명, 주소, 법인 명칭 또는 주된 보관 장소가 변경되었을 때 신청하는 '변경신고'의 법정 처리 기한은?","사유 발생일로부터 30일 이내","사유 발생일로부터 10일 이내","사유 발생일로부터 15일 이내","사유 발생일로부터 60일 이내",1,"인적 정보 가변 및 보관 장소 변동에 따른 행정 변경 민원은 30일 이내가 한계선입니다."],
         ["항공법규","theory-law","e1_5","항공 안전 정보를 전기통신 수단으로 긴급하게 전파 발령 공고하는 항공고시보(NOTAM)의 법정 최장 유효기간 기준은?","3개월 이내","1개월 이내","6개월 이내","영구 배포 및 고시",1,"NOTAM 정보의 최장 유효 시한은 3개월 이내이며, 영구적인 공고물 안내서는 AIP 정보입니다."],
         ["비행이론","theory-theory","e1_11","날개 단면(에어포일) 기하학 구조식 제원에서 날개의 최고 전방 끝점(앞전)과 최고 후방 끝점(뒷전)을 직선으로 최단 관통 통과하는 가상의 기준선 축은?","시위선 / 시위 (Chord Line)","평균캠버선","익형 최대 두께선","상대풍 흐름 부양 경사선",1,"앞전과 뒷전을 직선 연결한 가상의 중심 기준 축선 명칭은 시위선입니다."],
-        ["비행이론","theory-theory","e1_12","드론의 비행제어장치(FC) 내장 모듈 중 중력 가속도축의 방향 변위 및 선형 속도 변화량을 감지 연산하여 기체의 절대적인 수평 자세 평형 각도값을 보정 홀딩해 주는 센서는?","가속도 센서 (Accelerometer)","자이로 센서","지자기 센서","기압 센서",1,"드론의 절대 수평 자세 각도 영점을 잡는 소자는 가속도 센서입니다."],
+        ["비행이론","theory-theory","e1_12","드론의 비행제어장치(FC) 내장 모듈 중 중력 가속도축의 방향 변위 및 선형 속도 변화량을 감지 연산하여 기체의 절대적인 수평 자세 평형 각도값을 보정 홀딩해 주는 센서는?","가속도 센서 (Accelerometer)","자이로 센서","지자기 센서","기압 센서",1,"드론의 절대 수평 자세 각도 영점을 잡는 소자가 가속도 센서입니다."],
         ["비행이론","theory-theory","e1_13","비행체의 수평 이동 속도가 증가할수록 공기 마찰 형상에 따른 '유해항력'과 날개 와류 부산물인 '유도항력'의 기하학적 역학 성질 변화로 옳은 것은?","유해항력은 속도의 제곱에 비례해 폭증하고, 유도항력은 속도에 반비례하여 크기가 감소한다.","두 항력 모두 속도 수치에 정비례 증가한다.","유해항력은 하강 감소하고 유도항력만 폭증 유도된다.","항력 수치들은 비행체 이동 속도와 연관성이 전무하다",1,"속도가 급증하면 형상 마찰인 유해항력은 제곱 폭증하나 날개 와류인 유도항력은 반비례 감소합니다."],
         ["비행이론","theory-theory","e1_14","유체 역학 물리 법칙 중 공기나 액체의 흐름 속도가 유속이 빠르셔야 내부 정압이 낮아지고, 반대로 속도가 느려지면 정압이 상승 차등 유도된다는 부양 양력의 핵심 정리는?","베르누이의 정리 (Bernoulli's Theorem)","파스칼의 압력 밀폐 원리","뉴턴의 운동 제2법칙","보일-샤를의 대기 물리 법칙",1,"유속과 압력의 상호 반비례 역학 선을 동기화하여 날개 상하 압력 편차 양력을 증명한 이론은 베르누이 정리입니다."],
         ["비행이론","theory-theory","e1_15","비행 중 속도를 기존 제어 수치보다 정확히 2배 속도로 가속 전개 시, 에어포일 날개 표면에 가해지는 양력(Lift)과 항력(Drag)의 물리적 비례 스케일 변화 수치는?","제곱에 비례하여 총 4배 증가","동일하게 2배 증가","3배 가속 비례 증가","변화 없이 고정 유지",1,"공기역학 공식 매트릭스상 양력과 항력 수치들은 속도의 제곱에 정비례하여 폭증합니다."],
@@ -692,7 +926,7 @@
             let finalAns = opts.indexOf(item[4]) + 1;
 
             examData[`exam${e}`].push({
-                id: `e${e}_${q}`, cat: item[0], theoryId: item[1],
+                id: `e${e}_${q}`, cat: item[0], theoryId: item[1].includes('procedure') && q > 25 ? 'theory-procedure-2' : item[1],
                 q: item[3], o: opts, a: finalAns, exp: item[9]
             });
         }
@@ -710,7 +944,7 @@
             let finalAns = opts.indexOf(item[4]) + 1;
 
             examData[`trap${t}`].push({
-                id: `t${t}_${q}`, cat: item[0], theoryId: item[1],
+                id: `t${t}_${q}`, cat: item[0], theoryId: item[1].includes('procedure') && q > 25 ? 'theory-procedure-2' : item[1],
                 q: item[3], o: opts, a: finalAns, exp: item[9]
             });
         }
@@ -936,7 +1170,7 @@
     }
 
     function resetAllExams() {
-        if (!confirm("⚠ 경고: 전체 모의고사 및 고난도 함정 회차의 모든 풀이 내역과 축적된 오답노트 데이터가 영구 초기화됩니다. 진행하시겠습니까?")) return;
+        if (!confirm("⚠ 경고: 1~25회 전체 모의고사 및 고난도 함정 10회분의 모든 풀이 내역과 축적된 오답노트 데이터가 영구 초기화됩니다. 진행하시겠습니까?")) return;
 
         document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
 
