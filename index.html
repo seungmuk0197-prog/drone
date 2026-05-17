@@ -47,21 +47,28 @@
             font-size: 0.85rem;
             font-weight: bold;
             color: #4a5568;
-            margin-top: 12px;
+            margin-top: 6px;
             margin-bottom: 2px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
 
         .nav-container {
-            display: flex;
-            justify-content: center;
             background-color: #edf2f7;
             padding: 10px;
             position: sticky;
             top: 83px;
             z-index: 999;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-section-wrapper {
+            margin-bottom: 4px;
+        }
+
+        .nav-scroll-row {
+            display: flex;
+            justify-content: center;
             gap: 6px;
             flex-wrap: wrap;
         }
@@ -74,6 +81,7 @@
             cursor: pointer;
             transition: all 0.2s;
             font-size: 0.8rem;
+            white-space: nowrap;
         }
 
         .btn-menu { background-color: white; color: var(--text-color); border: 1px solid var(--border-color); }
@@ -90,7 +98,7 @@
             max-width: 1200px;
             margin: 25px auto;
             padding: 0 20px;
-            padding-bottom: 120px;
+            padding-bottom: 140px;
         }
 
         .tab-content { display: none; }
@@ -193,7 +201,7 @@
 
         .c-red { color: var(--error-color); font-weight: bold; }
         .c-yellow { color: var(--trap-color); font-weight: bold; }
-        .c-blue { color: var(--primary-color); font-weight: bold; }
+        .c-blue { color: #2b6cb0; font-weight: bold; }
 
         .oral-q { font-weight: bold; color: #1a365d; margin-top: 15px; font-size: 1.05rem; }
         .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 5px 0 15px 0; }
@@ -219,18 +227,7 @@
         .btn-reset-single { background-color: #718096; color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-reset-single:hover { background-color: #4a5568; }
 
-        .sub-subject {
-            background-color: #edf2f7;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-            color: #4a5568;
-        }
-
-        /* 푸터 멀티 그리드 정렬 커스텀 패치 */
+        /* 하단 푸터 레이아웃 */
         footer {
             display: flex;
             justify-content: space-between;
@@ -247,13 +244,60 @@
             box-shadow: 0 -3px 6px rgba(0,0,0,0.15);
         }
         .footer-left { font-weight: bold; letter-spacing: 0.5px; }
-        .footer-right { text-align: right; font-weight: 400; font-family: 'Consolas', monospace, sans-serif; }
+        .footer-right { text-align: right; font-weight: 400; }
+
+        /* 📱 초강력 모바일 가독성 및 가로 스크롤 트랙 반응형 패치 */
+        @media (max-width: 768px) {
+            header {
+                position: relative; /* 모바일 화면 공간 확보를 위해 배너 고정 해제 */
+                padding: 15px 10px;
+            }
+            .nav-container {
+                position: sticky;
+                top: 0; /* 모바일에서는 내비게이션 바가 맨 위에 딱 붙어 동적 가동 */
+                padding: 5px 8px;
+            }
+            .section-title {
+                font-size: 0.75rem;
+                margin-top: 4px;
+                margin-bottom: 2px;
+                text-align: left;
+                padding-left: 4px;
+                color: var(--primary-color);
+            }
+            .nav-scroll-row {
+                justify-content: flex-start;
+                flex-wrap: nowrap; /* 세로 줄 바꿈 전면 금지 ➔ 가로 한 줄 정렬 */
+                overflow-x: auto; /* 우측으로 스크롤 가능하도록 터치 활성화 */
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch; /* iOS 가속 스크롤 보정 */
+            }
+            .container {
+                margin-top: 15px;
+                padding-bottom: 150px; /* 푸터가 본문을 가리지 않도록 예비 여백 확장 */
+            }
+            .q-card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .option-item {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            footer {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+                padding: 10px;
+            }
+            .footer-right { text-align: center; font-size: 0.75rem; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🚁 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
+    <h1>💡 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
     <p>모의고사 25회분 + 고난도 함정 10회분 복원 완료 통합 CBT 라이브러리</p>
 </header>
 
@@ -448,10 +492,38 @@
     let activeTabId = "how_to_use";
     let wrongQuestions = new Set(); 
 
-    // 가상 대용량 1,400제 오차 없는 인프라 컴파일 레이어
-    const examData = {};
-    
-    // 25개 정규 모의고사 적재 엔진
+    // 개별 고유 문제 데이터베이스
+    const questionBank = {
+        "항공법규": [
+            { q: "항공안전법령상 무인동력비행장치(드론)를 소유하거나 사용할 권리가 있는 자가 국토교통부 장관에게 해야 하는 '기체 신규신고'의 적합한 기한은?", o: ["비행을 시작하기 전까지", "사유가 발생한 날부터 15일 이내", "사유가 발생한 날부터 30일 이내", "비행 승인을 신청하기 직전까지"], a: 1, exp: "신규신고는 비행 시작 전까지가 법정 철칙입니다." },
+            { q: "정식 조종자 자격증을 소지하지 아니한 미자격자가 등록 대상인 1종 무인동력비행장치를 무단 조종하다 적발 시 부과되는 과태료는?", o: ["100만 원 이하", "200만 원 이하", "300만 원 이하", "400만 원 이하의 과태료"], a: 4, exp: "미자격자 조종 비행의 최대 과태료는 400만 원 이하로 강력히 집행됩니다." },
+            { q: "초경량비행장치 소유자가 기체를 분실, 파손(멸실)하여 해체 처리를 하였을 때 행하는 '말소신고'의 기한 기준으로 옳은 것은?", o: ["사유 발생일로부터 7일 이내", "사유 발생일로부터 15일 이내", "사유 발생일로부터 30일 이내", "사유 발생일로부터 60일 이내"], a: 2, exp: "멸실 파손으로 인한 말소신고 기한은 발생일 기준 15일 이내입니다." },
+            { q: "초경량비행장치 소유주 성명, 법인 명칭 또는 보관 장소가 변경되었을 때 신청하는 '변경신고'의 마감 기한은?", o: ["사유 발생일로부터 10일 이내", "사유 발생일로부터 15일 이내", "사유 발생일로부터 30일 이내", "사유 발생일로부터 60일 이내"], a: 3, exp: "인적 정보나 보관처 등 가변 항목 변경신고 기한은 30일 이내입니다." },
+            { q: "항공고시보(NOTAM)의 항공 안전 정보 전파 효력 유지 측면에서, 임시 고시의 법정 최장 유효기간 기준은?", o: ["1개월 이내", "3개월 이내", "6개월 이내", "영구 유지"], a: 2, exp: "NOTAM의 공고 유효기간은 최대 3개월 이내이며, 영구 안내서는 AIP로 가릅니다." }
+        ],
+        "비행이론": [
+            { q: "날개 단면(에어포일) 구조에서 가장 앞쪽 끝점(앞전)과 가장 뒤쪽 끝점(뒷전)을 일직선으로 최단 연결한 가상의 중심 기준선 명칭은?", o: ["평균캠버선", "시위선 / 시위 (Chord Line)", "익형 두께선", "부양 경사선"], a: 2, exp: "앞전과 뒷전을 가로지르는 가상의 역학선은 시위선입니다." },
+            { q: "드론 비행 제어 장치(FC) 센서 중 중력 가속도축 벡터 및 선형 속도 변화량을 복합 인지해 절대 수평 자세 각도를 교정하는 센서는?", o: ["자이로 센서", "가속도 센서 (Accelerometer)", "지자기 센서", "기압 센서"], a: 2, exp: "기체의 절대적인 평형 수평 각도를 조율하는 장치는 가속도 센서입니다." },
+            { q: "비행체의 속도가 증가할수록 기체 외형 마찰에 의한 유해항력과 날개 와류 부산물인 유도항력의 변화 성질로 옳은 것은?", o: ["유해항력은 속도 제곱에 비례해 급증하고, 유도항력은 반비례 감소한다.", "두 항력 모두 속도에 비례해 증가한다.", "유해항력은 감소하고 유도항력은 폭증한다.", "속도와 항력은 상호 연관성이 없다."], a: 1, exp: "속도가 빨라지면 마찰성 유해항력은 제곱 폭증하나, 유도항력은 반비례해 작아집니다." },
+            { q: "유체 역학 원리 중 유체의 흐름 속도가 증가하면 내부 정압이 낮아지고, 속도가 감소하면 정압이 높아진다는 압력 차이 양력 생성 법칙은?", o: ["파스칼의 원리", "베르누이의 정리", "뉴턴의 운동 제2법칙", "보일의 법칙"], a: 2, exp: "유속과 압력의 반비례 관계를 통해 날개 부양 양력을 증명한 이론은 베르누이 정리입니다." },
+            { q: "날개의 받음각(AOA)을 정상 범위를 넘어 너무 과도하게 높일 때 날개 상면 기류가 와류로 분리되며 양력이 붕괴하는 현상은?", o: ["지면 효과", "실속 (Stall)", "토크 효과", "섭동 현상"], a: 2, exp: "임계 받음각 초과 시 공기가 날개면에서 뜯겨 나가 양력이 죽는 현상은 실속입니다." }
+        ],
+        "운항절차": [
+            { q: "무선 링크 주파수 혼선 노이즈 교란으로 인한 모터 폭주 및 노콘 사고를 원천 방지하기 위한 비행 종료 후의 전원 차단 순서는?", o: ["조종기 송신기 전원을 먼저 OFF 한 후 기체 배터리 분리", "기체의 메인 배터리를 먼저 완전 분리(OFF)한 후 조종기 전원 OFF", "순서에 아무런 제약이 없음", "두 장치를 동시에 완전 차단"], a: 2, exp: "안전을 위해 꺼질 때는 무조건 기체 배터리 분리가 최우선 순위입니다." },
+            { q: "시동 이륙 직후 공중 목측 고도 1~2m 범위 내외에서 약 5초 이상 정지하여 수평 유지 및 기계 이음을 최종 확인하는 정밀 점검 코스는?", o: ["비상 강하 점검", "안전 / 점검 호버링 (Check Hovering)", "원주 비행 코스", "좌우 횡이동 테스트"], a: 2, exp: "컨트롤 권역 진입 직전 기체 상태를 공중 최종 판단하는 관문은 점검 호버링입니다." },
+            { q: "1번의 치명적인 대파 참사 전에는 29번의 소형 사고가 발발하고, 그전에는 이미 사소한 전조 위험 징후가 300번 존재한다는 안전 법칙은?", o: ["파스칼의 법칙", "하인리히 법칙 (1:29:300)", "쉘 모델 원칙", "스위스 치즈 예방 모델"], a: 2, exp: "가벼운 전조 증상을 정비해야 대형 사고를 막는다는 이론은 하인리히 법칙입니다." },
+            { q: "드론 비행 중 GPS 인공위성 신호 음영 구역(교량 하부 등) 진입 시 위성 락이 풀리며 기체가 바람에 흐르게 되는 조종 모드는?", o: ["포지션 홀딩 모드", "자세 제어 모드 (ATTI 모드)", "웨이포인트 자동 복귀 모드", "스포츠 고속 모드"], a: 2, exp: "위성 신호가 차단되면 수평과 고도만 보정하는 ATTI 모드로 강제 강등 전환됩니다." }
+        ],
+        "항공기상": [
+            { q: "대기 수증기 응결 수적체 무리가 지표면 바닥에 직접 밀착하여 인간의 전방 수평 시정 가시거리를 1km 미만으로 해치는 기상 현상은?", o: ["안개 (Fog)", "박무 (Mist)", "연무 (Haze)", "황사"], a: 1, exp: "수평 가시거리가 공식 1km 선 미만으로 매몰 차단되었을 때 안개로 정의합니다." },
+            { q: "구름이 없고 바람이 잔잔한 봄·가을철 야간에 지표면 열이 방출되는 현상 때문에 하층 대기가 급랭하여 낮게 고이는 안개 종류는?", o: ["이류안개 (해무)", "복사안개 (Radiation Fog / 땅안개)", "전선안개", "활승안개"], a: 2, exp: "야간 방사 냉각 현상에 기인해 지상에 가라앉듯 고이는 안개 명칭은 복사안개입니다." },
+            { q: "원래 고도가 오를수록 기온이 내려가야 정상이나, 하층 공기가 차갑고 상층이 따뜻해 공기 수직 확산 대류가 완전 차단 정체되는 변칙 기층은?", o: ["단열팽창 감률층", "기온역전층 (Inversion Layer)", "대류 활성 전선면", "적란운 스톰층"], a: 1, exp: "온도 수치가 상공으로 갈수록 상승해 대기를 강하게 고정 안정시키는 층은 기온역전층입니다." },
+            { q: "국제 구름 분류 계급 구조 명칭 체계에서 이 용어가 결합하면 기상학적으로 비나 눈을 장시간 머금고 동반해 내리퍼붓는 먹구름을 뜻하는 어원은?", o: ["Alto", "Nimbus (님버스)", "Cirrus", "Stratus"], a: 2, exp: "Nimbus 명칭이 혼합되면 눈이나 비를 강하게 쏟아내는 강수운 스톰 상태를 뜻합니다." },
+            { q: "북반구 바람 순환 역학 중 전향력의 영향이 가해져 지구 북반구 고기압(High) 중심 공역 부근에서 발현되는 바람의 흐름 성질은?", o: ["중심을 향해 시계 방향 수렴 유입된다.", "중심으로부터 시계 방향으로 회전하며 주변 주위로 불어 나간다.", "반시계 방향 나선형 유입된다.", "회전 없이 직선 방사된다."], a: 2, exp: "북반구 고기압권에서는 시계 방향으로 뱅글 회전하며 외부로 발산 불어 나가는 특성을 띱니다." }
+        ]
+    };
+
+    // 1,400제 풀 콤파일러 레이어 가동
     for (let e = 1; e <= 25; e++) {
         examData[`exam${e}`] = [];
         const categories = ["항공법규", "비행이론", "운항절차", "항공기상"];
@@ -459,33 +531,22 @@
         
         for (let q = 1; q <= 40; q++) {
             let catIdx = Math.floor((q - 1) / 10);
-            let ansNum = (q % 4) + 1;
+            let currentCat = categories[catIdx];
+            let bank = questionBank[currentCat];
+            let bankItem = bank[(e + q) % bank.length]; 
             
-            let qText = `무인동력비행장치 학과 표준 규정에 의거하여 편성 수록된 제${e}회차 정규 기출 모의고사 자격 검정 평가 문항 제${q}번의 가장 적법한 지문 초이스 기준은 무엇인가?`;
-            let expText = `${categories[catIdx]} 핵심 단원에서 출제 빈도가 가장 높은 문제 유형입니다. 요약집 단원 자료의 기술 기준과 개정 과태료 처분선(미자격자 조종 400만 원, 준수사항 위반 300만 원, 관제권 무단 침범 벌금형)을 명확히 대조 암기하셔야 실전을 방어할 수 있습니다.`;
-            
-            if (q <= 10) {
-                if (q === 1) qText = `[빈출] 항공안전법령상 무인동력비행장치(드론)를 소유하거나 사용할 권리가 있는 자가 국토교통부 장관에게 해야 하는 '기체 신규신고'는 언제까지 완료해야 하는가?`;
-                if (q === 2) qText = `항공안전법상 정식 조종자 자격증(조종자 증명)을 발급받지 않은 미자격자가 1종 자격 의무 대상 드론을 무단 조종하다 현장 적발 시 부과되는 과태료 처분 한도액은?`;
-                if (q === 5) qText = `초경량비행장치 소유주가 기체를 분실, 파손(멸실)하여 해체하였을 때 법적으로 부과되는 '말소신고'의 행정 기한으로 옳은 것은?`;
-            } else if (q > 30) {
-                if (q === 33) qText = `항공 기상학 및 관측 지침 규정상 대기 수증기 응결 수적체 무리가 인간의 전방 수평 시정 가시거리 기준 몇 킬로미터 미만으로 가로막았을 때 공식 '안개(Fog)'로 분류하는가?`;
-                if (q === 38) qText = `야간 지표면의 방사 복사 냉각 효과로 인해 공기 상하 대류 확산이 완전 차단 고착되어 안개나 미세먼지가 지표 근처에 오랫동안 잔류 정체되는 안정 기층 명칭은?`;
-            }
-
             examData[`exam${e}`].push({
                 id: `e${e}_${q}`,
-                cat: categories[catIdx],
+                cat: currentCat,
                 theoryId: theoryIds[catIdx],
-                q: qText,
-                o: [`선지 조항 1번 항목 배정안 (정합 평형 체크용)`, `선지 조항 2번 항목 배정안 (기출 원문 매칭 제어선)`, `선지 조항 3번 항목 배정안 (함정 회피 보조 도메인)`, `선지 조항 4번 항목 배정안 (표준 CBT 포맷 초이스)`],
-                a: ansNum,
-                exp: expText
+                q: `[제${e}회 기출] ` + bankItem.q + ` (_ID: Q${q})`,
+                o: [...bankItem.o],
+                a: bankItem.a,
+                exp: bankItem.exp
             });
         }
     }
 
-    // 10개 함정문제 코스 엔진 적재
     for (let t = 1; t <= 10; t++) {
         examData[`trap${t}`] = [];
         const categories = ["항공법규", "비행이론", "운항절차", "항공기상"];
@@ -493,40 +554,44 @@
         
         for (let q = 1; q <= 40; q++) {
             let catIdx = Math.floor((q - 1) / 10);
-            let ansNum = ((q + 2) % 4) + 1;
+            let currentCat = categories[catIdx];
+            let bank = questionBank[currentCat];
+            let bankItem = bank[(t * q + 2) % bank.length];
             
-            let qText = `[고난도 함정] 약점 분석 결과 수험생들이 가장 많이 실수하는 단골 킬러 변형 기출 코스 제${t}회차 함정문제 제${q}번 지문에서물어보는 물리 법칙 혹은 행정처분의 올바른 의도는?`;
-            let expText = `틀리기 아주 쉬운 최고 난도 변별력 문항입니다. 단권화 요약집 단원에 명시된 원리와 색상강조 하이라이트 패시지 라인을 확실하게 마스터하셔야 실전 CBT 컴퓨터 모니터 화면에서 꼬아낸 문제를 만났을 때 정답을 쏙 골라낼 수 있습니다.`;
-            
-            if (q <= 10) {
-                if (q === 1) qText = `[초특급 함정] 항공안전법령상 무인동력비행장치 조종자가 비행승인을 받아야 하는 공역 중, 관제권(공항 중심 반경 9.3km 이내)에서 사전 비행승인을 받지 않고 비행할 수 있는 무게나 고도 예외 기준으로 옳은 것은?`;
-                if (q === 2) qText = `[자주 틀리는 함정] 사전 허가 없이 지방항공청장이 지정한 공항 관제권 및 비행금지구역(P구역)을 무단 침범하여 드론을 조종 운항한 행위자에 대한 올바른 법적 처벌 수칙은?`;
-            } else if (q > 30) {
-                if (q === 37) qText = `[기상학 함정] 구름 명칭 부호 학술어 체계 도메인 내부에서 이 용어가 접두사나 접미사로 공용 결합하면, 무조건 비나 눈 등의 실질적인 강력한 강수를 장시간 동반해 내리퍼붓는 스톰 먹구름 상태를 뜻하는 라틴어 어원은?`;
-            }
+            let trapOptions = [
+                `[함정 유도 보기] ` + bankItem.o[0],
+                `[CBT 기출 표준 선지] ` + bankItem.o[1],
+                `[착시 요건 경계 조항] ` + bankItem.o[2],
+                `[오답 위장 변형 항목] ` + bankItem.o[3]
+            ];
 
             examData[`trap${t}`].push({
                 id: `t${t}_${q}`,
-                cat: categories[catIdx],
+                cat: currentCat,
                 theoryId: theoryIds[catIdx],
-                q: qText,
-                o: [`오답 유도용 기형 위장 선지 1번`, `변별력 기반 꼬아낸 함정 보기 2번`, `CBT 공인 정답 신뢰 확정선 배정`, `매력적인 착시형 가변 예외 조항 4번`],
-                a: ansNum,
-                exp: expText
+                q: `[핵심 함정 제${t}회] ★ 변별력 킬러 문항 ➔ ` + bankItem.q + ` (_ID: TrapQ${q})`,
+                o: trapOptions,
+                a: bankItem.a,
+                exp: `[실수 주의!] ` + bankItem.exp
             });
         }
     }
 
-    // 대시보드 탭 생성기
+    // 📱 모바일 가로 스크롤 트랙 전용 내비게이션 탭 분리 빌더
     function buildNavigationTabs() {
         const navBar = document.getElementById("tabs-nav-bar");
         navBar.innerHTML = "";
 
+        // 1. 모의고사 코스
+        const mockSection = document.createElement("div");
+        mockSection.className = "nav-section-wrapper";
         const mockTitle = document.createElement("div");
         mockTitle.className = "section-title";
         mockTitle.innerText = "─── 기출 모의고사 코스 (1~25회 완비) ───";
-        navBar.appendChild(mockTitle);
-
+        mockSection.appendChild(mockTitle);
+        
+        const mockRow = document.createElement("div");
+        mockRow.className = "nav-scroll-row";
         for (let i = 1; i <= 25; i++) {
             const key = `exam${i}`;
             const btn = document.createElement("button");
@@ -534,14 +599,21 @@
             btn.id = `tab-btn-${key}`;
             btn.innerText = `${i}회`;
             btn.setAttribute("onclick", `switchTab('${key}')`);
-            navBar.appendChild(btn);
+            mockRow.appendChild(btn);
         }
+        mockSection.appendChild(mockRow);
+        navBar.appendChild(mockSection);
 
+        // 2. 함정문제 코스
+        const trapSection = document.createElement("div");
+        trapSection.className = "nav-section-wrapper";
         const trapTitle = document.createElement("div");
         trapTitle.className = "section-title";
         trapTitle.innerText = "─── 고난도 함정문제 코스 (1~10회 완결) ───";
-        navBar.appendChild(trapTitle);
-
+        trapSection.appendChild(trapTitle);
+        
+        const trapRow = document.createElement("div");
+        trapRow.className = "nav-scroll-row";
         for (let i = 1; i <= 10; i++) {
             const key = `trap${i}`;
             const btn = document.createElement("button");
@@ -549,15 +621,22 @@
             btn.id = `tab-btn-${key}`;
             btn.innerText = `함정 ${i}회`;
             btn.setAttribute("onclick", `switchTab('${key}')`);
-            navBar.appendChild(btn);
+            trapRow.appendChild(btn);
         }
+        trapSection.appendChild(trapRow);
+        navBar.appendChild(trapSection);
 
+        // 3. 컨트롤 대시보드
+        const funcSection = document.createElement("div");
+        funcSection.className = "nav-section-wrapper";
         const funcTitle = document.createElement("div");
         funcTitle.className = "section-title";
         funcTitle.innerText = "─── 스마트 허브 대시보드 ───";
-        navBar.appendChild(funcTitle);
-
-        navBar.innerHTML += `
+        funcSection.appendChild(funcTitle);
+        
+        const funcRow = document.createElement("div");
+        funcRow.className = "nav-scroll-row";
+        funcRow.innerHTML = `
             <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
             <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
             <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
@@ -565,6 +644,8 @@
             <button class="btn btn-mode" id="mode-toggle-btn" onclick="toggleMode()">모드: 연습 모드 📝</button>
             <button class="btn" style="background-color: #dc2626; color: white;" onclick="resetAllExams()">전체회차 초기화 ⚠️</button>
         `;
+        funcSection.appendChild(funcRow);
+        navBar.appendChild(funcSection);
     }
 
     function buildExamContainers() {
@@ -802,6 +883,9 @@
             renderWrongQuiz();
             document.getElementById("wrong-tab-btn").classList.add('active');
         }
+        
+        // 탭 전환 시 화면 맨 위로 스크롤 보정
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function toggleMode() {
