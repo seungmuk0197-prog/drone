@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>드론 조종자 자격시험 25회 + 함정 10회 + 요약본 4종 대통합 라이브러리</title>
+    <title>드론 조종자 자격시험 25회 + 함정 10회 통합 스마트 마스터피스 시스템</title>
     <style>
         :root {
-            --primary-color: #2b6cb0;
-            --primary-hover: #2c5282;
+            --primary-color: #1a365d;
+            --primary-hover: #2a4365;
             --trap-color: #d69e2e;
             --trap-hover: #b7791f;
             --success-color: #38a169;
@@ -30,7 +30,7 @@
         header {
             background-color: var(--primary-color);
             color: white;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
             position: sticky;
             top: 0;
@@ -38,18 +38,19 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        header h1 { margin: 0; font-size: 1.4rem; }
+        header h1 { margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; }
+        header p { margin: 5px 0 0 0; font-size: 0.95rem; color: #cbd5e0; font-weight: 500; }
         
         .section-title {
             width: 100%;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: #4a5568;
-            margin-top: 10px;
+            margin-top: 12px;
             margin-bottom: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .nav-container {
@@ -58,7 +59,7 @@
             background-color: #edf2f7;
             padding: 10px;
             position: sticky;
-            top: 65px;
+            top: 83px;
             z-index: 999;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             gap: 6px;
@@ -89,7 +90,7 @@
             max-width: 1200px;
             margin: 25px auto;
             padding: 0 20px;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
         }
 
         .tab-content { display: none; }
@@ -186,6 +187,9 @@
         .theory-section h3 { color: #2d3748; background: #edf2f7; padding: 8px 12px; border-radius: 4px; font-size: 1.1rem; margin-top: 20px; }
         .theory-section ul { padding-left: 20px; }
         .theory-section li { margin-bottom: 8px; }
+        .theory-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95rem; }
+        .theory-table th, .theory-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
+        .theory-table th { background-color: #edf2f7; font-weight: bold; }
 
         .result-panel {
             background-color: white;
@@ -216,12 +220,27 @@
             margin-bottom: 10px;
             color: #4a5568;
         }
+
+        footer {
+            text-align: right;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #a0aec0;
+            background-color: #edf2f7;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 1px solid var(--border-color);
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🚁 드론 자격시험 25회 + 함정 10회 스마트 라이브러리 (최종 그랜드 완결본)</h1>
+    <h1>🚁 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
+    <p>모의고사 25회분 + 고난도 함정 10회분 + 4대 수험서 단권화 통합 CBT 시스템</p>
 </header>
 
 <div class="nav-container" id="tabs-nav-bar">
@@ -244,7 +263,7 @@
     <div id="theory" class="tab-content">
         <div class="info-box" style="border-left-color: var(--success-color);">
             <h3>📖 드론 초경량비행장치 조종 자격시험 필기 그랜드 마스터 단권화 가이드</h3>
-            <p>제공해주신 모든 요약 자료를 교차 대조하여, 누락될 수 있는 사소한 개념 및 기출문제 연동 함정 방어선까지 완전 보강을 마쳤습니다.</p>
+            <p>신한글로벌인재교육원 드론과정 마스터를 위해 출제 가능한 모든 이론의 뼈대와 미세 보강 개념을 한곳에 집약했습니다.</p>
         </div>
         
         <div class="theory-section" id="theory-law">
@@ -260,16 +279,42 @@
 
             <h3>2) 항공 정보 고시 및 행정 민원 기한 (초특급 단골 함정)</h3>
             <ul>
-                <li><strong>항공고시보(NOTAM):</strong> 항공 안전 정보를 전파하는 무선통신 공고문으로, <strong>유효기간은 3개월 이내</strong>입니다. 반면 영구적인 항공 안내서는 <strong>항공정보간행물(AIP)</strong>로 상호 엄격히 구별합니다.</li>
-                <li><strong>행정 신고 기한 마감 요건:</strong>
+                <li><strong>항공고시보(NOTAM):</strong> 항공 안전 정보를 전기통신 수단으로 긴급 전파하는 공고문으로, <strong>유효기간은 3개월 이내</strong>입니다. 반면 영구적이거나 장기적인 항공 안내서는 <strong>항공정보간행물(AIP)</strong>로 상호 엄격히 구별합니다.</li>
+                <li><strong>행정 신고 기한 마감 요건 (15일 vs 30일 절대 매칭):</strong>
                     <ul>
                         <li>기체의 분실, 파손, 해체(멸실) 및 <strong>2개월 이상 존재가 불분명할 때</strong> ➔ 사유 발생일로부터 <strong>15일 이내 말소신고</strong></li>
-                        <li>소유주의 주소 변경, 성명·법인 명칭 변경, 매매 양도로 인한 소유권 이전 시 ➔ 사유 발생일로부터 <strong>30일 이내 변경/이전신고</strong></li>
+                        <li>소유주의 주소 변경, 성명·법인 명칭 변경, 매매 계약에 따른 양도 발생 시 ➔ 사유 발생일로부터 <strong>30일 이내 변경/이전신고</strong></li>
                         <li><strong>※ 중요 보강 함정:</strong> 동일 규격의 소모품(프로펠러, 모터)의 단순 소모성 교체 정비는 행정 변경신고 대상이 아닙니다.</li>
                     </ul>
                 </li>
-                <li><strong>공역 등급 구조 체계 (A~G등급):</strong> 관제공역은 A~E등급, 비관제공역은 F, G등급입니다. 최고층인 <strong>A등급 공역은 모든 항공기가 예외 없이 반드시 계기 비행(IFR)</strong>을 수행해야 합니다. 대한민국 공역 체계에서는 **F등급 공역을 실제 운영하지 않습니다**.</li>
-                <li><strong>위반 시 과태료 및 벌칙 기준액:</strong>
+                <li><strong>공역 등급 구조 체계 (A~G등급 정밀 기준 보강):</strong>
+                    <table class="theory-table">
+                        <tr>
+                            <th>공역 구분</th>
+                            <th>등급</th>
+                            <th>비행 요건 및 허가 기준</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" style="font-weight:bold;">관제공역</td>
+                            <td>A등급</td>
+                            <td>최고층 공역. **모든 항공기가 예외 없이 반드시 계기 비행(IFR)**을 수행해야 함.</td>
+                        </tr>
+                        <tr>
+                            <td>B~e등급</td>
+                            <td>관제탑의 통제를 직접 받으며 시정 및 구름 이격 기준에 맞춰 비행 통제됨.</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" style="font-weight:bold;">비관제공역</td>
+                            <td>F등급</td>
+                            <td>비행 조언 서비스 공역. **현재 대한민국 공역 체계에서는 F등급을 실제 운영하지 않음(함정)**</td>
+                        </tr>
+                        <tr>
+                            <td>G등급</td>
+                            <td>정보 서비스 공역. 통제를 받지 않으며 시정 5km 확보 시 드론 비행 가능 범위에 해당함.</td>
+                        </tr>
+                    </table>
+                </li>
+                <li><strong>위반 시 과태료 및 벌칙 기준액 (형사처벌 구별):</strong>
                     <ul>
                         <li>영리 사용사업자 의무 책임보험(배상책임보험 대인/대물) 미가입 시 최대 <strong>500만 원 이하의 과태료</strong></li>
                         <li>자격증이 없는 미자격자의 무단 조종 비행 적발 시 최대 <strong>400만 원 이하의 과태료</strong></li>
@@ -318,7 +363,7 @@
                     <ul>
                         <li><strong>모너코크 구조:</strong> 내부 골격 뼈대가 전무하며 두꺼운 외피 스킨과 정형제만으로 전체 외부 비행 하중을 모두 버티는 구조입니다. 내부 가용 공간이 극대화됩니다.</li>
                         <li><strong>세미 모너코크 구조:</strong> 외피가 일부 하중을 받고, 내부의 세로형 뼈대 구조인 <strong>스트링어(Stringer)</strong> 및 벌크헤드가 힘을 정밀 분담해 지탱하는 대부분의 현대식 항공기 표준 구조입니다.</li>
-                        <li><strong>트러스 구조:</strong> 삼각형 형태로 조밀하게 짜인 강력한 내부 철제 강철 뼈대(트러스)가 비행 하중 전체를 독점 전담하며 외부에는 아주 얇은 천이나 외피만 입히는 방식으로 내부 공간이 매우 협소해집니다.</li>
+                        <li><strong>트러스 구조:</strong> 삼각형 형태로 조밀하게 짜인 강력한 내부 철제 강철 뼈대(트러스)가 비행 하중 전체를 전담하며 외부에는 아주 얇은 천이나 외피만 입히는 방식으로 내부 공간이 매우 협소해집니다.</li>
                     </ul>
                 </li>
             </ul>
@@ -341,13 +386,19 @@
                 <li><strong>대류권(Troposphere):</strong> 수증기 분자가 존재하는 영공 내 유일한 대기 구역층으로 비, 눈, 구름 등 모든 기상 이변이 발발하며 고도 100m 상승 시마다 기온이 약 0.65℃씩 감률 하강합니다. 대류권의 상부 한계 경계선을 <strong>대류권계면</strong>이라 합니다.</li>
                 <li><strong>안개(Fog)와 박무(Mist)의 과학적 경계선:</strong> 안개와 구름은 미세 물방울 응결체라는 물리 성분은 완전 동일하나, 지표면 바닥에 직접 결착하여 인간의 전방 수평 시정 가시거리를 <strong>1km 미만</strong>으로 악화 차단할 때 안개라고 판정 공표하며, 1km 이상 10km 미만의 흐릿함은 박무(Mist)라고 칭합니다.
                     <ul>
-                        <li><strong>복사안개 (땅안개):</strong> 구름이 전혀 없고 바람이 고요한 맑은 야간 밤사이에 지표면 열이 허공으로 소실되는 <strong>방사 복사 냉각 현상</strong>으로 인해 하층 대기가 이슬점 이하로 급랭 응결하여 지면에 낮게 고여 깔리는 안개입니다. 해가 뜨고 지열이 차차 가열되면 신속히 대류 분산 소멸합니다.</li>
-                        <li><strong>이류안개 (해무):</strong> 온난 다습한 공기 덩어리 기단이 온도가 급격히 차가운 바다 수면이나 차가운 지표 위 공간을 <strong>수평 방향으로 이동(이류)</strong>할 때, 찬 바닥면에 접한 아래 공기층이 포화 급랭 응결하는 대형 안개로 대한민국 삼면에 빈발하는 해무의 근본 원리입니다. 풍속 4~5m/s 수준의 바람이 동반될 때 발생이 더욱 용이합니다.</li>
+                        <li><strong>복사안개 (땅안개):</strong> 구름이 전혀 없고 바람이 고요한 맑은 야간 밤사이에 지표면 열이 허공으로 소실되는 <strong>방사 복사 냉각 현상</strong>으로 인해 하층 대기가 이슬점 아래로 급랭 응결하여 지면에 낮게 고여 깔리는 안개입니다. 해가 뜨고 지열이 차차 가열되면 신속히 대류 분산 소멸합니다.</li>
+                        <li><strong>이류안개 (해무):</strong> 온난 다습한 공기 기단 덩어리가 온도가 매우 차가운 바다 수면이나 차가운 지표 위 공간을 <strong>수평 방향으로 이동(이류)</strong>할 때, 찬 바닥면에 접한 아래 공기층이 포화 급랭 응결하는 대형 안개로 대한민국 삼면에 빈발하는 해무의 근본 원리입니다. 풍속 4~5m/s 수준의 바람이 동반될 때 발생이 더욱 용이합니다.</li>
                     </ul>
                 </li>
-                <li><strong>기온역전층(Inversion Layer):</strong> 원래 고도가 오를수록 온도가 내려가야 정상이나, 하층 공기가 차갑고 상층이 따뜻하게 엎어진 변칙 안정 기층입니다. 공기 수직 확산 대류가 차단되므로 안개, 황사, 미세먼지 등 유해 매연 연무가 지표면에 장시간 적체 누적됩니다.</li>
+                <li><strong>난류(Turbulence)의 강도 기준 보강:</strong>
+                    <ul>
+                        <li><strong>약한 난류:</strong> 기체가 가볍고 부드럽게 흔들리는 수준.</li>
+                        <li><strong>보통 난류 (중간 난류):</strong> 상당한 진동이 수반되나 **조종사가 기체의 직접적인 통제 제어력을 상실하지는 않는 범위**.</li>
+                        <li><strong>심한 난류:</strong> 급격한 고도 및 자세 도치가 유발되어 순간적으로 조종 통제력을 상실할 수 있는 위험 단계.</li>
+                    </ul>
+                </li>
                 <li><strong>이슬점 도달 포화 원리:</strong> 실제 대기 기온 수치가 하강하거나 습도가 공급되어 <strong>기온 수치와 이슬점 온도가 완벽히 일치 맞닿게 되면 대기가 포화 상태(상대습도 100%)</strong>에 직격 수렴하며 구름과 안개의 응결 형성이 전격 시작됩니다.</li>
-                <li><strong>구름 학술어 라틴 어원 'Nimbus(님버스)':</strong> 국제 구름 계급 분류 구조 명칭에서 이 단어가 접두사나 접미사로 공용 결합하면(적란운, 난층운 등) **'비나 눈 등의 직접적이고 강력한 강수 현상을 장시간 동반해 내리퍼붓는 스톰 먹구름'**을 기상학적으로 뜻합니다. 산악 지형 난기류가 만드는 UFO 모양은 **렌즈형 구름**입니다.</li>
+                <li><strong>구름 학술어 라틴 어원 'Nimbus(님버스)':</strong> 국제 구름 계급 분류 구조 명칭에서 이 단어가 접두사나 접미사로 공용 결합하면(적란운, 난층운 등) **'비나 눈 등의 직접적이고 강력한 강수 현상을 장시간 동반해 내리퍼붓는 스톰 먹구름'**을 기상학적으로 뜻합니다. 산악 지형 난기류(산악파)가 만드는 볼록 렌즈형 UFO 모양은 <strong>렌즈형 구름</strong>입니다.</li>
             </ul>
 
             <h3>2) 한반도 주변 지배 기단 고유 성질 및 북반구 바람 역학</h3>
@@ -355,13 +406,17 @@
                 <li><strong>시베리아 기단:</strong> 한겨울철 시베리아 대륙에서 한반도로 매서운 북서 계절풍을 유도하며 매서운 혹한 한파와 동결 가뭄을 독점 유발하는 대륙성 <strong>'한랭 건조'</strong> 기단입니다.</li>
                 <li><strong>북태평양 기단:</strong> 한여름철(7~8월) 찜통 무더위와 가혹 폭염 주의보, 남동 계절풍 및 열대야 밤 환경을 결정짓는 저위도 해양성 <strong>'고온 다습'</strong> 기단입니다.</li>
                 <li><strong>오호츠크해 기단:</strong> 늦봄과 초여름 장마철 한반도 상공에 도달하는 해양성 <strong>'한랭 다습'</strong> 기단으로, 북태평양 기단과 충돌 시 세력이 비등하여 이동 없이 장시간 대치하는 **정체전선(장마전선)**을 유도해 장마를 내립니다.</li>
-                <li><strong>양쯔강 기단:</strong> 봄철과 가을철 한반도에 도달하여 따뜻하고 건조한 성질과 함께 <strong>이동성 고기압</strong>을 형성해 맑은 날씨와 황사를 동반하는 기단입니다.</li>
+                <li><strong>양쯔강 기단 (봄철 보강):</strong> 주로 봄철과 가을철 한반도에 도달하여 따뜻하고 건조한 성질과 함께 **이동성 고기압**을 형성해 맑은 날씨와 황사를 동반하는 기단입니다.</li>
                 <li><strong>북반구 바람 순환 구조 원리:</strong> 기압 경도 기울기 편차에 의해 공기는 고기압 영역에서 저기압 영역으로 수평 이동(바람 발생)하며, 지구 자전에 따른 전향력(코리올리 힘)의 영향이 가해져 **북반구 고기압 중심에서는 시계 방향으로 바람이 불어 나가고**, **저기압 중심에서는 반시계 방향으로 나선형을 그리며 바람이 불어 들어오는** 고유 흡입 대기 역학을 완성합니다.</li>
             </ul>
             <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
         </div>
     </div>
 </div>
+
+<footer>
+    제작자 SM
+</footer>
 
 <script>
     let isExamMode = false;
@@ -390,11 +445,11 @@
         exam17: [{ id: "e17_1", cat: "항공법규", theoryId: "theory-law", q: "자격증을 보유하지 않은 미자격자가 1종 드론을 무단 운항 조종 시 부과되는 최고 과태료 처분액은?", o: ["100만 원 이하", "200만 원 이하", "300만 원 이하", "400만 원 이하"], a: 4, exp: "미자격자 조종 비행 과태료 최고 부과 한계 수치액은 400만 원 이하입니다." }],
         exam18: [{ id: "e18_1", cat: "항공기상", theoryId: "theory-meteorology", q: "고도가 올라갈수록 기온이 평소 감률과 달리 비례 상승하는 안정 기층 구조 명칭은?", o: ["기온역전층 (Inversion Layer)", "단열팽창층", "대류 전선층", "스톰 적란운층"], a: 1, exp: "상공 온도 수치가 하층 대기보다 따뜻해 대류를 막아버리는 고정 안정층은 기온역전층입니다." }],
         exam19: [{ id: "e19_1", cat: "항공법규", theoryId: "theory-law", q: "온라인 학과 교육 이수만으로 간편 취득할 수 있는 무인동력비행장치의 자격 등급은?", o: ["1종", "2종", "3종", "무인동력비행장치 4종"], a: 4, exp: "250g 초과 2kg 이하인 4종 장치는 온라인 교육(6시간) 및 평가만으로 취득이 가능합니다." }],
-        exam20: [{ id: "e20_39", cat: "항공기상", theoryId: "theory-meteorology", q: "안개(Fog) 현상과 상공의 구름(Cloud)을 정밀 구분 짓는 기상학적 절대 기준 요건은 무엇인가?", o: ["물방울 자체 무게", "상대 습도", "지표면 바닥에 직접 물리적으로 부착 접촉하여 시야를 흐리고 있는지 여부", "주변 기단의 감률"], a: 3, exp: "지표면 접촉 유무(발생 고도 편차)에 의거하여 안개와 구름의 호칭을 양분 분리합니다." }],
+        exam20: [{ id: "e20_39", cat: "항공기상", theoryId: "theory-meteorology", q: "안개(Fog) 현상과 상공의 구름(Cloud)을 정밀 구분 짓는 기상학적 절대 기준 요건은 무엇인가?", o: ["물방울 자체 무게", "상대 습도", "지표면 바닥에 직접 물리적으로 부착 접촉하여 시야를 흐리고 있는지 여부", "주변 기단의 감률"], a: 3, exp: "지표면 콘택트 여부 유무(발생 고도)에 의거하여 안개와 구름의 호칭을 가릅니다." }],
         exam21: [{ id: "e21_2", cat: "항공법규", theoryId: "theory-law", q: "초경량비행장치를 타인에게 양도한 경우, 양수인은 사유 발생일로부터 며칠 이내에 '이전신고'를 해야 하는가?", o: ["7일 이내", "15일 이내", "30일 이내", "60일 이내"], a: 3, exp: "매매 계약 등으로 소유권 양도 이전 시 사유 발생일 기준 30일 이내 이전신고가 철칙입니다." }],
         exam22: [{ id: "e22_1", cat: "항공법규", theoryId: "theory-law", q: "학과시험(필기) 합격 통보를 받은 자가 실기시험을 치르기 위해 유효한 학과시험 합격 유효기간은?", o: ["1년", "2년", "3년", "5년"], a: 2, exp: "드론 자격증의 학과시험 합격 효력은 전국 공통 만 '2년' 동안 유효하게 지탱됩니다." }],
         exam23: [{ id: "e23_1", cat: "항공법규", theoryId: "theory-law", q: "최대이륙중량이 '25kg 초과 자체중량 150kg 이하'인 기체를 비행할 때 취득해야 하는 필수 자격 등급은?", o: ["무인동력비행장치 1종", "2종 자격", "3종 자격", "4종 자격"], a: 1, exp: "최대이륙중량 25kg 초과는 최고 자격 등급인 '1종' 라이선스를 획득 소지해야 합니다." }],
-        exam24: [{ id: "e24_1", cat: "항공법규", theoryId: "theory-law", q: "항공안전법 제2조에 정의된 '초경량비행장치'의 가장 올바른 학술적 정의 조항 문구는?", o: ["항공기와 경량항공기 제외 국토부령 지정 비행장치", "자체중량 150kg 이하 모든 무인 장치", "항공기와 경량항공기 외에 공기의 반작용으로 뜰 수 있는 기기 외에 국토교통부령으로 정하는 동력비행장치, 인력항공기, 기구류 및 무인비행장치 등", "수색용 특수 기체"], a: 3, exp: "초경량비행장치는 항공기·경량항공기 외 공기 반작용 부양 기기 중 국토부령 명시 기기를 통칭합니다." }],
+        exam24: [{ id: "e24_1", cat: "항공법규", theoryId: "theory-law", q: "항공안전법 제2조에 정의된 '초경량비행장치'의 가장 올바른 학술적 정의 조항 문구는?", o: ["항공기와 경량항공기 제외 국토부령 지정 비행장치", "자체중량 150kg 이하 모든 무인 장치", "항공기와 경량항공기 외에 공기의 반작용으로 뜰 수 있는 기기 외에 국토교통부령으로 정하는 동력비행장치, 인력항공기, 기구류 및 무인비행장치 등", "수색용 특수 기체"], a: 3, exp: "초경량비행장치란 공기의 반작용으로 부양하는 기기 중 동력·인력·기구·무인장치류를 통칭합니다." }],
         exam25: [{ id: "e25_2", cat: "항공법규", theoryId: "theory-law", q: "정식 자격증을 발급받지 않은 미자격자가 1종 대상 드론을 조종하다가 적발되었을 때의 과태료 처분 기준은?", o: ["100만 원 이하", "200만 원 이하", "300만 원 이하", "400만 원 이하의 과태료"], a: 4, exp: "미자격자 조종 처벌 처분 상한 최고 수치액은 강력해진 '400만 원 이하'입니다." }],
 
         // ================== [함정문제 코스 10개 회차 풀 바인딩 완료] ==================
@@ -405,7 +460,7 @@
         trap5: [{ id: "t5_1", cat: "항공법규", theoryId: "theory-law", q: "[함정] 조종자가 비행 중 고의 또는 중대한 과실로 타인의 재산에 손해를 입힌 경우 행정처분 기준은?", o: ["50만 원 과태료", "1년 징역", "조종자 자격증의 취소 또는 6개월 이내의 효력 정지 처분", "처분 없음"], a: 3, exp: "고의 중과실 인명 재산 피해 유발 시 자격 취소 또는 6개월 이내 효력 정지 대상입니다." }],
         trap6: [{ id: "t6_1", cat: "항공법규", theoryId: "theory-law", q: "[함정] 관제권 내에서 사전 비행승인을 받지 않고 비행할 수 있는 예외 규정으로 옳은 것은?", o: ["12kg 이하 면제", "2kg 이하 면제", "취미용 면제", "관제권 내에서는 기체의 무게, 비행 고도, 영리 여부와 상관없이 무조건 사전 비행승인을 받아야 한다."], a: 4, exp: "공항 주변 관제권 영공 범위 내에서는 예외 면제 조항이 0%로 절대 존재하지 않습니다. 무조건 사전 승인!" }],
         trap7: [{ id: "t7_1", cat: "항공법규", theoryId: "theory-law", q: "[함정] 무인동력비행장치 변경신고를 제출해야 하는 의무 사유에 해당하지 않는 항목은?", o: ["소유주 주소 성명 가변", "보관 장소 시·도 변경", "동일 규격 소모품 프로펠러 및 모터를 단순 정비 목적 교체한 경우", "영리 용도 변경"], a: 3, exp: "소모성 규격 부품의 노후 정비 단순 교체 주기는 변경신고 행정 규제 대상이 아닙니다." }],
-        trap8: [{ id: "t8_1", cat: "항공법규", theoryId: "theory-law", q: "[함정] 관제권(공항 중심 반경 9.3km) 내 상공을 무단 침범해 비행하다 적발 시 처벌 기준으로 옳은 것은?", o: ["100만 원 과태료", "항공안전법 벌칙 규정에 의거한 200만 원 이하의 벌금형 (형사 처벌)", "300만 원 과태료", "경고 훈방"], a: 2, exp: "관제권 및 P구역 무단 비행 적발 조종사는 행정 과태료가 아닌 벌칙 적용으로 200만 원 이하 벌금형(형형 처벌)에 처해집니다." }],
+        trap8: [{ id: "t8_1", cat: "항공법규", theoryId: "theory-law", q: "[함정] 관제권(공항 중심 반경 9.3km) 내 상공을 무단 침범해 비행하다 적발 시 처벌 기준으로 옳은 것은?", o: ["100만 원 과태료", "항공안전법 벌칙 규정에 의거한 200만 원 이하의 벌금형 (형사 처벌)", "300만 원 과태료", "경고 훈방"], a: 2, exp: "관제권 및 P구역 무단 비행 적발 조종사는 행정 과태료가 아닌 벌칙 적용으로 200만 원 이하 벌금형(형사 처벌)에 처해집니다." }],
         trap9: [{ id: "t9_1", cat: "항공법규", theoryId: "theory-law", q: "[함정] 영공 내에서 초경량비행장치 비행 승인 및 민원 신청 허가 고시를 전담 처리하는 관할 기관은?", o: ["교통안전공단", "국토교통부 소속 관할 지방항공청 (서울·부산·제주지방항공청)", "항공안전기술원", "시도경찰청"], a: 2, exp: "비행 허가 및 특별비행 행정 승인 관할 부서는 국토교통부 산하 각 '지방항공청'입니다." }],
         trap10: [{ id: "t10_38", cat: "항공기상", theoryId: "theory-meteorology", q: "[함정] 비나 눈 등의 직접 강수(Rain) 현상을 장시간 동반해 내리뿜는 먹구름 학명 부호에 결합하는 라틴어 어원은?", o: ["Alto", "Nimbus (님버스)", "Cirrus", "Stratus"], a: 2, exp: "Nimbus(님버스) 어원이 구름명에 포함되면 기상학적으로 비나 눈을 강하게 뿌리는 강수 스톰운을 직제 뜻합니다." }]
     };
@@ -529,10 +584,10 @@
         const expDiv = document.getElementById(`exp_${examKey}_${qId}`);
         
         if (selectedNum === question.a) {
-            feedDiv.innerHTML = "🎉 정답입니다! 빈출 개념 완벽 정복.";
+            feedDiv.innerHTML = "🎉 정답입니다! 개념 연산 완벽 통과.";
             feedDiv.className = "feedback correct";
         } else {
-            feedDiv.innerHTML = `❌ 틀렸습니다. (선택: ${selectedNum}번) - 정확한 정답은 ${question.a}번입니다.`;
+            feedDiv.innerHTML = `❌ 틀렸습니다. (마킹: ${selectedNum}번) - 정확한 정답은 ${question.a}번입니다.`;
             feedDiv.className = "feedback wrong";
             wrongQuestions.add(question); 
             document.getElementById("wrong-tab-btn").style.display = "inline-block";
@@ -589,7 +644,7 @@
         targetContainer.innerHTML = "";
         
         if (wrongQuestions.size === 0) {
-            targetContainer.innerHTML = "<p style='text-align:center; padding:40px; font-weight:bold; color:#718096;'>보관된 함정 오답이 없습니다. 퍼펙트 스펙입니다!</p>";
+            targetContainer.innerHTML = "<p style='text-align:center; padding:40px; font-weight:bold; color:#718096;'>보관된 함정 오답이 없습니다. 퍼펙트 가동 상태입니다!</p>";
             document.getElementById("wrong-submit-container").style.display = "none";
             return;
         }
@@ -627,14 +682,14 @@
         let correctCount = 0;
         let itemsArray = Array.from(wrongQuestions);
         itemsArray.forEach(item => {
-            const radioGroup = document.getElementsByName(`ans_wrong_${item.id}`);
+            const radioGroup = document.getElementsByName('ans_wrong_' + item.id);
             let checkedVal = 0;
             for (let i = 0; i < radioGroup.length; i++) {
                 if (radioGroup[i].checked) { checkedVal = parseInt(radioGroup[i].value); break; }
             }
             if (checkedVal === item.a) correctCount++;
         });
-        alert(`🎯 약점 보완 시스템: 총 ${wrongQuestions.size}제 중 ${correctCount}개 약점 정복 완료!`);
+        alert('🎯 약점 보완 시스템: 총 ' + wrongQuestions.size + '제 중 ' + correctCount + '개 약점 정복 완료!');
     }
 
     function switchTab(tabId) {
@@ -644,7 +699,7 @@
         
         document.getElementById(tabId).classList.add('active');
 
-        const targetBtn = document.getElementById(`tab-btn-${tabId}`);
+        const targetBtn = document.getElementById('tab-btn-' + tabId);
         if (targetBtn) targetBtn.classList.add('active');
 
         if (tabId === 'wrong_notes') {
