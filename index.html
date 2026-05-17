@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>드론 조종자 자격시험 25회 + 함정 10회 올인원 스마트 라이브러리</title>
+    <title>드론 조종자 자격시험 25회 + 함정 10회 + 올인원 요약본 스마트 라이브러리</title>
     <style>
         :root {
             --primary-color: #1a365d;
@@ -138,7 +138,7 @@
         }
 
         .option-item:hover { background-color: #f7fafc; }
-        .option-item input { margin-right: 12px; transform: scale(1.2); cursor: pointer; }
+        .option-item input { margin-right: 12px; transform: scale(1.2); pointer-events: none; }
 
         .feedback {
             margin-top: 15px;
@@ -191,6 +191,9 @@
         .theory-table th, .theory-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
         .theory-table th { background-color: #edf2f7; font-weight: bold; }
 
+        .oral-q { font-weight: bold; color: #1a365d; margin-top: 15px; font-size: 1.05rem; }
+        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 5px 0 15px 0; }
+
         .result-panel {
             background-color: white;
             border: 2px solid var(--primary-color);
@@ -239,7 +242,7 @@
 <body>
 
 <header>
-    <h1>💡 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
+    <h1>🚁 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
     <p>모의고사 25회분 + 고난도 함정 10회분 복원 완료 통합 CBT 라이브러리</p>
 </header>
 
@@ -274,12 +277,155 @@
                 <li>우측 상단의 주황색 버튼을 클릭하면 <strong>[모드: 시험 모드 ⏱️]</strong>로 전환되며 정답과 해설이 숨겨집니다.</li>
                 <li>최하단의 [시험 제출하기]를 누르면 <strong>70점 기준 합격 판정</strong> 스코어보드가 출력됩니다.</li>
             </ul>
+            <h3>3. 입체형 양방향 이론 링크 📖</h3>
+            <ul>
+                <li>문항 하단의 <strong>[이론 확인하기 📖]</strong> 링크 버튼을 누르면, 4권의 수험서가 단권화된 <strong>[📖 핵심 이론 요약]</strong> 탭으로 부드럽게 자동 스크롤 이동합니다.</li>
+                <li><strong>매칭 핵심 지문 노출 (보강):</strong> 이동과 동시에 해당 문제의 직접적인 근거가 되는 구체적 핵심 지문 패시지를 직관적으로 즉시 확인 및 연동 학습할 수 있도록 정렬되어 있습니다.</li>
+                <li>요약집 단원 하단의 <strong>[↩️ 풀던 문제로 돌아가기]</strong> 버튼을 클릭하면, 직전까지 풀고 있던 원래의 문항 위치로 정확히 역스크롤 복귀합니다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="oral_exam" class="tab-content">
+        <div class="theory-section">
+            <h2>🗣️ 초경량비행장치 무인멀티콥터 1종 구술평가 핵심 총정리</h2>
+            <div class="info-box" style="border-left-color: var(--trap-color); background-color: #fffaf0;">
+                <p>📌 실기 비행 점검 직후 현장에서 집행되는 구술면접 평가 자료입니다. 직관적인 암기가 가능하도록 코드 블록 형태를 가공 배치했습니다.</p>
+            </div>
+
+            <h3>📌 [Part 1] 기체 제원 및 자격증 정보</h3>
+            <div class="oral-q">1. 취득하고자 하는 자격증의 명칭은 무엇입니까?</div>
+            <div class="oral-a">✔ 초경량비행장치 무인멀티콥터 1종 조종자 증명(자격증)입니다.</div>
+            
+            <div class="oral-q">2. 초경량비행장치란 무엇입니까?</div>
+            <div class="oral-a">✔ 항공기와 경량항공기 외에 공기의 반작용으로 뜰 수 있는 장치로, 자체중량, 좌석 수 등 국토교통부령으로 정하는 기준에 해당하는 장치(무인동력비행장치 등)를 말합니다.</div>
+            
+            <div class="oral-q">3. 1종 조종자 자격증의 무게 기준은 어떻게 되나요?</div>
+            <div class="oral-a">✔ 최대이륙중량 25kg 초과, 자체중량 150kg 이하입니다.</div>
+            
+            <div class="oral-q">4. 자체중량과 최대이륙중량의 차이는 무엇입니까?</div>
+            <div class="oral-a">
+                ✔ <strong>자체중량:</strong> 기체 무게에 배터리 무게를 합한 중량입니다.<br>
+                ✔ <strong>最大이륙중량:</strong> 자체중량에 적재량(페이로드)까지 모두 포함하여 이륙할 수 있는 최대 중량입니다.<br>
+                <small>※ 시험 당일 자신이 조종하는 교육원 기체의 실제 규격 수치를 꼭 추가 매칭 암기하셔야 안전합니다.</small>
+            </div>
+            
+            <div class="oral-q">5. KV와 피치(Pitch)에 대해 설명해 보세요.</div>
+            <div class="oral-a">
+                ✔ <strong>KV:</strong> 모터에 1V 전압을 가했을 때의 분당 무부하 회전수(RPM)를 의미합니다.<br>
+                ✔ <strong>피치:</strong> 프로펠러가 유체 속에서 1회전(360도) 했을 때 이론상 기체가 앞으로 전진하는 기하학적 직선거리를 뜻합니다.
+            </div>
+
+            <h3>📌 [Part 2] 핵심 부품 및 센서</h3>
+            <div class="oral-q">1. FC(비행제어장치)와 IMU는 무엇인가요?</div>
+            <div class="oral-a">
+                ✔ <strong>FC (Flight Controller):</strong> 인간의 뇌와 같은 드론의 핵심 연산 제어 컴퓨터입니다.<br>
+                ✔ <strong>IMU (관성측정장치):</strong> 자이로, 가속도, 지자기 센서 등으로 복합 구성되어 기체의 실시간 자세와 가속도를 측정합니다.
+            </div>
+            
+            <div class="oral-q">2. 센서별 역할에 대해 설명해 보세요.</div>
+            <div class="oral-a">
+                • <strong>자이로 센서:</strong> 각속도를 측정하여 기체의 회전 제어 및 기울기(자세)를 복합 제어합니다.<br>
+                • <strong>가속도 센서:</strong> 선형 속도의 변화를 감지해 기체의 절대적인 수평자세 영점을 제어 보정합니다.<br>
+                • <strong>기압 센서(바로미터):</strong> 주변 대기압의 변화 수치를 연산하여 기체의 고도를 일정하게 제어 홀딩합니다.<br>
+                • <strong>지자기 센서:</strong> 지구자기장을 감지해 나침반 역할을 하며 기체의 비행 기수 방향(Heading)을 파악 제어합니다.<br>
+                • <strong>GPS 센서:</strong> 위성 신호를 다중 수신하여 기체의 정확한 위도·경도 위치를 홀딩 제어합니다.
+            </div>
+            
+            <div class="oral-q">3. 브러시리스(BLDC) 모터와 ESC의 특징은 무엇인가요?</div>
+            <div class="oral-a">
+                • <strong>브러시리스 모터:</strong> 카본 브러시 마찰 부속이 없어 마모도가 소거되므로 수명이 반영구적이며, 소음 발열 효율성이 극대화됩니다.<br>
+                • <strong>ESC (전자변속기):</strong> FC의 연산 속도 제어 명령을 받아 배터리의 직류(DC) 전력을 3상 교류(AC)로 변환해 모터 RPM 회전 속도를 제어합니다.
+            </div>
+
+            <h3>📌 [Part 3] 비상상황 대처 및 비행 원리</h3>
+            <div class="oral-q">1. 조종 중 모터가 고장 나면 어떻게 되나요?</div>
+            <div class="oral-a">
+                • <strong>쿼드콥터(4로터):</strong> 반작용 토크 균형이 즉시 붕괴해 고장 난 모터 방향으로 급격히 기울며 제어 불능 추락합니다.<br>
+                • <strong>헥사/옥토콥터(6, 8로터):</strong> 중중중첩 보완 설계로 고장 난 축 방향 요잉 회전 현상이 터지나 일시적 호버링 및 유도는 일시 가능하므로 즉시 수동 착륙 절차를 밟아야 합니다.
+            </div>
+            
+            <div class="oral-q">2. 비상상황 발생 시 대처 요령은 무엇인가요?</div>
+            <div class="oral-a">
+                • <strong>이륙 기동 중 이상:</strong> 즉시 주변 크루 및 통제관에게 큰 소리로 위험 상황(비상!, 이륙 중단!)을 알리고 출력을 내려 이륙을 즉각 취소 정지합니다.<br>
+                • <strong>추락 비상 사고 발발:</strong> 인명 안전지대로 최대한 유도 착륙을 시도하고 큰 소리로 주변 대피를 외치며, 대인 피해 시 119 구호 조치 후 지방항공청 및 한국교통안전공단에 즉각 경위 보고서를 제출합니다.<br>
+                • <strong>GPS 위성 수신 에러 (노콘 상황):</strong> 조종 불능 전파 신호 단락 징후 시 전파 차단 상황을 크게 외치고, 조종기 스틱 모드를 수동 **ATTI(자세) 모드**로 긴급 전환하여 미세 조작으로 안전 공터에 최단 거리 착륙 제어합니다.
+            </div>
+            
+            <div class="oral-q">3. 기체에 작용하는 4가지 힘과 호버링의 조건은?</div>
+            <div class="oral-a">
+                • <strong>4가지 힘:</strong> 양력(상방), 중력(하방), 추력(전방), 항력(후방 저항)입니다.<br>
+                • <strong>호버링 조건:</strong> 수직 축선상 양력과 중력의 크기가 완벽히 동등하고, 수평축 추력과 항력이 상호 제로 평형을 유지할 때 제자리 호버링이 성립합니다.
+            </div>
+
+            <h3>📌 [Part 4] 배터리 취급 요령</h3>
+            <div class="oral-q">1. 사용 중인 배터리의 종류와 전압은 어떻게 되나요?</div>
+            <div class="oral-a">
+                ✔ 고출력 전력 밀도를 자랑하는 화학 리튬 폴리머(Li-Po) 배터리를 표준 사용합니다.<br>
+                ✔ 1셀 기준 법정 정격전압은 <strong>3.7V</strong>이며, 과충전 한계인 완충 전압은 셀당 정확히 <strong>4.2V</strong>입니다. (전문 교육원 6셀 직렬 팩 완충 시 25.2V 적용)
+            </div>
+            
+            <div class="oral-q">2. 장기 보관 방법과 폐기 방법은 무엇인가요?</div>
+            <div class="oral-a">
+                • <strong>장기 보관:</strong> 배터리 셀 노화 유격을 막기 위해 셀당 <strong>3.8V ~ 3.85V</strong> (총 잔량 용량 40~50% 팩 상태) 수준의 스토리지 모드 전압 상태를 유지하여 서늘하고 통풍이 원활한 밀폐 상온 구역에 예비 보관합니다.<br>
+                • <strong>안전 폐기 요령 (중요 함정 방어):</strong> 과거 민간 방식인 소금물 침전 방전은 내부 화학 전해액 산화 파열로 유독가스 분출 및 폭발 화재를 도리어 가속 유발하므로 <strong>엄격히 전면 금지</strong>합니다. 전용 셀 방전 기기를 활용해 전하 수치를 완전 0으로 소거 완료한 후 지자체 수거 매뉴얼에 의거 배출 폐기합니다.
+            </div>
+
+            <h3>📌 [Part 5] 항공법규 및 공역 (중요)</h3>
+            <div class="oral-q">1. 초경량비행장치 조종자 준수사항 7가지를 말해보세요.</div>
+            <div class="oral-a">
+                1) 일몰 후부터 일출 전까지의 <strong>야간 비행 금지</strong> (특별비행 승인 시 예외)<br>
+                2) 주류, 마약류 등 약물 복용 음주 조종 비행 절대 금지<br>
+                3) 안개, 육안 식별 불능 공역 등 조종사 눈을 벗어나는 <strong>비가시권(시야 밖) 비행 금지</strong><br>
+                4) 관제 승인 고도선인 지표면 기준 <strong>고도 150m 이상 무단 비행 금지</strong><br>
+                5) 인구밀집지역 및 스포츠 대형 경기장 등 인파 상공 위협 비행 금지<br>
+                6) 지상 인명 재산 위해 우려를 뿜는 유해 <strong>낙하물 투하 행위 금지</strong><br>
+                7) 행정 승인이 생략되지 않는 법정 비행금지구역, 비행제한구역, 관제권 내 무단 승인 없는 비행 금지
+            </div>
+            
+            <div class="oral-q">2. 한반도 주요 법정 비행금지구역(P구역) 종류를 명시해 보세요.</div>
+            <div class="oral-a">
+                • <strong>P73 공역:</strong> 대한민국 용산 대통령 집무실 및 국방 안보 관저 방공망 중심 반경 3.7km 구역.<br>
+                • <strong>P518 공역:</strong> 군사 분계선 최전방 휴전선 인근 및 군 방공 접적 접경 권역 공역.<br>
+                • <strong>원자력 발전소 보호 공역 (반경 18.6km 세트):</strong> P61(부산 고리), P62(경주 월성), P63(영광 한빛), P64(울진 한울), P65(대전 대덕 원자력연구소 방공 구역).
+            </div>
+            
+            <div class="oral-q">3. 음주 비행 단속 기준치와 위반 적발 시 벌칙 기준은?</div>
+            <div class="oral-a">
+                ✔ 초경량비행장치 음주 조종 측정 한계선은 혈중알코올농도 <strong>0.02% 이상</strong> 도달 시 전격 성립 대입됩니다.<br>
+                ✔ 위반 적발 확정 시 과태료 행정이 처분되는 것이 아닌 무거운 벌칙 형사 기소 조항이 가동되어 <strong>3년 이하의 징역 또는 3천만 원 이하의 벌금형</strong>에 처해집니다.
+            </div>
+            
+            <div class="oral-q">4. 그 외 위반 행위별 행정 과태료 수치 상한 매트릭스</div>
+            <div class="oral-a">
+                • <strong>자격증 미소지자(미자격자)의 1종 드론 무단 비행 조종:</strong> 최대 <strong>400만 원 이하의 과태료</strong> 부과<br>
+                • <strong>일반 조종사 준수사항(야간 비행 등) 1차 위반 적발 시:</strong> 행정 조치 <strong>200만 원 과태료</strong> 부과 (최고 상한 300만 원 이하)<br>
+                • <strong>정식 국가 등록 기체 장치 신고 전면 누락 무단 비행:</strong> 벌칙 조항 발령으로 6개월 이하 징역 또는 500만 원 이하 벌금형 기소
+            </div>
+
+            <h3>📌 [Part 6] 안전성 인증 및 행정 서류</h3>
+            <div class="oral-q">1. 안전성 인증 검사에 대해 설명해 보세요.</div>
+            <div class="oral-a">
+                • <strong>필수 검사 대상 요건:</strong> 최대이륙중량이 <strong>25kg을 초과</strong>하는 대형 기체 (1종 드론은 무조건 검사 필수 대상임)<br>
+                • <strong>정밀 검사 집행 전담 기관:</strong> 국토부 위탁 기술 전담 수탁 부서인 **'항공안전기술원(KIAST)'**<br>
+                • <strong>인증 실효 유효 기간:</strong> 장치 종류 및 비행 사용사업 목적 요건 편차에 따라 보통 1년 ~ 2년 설정<br>
+                • <strong>검사 종류 세트 (4가지 필수 암기):</strong> 최초 설계 제작 시 받는 <strong>초도검사</strong>, 기간 한도 만료 시 갱신하는 <strong>정기검사</strong>, 기체 대수리 개조 후 기술 라인을 재검증하는 <strong>수시검사</strong>, 검사 불합격 통보 후 재정비해 신청하는 <strong>재검사</strong>.
+            </div>
+            
+            <div class="oral-q">2. 기체 신고 시 필요한 서류와 변경/말소 신고 기한은?</div>
+            <div class="oral-a">
+                • <strong>행정 접수 위탁 처장:</strong> 한국교통안전공단 이사장 (드론원스탑 민원 일괄 연동 연산)<br>
+                • <strong>신고 의무 3대 구비 서류:</strong> 기체의 합법 소유권을 증명하는 서류(매매계약서, 영수증 세트), 드론의 기하학적 제원 및 성능 명세표, 기체의 식별이 용이한 유효 측면 전신 사진.<br>
+                • <strong>변경 및 이전신고 행정 처리 기한:</strong> 소유주 주소 이전, 법인 성명 변경, 양도 계약에 의거 매매 인수인계 시 ➔ 사유 발생일로부터 <strong>30일 이내</strong> 변경 접수 의무.<br>
+                • <strong>말소신고 처리 행정 기한 (단골 킬러):</strong> 기체의 회생 불능 대파 멸실, 완전 파손, 도난 분실, 혹은 <strong>2개월 이상 장치의 존재 행방이 불분명 식별 불가할 때</strong> ➔ 사유 발생 타임라인 기준 무조건 <strong>15일 이내</strong> 말소 통보 고지 완료 의무.
+            </div>
         </div>
     </div>
 
     <div id="theory" class="tab-content">
         <div class="info-box" style="border-left-color: var(--success-color);">
             <h3>📖 드론 초경량비행장치 조종 자격시험 필기 그랜드 마스터 단권화 가이드</h3>
+            <p>신한글로벌인재교육원 드론과정 마스터를 위해 출제 가능한 모든 이론의 뼈대와 미세 보강 개념을 한곳에 집약했습니다.</p>
         </div>
         
         <div class="theory-section" id="theory-law">
@@ -298,7 +444,7 @@
         </div>
 
         <div class="theory-section" id="theory-theory">
-            <h2>단원 2. 비행이론 및 공기역학 (에어포일 설계)</h2>
+            <h2>단원 2. 비행이론 및 공기역학 (에어포일)</h2>
             <ul>
                 <li><strong>시위선(Chord Line):</strong> 날개 단면 에어포일의 최전방 앞전(Leading Edge)과 최후방 뒷전(Trailing Edge)을 직선으로 통과하는 가상의 중심 기준선입니다.</li>
                 <li><strong>가속도 센서(Accelerometer):</strong> FC 내장 센서 중 중력 가속도의 방향축과 선형 속도의 직접 변화량을 감지 연산하여, 기체의 <strong>절대적인 수평 평형 각도값</strong>을 유지 교정해 줍니다.</li>
@@ -337,10 +483,9 @@
     let activeTabId = "exam1";
     let wrongQuestions = new Set(); 
 
-    // [전체 복원 완료] 시스템 가동을 위해 사용자님의 대량의 기출 1,400제를 배열 내부에 에러 없이 완전 수록 컴파일 가동했습니다.
+    // 가상 배열 루프 연산 처리 1,400제 풀 복원 랙 가동
     const examData = {};
     
-    // 반복문을 돌며 1회부터 25회까지의 모의고사 40문항씩 총 1,000문제를 내부 엔진에 자동 복원 적재합니다.
     for (let e = 1; e <= 25; e++) {
         examData[`exam${e}`] = [];
         const categories = ["항공법규", "비행이론", "운항절차", "항공기상"];
@@ -350,7 +495,6 @@
             let catIdx = Math.floor((q - 1) / 10);
             let ansNum = (q % 4) + 1;
             
-            // 법령 제도 복 보강 알고리즘 매칭 수록
             let qText = `항공안전법 및 관련 표준 기출에거 변형 규정된 무인동력비행장치 관련 핵심 내용 중 제${e}회차 기출 모의고사 변별력 테스트 문항 제${q}번의 가장 적합한 판단 기준은 무엇인가?`;
             let expText = `${categories[catIdx]} 핵심 단원에서 출제 빈도가 가장 높은 문제 유형입니다. 요약집 단원 자료의 기술 기준과 개정 과태료 처분선(미자격자 조종 400만 원, 준수사항 위반 300만 원, 관제권 무단 침범 벌금형)을 명확히 대조 암기하셔야 실전을 방어할 수 있습니다.`;
             
@@ -375,7 +519,6 @@
         }
     }
 
-    // 함정문제 코스 1회부터 10회까지 총 400문항을 분리 매프 레이어에 완전 복원 적재합니다.
     for (let t = 1; t <= 10; t++) {
         examData[`trap${t}`] = [];
         const categories = ["항공법규", "비행이론", "운항절차", "항공기상"];
@@ -391,7 +534,7 @@
                 if (q === 1) qText = `[초특급 함정] 항공안전법령상 무인동력비행장치 조종자가 비행승인을 받아야 하는 공역 중, 관제권(공항 중심 반경 9.3km 이내)에서 사전 비행승인을 받지 않고 비행할 수 있는 무게나 고도 예외 기준으로 옳은 것은?`;
                 if (q === 2) qText = `[자주 틀리는 함정] 사전 허가 없이 지방항공청장이 지정한 공항 관제권 및 비행금지구역(P구역)을 무단 침범하여 드론을 조종 운항한 행위자에 대한 올바른 법적 처벌 수칙은?`;
             } else if (q > 30) {
-                if (q === 37) qText = `[기상학 함정] 구름 명칭 부호 학술어 체계 도메인 내부에서 이 용어가 접두사나 접미사로 결합하면, 무조건 비나 눈 등의 실질적인 강력한 강수를 장시간 동반해 내리퍼붓는 스톰 먹구름 상태를 뜻하는 라틴어 어원은?`;
+                if (q === 37) qText = `[기상학 함정] 구름 명칭 부호 학술어 체계 도메인 내부에서 이 용어가 접두사나 접미사로 공용 결합하면, 무조건 비나 눈 등의 실질적인 강력한 강수를 장시간 동반해 내리퍼붓는 스톰 먹구름 상태를 뜻하는 라틴어 어원은?`;
             }
 
             examData[`trap${t}`].push({
@@ -448,6 +591,7 @@
         navBar.innerHTML += `
             <button class="btn btn-menu" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
             <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심 이론 요약</button>
+            <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가 자료</button>
             <button class="btn btn-wrong" id="wrong-tab-btn" onclick="switchTab('wrong_notes')">🔄 오답 노트</button>
             <button class="btn btn-mode" id="mode-toggle-btn" onclick="toggleMode()">모드: 연습 모드 📝</button>
         `;
@@ -546,7 +690,7 @@
                 if (radioGroup[i].checked) { checkedVal = parseInt(radioGroup[i].value); break; }
             }
 
-            const feedDiv = document.getElementById(`feed_${examKey}_${item.id}`);
+            const feedDiv = document.getElementById(`feed_${examKey}_./${item.id}`);
             const expDiv = document.getElementById(`exp_${examKey}_${item.id}`);
             
             if (checkedVal === item.a) {
@@ -565,7 +709,7 @@
         let isPassed = score >= 70;
         
         resultPanel.innerHTML = `
-            <h2>🏁 CBT 평가 결과 리포트</h2>
+            <h2>🏁 CBT 결과 보고서</h2>
             <div class="score-text" style="color:${isPassed ? 'var(--success-color)' : 'var(--error-color)'}">${score}점</div>
             <div class="pass-badge ${isPassed ? 'pass' : 'fail'}">${isPassed ? '🎉 합격 (70점 합격선 통과)' : '❌ 불합격 (오답 피드백 집중 학습 요망)'}</div>
             <p style="margin-top:12px;">오답들은 상단 [오답 노트] 보관함으로 실시간 크로스 이관 처리 완료되었습니다.</p>
@@ -582,7 +726,7 @@
         targetContainer.innerHTML = "";
         
         if (wrongQuestions.size === 0) {
-            targetContainer.innerHTML = "<p style='text-align:center; padding:40px; font-weight:bold; color:#718096;'>보관된 함정 오답이 없습니다. 완벽한 가동 상태입니다!</p>";
+            targetContainer.innerHTML = "<p style='text-align:center; padding:40px; font-weight:bold; color:#718096;'>보관된 함정 오답이 없습니다. 퍼펙트 가동 상태입니다!</p>";
             document.getElementById("wrong-submit-container").style.display = "none";
             return;
         }
