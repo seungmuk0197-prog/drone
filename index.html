@@ -31,16 +31,23 @@
         .info-box { background-color: #ebf8ff; border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 0 5px 5px 0; margin-bottom: 25px; }
         .q-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .sub-subject { font-size: 0.85rem; color: #718096; margin-bottom: 5px; font-weight: bold; }
-        .q-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; }
+        .q-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; line-height: 1.5; }
         .options-list { margin-bottom: 15px; }
         .option-item { margin-bottom: 10px; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s; }
         .option-item:hover { background-color: #f7fafc; }
-        .option-item input { margin-right: 12px; transform: scale(1.2); }
+        .option-item input { margin-right: 12px; transform: scale(1.2); flex-shrink: 0; }
         .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; font-weight: bold; }
         .feedback.correct { background-color: #c6f6d5; color: #22543d; display: block; }
         .feedback.wrong { background-color: #fed7d7; color: #742a2a; display: block; }
-        .explanation { margin-top: 12px; padding: 15px; background-color: #f7fafc; border-left: 3px solid #cbd5e0; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; color: #4a5568; }
+        .explanation { margin-top: 12px; padding: 15px; background-color: #f7fafc; border-left: 3px solid #cbd5e0; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; color: #4a5568; line-height: 1.6; }
+        
+        /* 이론 요약본 가독성 및 행간 여백 대폭 보강 */
         .theory-section { background-color: white; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 25px; }
+        .theory-section h3 { margin-top: 30px; margin-bottom: 15px; color: var(--primary-color); border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+        .theory-section ul { padding-left: 20px; margin-bottom: 20px; }
+        .theory-section ul li { line-height: 1.8; margin-bottom: 16px; text-align: justify; }
+        .theory-section ul li b { color: #111827; }
+        
         .oral-q { font-weight: bold; color: #1a365d; margin-top: 20px; font-size: 1.05rem; }
         .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 8px 0 20px 0; background-color: #f8fafc; padding: 10px 15px; border-radius: 0 6px 6px 0; }
         .loading-text { text-align: center; padding: 30px; font-weight: bold; color: var(--trap-color); font-size: 1.2rem; }
@@ -262,7 +269,7 @@
                 <li><b>리튬 폴리머(Li-Po) 배터리 규격 [이론1-301~309]:</b> 
                     <br>- <b>정격(공칭) 전압:</b> 셀당 3.7V / <b>완전 충전 전압:</b> 셀당 4.2V / <b>장기 보관 전압(스토리지):</b> 셀당 3.8V~3.85V.
                     <br>- <b>⚠️ 영구 손상 한계선:</b> <b>셀당 3.3V 이하</b>로 떨어지면 배터리 셀이 복구 불가능하게 영구 손상되므로 즉시 비행을 중단해야 합니다. 메모리 효과가 없으므로 수시 충전이 가능합니다. 납축전지는 무겁고 효율이 낮아 드론용으로 부적합합니다.
-                    <li><b>배터리 표면 필수 표기 4대 사항:</b> 셀 수(S), 용량(mAh), 전압(V), 방전율(C-rate). (원재료 성분이나 제조 화학 물질은 필수 표기 사항이 아닙니다.)</li>
+                    <br>- <b>배터리 표면 필수 표기 4대 사항:</b> 셀 수(S), 용량(mAh), 전압(V), 방전율(C-rate). (원재료 성분이나 제조 화학 물질은 필수 표기 사항이 아닙니다.)
                 </li>
                 <li><b>보관 및 폐기 프로토콜 [이론1-310~315]:</b> 완충 상태 장기 방치 시 가스가 차며 부풀어 오르는 <b>스웰링(Swelling) 현상</b>이 발생합니다. 보관 시에는 <b>40~50% 방전 상태로 맞춘 후 실온(5℃~25℃)의 서늘한 곳에 기체와 분리</b>하여 내화성 주머니(리포 세이프 백)에 넣어 보관해야 합니다. 60℃ 이상 노출은 금지됩니다. 배터리 셀 중 단 1개라도 문제가 발생하면 팩 전체를 폐기하는 것이 대원칙입니다.</li>
                 <li><b>🔥 소금물 방전법 공식 금지 [이론1-316, 317]:</b> 과거 교재에 등장하던 '소금물에 담가 폐기한다'는 방식은 유독가스 분출, 전극 부식 쇼트 및 발열 화재 위험으로 인해 <b>현재 안전 가이드라인에서는 절대 금지(지양)</b>하고 있습니다. 반드시 전기적 방전기를 통해 완전 방전(0V) 유도 후 지자체 규정에 맞춰 폐기합니다.</li>
@@ -497,10 +504,7 @@
 
         const quizBox = document.getElementById(`inside-${tabId}`);
         
-        // 1. 텍스트 전처리 및 줄바꿈 공백 제거
         let normalized = text.replace(/\r\n/g, "\n").trim();
-        
-        // 2. Q1, Q2.. 형태의 문항 분할 최적화 (앞뒤 공백 트림)
         let blocks = normalized.split(/\n(?=Q\d+)/i).map(b => b.trim()).filter(b => b.length > 0);
         
         let index = 1;
@@ -513,18 +517,16 @@
             let ans = 1;
             let explanationText = "";
 
-            // Q번호 매칭을 위한 임시 타이틀 버퍼 수집 로직
             let readingQuestion = false;
 
             lines.forEach(line => {
-                // 문항 제목 시작 검출
                 if (/^Q\d+/i.test(line)) {
                     qText = line.replace(/^Q\d+[\.\s:]*/i, "").trim();
                     readingQuestion = true;
                     return;
                 }
                 
-                // 번호별 보기 선지 파싱 (선지 텍스트 안에 '정답'이라는 단어가 순수 기재된 특이 케이스 예외처리)
+                // 번호별 보기 선지 파싱 정밀화 (줄바꿈 및 정답 텍스트 예외처리 추가)
                 if ((line.includes("①") || line.startsWith("1)")) && !line.startsWith("정답") && !/^[^①1]*정답/i.test(line)) {
                     opts[0] = line.replace(/^[①1\)\s\.]*/, "").trim();
                     readingQuestion = false;
@@ -541,7 +543,7 @@
                     opts[3] = line.replace(/^[④4\)\s\.]*/, "").trim();
                     readingQuestion = false;
                 }
-                // '정답:' 혹은 선지 포맷이 아니면서 '정답' 키워드가 들어간 행 처리 (오류 스크린샷 4번 가림 현상 해결)
+                // '정답' 라인 매칭 및 원문자(①②③④) 결합 인식 보정
                 else if (line.startsWith("정답") || line.includes("정답")) {
                     readingQuestion = false;
                     let m = line.match(/[1234①②③④]/);
@@ -559,13 +561,12 @@
                     readingQuestion = false;
                     explanationText += line + " ";
                 }
-                // 만약 멀티라인 질문 데이터가 존재할 경우 제목 데이터에 바인딩 유도
+                // 멀티라인 질문 내용 처리 보완
                 else if (readingQuestion) {
                     qText += " " + line;
                 }
             });
 
-            // 데이터 예외 처리 및 최종 바인딩 실패 대응 보정선
             if (!qText.trim()) {
                 qText = "드론학과 자격시험 평가 문항 데이터를 연동하는 중입니다.";
             }
@@ -579,7 +580,6 @@
             card.id = `card_${tabId}_${index}`;
             
             let optionsHtml = "";
-            // 보기 선지가 공백이거나 제대로 파싱되지 않은 비상 케이스 대처 자동 임시 선지 매칭 추가
             for(let oIdx = 0; oIdx < 4; oIdx++) {
                 let optText = opts[oIdx] ? opts[oIdx] : `출제 기준 가이드 문항선 보기 ${oIdx+1}`;
                 optionsHtml += `
