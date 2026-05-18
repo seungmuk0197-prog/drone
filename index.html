@@ -23,20 +23,23 @@
         .btn-menu.active { background-color: var(--primary-color); color: white; }
         .btn-trap { background-color: white; color: #b7791f; border: 1px solid var(--trap-color); }
         .btn-trap.active { background-color: var(--trap-color); color: white; }
+        .btn-wrong { background-color: white; color: var(--error-color); border: 1px solid var(--error-color); padding: 6px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.8rem; }
+        .btn-wrong.active { background-color: var(--error-color); color: white; }
         .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; padding-bottom: 140px; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .info-box { background-color: #ebf8ff; border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 0 5px 5px 0; margin-bottom: 25px; }
         .q-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .sub-subject { font-size: 0.85rem; color: #718096; margin-bottom: 5px; font-weight: bold; }
         .q-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; }
+        .options-list { margin-bottom: 15px; }
         .option-item { margin-bottom: 10px; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s; }
         .option-item:hover { background-color: #f7fafc; }
         .option-item input { margin-right: 12px; transform: scale(1.2); }
         .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; font-weight: bold; }
         .feedback.correct { background-color: #c6f6d5; color: #22543d; display: block; }
         .feedback.wrong { background-color: #fed7d7; color: #742a2a; display: block; }
-        .explanation { margin-top: 10px; padding: 15px; background-color: #f7fafc; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; }
-        .link-btn { display: inline-block; margin-top: 12px; color: var(--primary-color); text-decoration: none; font-size: 0.85rem; font-weight: bold; cursor: pointer; border: 1px solid var(--primary-color); padding: 4px 8px; border-radius: 4px; }
+        .explanation { margin-top: 12px; padding: 15px; background-color: #f7fafc; border-left: 3px solid #cbd5e0; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; color: #4a5568; }
         .theory-section { background-color: white; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 25px; }
         .oral-q { font-weight: bold; color: #1a365d; margin-top: 15px; font-size: 1.05rem; }
         .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 5px 0 15px 0; }
@@ -105,11 +108,12 @@
 </footer>
 
 <script>
-    // ⚙️ 깃허브 저장소 정보 연동 변수 자동 고정 세팅
     const githubUsername = "seungmuk0197-prog"; 
     const githubRepo = "drone";           
 
-    let isExamMode = false; let activeTabId = "how_to_use"; let wrongQuestions = new Set();
+    let activeTabId = "how_to_use";
+    // 전역 오답노트 관리를 위한 맵 객체 (key: "tabId_idx", value: 퀴즈 데이터 객체)
+    let wrongQuestionsMap = new Map();
 
     function initApp() {
         buildTabs();
@@ -146,18 +150,17 @@
             <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
             <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
             <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
-            <button class="btn btn-wrong" id="wrong-tab-btn" onclick="switchTab('wrong_notes')">🔄 오답노트 문제구성</button>
+            <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 오답노트 문제구성</button>
         `;
         funcWrap.appendChild(funcRow); nav.appendChild(funcWrap);
     }
 
-    // 🚀 핵심 구조: 대시기호 인코딩 교정 및 괄호 파일명 양방향 교차 추적 다운로드 엔진
     function loadGithubFile(prefix, num) {
         const tabId = prefix + num;
         activeTabId = tabId;
         
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-        document.querySelectorAll('.btn-menu, .btn-trap').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
         
         let targetTab = document.getElementById(tabId);
         if(!targetTab) {
@@ -174,13 +177,12 @@
 
         targetTab.innerHTML = `<div class="loading-text">🔄 깃허브 원격 서버 연동 중... [제 ${num}회분] 원문 텍스트 스트리밍 수신 중...</div>`;
 
-        // 윈도우 일련번호 파일명 형식인 "%20(${num})" 주소를 우선 추적하도록 완벽 매칭 정렬
         let urlWithBracket = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}%20(${num}).txt`;
         let urlNormal = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}${num}.txt`;
 
         fetch(urlWithBracket)
         .then(res => {
-            if(!res.ok) return fetch(urlNormal); // 괄호 주소가 없을 시 원본 순정 파일명으로 교차 추적 가동
+            if(!res.ok) return fetch(urlNormal); 
             return res;
         })
         .then(response => {
@@ -211,6 +213,7 @@
 
         const quizBox = document.getElementById(`inside-${tabId}`);
         let normalized = text.replace(/\r\n/g, "\n");
+        // Q1., Q2. 기호 기준으로 컴포넌트 쪼개기
         let blocks = normalized.split(/\n(?=Q\d+)/i);
         
         let index = 1;
@@ -222,14 +225,29 @@
             let qText = "텍스트 원문 해독 프로세스 대기";
             let opts = [];
             let ans = 1;
+            let explanationText = "";
 
             lines.forEach(line => {
-                if(/^Q\d+/i.test(line)) qText = line.replace(/^Q\d+[\.\s:]*/i, "");
-                else if(line.includes("①") || line.startsWith("1)")) opts[0] = line.replace(/^[①1\)\s\.]*/, "");
-                else if(line.includes("②") || line.startsWith("2)")) opts[1] = line.replace(/^[②2\s\.]*/, "");
-                else if(line.includes("③") || line.startsWith("3)")) opts[2] = line.replace(/^[③3\)\s\.]*/, "");
-                else if(line.includes("④") || line.startsWith("4)")) opts[3] = line.replace(/^[④4\)\s\.]*/, "");
-                else if(line.includes("정답")) {
+                if(/^Q\d+/i.test(line)) {
+                    qText = line.replace(/^Q\d+[\.\s:]*/i, "");
+                } 
+                else if(line.includes("①") || line.startsWith("1)")) {
+                    // 지문이 "1. 정답: ①" 처럼 완전히 파괴되어 들어오는 경우 방어 코드 작성
+                    let content = line.replace(/^[①1\)\s\.]*/, "");
+                    if(!content.includes("정답")) opts[0] = content;
+                } 
+                else if(line.includes("②") || line.startsWith("2)")) {
+                    opts[1] = line.replace(/^[②2\s\.]*/, "");
+                } 
+                else if(line.includes("③") || line.startsWith("3)")) {
+                    opts[2] = line.replace(/^[③3\)\s\.]*/, "");
+                } 
+                else if(line.includes("④") || line.startsWith("4)")) {
+                    opts[3] = line.replace(/^[④4\)\s\.]*/, "");
+                }
+                
+                // 정답 파싱 로직 분리 (보기 훼손을 막기 위해 단독 조건 검사)
+                if(line.includes("정답")) {
                     let m = line.match(/[1234①②③④]/);
                     if(m) {
                         if(m[0]==='1'||m[0]==='①') ans = 1;
@@ -237,11 +255,25 @@
                         if(m[0]==='3'||m[0]==='③') ans = 3;
                         if(m[0]==='4'||m[0]==='④') ans = 4;
                     }
+                    // "정답: ① (사유: ~)" 패턴일 경우 괄호 안의 내용을 해설 데이터로 자동 흡수 처리
+                    if(line.includes("(") || line.includes("해설") || line.includes("이유")) {
+                        explanationText += line + " ";
+                    }
+                }
+                else if(line.startsWith("[해설]") || line.startsWith("해설:") || line.startsWith("[설명]")) {
+                    explanationText += line + " ";
                 }
             });
 
+            // 기본 해설 보강 문구
+            if(!explanationText.trim()) {
+                explanationText = `해당 문제의 공식 정답은 ${ans}번입니다. 관련 항공안전법규 및 조종자 준수사항 교재 교차검증을 권장합니다.`;
+            }
+
+            // UI 렌더링 카드 생성
             let card = document.createElement("div");
             card.className = "q-card";
+            card.id = `card_${tabId}_${index}`;
             
             let optionsHtml = "";
             opts.forEach((opt, oIdx) => {
@@ -260,26 +292,72 @@
                 <div class="q-title">Q${index}. ${qText}</div>
                 <div class="options-list">${optionsHtml}</div>
                 <div class="feedback" id="feed_${tabId}_${index}"></div>
+                <div class="explanation" id="expl_${tabId}_${index}">💡 <b>심층 해설:</b> ${explanationText}</div>
             `;
             quizBox.appendChild(card);
+
+            // 전역 맵 객체에 문제 원본 정보 박아두기 (오답노트 복사용)
+            wrongQuestionsMap.set(`${tabId}_${index}`, { qText, opts, ans, explanationText, prefix, num, index });
             index++;
         });
     }
 
     function checkAnswerInstant(tabId, idx, selectNum, correctNum) {
         const feed = document.getElementById(`feed_${tabId}_${idx}`);
+        const expl = document.getElementById(`expl_${tabId}_${idx}`);
+        const key = `${tabId}_${idx}`;
+        const qData = wrongQuestionsMap.get(key);
+
         if(selectNum === correctNum) {
-            feed.innerHTML = "🎉 정답입니다! 정확한 원리 관통 완료."; feed.className = "feedback correct";
+            feed.innerHTML = "🎉 정답입니다! 정확한 원리 관통 완료."; 
+            feed.className = "feedback correct";
         } else {
-            feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`; feed.className = "feedback wrong";
+            feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`; 
+            feed.className = "feedback wrong";
+            
+            // 실시간 오답노트 화면(wrong_notes 탭)에 비동기 복사 렌더링 펌핑 가동
+            renderWrongNotesContainer(key, qData);
         }
         feed.style.display = "block";
+        if(expl) expl.style.display = "block"; // 정답 체킹 시 해설 블록 투명도 제거 후 노출
+    }
+
+    function renderWrongNotesContainer(key, data) {
+        const wrongBox = document.getElementById("container-wrong");
+        if(!wrongBox) return;
+
+        // 이미 오답노트에 추가된 항목이면 중복 생성 방지
+        if(document.getElementById(`wrong_card_${key}`)) return;
+
+        let wrongCard = document.createElement("div");
+        wrongCard.className = "q-card";
+        wrongCard.id = `wrong_card_${key}`;
+        wrongCard.style.borderLeft = "4px solid var(--error-color)";
+
+        let optionsHtml = "";
+        data.opts.forEach((opt, oIdx) => {
+            if(opt) {
+                optionsHtml += `
+                    <label class="option-item" style="cursor:default;">
+                        &nbsp;${oIdx+1}. ${opt} ${ (oIdx+1 === data.ans) ? '<b style="color:var(--success-color); margin-left:10px;">(정답)</b>' : '' }
+                    </label>
+                `;
+            }
+        });
+
+        wrongCard.innerHTML = `
+            <div class="sub-subject" style="color:var(--error-color);">출처: ${data.prefix==='trap'?'함정':'일반'} ${data.num}회 - ${data.index}번 문항</div>
+            <div class="q-title">Q. ${data.qText}</div>
+            <div class="options-list">${optionsHtml}</div>
+            <div class="explanation" style="display:block; background-color:#fff5f5;">💡 <b>복습 해설:</b> ${data.explanationText}</div>
+        `;
+        wrongBox.appendChild(wrongCard);
     }
 
     function switchTab(tabId) {
         activeTabId = tabId;
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-        document.querySelectorAll('.btn-menu, .btn-trap').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
         
         const target = document.getElementById(tabId);
         if(target) target.classList.add('active');
