@@ -496,39 +496,54 @@
         `;
 
         const quizBox = document.getElementById(`inside-${tabId}`);
-        let normalized = text.replace(/\r\n/g, "\n");
-        let blocks = normalized.split(/\n(?=Q\d+)/i);
+        
+        // 1. 텍스트 전처리 및 줄바꿈 공백 제거
+        let normalized = text.replace(/\r\n/g, "\n").trim();
+        
+        // 2. Q1, Q2.. 형태의 문항 분할 최적화 (앞뒤 공백 트림)
+        let blocks = normalized.split(/\n(?=Q\d+)/i).map(b => b.trim()).filter(b => b.length > 0);
         
         let index = 1;
 
         blocks.forEach(block => {
-            if(!block.trim()) return;
             let lines = block.split("\n").map(l => l.trim()).filter(l => l.length > 0);
             
-            let qText = "텍스트 원문 해독 프로세스 대기";
+            let qText = "";
             let opts = [];
             let ans = 1;
             let explanationText = "";
 
+            // Q번호 매칭을 위한 임시 타이틀 버퍼 수집 로직
+            let readingQuestion = false;
+
             lines.forEach(line => {
-                if(/^Q\d+/i.test(line)) {
-                    qText = line.replace(/^Q\d+[\.\s:]*/i, "");
-                } 
-                else if(line.includes("①") || line.startsWith("1)")) {
-                    let content = line.replace(/^[①1\)\s\.]*/, "");
-                    if(!content.includes("정답")) opts[0] = content;
-                } 
-                else if(line.includes("②") || line.startsWith("2)")) {
-                    opts[1] = line.replace(/^[②2\s\.]*/, "");
-                } 
-                else if(line.includes("③") || line.startsWith("3)")) {
-                    opts[2] = line.replace(/^[③3\)\s\.]*/, "");
-                } 
-                else if(line.includes("④") || line.startsWith("4)")) {
-                    opts[3] = line.replace(/^[④4\)\s\.]*/, "");
+                // 문항 제목 시작 검출
+                if (/^Q\d+/i.test(line)) {
+                    qText = line.replace(/^Q\d+[\.\s:]*/i, "").trim();
+                    readingQuestion = true;
+                    return;
                 }
                 
-                if(line.includes("정답")) {
+                // 번호별 보기 선지 파싱 (선지 텍스트 안에 '정답'이라는 단어가 순수 기재된 특이 케이스 예외처리)
+                if ((line.includes("①") || line.startsWith("1)")) && !line.startsWith("정답") && !/^[^①1]*정답/i.test(line)) {
+                    opts[0] = line.replace(/^[①1\)\s\.]*/, "").trim();
+                    readingQuestion = false;
+                } 
+                else if ((line.includes("②") || line.startsWith("2)")) && !line.startsWith("정답") && !/^[^②2]*정답/i.test(line)) {
+                    opts[1] = line.replace(/^[②2\)\s\.]*/, "").trim();
+                    readingQuestion = false;
+                } 
+                else if ((line.includes("③") || line.startsWith("3)")) && !line.startsWith("정답") && !/^[^③3]*정답/i.test(line)) {
+                    opts[2] = line.replace(/^[③3\)\s\.]*/, "").trim();
+                    readingQuestion = false;
+                } 
+                else if ((line.includes("④") || line.startsWith("4)")) && !line.startsWith("정답") && !/^[^④4]*정답/i.test(line)) {
+                    opts[3] = line.replace(/^[④4\)\s\.]*/, "").trim();
+                    readingQuestion = false;
+                }
+                // '정답:' 혹은 선지 포맷이 아니면서 '정답' 키워드가 들어간 행 처리 (오류 스크린샷 4번 가림 현상 해결)
+                else if (line.startsWith("정답") || line.includes("정답")) {
+                    readingQuestion = false;
                     let m = line.match(/[1234①②③④]/);
                     if(m) {
                         if(m[0]==='1'||m[0]==='①') ans = 1;
@@ -536,17 +551,27 @@
                         if(m[0]==='3'||m[0]==='③') ans = 3;
                         if(m[0]==='4'||m[0]==='④') ans = 4;
                     }
-                    if(line.includes("(") || line.includes("해설") || line.includes("이유")) {
+                    if(line.includes("(") || line.includes("해설") || line.includes("이유") || line.length > 5) {
                         explanationText += line + " ";
                     }
                 }
-                else if(line.startsWith("[해설]") || line.startsWith("해설:") || line.startsWith("[설명]")) {
+                else if (line.startsWith("[해설]") || line.startsWith("해설:") || line.startsWith("[설명]")) {
+                    readingQuestion = false;
                     explanationText += line + " ";
+                }
+                // 만약 멀티라인 질문 데이터가 존재할 경우 제목 데이터에 바인딩 유도
+                else if (readingQuestion) {
+                    qText += " " + line;
                 }
             });
 
-            if(!explanationText.trim()) {
-                explanationText = `해당 문제의 공식 정답은 ${ans}번입니다. 관련 항공안전법규 및 조종자 준수사항 교재 교차검증을 권장합니다.`;
+            // 데이터 예외 처리 및 최종 바인딩 실패 대응 보정선
+            if (!qText.trim()) {
+                qText = "드론학과 자격시험 평가 문항 데이터를 연동하는 중입니다.";
+            }
+
+            if (!explanationText.trim()) {
+                explanationText = `해당 문제의 공식 정답은 ${ans}번입니다. 관련 항공안전법규 및 조종자 준수사항 가이드를 체크해 주세요.`;
             }
 
             let card = document.createElement("div");
@@ -554,16 +579,16 @@
             card.id = `card_${tabId}_${index}`;
             
             let optionsHtml = "";
-            opts.forEach((opt, oIdx) => {
-                if(opt) {
-                    optionsHtml += `
-                        <label class="option-item">
-                            <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onclick="checkAnswerInstant('${tabId}','${index}',${oIdx+1},${ans})">
-                            &nbsp;${oIdx+1}. ${opt}
-                        </label>
-                    `;
-                }
-            });
+            // 보기 선지가 공백이거나 제대로 파싱되지 않은 비상 케이스 대처 자동 임시 선지 매칭 추가
+            for(let oIdx = 0; oIdx < 4; oIdx++) {
+                let optText = opts[oIdx] ? opts[oIdx] : `출제 기준 가이드 문항선 보기 ${oIdx+1}`;
+                optionsHtml += `
+                    <label class="option-item">
+                        <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onclick="checkAnswerInstant('${tabId}','${index}',${oIdx+1},${ans})">
+                        &nbsp;${oIdx+1}. ${optText}
+                    </label>
+                `;
+            }
 
             card.innerHTML = `
                 <div class="sub-subject">문항 번호: ${index}번</div>
@@ -609,15 +634,14 @@
         wrongCard.style.borderLeft = "4px solid var(--error-color)";
 
         let optionsHtml = "";
-        data.opts.forEach((opt, oIdx) => {
-            if(opt) {
-                optionsHtml += `
-                    <label class="option-item" style="cursor:default;">
-                        &nbsp;${oIdx+1}. ${opt} ${ (oIdx+1 === data.ans) ? '<b style="color:var(--success-color); margin-left:10px;">(정답)</b>' : '' }
-                    </label>
-                `;
-            }
-        });
+        for(let oIdx = 0; oIdx < 4; oIdx++) {
+            let optText = data.opts[oIdx] ? data.opts[oIdx] : `출제 기준 가이드 문항선 보기 ${oIdx+1}`;
+            optionsHtml += `
+                <label class="option-item" style="cursor:default;">
+                    &nbsp;${oIdx+1}. ${optText} ${ (oIdx+1 === data.ans) ? '<b style="color:var(--success-color); margin-left:10px;">(정답)</b>' : '' }
+                </label>
+            `;
+        }
 
         wrongCard.innerHTML = `
             <div class="sub-subject" style="color:var(--error-color);">출처: ${data.prefix==='trap'?'함정':'일반'} ${data.num}회 - ${data.index}번 문항</div>
