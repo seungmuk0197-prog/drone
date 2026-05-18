@@ -16,17 +16,17 @@
         header h1 { margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; }
         header p { margin: 8px 0 0 0; font-size: 0.95rem; color: #cbd5e0; }
         
+        /* PC 환경에서는 메뉴 고정 유지 */
         .nav-container { background-color: #edf2f7; padding: 15px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
         .nav-section-wrapper { margin-bottom: 10px; }
         .section-title { font-size: 0.85rem; font-weight: bold; color: #4a5568; margin-bottom: 8px; padding-left: 5px; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* 컨트롤 패널 (모드 선택 및 초기화) */
+        /* 컨트롤 패널 */
         .global-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .mode-selector label { margin-right: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; }
         .mode-selector input[type="radio"] { transform: scale(1.3); margin-right: 8px; cursor: pointer; }
         .action-buttons { display: flex; gap: 8px; }
         
-        /* 스크롤 가능한 가로 네비게이션 탭 */
         .nav-scroll-row { display: flex; justify-content: flex-start; gap: 8px; overflow-x: auto; padding-bottom: 8px; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         .nav-scroll-row::-webkit-scrollbar { height: 6px; }
         .nav-scroll-row::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
@@ -65,10 +65,8 @@
         .feedback { margin-top: 18px; padding: 15px; border-radius: 6px; display: none; font-weight: bold; font-size: 1rem; }
         .feedback.correct { background-color: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
         .feedback.wrong { background-color: #fed7d7; color: #742a2a; border: 1px solid #feb2b2; }
-        
         .explanation { margin-top: 15px; padding: 18px; background-color: #f8fafc; border-left: 4px solid #cbd5e0; display: none; font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
         
-        /* 이론 요약본 CSS */
         .theory-section { background-color: white; padding: 30px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .theory-section h2 { margin-top: 0; color: #1a202c; }
         .theory-section h3 { margin-top: 35px; margin-bottom: 18px; color: var(--primary-color); border-bottom: 2px solid #edf2f7; padding-bottom: 10px; }
@@ -88,12 +86,35 @@
         
         footer { display: flex; justify-content: space-between; align-items: center; padding: 18px 25px; font-size: 0.9rem; color: #cbd5e0; background-color: var(--primary-color); position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 1020; border-top: 1px solid #2a4365; }
         
+        /* 플로팅 TOP 버튼 (초기엔 안보임) */
+        #btn-back-to-top {
+            display: none; position: fixed; bottom: 25px; right: 25px; 
+            background-color: var(--primary-hover); color: white; border: none; 
+            border-radius: 50%; width: 55px; height: 55px; font-size: 0.85rem; 
+            font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
+            z-index: 9999; align-items: center; justify-content: center; flex-direction: column;
+            line-height: 1.2; opacity: 0.9;
+        }
+        #btn-back-to-top:hover { background-color: var(--primary-color); opacity: 1; }
+
+        /* 모바일 전용 반응형 (화면 가림 완벽 해결) */
         @media (max-width: 768px) {
             header { padding: 20px 15px; }
-            .global-controls { flex-direction: column; gap: 15px; align-items: stretch; }
+            header h1 { font-size: 1.2rem; }
+            
+            /* 핵심: 모바일에서는 메뉴 고정을 아예 풀어버림 (스크롤하면 위로 사라짐) */
+            .nav-container { position: static; padding: 10px; }
+            
+            .global-controls { flex-direction: column; gap: 12px; align-items: stretch; padding: 12px; }
             .action-buttons { justify-content: space-between; }
-            .container { padding-bottom: 120px; }
+            .mode-selector label { font-size: 0.9rem; }
+            
+            .container { padding-bottom: 120px; margin-top: 15px; }
+            .q-card { padding: 18px 15px; } /* 카드 여백 슬림화 */
+            .q-title { font-size: 1.05rem; }
+            
             footer { flex-direction: column; gap: 8px; text-align: center; padding: 15px; position: static; }
+            #btn-back-to-top { bottom: 20px; right: 15px; width: 50px; height: 50px; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -429,6 +450,11 @@
     </div>
 </div>
 
+<button id="btn-back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    <span>⬆️</span>
+    <span>메뉴</span>
+</button>
+
 <footer>
     <div class="footer-left">제작자 SM</div>
     <div class="footer-right">Created on May 17, 2026 | Inquiries: chaesira@naver.com</div>
@@ -440,11 +466,18 @@
 
     let activeTabId = "how_to_use";
     let wrongQuestionsMap = new Map();
-    let currentMode = "practice"; // 'practice' 모의시험 | 'real' 실제시험
+    let currentMode = "practice";
 
     function initApp() {
         buildTabs();
         switchTab("how_to_use");
+        
+        // 플로팅 버튼 스크롤 감지
+        window.addEventListener('scroll', () => {
+            const topBtn = document.getElementById('btn-back-to-top');
+            if(window.scrollY > 300) topBtn.style.display = 'flex';
+            else topBtn.style.display = 'none';
+        });
     }
 
     function buildTabs() {
@@ -453,15 +486,15 @@
             <div class="global-controls">
                 <div class="mode-selector">
                     <label style="color:var(--primary-color);">
-                        <input type="radio" name="exam_mode" value="practice" checked onchange="setMode('practice')"> 📘 모의시험 (해설 즉시 제공)
+                        <input type="radio" name="exam_mode" value="practice" checked onchange="setMode('practice')"> 📘 모의시험 (해설 즉시)
                     </label>
                     <label style="color:var(--error-color);">
-                        <input type="radio" name="exam_mode" value="real" onchange="setMode('real')"> 📝 실제시험 (채점 및 합격여부)
+                        <input type="radio" name="exam_mode" value="real" onchange="setMode('real')"> 📝 실제시험 (채점 모드)
                     </label>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn btn-menu" onclick="resetCurrentTab()">🔄 현재 회차 리셋</button>
-                    <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 기록 리셋</button>
+                    <button class="btn btn-menu" onclick="resetCurrentTab()">🔄 현재 리셋</button>
+                    <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 리셋</button>
                 </div>
             </div>
             
@@ -503,20 +536,15 @@
         let modeName = (mode === 'real') ? '실제시험' : '모의시험';
         if(confirm(`[${modeName}] 모드로 변경하시겠습니까?\n모드를 전환하면 안전을 위해 진행 중인 모든 시험의 풀이 내역과 오답노트가 자동으로 초기화됩니다.`)) {
             currentMode = mode;
-            
-            // 데이터 초기화 수행 (오답노트 비우기 및 라디오버튼 언체크)
             document.getElementById("container-wrong").innerHTML = "";
             document.querySelectorAll(".quiz-container").forEach(container => {
                 const tabId = container.id.replace('inside-', '');
                 if(tabId && tabId !== 'container-wrong') resetTabUI(tabId);
             });
-            
-            // 실제시험 모드일 때만 모든 시험지 하단에 '제출하기' 버튼 보이기
             document.querySelectorAll("[id^='submit-box-']").forEach(box => {
                 box.style.display = (mode === 'real') ? "block" : "none";
             });
         } else {
-            // 취소 시 라디오 버튼 원래대로 되돌리기
             document.querySelector(`input[name="exam_mode"][value="${currentMode}"]`).checked = true;
         }
     }
@@ -524,18 +552,16 @@
     function resetCurrentTab() {
         const tabId = activeTabId;
         if(tabId.includes('how_to_use') || tabId.includes('theory') || tabId.includes('oral_exam') || tabId.includes('wrong_notes')) {
-            alert("초기화할 문제지가 열려있지 않습니다. 모의고사나 함정 코스를 선택해 주세요.");
+            alert("초기화할 문제지가 열려있지 않습니다. 회차를 먼저 선택해 주세요.");
             return;
         }
-        
-        if(!confirm("현재 풀고 있는 답안과 채점 내역을 모두 초기화(리셋)하시겠습니까?")) return;
+        if(!confirm("현재 화면의 답안과 채점 내역을 모두 초기화하시겠습니까?")) return;
         resetTabUI(tabId);
         alert("현재 회차가 초기화되었습니다.");
     }
 
     function resetAll() {
         if(!confirm("모든 문제지 풀이 내역과 오답노트가 완전히 초기화됩니다.\n진행하시겠습니까?")) return;
-        
         document.getElementById("container-wrong").innerHTML = "";
         document.querySelectorAll(".quiz-container").forEach(container => {
             const tabId = container.id.replace('inside-', '');
@@ -547,21 +573,16 @@
     function resetTabUI(tabId) {
         const cards = document.querySelectorAll(`#inside-${tabId} .q-card`);
         cards.forEach(card => {
-            // 체크 해제
             const radios = card.querySelectorAll(`input[type="radio"]`);
             radios.forEach(r => r.checked = false);
             
-            // 피드백 및 해설 숨기기
             const feed = card.querySelector(".feedback");
             const expl = card.querySelector(".explanation");
             if(feed) feed.style.display = "none";
             if(expl) expl.style.display = "none";
         });
-
-        // 실제시험 모드 점수표 가리기 및 제출버튼 부활
         const scoreDiv = document.getElementById(`score-result-${tabId}`);
         if(scoreDiv) scoreDiv.innerHTML = "";
-        
         const submitBtn = document.getElementById(`submit-btn-${tabId}`);
         if(submitBtn) submitBtn.style.display = "inline-block";
     }
@@ -721,7 +742,6 @@
             index++;
         });
 
-        // 실제시험 모드를 위한 제출 버튼 추가
         let submitBox = document.createElement("div");
         submitBox.id = `submit-box-${tabId}`;
         submitBox.style.display = (currentMode === 'real') ? 'block' : 'none';
@@ -735,10 +755,8 @@
     }
 
     function handleAnswerSelect(tabId, idx, selectNum, correctNum) {
-        // 실제시험 모드일 때는 클릭해도 해설과 정답 피드백이 나오지 않습니다. (라디오 버튼 자체의 체크만 동작함)
         if (currentMode === 'real') return;
         
-        // 모의시험 모드일 때는 기존처럼 즉시 피드백을 보여줍니다.
         const feed = document.getElementById(`feed_${tabId}_${idx}`);
         const expl = document.getElementById(`expl_${tabId}_${idx}`);
         const key = `${tabId}_${idx}`;
@@ -756,14 +774,12 @@
         if(expl) expl.style.display = "block";
     }
 
-    // 실제 시험 채점 로직
     function submitRealExam(tabId) {
         const cards = document.querySelectorAll(`#inside-${tabId} .q-card`);
         let total = cards.length;
         let correctCount = 0;
         let unansCount = 0;
 
-        // 미입력 문항 검사
         cards.forEach(card => {
             if(!card.querySelector(`input[type="radio"]:checked`)) unansCount++;
         });
@@ -772,7 +788,6 @@
             if(!confirm(`아직 풀지 않은 문제가 ${unansCount}개 있습니다.\n이대로 제출하시겠습니까? (미입력 문항은 오답 처리됩니다)`)) return;
         }
 
-        // 전체 채점 진행
         cards.forEach(card => {
             const idx = card.id.split('_').pop();
             const key = `${tabId}_${idx}`;
@@ -799,12 +814,10 @@
                     renderWrongNotesContainer(key, qData);
                 }
             }
-            // 채점 후 모든 해설 오픈
             feed.style.display = "block";
             expl.style.display = "block";
         });
 
-        // 100점 만점 기준 환산 점수 계산
         const score = Math.round((correctCount / total) * 100);
         const resultDiv = document.getElementById(`score-result-${tabId}`);
         const isPass = score >= 70;
@@ -822,10 +835,7 @@
             </div>
         `;
         
-        // 제출 버튼 숨기기
         document.getElementById(`submit-btn-${tabId}`).style.display = "none";
-        
-        // 결과창으로 스크롤 이동
         resultDiv.scrollIntoView({ behavior: 'smooth' });
     }
 
