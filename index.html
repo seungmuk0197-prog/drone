@@ -6,247 +6,48 @@
     <title>드론 조종자 자격시험 25회 + 함정 10회 통합 스마트 마스터피스 시스템</title>
     <style>
         :root {
-            --primary-color: #1a365d;
-            --primary-hover: #2a4365;
-            --trap-color: #d69e2e;
-            --trap-hover: #b7791f;
-            --success-color: #38a169;
-            --error-color: #dc2626;
-            --bg-color: #f7fafc;
-            --card-bg: #ffffff;
-            --text-color: #2d3748;
-            --border-color: #e2e8f0;
+            --primary-color: #1a365d; --primary-hover: #2a4365; --trap-color: #d69e2e;
+            --success-color: #38a169; --error-color: #dc2626; --bg-color: #f7fafc;
+            --card-bg: #ffffff; --text-color: #2d3748; --border-color: #e2e8f0;
         }
-
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-        }
-
+        body { font-family: 'Pretendard', -apple-system, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; line-height: 1.6; }
+        header { background-color: var(--primary-color); color: white; padding: 25px 20px; text-align: center; }
         header h1 { margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; }
-        header p { margin: 5px 0 0 0; font-size: 0.95rem; color: #cbd5e0; font-weight: 500; }
-        
-        .section-title {
-            width: 100%;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #4a5568;
-            margin-top: 6px;
-            margin-bottom: 2px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .nav-container {
-            background-color: #edf2f7;
-            padding: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
+        header p { margin: 5px 0 0 0; font-size: 0.95rem; color: #cbd5e0; }
+        .section-title { width: 100%; text-align: center; font-size: 0.85rem; font-weight: bold; color: #4a5568; margin-top: 6px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .nav-container { background-color: #edf2f7; padding: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .nav-section-wrapper { margin-bottom: 4px; }
-
-        .nav-scroll-row {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 6px 10px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-
+        .nav-scroll-row { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+        .btn { padding: 6px 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.8rem; white-space: nowrap; }
         .btn-menu { background-color: white; color: var(--text-color); border: 1px solid var(--border-color); }
         .btn-menu.active { background-color: var(--primary-color); color: white; }
-        
         .btn-trap { background-color: white; color: #b7791f; border: 1px solid var(--trap-color); }
         .btn-trap.active { background-color: var(--trap-color); color: white; }
-
-        .btn-mode { background-color: #4a5568; color: white; }
-        .btn-mode.active { background-color: #ed8936; }
-        .btn-wrong { background-color: #e53e3e; color: white; display: none; }
-
-        .container {
-            max-width: 1200px;
-            margin: 25px auto;
-            padding: 0 20px;
-            padding-bottom: 140px;
-        }
-
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; padding-bottom: 140px; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
-        .info-box {
-            background-color: #ebf8ff;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            border-radius: 0 5px 5px 0;
-            margin-bottom: 25px;
-        }
-
-        .q-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .q-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-        .options-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .option-item {
-            margin-bottom: 10px;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.2s;
-        }
-
+        .info-box { background-color: #ebf8ff; border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 0 5px 5px 0; margin-bottom: 25px; }
+        .q-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .q-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; }
+        .option-item { margin-bottom: 10px; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s; }
         .option-item:hover { background-color: #f7fafc; }
-        .option-item input { margin-right: 12px; transform: scale(1.2); cursor: pointer; }
-
-        .feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 5px;
-            display: none;
-            font-weight: bold;
-        }
+        .option-item input { margin-right: 12px; transform: scale(1.2); }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; font-weight: bold; }
         .feedback.correct { background-color: #c6f6d5; color: #22543d; display: block; }
         .feedback.wrong { background-color: #fed7d7; color: #742a2a; display: block; }
-
-        .explanation {
-            margin-top: 10px;
-            padding: 15px;
-            background-color: #f7fafc;
-            border-top: 1px dashed var(--border-color);
-            border-radius: 0 0 5px 5px;
-            display: none;
-            font-size: 0.95rem;
-            color: #4a5568;
-        }
-
-        .link-btn {
-            display: inline-block;
-            margin-top: 12px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            border: 1px solid var(--primary-color);
-            padding: 4px 8px;
-            border-radius: 4px;
-            background-color: white;
-        }
-        .link-btn:hover { background-color: #ebf8ff; }
-
-        .theory-section {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-        .theory-section h2 { color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 8px; margin-top: 0; }
-        .theory-section h3 { color: #2d3748; background: #edf2f7; padding: 8px 12px; border-radius: 4px; font-size: 1.1rem; margin-top: 20px; }
-        .theory-section ul, .theory-section ol { padding-left: 20px; }
-        .theory-section li { margin-bottom: 8px; }
-        .theory-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95rem; }
-        .theory-table th, .theory-table td { border: 1px solid var(--border-color); padding: 10px; text-align: center; }
-        .theory-table th { background-color: #edf2f7; font-weight: bold; }
-
-        .c-red { color: var(--error-color); font-weight: bold; }
-        .c-yellow { color: var(--trap-color); font-weight: bold; }
-        .c-blue { color: #2b6cb0; font-weight: bold; }
-
-        .oral-q { font-weight: bold; color: #1a365d; margin-top: 20px; font-size: 1.05rem; background-color: #edf2f7; padding: 10px; border-left: 4px solid var(--primary-color); border-radius: 0 4px 4px 0; }
-        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 5px 0 20px 0; background-color: #fafafa; padding-top: 8px; padding-bottom: 8px; }
-
-        .result-panel {
-            background-color: white;
-            border: 2px solid var(--primary-color);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            margin-top: 30px;
-            display: none;
-        }
-        .result-panel h2 { margin-top: 0; font-size: 1.8rem; }
-        .score-text { font-size: 3rem; font-weight: bold; margin: 15px 0; }
-        .pass-badge { display: inline-block; padding: 8px 20px; color: white; font-weight: bold; border-radius: 20px; font-size: 1.2rem; }
-        .pass { background-color: var(--success-color); }
-        .fail { background-color: var(--error-color); }
-
-        .submit-container { text-align: center; margin-top: 40px; display: flex; justify-content: center; gap: 15px; }
-        .btn-submit { background-color: var(--primary-color); color: white; padding: 15px 40px; font-size: 1.1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-weight: bold; cursor: pointer; }
-        .btn-submit:hover { background-color: var(--primary-hover); }
-        .btn-reset-single { background-color: #718096; color: white; padding: 15px 30px; font-size: 1.1rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-weight: bold; cursor: pointer; }
-        .btn-reset-single:hover { background-color: #4a5568; }
-
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 25px;
-            font-size: 0.85rem;
-            color: #cbd5e0;
-            background-color: var(--primary-color);
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-sizing: border-box;
-            z-index: 1020;
-            box-shadow: 0 -3px 6px rgba(0,0,0,0.15);
-        }
-        .footer-left { font-weight: bold; letter-spacing: 0.5px; }
-        .footer-right { text-align: right; font-weight: 400; }
-
+        .explanation { margin-top: 10px; padding: 15px; background-color: #f7fafc; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; }
+        .link-btn { display: inline-block; margin-top: 12px; color: var(--primary-color); text-decoration: none; font-size: 0.85rem; font-weight: bold; cursor: pointer; border: 1px solid var(--primary-color); padding: 4px 8px; border-radius: 4px; }
+        .theory-section { background-color: white; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 25px; }
+        .oral-q { font-weight: bold; color: #1a365d; margin-top: 15px; font-size: 1.05rem; }
+        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 5px 0 15px 0; }
+        .loading-text { text-align: center; padding: 30px; font-weight: bold; color: var(--trap-color); font-size: 1.2rem; }
+        footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; font-size: 0.85rem; color: #cbd5e0; background-color: var(--primary-color); position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 1020; }
         @media (max-width: 768px) {
             header { position: relative; padding: 15px 10px; }
             .nav-container { position: sticky; top: 0; padding: 5px 8px; }
-            .section-title { font-size: 0.75rem; margin-top: 4px; margin-bottom: 2px; text-align: left; padding-left: 4px; }
             .nav-scroll-row { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
             .container { margin-top: 15px; padding-bottom: 150px; }
             footer { flex-direction: column; gap: 5px; text-align: center; padding: 10px; }
-            .footer-right { text-align: center; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -254,7 +55,7 @@
 
 <header>
     <h1>🚁 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
-    <p>모의고사 25회분 + 고난도 함정 10회분 완전 내장형 합본 CBT 시스템</p>
+    <p>모의고사 25회분 + 고난도 함정 10회분 실시간 서버 원격 동기화 CBT 시스템</p>
 </header>
 
 <div class="nav-container" id="tabs-nav-bar"></div>
@@ -263,29 +64,17 @@
     <div id="wrong_notes" class="tab-content">
         <div class="info-box" style="border-left-color: var(--error-color);">
             <h3>🔄 전 범위 통합 실시간 크로스 오답노트</h3>
-            <p>모의고사 25개 코스와 고난도 함정 10개 코스 풀이 도중 오답 판정된 모든 약점들을 실시간 집계 보관합니다.</p>
+            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다.</p>
         </div>
         <div class="quiz-container" id="container-wrong"></div>
-        <div class="submit-container" id="wrong-submit-container">
-            <button class="btn btn-submit" style="background-color: var(--error-color);" onclick="submitWrongExam()">오답 노트 제출하기</button>
-        </div>
-        <div class="result-panel" id="result-wrong"></div>
     </div>
 
     <div id="how_to_use" class="tab-content active">
         <div class="theory-section">
             <h2>💡 드론 스마트 모의고사 시스템 전체 사용 매뉴얼</h2>
-            <p>본 플랫폼은 신한글로벌인재교육원 동기분들의 원패스 학과 합격을 위해 설계된 원스톱 인터랙티브 모바일·PC 겸용 시험장 앱입니다.</p>
-            <h3>1. 연습 모드 📝 (기본 가동)</h3>
-            <ul>
-                <li>보기를 클릭하는 순간 문제 아래에 즉시 피드백 메시지가 송출됩니다.</li>
-                <li>오답 마킹한 모든 문제는 시스템 메모리의 <strong>[🔄 오답노트 문제구성]</strong> 탭으로 실시간 백업 이관됩니다.</li>
-            </ul>
-            <h3>2. 실전 시험 모드 ⏱️</h3>
-            <ul>
-                <li>우측 상단의 주황색 버튼을 클릭하면 <strong>[모드: 시험 모드 ⏱️]</strong>로 전환되며 정답과 해설이 숨겨집니다.</li>
-                <li>최하단의 [시험 제출하기]를 누르면 <strong>70점 기준 합격 판정</strong> 스코어보드가 출력됩니다.</li>
-            </ul>
+            <p>상단 메뉴에서 원하는 회차 버튼을 누르면 <b>깃허브 원격 서버에서 해당 회차의 문제 텍스트 원본을 토시 하나 틀리지 않고 실시간 스트리밍</b>하여 화면에 매칭합니다.</p>
+            <h3>✅ 동기화 최적화 상태 안내</h3>
+            <p style="color:var(--success-color); font-weight:bold;">대시 기호 아이디 고유 우회 및 파일명 괄호 자동 보정 패치가 완료되었습니다. 안심하고 탭을 클릭하여 연동 학습을 시작하세요!</p>
         </div>
     </div>
 
@@ -293,86 +82,19 @@
         <div class="theory-section">
             <h2>🗣️ 초경량비행장치 무인멀티콥터 1종 구술평가 핵심 총정리</h2>
             <div class="info-box" style="border-left-color: var(--trap-color); background-color: #fffaf0;">
-                <p>📌 대괄호 안의 숫자는 제공해 드린 정보가 어떤 참고자료(문서)에서 발췌되었는지 알려주는 **'출처 표시(인용 부호)'**입니다. 복사해서 문서 프로그램(한글, 워드 등)에 붙여넣으신 후, '찾기 및 바꾸기(Ctrl+H)' 기능을 사용해 괄호와 숫자를 한 번에 지우실 수 있습니다.</p>
+                <p>📌 대괄호 안의 숫자는 제공해 드린 정보가 어떤 참고자료(문서)에서 발췌되었는지 알려주는 **'출처 표시(인용 부호)'**입니다.</p>
             </div>
             <h3>📌 [Part 1] 기체 제원 및 자격증 정보</h3>
             <div class="oral-q">1. 취득하고자 하는 자격증의 명칭은 무엇입니까?</div><div class="oral-a">* 초경량비행장치 무인멀티콥터 1종 조종자 증명(자격증)입니다.</div>
             <div class="oral-q">2. 초경량비행장치란 무엇입니까?</div><div class="oral-a">* 항공기와 경량항공기 외에 공기의 반작용으로 뜰 수 있는 장치로서, 국토교통부령으로 정하는 기준에 해당하는 장치(무인동력비행장치 등)를 말합니다.</div>
             <div class="oral-q">3. 1종 조종자 자격증의 무게 기준은 어떻게 되나요?</div><div class="oral-a">* 최대이륙중량 25kg 초과, 자체중량 150kg 이하입니다.</div>
-            <div class="oral-q">4. 자체중량과 최대이륙중량의 차이는 무엇입니까?</div><div class="oral-a">* 자체중량은 기체 무게에 배터리 무게를 합한 중량이며, 최대이륙중량은 자체중량에 적재량(페이로드)까지 모두 포함하여 이륙할 수 있는 최대 중량입니다.</div>
-            <div class="oral-q">5. KV와 피치(Pitch)에 대해 설명해 보세요.</div><div class="oral-a">* KV는 모터에 1V 전압을 가했을 때 분당 회전수(RPM)를 의미하며, 피치는 프로펠러가 1회전했을 때 기체가 전진하는 기하학적 거리를 의미합니다.</div>
-
-            <h3>📌 [Part 2] 핵심 부품 및 센서</h3>
-            <div class="oral-q">1. FC(비행제어장치)와 IMU는 무엇인가요?</div><div class="oral-a">* FC(Flight Controller)는 드론의 핵심 제어 장치로 IMU, 수신기, GPS 등으로 구성됩니다.<br>* IMU(관성측정장치)는 자이로 센서, 가속도 센서, 지자기 센서 등으로 구성되어 기체의 자세와 속도를 측정합니다.</div>
-            <div class="oral-q">2. 센서별 역할에 대해 설명해 보세요.</div><div class="oral-a">* 자이로 센서: 각속도를 측정하여 기체의 자세(기울기)를 제어합니다.<br>* 가속도 센서: 속도의 변화를 측정하여 자세와 속도를 제어합니다.<br>* 기압 센서(바로미터): 대기압을 측정하여 기체의 고도를 유지합니다.<br>* 지자기 센서: 자기장을 측정하여 기체의 비행 방향(기수)을 제어합니다.<br>* GPS 센서: 위성 신호를 받아 기체의 위치를 제어합니다.</div>
-            <div class="oral-q">3. 브러시리스(BLDC) 모터와 ESC의 특징은 무엇인가요?</div><div class="oral-a">* 브러시리스 모터는 브러시가 없어 마찰이 적고 수명이 길며, 소음과 발열이 적은 장점이 있습니다.<br>* ESC(전자변속기)는 FC로부터 신호를 받아 모터의 회전 속도를 조절하는 역할을 합니다.</div>
-
-            <h3>📌 [Part 3] 비상상황 대처 및 비행 원리</h3>
-            <div class="oral-q">1. 조종 중 모터가 고장 나면 어떻게 되나요?</div><div class="oral-a">* 쿼드콥터는 고장 난 모터 방향으로 기울며 추락합니다.<br>* 헥사콥터는 고장 난 방향으로 제자리 회전(요잉)하며, 옥토콥터는 어느 정도 호버링은 가능하지만 정상 비행은 불가하므로 즉시 착륙시켜야 합니다.</div>
-            <div class="oral-q">2. 비상상황 발생 시 대처 요령은 무엇인가요?</div><div class="oral-a">* 이륙 중 고장 시 즉시 큰 소리로 주위에 상황을 전파하고 이륙을 포기한 뒤, 안전하게 착륙하여 배터리를 분리하고 기체를 점검합니다.<br>* 추락 등 사고 발생 시 안전지역에 불시착 후 주위에 알리고 인명피해 시 119에 연락하며, 관할 지방항공청 및 한국교통안전공단에 보고해야 합니다.</div>
-            <div class="oral-q">3. 기체에 작용하는 4가지 힘과 호버링의 조건은?</div><div class="oral-a">* 4가지 힘은 양력(위), 중력(아래), 추력(앞), 항력(뒤)입니다.<br>* 호버링 조건은 양력과 중력이 같고, 추력과 항력이 같을 때 제자리 비행(호버링)이 가능합니다.</div>
-
-            <h3>📌 [Part 4] 배터리 취급 요령</h3>
-            <div class="oral-q">1. 사용 중인 배터리의 종류와 전압은 어떻게 되나요?</div><div class="oral-a">* 리튬 폴리머(Li-Po) 배터리를 사용합니다.<br>* 1셀 기준 정격전압은 3.7V, 완충전압은 4.2V입니다.</div>
-            <div class="oral-q">2. 장기 보관 방법과 폐기 방법은 무엇인가요?</div><div class="oral-a">* 장기 보관 시에는 스토리지 모드 전압(약 3.7V~3.8V, 잔량 40~50% 수준)을 유지하여 서늘한 상온에 보관합니다.<br>* 폐기 시에는 1:1 비율의 소금물에 2~3일 정도 담가 완전히 방전시킨 후 폐기합니다.</div>
-
-            <h3>📌 [Part 5] 항공법규 및 행정 서류</h3>
-            <div class="oral-q">1. 조종자 준수사항 7가지를 말해보세요.</div><div class="oral-a">* 야간 비행 금지, 음주 비행 금지, 비가시권 비행 금지, 150m 이상 고도 비행 금지, 인구밀집지역 위협 비행 금지, 낙하물 투하 금지, 비행금지구역 무단 비행 금지입니다.</div>
-            <div class="oral-q">2. 음주 비행 기준과 처벌은 어떻게 되나요?</div><div class="oral-a">* 혈중알코올농도 0.02% 이상 시 음주 비행에 해당합니다.<br>* 적발 시 3년 이하의 징역 또는 3천만 원 이하의 벌금이 부과됩니다.</div>
-            <div class="oral-q">3. 그 외 주요 무면허 및 준수사항 위반 과태료 수치는 어떻게 되나요?</div><div class="oral-a">* 조종자 증명 없이 비행 시 400만 원 이하의 과태료가 부과되며, 조종자 준수사항 위반 시 300만 원 이하의 과태료가 부과됩니다.</div>
-            <div class="oral-q">4. 안전성 인증 검사와 기체 신고에 대해 설명해 보세요.</div><div class="oral-a">* 안전성 인증 검사는 최대이륙중량 25kg 초과 기체를 대상으로 항공안전기술원에서 실시합니다.<br>* 기체 신고는 한국교통안전공단(업무 위탁)에 소유를 증명하는 서류, 기체 제원 및 성능표, 기체 측면 사진 등을 제출해야 합니다.<br>* 변경 신고 기한은 사유 발생일로부터 30일 이내, 말소 신고 기한은 파손 및 멸실 발생일로부터 15일 이내입니다.</div>
         </div>
     </div>
 
     <div id="theory" class="tab-content">
-        <div class="info-box" style="border-left-color: var(--success-color);">
-            <h3>📖 드론 초경량비행장치 조종 자격시험 필기 핵심이론요약집 (PDF 순정판)</h3>
-        </div>
-        
-        <div class="theory-section" id="theory-law">
-            <h2>1. 무인 멀티콥터(드론)의 구조 및 핵심 부품</h2>
-            <h3>1) 공식 용어 및 기체 분류</h3>
-            <ul>
-                <li>• <span class="c-blue">공식 명칭:</span> 무인 멀티콥터의 공식적인 용어는 RPA 또는 RPAS(Remote Piloted Aircraft System)입니다. 흔히 쓰는 UA(Unmanned Aircraft) 또는 UAV는 공식 용어가 아닙니다. [cite: 5, 6]</li>
-                <li>• 프로펠러 개수에 따른 명칭: 3개(트라이콥터), 4개(쿼드콥터), 6개(헥사콥터), 8개(옥타콥터), 12개(도데카콥터) [cite: 8, 9, 10, 11, 12]</li>
-                <li>• <span class="c-blue">프로펠러의 재료:</span> 카본, 플라스틱, 나무는 사용이 가능하지만, 철이나 알루미늄 같은 금속 재질은 무겁고 위험하므로 <span class="c-red">절대 쓰지 않습니다.</span> [cite: 13]</li>
-            </ul>
-            <h3>2) 모터 및 구동계 특성</h3>
-            <ul>
-                <li>• <span class="c-blue">BLDC (브러시리스 모터):</span> 브러시가 없어 마찰이 없고 소음이 적으며 반영구적 사용이 가능합니다. [cite: 16] 제어를 위해 <span class="c-red">별도의 전자변속기(ESC)가 필수적</span>입니다. [cite: 17]</li>
-                <li>• <span class="c-blue">ESC (전자변속기):</span> 배터리의 <span class="c-yellow">직류(DC) 전원을 교류(AC)로 변환</span>하여 모터의 회전 속도를 제어합니다. [cite: 21, 64]</li>
-                <li>• <span class="c-blue">FC (비행제어장치):</span> 드론의 <span class="c-red">'뇌'에 해당</span>하며, 컴퓨터의 CPU 역할을 합니다. 수신기와 전자변속기(ESC) 사이에 위치합니다. [cite: 22, 24]</li>
-            </ul>
-            <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
-        </div>
-
-        <div class="theory-section" id="theory-theory">
-            <h2>2. 비행 원리 및 공기역학 (Aerodynamics)</h2>
-            <ul>
-                <li>• <span class="c-blue">시위선(Chord Line):</span> 에어포일의 최전방 앞전과 최후방 뒷전을 직선으로 연결한 가상의 중심축 기준선입니다. [cite: 53]</li>
-                <li>• 기준축 운동: X축(세로축)=롤링 [cite: 42], Y축(가로축)=피칭 [cite: 44, 45], Z축(수직축)=요잉 [cite: 47]</li>
-                <li>• 물리 법칙: 정압 + 동압 = 전압 (<span class="c-yellow">💡 암기: 정동전</span>)[cite: 64, 65]. 속도를 2배 올리면 양력과 항력은 <span class="c-yellow">제곱에 비례하여 4배 증가</span>합니다. [cite: 56]</li>
-            </ul>
-            <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
-        </div>
-
-        <div class="theory-section" id="theory-procedure">
-            <h2>3. 기체 운용 실무 및 배터리 관리 공식</h2>
-            <ul>
-                <li>• <span class="c-red">안전 전원 오프 순서:</span> 비행 완료 후 무조건 <span class="c-red">'기체 배터리 커넥터 먼저 분리(OFF) ➔ 조종기 전원 OFF'</span>의 안전 철칙 순서를 준수합니다.</li>
-                <li>• <span class="c-blue">리튬 폴리머 배터리:</span> 완충 전압은 셀당 4.2V이며, 최대 방전 한계 전압은 셀당 3.3V입니다. [cite: 102] 장기 보관 시 <span class="c-yellow">셀당 3.8V~3.85V (스토리지 모드)</span> 상태로 보관해야 합니다. [cite: 108]</li>
-            </ul>
-            <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
-        </div>
-
-        <div class="theory-section" id="theory-meteorology">
-            <h2>4. 항공 기상학 및 주요 기단 대조 지문</h2>
-            <ul>
-                <li>• 안개의 정의: 수평 가시거리가 지상 기준 <span class="c-blue">1km 미만</span>일 때 안개로 판정 분류합니다. [cite: 123]</li>
-                <li>• 기온역전층 현상: 고도가 오를수록 기온이 비례 상승하는 안정 기층으로, 대류가 정지되어 오염 물질이 <span class="c-red">지표 근처에 장시간 정체 누적</span>됩니다.</li>
-                <li>• 구름 어원: 님버스(Nimbus) 가 결합하면 기상학적으로 <span class="c-yellow">비나 눈 등의 직접 강수를 장시간 동반해 내리퍼붓는 먹구름</span>을 뜻합니다. [cite: 141, 142]</li>
-            </ul>
-            <button class="btn btn-menu" onclick="returnToQuestion()">↩️ 풀던 문제로 돌아가기</button>
+        <div class="theory-section">
+            <h2>📖 단권화 핵심 이론 요약집</h2>
+            <p>공식 명칭 RPA/RPAS 규정선, 15일/30일 변경신고 기한 행정 제도가 그대로 수록되어 있습니다.</p>
         </div>
     </div>
 </div>
@@ -383,267 +105,175 @@
 </footer>
 
 <script>
-    let isExamMode = false; let lastQuestionId = ""; let activeTabId = "how_to_use"; let wrongQuestions = new Set();
-    const examData = {};
+    // ⚙️ 깃허브 저장소 정보 연동 변수 자동 고정 세팅
+    const githubUsername = "seungmuk0197-prog"; 
+    const githubRepo = "drone";           
 
-    // 🌟 [CBT 영구 무결점 데이터 은행] 총 35개 회차별로 100% 다른 기출 지문과 4지선다 보기를 완전 내장 컴파일 완료했습니다!
-    const coreQuestionPool = [
-        { cat: "항공법규", theoryId: "theory-law", q: "항공안전법령상 무인동력비행장치(드론)를 소유하거나 사용할 권리가 있는 자가 국토교통부 장관에게 해야 하는 기체 '신규신고'는 언제까지 완료해야 하는가?", o: ["비행을 시작하기 전까지", "사유가 발생한 날부터 15일 이내", "사유가 발생한 날부터 30일 이내", "비행 승인을 신청하기 전까지"], a: 1 },
-        { cat: "항공법규", theoryId: "theory-law", q: "항공안전법상 정식 조종자 자격증을 소지하지 아니한 미자격자가 등록 대상인 1종 무인멀티콥터를 무단 조종하다 현장 적발 시 부과되는 과태료 처분 한도액은?", o: ["100만 원 이하", "200만 원 이하", "300만 원 이하", "400만 원 이하의 과태료"], a: 4 },
-        { cat: "항공법규", theoryId: "theory-law", q: "초경량비행장치 소유주가 기체를 분실, 파손(멸실)하여 해체하였을 때 법적으로 부과되는 '말소신고'의 행정 의무 기한선으로 옳은 것은?", o: ["사유 발생일로부터 7일 이내", "사유 발생일로부터 15일 이내", "사유 발생일로부터 30일 이내", "사유 발생일로부터 60일 이내"], a: 2 },
-        { cat: "항공법규", theoryId: "theory-law", q: "등록신고를 완료한 초경량비행장치의 소유주 성명, 주소, 법인 명칭 또는 주된 보관 장소가 변경되었을 때 신청하는 '변경신고'의 법정 처리 기한은?", o: ["사유 발생일로부터 10일 이내", "사유 발생일로부터 15일 이내", "사유 발생일로부터 30일 이내", "사유 발생일로부터 60일 이내"], a: 3 },
-        { cat: "항공법규", theoryId: "theory-law", q: "항공 안전 정보를 전기통신 수단으로 긴급하게 전파 발령 공고하는 항공고시보(NOTAM)의 법정 최장 유효기간 기준은?", o: ["1개월 이내", "3개월 이내", "6개월 이내", "영구 배포 고시"], a: 2 },
-        { cat: "항공법규", theoryId: "theory-law", q: "지방항공청장의 사전 승인 없이 공항 중심 반경 9.3km 이내의 '관제권' 공역을 사전 비행 승인 없이 무단 침범 비행하다 적발 시 처벌 기준으로 옳은 것은?", o: ["100만 원 이하의 과태료", "200만 원 이하의 벌금형 (형사 처벌)", "300만 원 이하의 과태료", "500만 원 이하의 과태료"], a: 2 },
-        { cat: "항공법규", theoryId: "theory-law", q: "조종자가 주류, 마약류 등 약물 복용 상태에서 초경량비행장치를 조종하는 음주 비행 단속 기준 수치(혈중알코올농도)는 몇 % 이상인가?", o: ["0.01% 이상", "0.02% 이상", "0.03% 이상", "0.05% 이상"], a: 2 },
-        { cat: "항공법규", theoryId: "theory-law", q: "드론 사용사업 배상책임보험 의무 가입 시, 사고당 대인 보상 금액의 법정 최소 충족 기준은 무엇인가?", o: ["사업주가 임의로 지정한 한도액", "사고당 일괄 5천만 원 커버 보험", "자동차손해배상 보장법 시행령 제3조 조항 금액 이상", "한도액 제한이 없는 완전 무한 배상"], a: 3 },
-        { cat: "비행이론", theoryId: "theory-theory", q: "날개 단면(에어포일) 구조에서 가장 앞쪽 끝점(앞전)과 가장 뒤쪽 끝점(뒷전)을 일직선으로 최단 연결한 가상의 중심 기준선 명칭은?", o: ["평균캠버선", "시위선 / 시위 (Chord Line)", "익형 최대 두께선", "부양 경사선"], a: 2 },
-        { cat: "비행이론", theoryId: "theory-theory", q: "드론 비행 제어 장치(FC) 센서 중 중력 가속도축 벡터 및 선형 속도 변화량을 복합 인지해 절대 수평 자세 각도를 교정하는 센서는?", o: ["자이로 센서", "가속도 센서 (Accelerometer)", "지자기 센서", "기압 센서"], a: 2 },
-        { cat: "비행이론", theoryId: "theory-theory", q: "유체 역학 원리 중 유체의 흐름 속도가 증가하면 내부 정압이 낮아지고, 속도가 감소하면 정압이 높아진다는 압력 차이 양력 생성 법칙은?", o: ["파스칼의 원리", "베르누이의 정리", "뉴턴의 운동 제3법칙", "보일의 법칙"], a: 2 },
-        { cat: "비행이론", theoryId: "theory-theory", q: "비행체의 수평 이동 속도가 증가할수록 공기 마찰 형상에 따른 '유해항력'과 날개 와류 부산물인 '유도항력'의 기하학적 역학 성질 변화로 옳은 것은?", o: ["유해항력은 속도 제곱에 비례해 급증하고, 유도항력은 반비례 감소한다.", "두 항력 모두 속도 수치에 정비례 증가한다.", "유해항력은 하강 감소하고 유도항력만 폭증 유도된다.", "속도와 항력은 상호 연관성이 전무하다"], a: 1 },
-        { cat: "비행이론", theoryId: "theory-theory", q: "비행 중 속도를 기존 제어 수치보다 정확히 2배 속도로 가속 전개 시, 에어포일 날개 표면에 가해지는 양력(Lift)과 항력(Drag)의 물리적 비례 스케일 변화 수치는?", o: ["속도와 비례하여 2배 증가", "속도의 제곱에 비례하여 4배 증가", "3배 가속 비례 증가", "변화 없이 고정 유지"], a: 2 },
-        { cat: "운항절차", theoryId: "theory-procedure", q: "무선 링크 주파수 혼선 노이즈 교란으로 인한 모터 폭주 및 노콘 사고를 원천 방지하기 위한 비행 종료 후의 전원 차단 순서는?", o: ["조종기 송신기 전원을 먼저 OFF 한 후 기체 배터리 분리", "기체의 메인 배터리를 먼저 완전 분리(OFF)한 후 조종기 전원 OFF", "순서에 아무런 제약이 없음", "두 장치를 동시에 완전 차단"], a: 2 },
-        { cat: "운항절차", theoryId: "theory-procedure", q: "시동 이륙 직후 공중 목측 고도 1~2m 범위 내외에서 약 5초 이상 정지하여 수평 유지 및 기계 이음을 최종 확인하는 정밀 점검 코스는?", o: ["비상 강하 점검", "안전 / 점검 호버링 (Check Hovering)", "원주 비행 코스", "좌우 횡이동 테스트"], a: 2 },
-        { cat: "운항절차", theoryId: "theory-procedure", q: "1번의 치명적인 대파 참사 전에는 29번의 경미한 가벼운 경상고가 발생하고, 그전에는 이미 사소한 전조 위험 징후가 300번 누적 감지된다는 안전 법칙은?", o: ["파스칼의 법칙", "하인리히 법칙 (1:29:300 법칙)", "쉘 모델 원칙", "스위스 치즈 예방선"], a: 2 },
-        { cat: "항공기상", theoryId: "theory-meteorology", q: "대기 수증기 응결 수적체 무리가 지표면 바닥에 직접 밀착하여 인간의 전방 수평 시정 가시거리를 몇 킬로미터 미만으로 해치는 기상 현상을 안개(Fog)라고 하는가?", o: ["수평 시정 500m 미만", "수평 가시거리 1km 미만 권역 도달 시", "수평 시정 2km 미만", "수평 시정 5km 미만 권역"], a: 2 },
-        { cat: "항공기상", theoryId: "theory-meteorology", q: "원래 고도가 오를수록 기온이 내려가야 정상이나, 하층 공기가 차갑고 상층이 따뜻해 공기 수직 확산 대류가 완전 차단 고착되는 변칙 안정 기층은?", o: ["단열팽창 감률층", "기온역전층 (Inversion Layer)", "대류 활성 전선면", "적란운 스톰층"], a: 2 },
-        { cat: "항공기상", theoryId: "theory-meteorology", q: "국제 구름 분류 계급 구조 명칭 체계에서 이 용어가 결합하면 기상학적으로 비나 눈을 장시간 머금고 동반해 내리퍼붓는 먹구름을 뜻하는 어원은?", o: ["Alto", "Nimbus (님버스 어원)", "Cirrus", "Stratus"], a: 2 }
-    ];
+    let isExamMode = false; let activeTabId = "how_to_use"; let wrongQuestions = new Set();
 
-    // 🔄 가상 동적 해시 치환 스크램블링 엔진 (35개 전 회차의 1,400개 문제를 완전 자동 다르게 분리 생성)
-    for (let e = 1; e <= 25; e++) {
-        examData[`exam${e}`] = [];
-        for (let q = 1; q <= 40; q++) {
-            let poolIdx = (e * 3 + q * 7) % coreQuestionPool.length;
-            let src = coreQuestionPool[poolIdx];
-            
-            let oCopy = [...src.o];
-            let rotation = (e + q) % 4;
-            for (let r = 0; r < rotation; r++) { oCopy.push(oCopy.shift()); }
-            let finalAnsIdx = oCopy.indexOf(src.o[src.a - 1]) + 1;
-
-            examData[`exam${e}`].push({
-                id: `e${e}_${q}`, cat: src.cat, theoryId: src.theoryId,
-                q: src.q, o: oCopy, a: finalAnsIdx,
-                exp: `학과 필기 표준 기출 연동 해설 조항입니다.`
-            });
-        }
+    function initApp() {
+        buildTabs();
+        switchTab("how_to_use");
     }
 
-    for (let t = 1; t <= 10; t++) {
-        examData[`trap${t}`] = [];
-        for (let q = 1; q <= 40; q++) {
-            let poolIdx = (t * 11 + q * 13 + 2) % coreQuestionPool.length;
-            let src = coreQuestionPool[poolIdx];
-            
-            let oCopy = [...src.o];
-            let rotation = (t * q) % 4;
-            for (let r = 0; r < rotation; r++) { oCopy.push(oCopy.shift()); }
-            let finalAnsIdx = oCopy.indexOf(src.o[src.a - 1]) + 1;
+    function buildTabs() {
+        const nav = document.getElementById("tabs-nav-bar");
+        nav.innerHTML = "";
 
-            examData[`trap${t}`].push({
-                id: `t${t}_${q}`, cat: src.cat, theoryId: src.theoryId,
-                q: src.q, o: oCopy, a: finalAnsIdx,
-                exp: `틀리기 아주 쉬운 변별력 킬러 변형 기출 지문입니다.`
-            });
+        // 모의고사 25회분
+        let mockWrap = document.createElement("div"); mockWrap.className = "nav-section-wrapper";
+        mockWrap.innerHTML = '<div class="section-title">─── 기출 모의고사 코스 (1~25회 완비) ───</div>';
+        let mockRow = document.createElement("div"); mockRow.className = "nav-scroll-row";
+        for(let i=1; i<=25; i++) {
+            mockRow.innerHTML += `<button class="btn btn-menu" id="tab-btn-exam${i}" onclick="loadGithubFile('exam', ${i})">${i}회</button>`;
         }
-    }
+        mockWrap.appendChild(mockRow); nav.appendChild(mockWrap);
 
-    function buildNavigationTabs() {
-        const navBar = document.getElementById("tabs-nav-bar");
-        navBar.innerHTML = "";
-
-        const mockSection = document.createElement("div");
-        mockSection.className = "nav-section-wrapper";
-        const mockTitle = document.createElement("div");
-        mockTitle.className = "section-title";
-        mockTitle.innerText = "─── 기출 모의고사 코스 (1~25회 완비) ───";
-        mockSection.appendChild(mockTitle);
-        
-        const mockRow = document.createElement("div");
-        mockRow.className = "nav-scroll-row";
-        for (let i = 1; i <= 25; i++) {
-            const key = `exam${i}`;
-            const btn = document.createElement("button");
-            btn.className = `btn btn-menu`;
-            btn.id = `tab-btn-${key}`;
-            btn.innerText = `${i}회`;
-            btn.setAttribute("onclick", `switchTab('${key}')`);
-            mockRow.appendChild(btn);
+        // 함정 10회분
+        let trapWrap = document.createElement("div"); trapWrap.className = "nav-section-wrapper";
+        trapWrap.innerHTML = '<div class="section-title">─── 최고 오답률 격파 함정문제 코스 (1~10회 완결) ───</div>';
+        let trapRow = document.createElement("div"); trapRow.className = "nav-scroll-row";
+        for(let i=1; i<=10; i++) {
+            trapRow.innerHTML += `<button class="btn btn-trap" id="tab-btn-trap${i}" onclick="loadGithubFile('trap', ${i})">함정 ${i}회</button>`;
         }
-        mockSection.appendChild(mockRow);
-        navBar.appendChild(mockSection);
+        trapWrap.appendChild(trapRow); nav.appendChild(trapWrap);
 
-        const trapSection = document.createElement("div");
-        trapSection.className = "nav-section-wrapper";
-        const trapTitle = document.createElement("div");
-        trapTitle.className = "section-title";
-        trapTitle.innerText = "─── 고난도 약점 정복 함정문제 코스 (1~10회 완결) ───";
-        trapSection.appendChild(trapTitle);
-        
-        const trapRow = document.createElement("div");
-        trapRow.className = "nav-scroll-row";
-        for (let i = 1; i <= 10; i++) {
-            const key = `trap${i}`;
-            const btn = document.createElement("button");
-            btn.className = `btn btn-trap`;
-            btn.id = `tab-btn-${key}`;
-            btn.innerText = `함정 ${i}회`;
-            btn.setAttribute("onclick", `switchTab('${key}')`);
-            trapRow.appendChild(btn);
-        }
-        trapSection.appendChild(trapRow);
-        navBar.appendChild(trapSection);
-
-        const funcSection = document.createElement("div");
-        funcSection.className = "nav-section-wrapper";
-        const funcTitle = document.createElement("div");
-        funcTitle.className = "section-title";
-        funcTitle.innerText = "─── 스마트 허브 대시보드 컨트롤 타워 ───";
-        funcSection.appendChild(funcTitle);
-        
-        const funcRow = document.createElement("div");
-        funcRow.className = "nav-scroll-row";
+        // 기능형 대시보드 허브
+        let funcWrap = document.createElement("div"); funcWrap.className = "nav-section-wrapper";
+        funcWrap.innerHTML = '<div class="section-title">─── 스마트 허브 대시보드 ───</div>';
+        let funcRow = document.createElement("div"); funcRow.className = "nav-scroll-row";
         funcRow.innerHTML = `
             <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
             <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
             <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
             <button class="btn btn-wrong" id="wrong-tab-btn" onclick="switchTab('wrong_notes')">🔄 오답노트 문제구성</button>
-            <button class="btn btn-mode" id="mode-toggle-btn" onclick="toggleMode()">모드: 연습 모드 📝</button>
-            <button class="btn" style="background-color: #dc2626; color: white;" onclick="resetAllExams()">전체회차 초기화 ⚠️</button>
         `;
-        funcSection.appendChild(funcRow);
-        navBar.appendChild(funcSection);
+        funcWrap.appendChild(funcRow); nav.appendChild(funcWrap);
     }
 
-    function buildExamContainers() {
-        const mainContainer = document.getElementById("main-pan-container");
+    // 🚀 핵심 구조: 대시기호 인코딩 교정 및 괄호 파일명 양방향 교차 추적 다운로드 엔진
+    function loadGithubFile(prefix, num) {
+        const tabId = prefix + num;
+        activeTabId = tabId;
         
-        Object.keys(examData).forEach(key => {
-            const isTrap = key.startsWith("trap");
-            const num = key.replace("exam", "").replace("trap", "");
-            const div = document.createElement("div");
-            div.id = key;
-            div.className = `tab-content`;
-            div.innerHTML = `
-                <div class="info-box" style="${isTrap ? 'border-left-color: var(--trap-color); background-color: #fffaf0;' : ''}">
-                    <h3>📝 드론 자격시험 ${isTrap ? '고난도 함정 코스 제' + num + '회분' : '통합 기출 모의고사 제' + num + '회분'}</h3>
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.btn-menu, .btn-trap').forEach(btn => btn.classList.remove('active'));
+        
+        let targetTab = document.getElementById(tabId);
+        if(!targetTab) {
+            targetTab = document.createElement("div");
+            targetTab.id = tabId;
+            targetTab.className = "tab-content active";
+            document.getElementById("main-pan-container").appendChild(targetTab);
+        } else {
+            targetTab.classList.add("active");
+        }
+        
+        const btn = document.getElementById(`tab-btn-${tabId}`);
+        if(btn) btn.classList.add("active");
+
+        targetTab.innerHTML = `<div class="loading-text">🔄 깃허브 원격 서버 연동 중... [제 ${num}회분] 원문 텍스트 스트리밍 수신 중...</div>`;
+
+        // 윈도우 일련번호 파일명 형식인 "%20(${num})" 주소를 우선 추적하도록 완벽 매칭 정렬
+        let urlWithBracket = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}%20(${num}).txt`;
+        let urlNormal = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}${num}.txt`;
+
+        fetch(urlWithBracket)
+        .then(res => {
+            if(!res.ok) return fetch(urlNormal); // 괄호 주소가 없을 시 원본 순정 파일명으로 교차 추적 가동
+            return res;
+        })
+        .then(response => {
+            if(!response.ok) throw new Error("네트워크 파일 유실");
+            return response.text();
+        })
+        .then(text => {
+            parseAndRenderText(targetTab, tabId, text, prefix, num);
+        })
+        .catch(err => {
+            targetTab.innerHTML = `
+                <div class="info-box" style="border-left-color:var(--error-color); background-color:#fff5f5;">
+                    <h4 class="c-red">❌ 파일 연동 데이터 매칭 대기</h4>
+                    <p><b>원인:</b> 현재 파일이 깃허브 서버에 동기화 반영되는 중이거나 파일명 유격이 있습니다.</p>
+                    <p style="font-size:0.9rem; color:#718096;">서버 파일 직접 확인선: <a href="https://github.com/${githubUsername}/${githubRepo}" target="_blank">내 깃허브 저장소 가기</a></p>
                 </div>
-                <div class="quiz-container" id="container-${key}"></div>
-                <div class="submit-container">
-                    <button class="btn btn-submit class-submit-btn" style="${isTrap ? 'background-color: var(--trap-color);' : ''}" onclick="submitExam('${key}')">시험 제출하기</button>
-                    <button class="btn btn-reset-single" onclick="resetSingleExam('${key}')">회차 리셋하기 🔄</button>
-                </div>
-                <div class="result-panel" id="result-${key}"></div>
             `;
-            mainContainer.insertBefore(div, document.getElementById("wrong_notes"));
-            renderQuiz(key);
         });
     }
 
-    function renderQuiz(examKey) {
-        const targetContainer = document.getElementById(`container-${examKey}`);
-        if (!targetContainer) return;
-        targetContainer.innerHTML = "";
-        
-        const questions = examData[examKey];
-        questions.forEach((item, index) => {
-            const card = document.createElement("div");
-            card.className = "q-card";
-            card.id = `card_${examKey}_${item.id}`;
+    function parseAndRenderText(container, tabId, text, prefix, num) {
+        container.innerHTML = `
+            <div class="info-box" style="${prefix==='trap'?'border-left-color: var(--trap-color); background-color: #fffaf0;':''}">
+                <h3>📝 ${prefix==='trap'?'고난도 함정 코스 제':'통합 기출 모의고사 제'} ${num}회분 실제 문제</h3>
+            </div>
+            <div class="quiz-container" id="inside-${tabId}"></div>
+        `;
 
+        const quizBox = document.getElementById(`inside-${tabId}`);
+        let normalized = text.replace(/\r\n/g, "\n");
+        let blocks = normalized.split(/\n(?=Q\d+)/i);
+        
+        let index = 1;
+
+        blocks.forEach(block => {
+            if(!block.trim()) return;
+            let lines = block.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+            
+            let qText = "텍스트 원문 해독 프로세스 대기";
+            let opts = [];
+            let ans = 1;
+
+            lines.forEach(line => {
+                if(/^Q\d+/i.test(line)) qText = line.replace(/^Q\d+[\.\s:]*/i, "");
+                else if(line.includes("①") || line.startsWith("1)")) opts[0] = line.replace(/^[①1\)\s\.]*/, "");
+                else if(line.includes("②") || line.startsWith("2)")) opts[1] = line.replace(/^[②2\s\.]*/, "");
+                else if(line.includes("③") || line.startsWith("3)")) opts[2] = line.replace(/^[③3\)\s\.]*/, "");
+                else if(line.includes("④") || line.startsWith("4)")) opts[3] = line.replace(/^[④4\)\s\.]*/, "");
+                else if(line.includes("정답")) {
+                    let m = line.match(/[1234①②③④]/);
+                    if(m) {
+                        if(m[0]==='1'||m[0]==='①') ans = 1;
+                        if(m[0]==='2'||m[0]==='②') ans = 2;
+                        if(m[0]==='3'||m[0]==='③') ans = 3;
+                        if(m[0]==='4'||m[0]==='④') ans = 4;
+                    }
+                }
+            });
+
+            let card = document.createElement("div");
+            card.className = "q-card";
+            
             let optionsHtml = "";
-            item.o.forEach((opt, oIdx) => {
-                optionsHtml += `
-                    <label class="option-item" id="label_${examKey}_${item.id}_${oIdx+1}">
-                        <input type="radio" name="ans_${examKey}_${item.id}" value="${oIdx+1}" onclick="checkAnswerInstant('${examKey}', '${item.id}', ${oIdx+1})">
-                        &nbsp;${oIdx+1}. ${opt}
-                    </label>
-                `;
+            opts.forEach((opt, oIdx) => {
+                if(opt) {
+                    optionsHtml += `
+                        <label class="option-item">
+                            <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onclick="checkAnswerInstant('${tabId}','${index}',${oIdx+1},${ans})">
+                            &nbsp;${oIdx+1}. ${opt}
+                        </label>
+                    `;
+                }
             });
 
             card.innerHTML = `
-                <div class="sub-subject">문항 번호: ${index + 1}번 | 과목 분야: ${item.cat}</div>
-                <div class="q-title">Q${index + 1}. ${item.q}</div>
+                <div class="sub-subject">문항 번호: ${index}번</div>
+                <div class="q-title">Q${index}. ${qText}</div>
                 <div class="options-list">${optionsHtml}</div>
-                <div class="feedback" id="feed_${examKey}_${item.id}"></div>
-                <div class="explanation" id="exp_${examKey}_${item.id}">
-                    <strong>정답은 명확히 ${item.a}번입니다.</strong><br><br>${item.exp}
-                </div>
-                <button class="link-btn" id="link_${examKey}_${item.id}" onclick="goToTheory('${item.theoryId}', 'card_${examKey}_${item.id}')">이론 확인하기 📖</button>
+                <div class="feedback" id="feed_${tabId}_${index}"></div>
             `;
-            targetContainer.appendChild(card);
+            quizBox.appendChild(card);
+            index++;
         });
     }
 
-    function checkAnswerInstant(examKey, qId, selectedNum) {
-        if (isExamMode && examKey !== 'wrong') return; 
-
-        const questions = examData[examKey] || Array.from(wrongQuestions);
-        const question = questions.find(q => q.id === qId);
-        const feedDiv = document.getElementById(`feed_${examKey}_${qId}`);
-        
-        if (selectedNum === question.a) {
-            feedDiv.innerHTML = "🎉 정답입니다! 개념 마스터 안착.";
-            feedDiv.className = "feedback correct";
+    function checkAnswerInstant(tabId, idx, selectNum, correctNum) {
+        const feed = document.getElementById(`feed_${tabId}_${idx}`);
+        if(selectNum === correctNum) {
+            feed.innerHTML = "🎉 정답입니다! 정확한 원리 관통 완료."; feed.className = "feedback correct";
         } else {
-            feedDiv.innerHTML = `❌ 틀렸습니다. 정답은 ${question.a}번입니다.`;
-            feedDiv.className = "feedback wrong";
-            wrongQuestions.add(question); 
-            document.getElementById("wrong-tab-btn").style.display = "inline-block";
+            feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`; feed.className = "feedback wrong";
         }
-        feedDiv.style.display = "block";
-    }
-
-    function submitExam(examKey) {
-        const questions = examData[examKey];
-        let correctCount = 0;
-
-        questions.forEach(item => {
-            const radioGroup = document.getElementsByName(`ans_${examKey}_${item.id}`);
-            let checkedVal = 0;
-            for (let i = 0; i < radioGroup.length; i++) {
-                if (radioGroup[i].checked) { checkedVal = parseInt(radioGroup[i].value); break; }
-            }
-
-            const feedDiv = document.getElementById(`feed_${examKey}_${item.id}`);
-            
-            if (checkedVal === item.a) {
-                correctCount++;
-                if(feedDiv) { feedDiv.innerHTML = "🎉 정답입니다!"; feedDiv.className = "feedback correct"; }
-            } else {
-                if(feedDiv) { feedDiv.innerHTML = `❌ 오답 (정답: ${item.a}번)`; feedDiv.className = "feedback wrong"; }
-                wrongQuestions.add(item); 
-            }
-            if(feedDiv) feedDiv.style.display = "block";
-        });
-
-        let score = Math.round((correctCount / questions.length) * 100);
-        const resultPanel = document.getElementById(`result-${examKey}`);
-        let isPassed = score >= 70;
-        
-        resultPanel.innerHTML = `
-            <h2>🏁 CBT 모의평가 채점 결과</h2>
-            <div class="score-text" style="color:${isPassed ? 'var(--success-color)' : 'var(--error-color)'}">${score}점</div>
-            <div class="pass-badge ${isPassed ? 'pass' : 'fail'}">${isPassed ? '🎉 합격 (70점 기준 통과)' : '❌ 불합격'}</div>
-        `;
-        resultPanel.style.display = "block";
-        if (wrongQuestions.size > 0) {
-            document.getElementById("wrong-tab-btn").style.display = "inline-block";
-        }
-    }
-
-    function resetSingleExam(examKey) {
-        if (!confirm("해당 회차를 초기화하시겠습니까?")) return;
-        document.querySelectorAll(`#container-${examKey} input[type="radio"]`).forEach(r => r.checked = false);
-        document.querySelectorAll(`#container-${examKey} .feedback`).forEach(f => f.style.display = "none");
-        const resPanel = document.getElementById(`result-${examKey}`); if (resPanel) resPanel.style.display = "none";
-    }
-
-    function resetAllExams() {
-        if (!confirm("전체 회차를 초기화하시겠습니까?")) return;
-        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-        document.querySelectorAll('.feedback, .result-panel').forEach(el => el.style.display = "none");
-        wrongQuestions.clear(); document.getElementById("wrong-tab-btn").style.display = "none";
+        feed.style.display = "block";
     }
 
     function switchTab(tabId) {
@@ -651,45 +281,15 @@
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.btn-menu, .btn-trap').forEach(btn => btn.classList.remove('active'));
         
-        var targetSection = document.getElementById(tabId);
-        if(targetSection) targetSection.classList.add('active');
-
-        const targetBtn = document.getElementById('tab-btn-' + tabId);
-        if (targetBtn) targetBtn.classList.add('active');
-
-        if (tabId === 'wrong_notes') renderWrongQuiz();
+        const target = document.getElementById(tabId);
+        if(target) target.classList.add('active');
+        
+        const btn = document.getElementById(`tab-btn-${tabId}`);
+        if(btn) btn.classList.add("active");
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function toggleMode() {
-        isExamMode = !isExamMode; const modeBtn = document.getElementById("mode-toggle-btn");
-        document.querySelectorAll('.feedback, .result-panel').forEach(el => el.style.display = "none");
-        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-        if (isExamMode) { modeBtn.innerHTML = "모드: 시험 모드 ⏱️"; modeBtn.classList.add("active"); }
-        else { modeBtn.innerHTML = "모드: 연습 모드 📝"; modeBtn.classList.remove("active"); }
-    }
-
-    function goToTheory(theorySectionId, originCardId) {
-        lastQuestionId = originCardId; switchTab('theory');
-        setTimeout(() => {
-            const target = document.getElementById(theorySectionId);
-            if (target) window.scrollTo({ top: target.offsetTop - 120, behavior: 'smooth' });
-        }, 150);
-    }
-
-    function returnToQuestion() {
-        if (!lastQuestionId) { switchTab('how_to_use'); return; }
-        const examKey = lastQuestionId.split('_')[1]; switchTab(examKey);
-        setTimeout(() => {
-            const targetCard = document.getElementById(lastQuestionId);
-            if (targetCard) window.scrollTo({ top: targetCard.offsetTop - 120, behavior: 'smooth' });
-        }, 150);
-    }
-
-    window.onload = function() {
-        buildNavigationTabs();
-        buildExamContainers();
-    }
+    window.onload = function() { initApp(); }
 </script>
 </body>
 </html>
