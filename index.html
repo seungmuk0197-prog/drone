@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>드론 조종자 자격시험 통합 스마트 마스터피스 시스템</title>
+    <title>드론 조종자 자격시험 25회 + 함정 10회 통합 스마트 마스터피스 시스템</title>
     <style>
         :root {
             --primary-color: #1a365d; --primary-hover: #2a4365; --trap-color: #d69e2e;
@@ -11,109 +11,83 @@
             --card-bg: #ffffff; --text-color: #2d3748; --border-color: #e2e8f0;
         }
         body { font-family: 'Pretendard', -apple-system, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; line-height: 1.6; }
-        
         header { background-color: var(--primary-color); color: white; padding: 25px 20px; text-align: center; }
         header h1 { margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; }
-        header p { margin: 8px 0 0 0; font-size: 0.95rem; color: #cbd5e0; }
+        header p { margin: 5px 0 0 0; font-size: 0.95rem; color: #cbd5e0; }
+        .section-title { width: 100%; text-align: center; font-size: 0.85rem; font-weight: bold; color: #4a5568; margin-top: 6px; text-transform: uppercase; letter-spacing: 1.5px; }
         
-        /* PC 환경에서는 메뉴 고정 유지 */
-        .nav-container { background-color: #edf2f7; padding: 15px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
-        .nav-section-wrapper { margin-bottom: 10px; }
-        .section-title { font-size: 0.85rem; font-weight: bold; color: #4a5568; margin-bottom: 8px; padding-left: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        /* PC 메뉴 고정 / 모바일은 공간 확보를 위해 상대 배치 */
+        .nav-container { background-color: #edf2f7; padding: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .nav-section-wrapper { margin-bottom: 4px; }
+        .nav-scroll-row { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
         
-        /* 컨트롤 패널 */
+        /* 컨트롤 패널 (모드 선택 및 리셋) */
         .global-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .mode-selector label { margin-right: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; }
         .mode-selector input[type="radio"] { transform: scale(1.3); margin-right: 8px; cursor: pointer; }
         .action-buttons { display: flex; gap: 8px; }
-        
-        .nav-scroll-row { display: flex; justify-content: flex-start; gap: 8px; overflow-x: auto; padding-bottom: 8px; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-        .nav-scroll-row::-webkit-scrollbar { height: 6px; }
-        .nav-scroll-row::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
-        
-        .btn { padding: 8px 14px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease; }
+
+        .btn { padding: 6px 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.8rem; white-space: nowrap; transition: 0.2s; }
         .btn-menu { background-color: white; color: var(--text-color); border: 1px solid var(--border-color); }
-        .btn-menu:hover { background-color: #e2e8f0; }
-        .btn-menu.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
-        
+        .btn-menu.active { background-color: var(--primary-color); color: white; }
         .btn-trap { background-color: white; color: #b7791f; border: 1px solid var(--trap-color); }
-        .btn-trap:hover { background-color: #fefcbf; }
         .btn-trap.active { background-color: var(--trap-color); color: white; }
-        
-        .btn-wrong { background-color: white; color: var(--error-color); border: 1px solid var(--error-color); }
-        .btn-wrong:hover { background-color: #fed7d7; }
+        .btn-wrong { background-color: white; color: var(--error-color); border: 1px solid var(--error-color); padding: 6px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.8rem; }
         .btn-wrong.active { background-color: var(--error-color); color: white; }
         
-        .container { max-width: 1000px; margin: 25px auto; padding: 0 20px 140px 20px; }
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; padding-bottom: 140px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
         
-        .info-box { background-color: #ebf8ff; border-left: 4px solid var(--primary-color); padding: 18px; border-radius: 4px; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .info-box h3 { margin-top: 0; margin-bottom: 8px; color: var(--primary-color); }
-        .info-box p { margin: 0; color: #2d3748; font-size: 0.95rem; }
+        .info-box { background-color: #ebf8ff; border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 0 5px 5px 0; margin-bottom: 25px; }
+        .q-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .sub-subject { font-size: 0.85rem; color: #718096; margin-bottom: 5px; font-weight: bold; }
+        .q-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; line-height: 1.5; }
+        .options-list { margin-bottom: 15px; }
+        .option-item { margin-bottom: 10px; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s; }
+        .option-item:hover { background-color: #f7fafc; }
+        .option-item input { margin-right: 12px; transform: scale(1.2); flex-shrink: 0; cursor: pointer; }
         
-        .q-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-        .sub-subject { font-size: 0.85rem; color: #718096; margin-bottom: 8px; font-weight: bold; display: inline-block; padding: 3px 8px; background: #edf2f7; border-radius: 4px; }
-        .q-title { font-size: 1.15rem; font-weight: bold; margin-bottom: 18px; line-height: 1.5; color: #1a202c; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; font-weight: bold; }
+        .feedback.correct { background-color: #c6f6d5; color: #22543d; display: block; }
+        .feedback.wrong { background-color: #fed7d7; color: #742a2a; display: block; }
+        .explanation { margin-top: 12px; padding: 15px; background-color: #f7fafc; border-left: 3px solid #cbd5e0; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; color: #4a5568; line-height: 1.6; }
         
-        .options-list { display: flex; flex-direction: column; gap: 10px; }
-        .option-item { padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; font-size: 1rem; color: #2d3748; }
-        .option-item:hover { background-color: #f7fafc; border-color: #cbd5e0; }
-        .option-item input { margin-right: 15px; transform: scale(1.3); cursor: pointer; flex-shrink: 0; }
-        
-        .feedback { margin-top: 18px; padding: 15px; border-radius: 6px; display: none; font-weight: bold; font-size: 1rem; }
-        .feedback.correct { background-color: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
-        .feedback.wrong { background-color: #fed7d7; color: #742a2a; border: 1px solid #feb2b2; }
-        .explanation { margin-top: 15px; padding: 18px; background-color: #f8fafc; border-left: 4px solid #cbd5e0; display: none; font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
-        
-        .theory-section { background-color: white; padding: 30px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .theory-section h2 { margin-top: 0; color: #1a202c; }
-        .theory-section h3 { margin-top: 35px; margin-bottom: 18px; color: var(--primary-color); border-bottom: 2px solid #edf2f7; padding-bottom: 10px; }
-        .theory-section ul { padding-left: 22px; margin-bottom: 25px; }
-        .theory-section ul li { line-height: 1.8; margin-bottom: 16px; text-align: justify; font-size: 0.98rem; }
+        .theory-section { background-color: white; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 25px; }
+        .theory-section h3 { margin-top: 30px; margin-bottom: 15px; color: var(--primary-color); border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+        .theory-section ul { padding-left: 20px; margin-bottom: 20px; }
+        .theory-section ul li { line-height: 1.8; margin-bottom: 16px; text-align: justify; }
         .theory-section ul li b { color: #111827; }
         
-        .oral-q { font-weight: 700; color: var(--primary-color); margin-top: 25px; font-size: 1.1rem; }
-        .oral-a { color: #2d3748; padding-left: 18px; border-left: 3px solid #cbd5e0; margin: 10px 0 25px 0; background-color: #f8fafc; padding: 12px 18px; border-radius: 0 8px 8px 0; line-height: 1.6; }
+        .oral-q { font-weight: bold; color: #1a365d; margin-top: 20px; font-size: 1.05rem; }
+        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 8px 0 20px 0; background-color: #f8fafc; padding: 10px 15px; border-radius: 0 6px 6px 0; }
+        .loading-text { text-align: center; padding: 30px; font-weight: bold; color: var(--trap-color); font-size: 1.2rem; }
         
-        .loading-text { text-align: center; padding: 40px; font-weight: bold; color: var(--primary-color); font-size: 1.2rem; }
-        
-        .styled-table { width: 100%; border-collapse: collapse; margin: 20px 0 30px 0; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .styled-table th { background-color: var(--primary-color); color: white; padding: 14px; text-align: left; font-weight: bold; border: 1px solid var(--primary-hover); }
-        .styled-table td { padding: 14px; border: 1px solid var(--border-color); }
+        .styled-table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .styled-table th { background-color: var(--primary-color); color: white; padding: 12px; text-align: left; font-weight: bold; }
+        .styled-table td { padding: 12px; border: 1px solid var(--border-color); }
         .styled-table tr:nth-child(even) { background-color: #f8fafc; }
         
-        footer { display: flex; justify-content: space-between; align-items: center; padding: 18px 25px; font-size: 0.9rem; color: #cbd5e0; background-color: var(--primary-color); position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 1020; border-top: 1px solid #2a4365; }
+        footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; font-size: 0.85rem; color: #cbd5e0; background-color: var(--primary-color); position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 1020; }
         
-        /* 플로팅 TOP 버튼 (초기엔 안보임) */
-        #btn-back-to-top {
-            display: none; position: fixed; bottom: 25px; right: 25px; 
-            background-color: var(--primary-hover); color: white; border: none; 
-            border-radius: 50%; width: 55px; height: 55px; font-size: 0.85rem; 
-            font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
-            z-index: 9999; align-items: center; justify-content: center; flex-direction: column;
-            line-height: 1.2; opacity: 0.9;
-        }
+        /* 플로팅 TOP 버튼 */
+        #btn-back-to-top { display: none; position: fixed; bottom: 25px; right: 25px; background-color: var(--primary-hover); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 0.85rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; line-height: 1.2; opacity: 0.9; }
         #btn-back-to-top:hover { background-color: var(--primary-color); opacity: 1; }
 
-        /* 모바일 전용 반응형 (화면 가림 완벽 해결) */
         @media (max-width: 768px) {
-            header { padding: 20px 15px; }
+            header { position: relative; padding: 15px 10px; }
             header h1 { font-size: 1.2rem; }
-            
-            /* 핵심: 모바일에서는 메뉴 고정을 아예 풀어버림 (스크롤하면 위로 사라짐) */
-            .nav-container { position: static; padding: 10px; }
-            
-            .global-controls { flex-direction: column; gap: 12px; align-items: stretch; padding: 12px; }
+            /* 모바일 환경: 메뉴 고정 해제 (화면 가림 100% 해소) */
+            .nav-container { position: relative; padding: 5px 8px; }
+            .nav-scroll-row { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+            .nav-scroll-row::-webkit-scrollbar { height: 5px; }
+            .nav-scroll-row::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
+            .global-controls { flex-direction: column; gap: 10px; align-items: stretch; }
             .action-buttons { justify-content: space-between; }
-            .mode-selector label { font-size: 0.9rem; }
-            
-            .container { padding-bottom: 120px; margin-top: 15px; }
-            .q-card { padding: 18px 15px; } /* 카드 여백 슬림화 */
-            .q-title { font-size: 1.05rem; }
-            
-            footer { flex-direction: column; gap: 8px; text-align: center; padding: 15px; position: static; }
+            .container { margin-top: 15px; padding-bottom: 150px; }
+            .q-card { padding: 20px 15px; }
+            footer { flex-direction: column; gap: 5px; text-align: center; padding: 10px; position: static; }
             #btn-back-to-top { bottom: 20px; right: 15px; width: 50px; height: 50px; font-size: 0.75rem; }
         }
     </style>
@@ -131,7 +105,7 @@
     <div id="wrong_notes" class="tab-content">
         <div class="info-box" style="border-left-color: var(--error-color);">
             <h3>🔄 전 범위 통합 실시간 크로스 오답노트</h3>
-            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다. 끝까지 파고들어 약점을 극복하세요!</p>
+            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다.</p>
         </div>
         <div class="quiz-container" id="container-wrong"></div>
     </div>
@@ -139,15 +113,9 @@
     <div id="how_to_use" class="tab-content active">
         <div class="theory-section">
             <h2>💡 드론 스마트 모의고사 시스템 전체 사용 매뉴얼</h2>
-            <p>상단 메뉴에서 원하는 회차 버튼을 누르면 <b>깃허브 원격 서버에서 해당 회차의 문제 텍스트 원본을 토시 하나 틀리지 않고 실시간 스트리밍</b>하여 화면에 자동 매칭합니다.</p>
-            
-            <hr style="margin: 20px 0; border: none; border-top: 1px dashed var(--border-color);">
-            
-            <h3>🔥 학습 모드 안내</h3>
-            <ul>
-                <li><b>📘 모의시험 모드:</b> 문제를 클릭하면 즉시 정답 및 오답 여부를 판별해주고 하단에 심층 해설이 제공됩니다. 복습과 암기에 유리합니다.</li>
-                <li><b>📝 실제시험 모드:</b> 클릭해도 정답 여부가 공개되지 않습니다. 맨 아래의 <b>'제출 및 채점하기'</b> 버튼을 눌러야 70점 만점 기준 합격/불합격 여부가 도출되며 해설이 열립니다.</li>
-            </ul>
+            <p>상단 메뉴에서 원하는 회차 버튼을 누르면 <b>깃허브 원격 서버에서 해당 회차의 문제 텍스트 원본을 토시 하나 틀리지 않고 실시간 스트리밍</b>하여 화면에 매칭합니다.</p>
+            <h3>✅ 시스템 최적화 완료 안내</h3>
+            <p style="color:var(--success-color); font-weight:bold;">1번 선지 증발 현상(파싱 오류) 완벽 패치 및 다른 탭으로 이동해도 풀었던 답안 기록이 <b>리셋 전까지 영구 유지</b>되도록 캐시 시스템이 도입되었습니다!</p>
         </div>
     </div>
 
@@ -327,7 +295,7 @@
                     <br>- <b>⚠️ 영구 손상 한계선:</b> <b>셀당 3.3V 이하</b>로 떨어지면 배터리 셀이 복구 불가능하게 영구 손상되므로 즉시 비행을 중단해야 합니다. 메모리 효과가 없으므로 수시 충전이 가능합니다. 납축전지는 무겁고 효율이 낮아 드론용으로 부적합합니다.
                     <br>- <b>배터리 표면 필수 표기 4대 사항:</b> 셀 수(S), 용량(mAh), 전압(V), 방전율(C-rate). (원재료 성분이나 제조 화학 물질은 필수 표기 사항이 아닙니다.)
                 </li>
-                <li><b>보관 및 폐기 프로토콜 [이론1-310~315]:</b> 완충 상태 장기 방치 시 가스가 차며 부풀어 오르는 <b>스웰링(Swelling) 현상</b>이 발생합니다. 보관 시에는 <b>40~50% 방전 상태로 맞춘 후 실온(5℃~25℃)의 서늘한 곳에 기체와 분리</b>하여 내화성 주머니(리포 세이프 백)에 넣어 보관해야 합니다. 60℃ 이상 노출은 금지됩니다. 배터리 셀 중 단 1개라도 문제가 발생하면 팩 전체 전량을 폐기하는 것이 대원칙입니다.</li>
+                <li><b>보관 및 폐기 프로토콜 [이론1-310~315]:</b> 완충 상태 장기 방치 시 가스가 차며 부풀어 오르는 <b>스웰링(Swelling) 현상</b>이 발생합니다. 보관 시에는 <b>40~50% 방전 상태로 맞춘 후 실온(5℃~25℃)의 서늘한 곳에 기체와 분리</b>하여 내화성 주머니(리포 세이프 백)에 넣어 보관해야 합니다. 60℃ 이상 노출은 금지됩니다. 배터리 셀 중 단 1개라도 문제가 발생하면 팩 전체를 폐기하는 것이 대원칙입니다.</li>
                 <li><b>🔥 소금물 방전법 공식 금지 [이론1-316, 317]:</b> 과거 교재에 등장하던 '소금물에 담가 폐기한다'는 방식은 유독가스 분출, 전극 부식 쇼트 및 발열 화재 위험으로 인해 <b>현재 안전 가이드라인에서는 절대 금지(지양)</b>하고 있습니다. 반드시 전기적 방전기를 통해 완전 방전(0V) 유도 후 지자체 규정에 맞춰 폐기합니다.</li>
                 <li><b>화재 발생 시 대처법 [이론1-318~322]:</b> 리튬폴리머 화재는 <b>D급 금속 화재</b>에 속하므로 일반 ABC 분말 소화기로는 내부 산소 차단이 불가능하여 진화할 수 없습니다. <b>전용 D급 금속 소화기를 사용하거나, 주변에 번질 위험이 없는 안전한 곳에서 대량의 물을 집중 주수하여 냉각 소화</b>해야 합니다.</li>
             </ul>
@@ -434,7 +402,7 @@
                     <br>- <b>⚠️ 이륙 전 점검 페이크 선지:</b> '스로틀 상승 비행 및 기동 제어 확인'은 비행 전 점검이 아닙니다. 이륙 시동 직후 약 1~2m 상공에서 호버링을 하며 센서 키 반응을 확인하는 <b>'이륙 직후 점검 사항'</b>에 해당합니다.
                 </li>
                 <li><b>공역 체계 및 사전 승인 면제 특례 [이론1-425~435]:</b> 최고층 등급인 A등급 공역은 시계비행이 불가능하며 오직 계기비행(IFR)만 수행합니다. 대한민국 공역 체계에서는 F등급 공역은 실제 운영하지 않으며 존재하지 않습니다. 드론은 비관제공역인 G등급 공역에서 승인 없이 비행 가능합니다. 지면/수면으로부터 200m 이상 높이 상공은 관제구로 정의됩니다.
-                    <br>- <b>사전 승인 면제 특례 (25kg 이하 기체):</b> 관제권과 P구역을 제외한 일반 공역에서 고도 150m 미만 비행 시 사전 승인서 없이 비행이 가능합니다. <b>[인구/건축물 밀집 지역 특례 신설]</b> 기체 중심 수평 거리 150m 및 해당 지역 가장 높은 장애물(빌딩 등) 상단 기준 150m까지는 고도 제한을 초과하더라도 승인 없이 비행할 수 있습니다. 군·경·소방 등 공공 목적 긴급 비행 시에는 사전 서류 없이 전화 유선 통보 및 구두 승인만 단독으로 즉시 비행 가능합니다.
+                    <br>- <b>사전 승인 면제 특례 (25kg 이하 기체):</b> 관제권과 P구역을 제외한 일반 공역에서 고도 150m 미만 비행 시 사전 승인서 없이 비행이 가능합니다. <b>[인구/건축물 밀집 지역 특례 신설]</b> 기체 중심 수평 거리 150m 및 해당 지역 가장 높은 장애물(빌딩 등) 상단 기준 150m까지는 고도 제한을 초과하더라도 승인 없이 비행할 수 있습니다. 군·경·소방 등 공공 목적 긴급 비행 시에는 사전 서류 없이 전화 유선 통보 및 구두 승인만으로 즉시 비행 가능합니다.
                 </li>
                 <li><b>자격 종별 최대이륙중량 기준 및 교관 자격 [이론1-436~444]:</b> 
                     <br>- <b>1종:</b> 최대이륙중량 25kg 초과 ~ 자체중량 150kg 이하 (비행 경력 20시간 + 학과·실기·구술)
@@ -457,7 +425,7 @@
 
 <footer>
     <div class="footer-left">제작자 SM</div>
-    <div class="footer-right">Created on May 17, 2026 | Inquiries: chaesira@naver.com</div>
+    <div class="footer-right">Created on May 20, 2026 | Inquiries: chaesira@naver.com</div>
 </footer>
 
 <script>
@@ -482,61 +450,66 @@
 
     function buildTabs() {
         const nav = document.getElementById("tabs-nav-bar");
-        nav.innerHTML = `
-            <div class="global-controls">
-                <div class="mode-selector">
-                    <label style="color:var(--primary-color);">
-                        <input type="radio" name="exam_mode" value="practice" checked onchange="setMode('practice')"> 📘 모의시험 (해설 즉시)
-                    </label>
-                    <label style="color:var(--error-color);">
-                        <input type="radio" name="exam_mode" value="real" onchange="setMode('real')"> 📝 실제시험 (채점 모드)
-                    </label>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn btn-menu" onclick="resetCurrentTab()">🔄 현재 리셋</button>
-                    <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 리셋</button>
-                </div>
+        nav.innerHTML = "";
+
+        // 컨트롤 패널 (모드 선택 및 리셋 영역 추가)
+        let controlWrap = document.createElement("div");
+        controlWrap.className = "global-controls";
+        controlWrap.innerHTML = `
+            <div class="mode-selector">
+                <label style="color:var(--primary-color);">
+                    <input type="radio" name="exam_mode" value="practice" checked onchange="setMode('practice')"> 📘 모의시험 (즉시해설)
+                </label>
+                <label style="color:var(--error-color);">
+                    <input type="radio" name="exam_mode" value="real" onchange="setMode('real')"> 📝 실전시험 (제출채점)
+                </label>
             </div>
-            
-            <div class="nav-section-wrapper">
-                <div class="section-title">── 스마트 대시보드 ──</div>
-                <div class="nav-scroll-row">
-                    <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 시스템 사용법</button>
-                    <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론 요약</button>
-                    <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가 총정리</button>
-                    <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 나만의 오답노트</button>
-                </div>
-            </div>
-            
-            <div class="nav-section-wrapper">
-                <div class="section-title">── 기출 모의고사 코스 ──</div>
-                <div class="nav-scroll-row" id="mock-row"></div>
-            </div>
-            
-            <div class="nav-section-wrapper">
-                <div class="section-title">── 고난도 함정 코스 ──</div>
-                <div class="nav-scroll-row" id="trap-row"></div>
+            <div class="action-buttons">
+                <button class="btn btn-menu" onclick="resetCurrentTab()">🔄 현재회차 리셋</button>
+                <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 리셋</button>
             </div>
         `;
+        nav.appendChild(controlWrap);
 
-        let mockRow = document.getElementById("mock-row");
+        // 기능형 대시보드 허브
+        let funcWrap = document.createElement("div"); funcWrap.className = "nav-section-wrapper";
+        funcWrap.innerHTML = '<div class="section-title">─── 스마트 허브 대시보드 ───</div>';
+        let funcRow = document.createElement("div"); funcRow.className = "nav-scroll-row";
+        funcRow.innerHTML = `
+            <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
+            <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
+            <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
+            <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 오답노트 문제구성</button>
+        `;
+        funcWrap.appendChild(funcRow); nav.appendChild(funcWrap);
+
+        // 모의고사 25회분
+        let mockWrap = document.createElement("div"); mockWrap.className = "nav-section-wrapper";
+        mockWrap.innerHTML = '<div class="section-title">─── 기출 모의고사 코스 (1~25회 완비) ───</div>';
+        let mockRow = document.createElement("div"); mockRow.className = "nav-scroll-row";
         for(let i=1; i<=25; i++) {
             mockRow.innerHTML += `<button class="btn btn-menu" id="tab-btn-exam${i}" onclick="loadGithubFile('exam', ${i})">${i}회</button>`;
         }
+        mockWrap.appendChild(mockRow); nav.appendChild(mockWrap);
 
-        let trapRow = document.getElementById("trap-row");
+        // 함정 10회분
+        let trapWrap = document.createElement("div"); trapWrap.className = "nav-section-wrapper";
+        trapWrap.innerHTML = '<div class="section-title">─── 최고 오답률 격파 함정문제 코스 (1~10회 완결) ───</div>';
+        let trapRow = document.createElement("div"); trapRow.className = "nav-scroll-row";
         for(let i=1; i<=10; i++) {
             trapRow.innerHTML += `<button class="btn btn-trap" id="tab-btn-trap${i}" onclick="loadGithubFile('trap', ${i})">함정 ${i}회</button>`;
         }
+        trapWrap.appendChild(trapRow); nav.appendChild(trapWrap);
     }
 
     function setMode(mode) {
         if(currentMode === mode) return;
+        let modeName = (mode === 'real') ? '실전시험' : '모의시험';
         
-        let modeName = (mode === 'real') ? '실제시험' : '모의시험';
-        if(confirm(`[${modeName}] 모드로 변경하시겠습니까?\n모드를 전환하면 안전을 위해 진행 중인 모든 시험의 풀이 내역과 오답노트가 자동으로 초기화됩니다.`)) {
+        if(confirm(`[${modeName}] 모드로 변경하시겠습니까?\n모드 전환 시 헷갈림 방지를 위해 진행 중이던 모든 답안 기록이 초기화됩니다.`)) {
             currentMode = mode;
             document.getElementById("container-wrong").innerHTML = "";
+            wrongQuestionsMap.clear();
             document.querySelectorAll(".quiz-container").forEach(container => {
                 const tabId = container.id.replace('inside-', '');
                 if(tabId && tabId !== 'container-wrong') resetTabUI(tabId);
@@ -545,6 +518,7 @@
                 box.style.display = (mode === 'real') ? "block" : "none";
             });
         } else {
+            // 취소 시 라디오버튼 원복
             document.querySelector(`input[name="exam_mode"][value="${currentMode}"]`).checked = true;
         }
     }
@@ -552,22 +526,23 @@
     function resetCurrentTab() {
         const tabId = activeTabId;
         if(tabId.includes('how_to_use') || tabId.includes('theory') || tabId.includes('oral_exam') || tabId.includes('wrong_notes')) {
-            alert("초기화할 문제지가 열려있지 않습니다. 회차를 먼저 선택해 주세요.");
+            alert("초기화할 문제지가 열려있지 않습니다. 모의고사나 함정 코스를 선택해 주세요.");
             return;
         }
-        if(!confirm("현재 화면의 답안과 채점 내역을 모두 초기화하시겠습니까?")) return;
+        if(!confirm("현재 화면의 답안과 채점 내역을 완전히 초기화하시겠습니까?")) return;
         resetTabUI(tabId);
         alert("현재 회차가 초기화되었습니다.");
     }
 
     function resetAll() {
-        if(!confirm("모든 문제지 풀이 내역과 오답노트가 완전히 초기화됩니다.\n진행하시겠습니까?")) return;
+        if(!confirm("진행하신 모든 문제지의 풀이 내역과 오답노트가 삭제됩니다.\n진행하시겠습니까?")) return;
         document.getElementById("container-wrong").innerHTML = "";
+        wrongQuestionsMap.clear();
         document.querySelectorAll(".quiz-container").forEach(container => {
             const tabId = container.id.replace('inside-', '');
             if(tabId && tabId !== 'container-wrong') resetTabUI(tabId);
         });
-        alert("전체 초기화가 완료되었습니다.");
+        alert("전체 데이터 리셋이 완료되었습니다.");
     }
 
     function resetTabUI(tabId) {
@@ -595,6 +570,9 @@
         document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
         
         let targetTab = document.getElementById(tabId);
+        let alreadyLoaded = false;
+
+        // ★ 탭 상태 영구 유지 캐싱 처리 로직 (재로딩 방지)
         if(!targetTab) {
             targetTab = document.createElement("div");
             targetTab.id = tabId;
@@ -602,12 +580,21 @@
             document.getElementById("main-pan-container").appendChild(targetTab);
         } else {
             targetTab.classList.add("active");
+            if(targetTab.querySelector('.quiz-container')) {
+                alreadyLoaded = true; // DOM 요소가 있다면 이미 로드되어 문제 풀이가 진행중인 상태
+            }
         }
         
         const btn = document.getElementById(`tab-btn-${tabId}`);
         if(btn) btn.classList.add("active");
 
-        targetTab.innerHTML = `<div class="loading-text">🔄 깃허브 원격 서버 연동 중...<br><span style="font-size:0.9rem; font-weight:normal; color:#718096; margin-top:10px; display:block;">[제 ${num}회분] 원문 텍스트 스트리밍 수신 중...</span></div>`;
+        // ★ 이미 렌더링된 시험지는 다시 fetch(로딩)하지 않고 여기서 멈춤으로써, 체크했던 답안을 그대로 유지시킵니다.
+        if (alreadyLoaded) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        targetTab.innerHTML = `<div class="loading-text">🔄 깃허브 원격 서버 연동 중... [제 ${num}회분] 데이터 수신 중...</div>`;
 
         let urlWithBracket = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}%20(${num}).txt`;
         let urlNormal = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}${num}.txt`;
@@ -627,8 +614,8 @@
         .catch(err => {
             targetTab.innerHTML = `
                 <div class="info-box" style="border-left-color:var(--error-color); background-color:#fff5f5;">
-                    <h3 style="color:var(--error-color);">❌ 파일 연동 데이터 매칭 대기</h3>
-                    <p><b>원인:</b> 현재 파일이 깃허브 서버에 아직 없거나, 파일명에 띄어쓰기 유격이 있습니다.</p>
+                    <h4 style="color:var(--error-color); margin:0 0 10px 0;">❌ 파일 연동 대기</h4>
+                    <p><b>원인:</b> 현재 파일이 깃허브 서버에 동기화 반영되는 중이거나 파일명 유격이 있습니다.</p>
                 </div>
             `;
         });
@@ -638,7 +625,7 @@
         container.innerHTML = `
             <div class="info-box" style="${prefix==='trap'?'border-left-color: var(--trap-color); background-color: #fffaf0;':''}">
                 <h3>📝 ${prefix==='trap'?'고난도 함정 코스 제':'통합 기출 모의고사 제'} ${num}회분</h3>
-                <p>현재 모드: <b>${currentMode === 'real' ? '실제시험 (채점 모드)' : '모의시험 (즉시 해설 모드)'}</b></p>
+                <p>현재 모드: <b>${currentMode === 'real' ? '실전시험 (채점 모드)' : '모의시험 (즉시 해설 모드)'}</b></p>
             </div>
             <div class="quiz-container" id="inside-${tabId}"></div>
         `;
@@ -680,20 +667,21 @@
                     let extra = line.replace(/^(?:\[정답\]|정답)\s*[:\.]?\s*[1234①②③④]/, "").trim();
                     if (extra.length > 1) explanationText += extra + " ";
                 } 
-                else if (/^[①1][\)\.]/.test(line) || line.startsWith("①")) {
-                    opts[0] = line.replace(/^[①1][\)\.]?\s*/, "").trim();
+                // ★ "텍스트 매칭 실패" 완벽 해결: 1., 1), ①, [1] 형태 및 "1 빈칸" 형태를 모두 정밀하게 걸러냄
+                else if (/^(①|1\)|1\.|1\s|\[1\])/.test(line)) {
+                    opts[0] = line.replace(/^(①|1\)|1\.|1\s|\[1\])\s*/, "").trim();
                     readingQuestion = false;
-                }
-                else if (/^[②2][\)\.]/.test(line) || line.startsWith("②")) {
-                    opts[1] = line.replace(/^[②2][\)\.]?\s*/, "").trim();
+                } 
+                else if (/^(②|2\)|2\.|2\s|\[2\])/.test(line)) {
+                    opts[1] = line.replace(/^(②|2\)|2\.|2\s|\[2\])\s*/, "").trim();
                     readingQuestion = false;
-                }
-                else if (/^[③3][\)\.]/.test(line) || line.startsWith("③")) {
-                    opts[2] = line.replace(/^[③3][\)\.]?\s*/, "").trim();
+                } 
+                else if (/^(③|3\)|3\.|3\s|\[3\])/.test(line)) {
+                    opts[2] = line.replace(/^(③|3\)|3\.|3\s|\[3\])\s*/, "").trim();
                     readingQuestion = false;
-                }
-                else if (/^[④4][\)\.]/.test(line) || line.startsWith("④")) {
-                    opts[3] = line.replace(/^[④4][\)\.]?\s*/, "").trim();
+                } 
+                else if (/^(④|4\)|4\.|4\s|\[4\])/.test(line)) {
+                    opts[3] = line.replace(/^(④|4\)|4\.|4\s|\[4\])\s*/, "").trim();
                     readingQuestion = false;
                 }
                 else if (line.startsWith("[해설]") || line.startsWith("해설:") || line.startsWith("[설명]")) {
@@ -704,15 +692,12 @@
                     qText += " " + line;
                 }
                 else {
-                    if (opts[0] !== "") { 
-                        explanationText += line + " ";
-                    }
+                    if (opts[0] !== "") explanationText += line + " ";
                 }
             });
 
             if (!qText.trim()) return;
-
-            if (!explanationText.trim()) explanationText = `공식 정답은 ${ans}번입니다. 이론 요약본의 관련 내용을 참고하여 복습해 주세요.`;
+            if (!explanationText.trim()) explanationText = `해당 문제의 공식 정답은 ${ans}번입니다. 이론 요약본의 관련 내용을 참고하여 복습해 주세요.`;
 
             let card = document.createElement("div");
             card.className = "q-card";
@@ -720,18 +705,18 @@
             
             let optionsHtml = "";
             for(let oIdx = 0; oIdx < 4; oIdx++) {
-                let optText = opts[oIdx] ? opts[oIdx] : `(보기 텍스트 매칭 실패 - 깃허브 원본 파일 확인 필요)`;
+                let optText = opts[oIdx] ? opts[oIdx] : `(보기 텍스트 파싱 오류 - 깃허브 원본 파일 포맷 확인 요망)`;
                 optionsHtml += `
                     <label class="option-item">
                         <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onclick="handleAnswerSelect('${tabId}','${index}',${oIdx+1},${ans})">
-                        ${oIdx+1}. ${optText}
+                        &nbsp;${oIdx+1}. ${optText}
                     </label>
                 `;
             }
 
             card.innerHTML = `
                 <div class="sub-subject">문항 번호: ${index}번</div>
-                <div class="q-title">Q. ${qText}</div>
+                <div class="q-title">Q${index}. ${qText}</div>
                 <div class="options-list">${optionsHtml}</div>
                 <div class="feedback" id="feed_${tabId}_${index}"></div>
                 <div class="explanation" id="expl_${tabId}_${index}">💡 <b>심층 해설:</b> ${explanationText}</div>
@@ -742,6 +727,7 @@
             index++;
         });
 
+        // 실전 채점 모드용 버튼 (평소엔 숨김)
         let submitBox = document.createElement("div");
         submitBox.id = `submit-box-${tabId}`;
         submitBox.style.display = (currentMode === 'real') ? 'block' : 'none';
@@ -763,10 +749,10 @@
         const qData = wrongQuestionsMap.get(key);
 
         if(selectNum === correctNum) {
-            feed.innerHTML = "🎉 정답입니다! 아주 훌륭합니다."; 
+            feed.innerHTML = "🎉 정답입니다! 정확한 원리 관통 완료."; 
             feed.className = "feedback correct";
         } else {
-            feed.innerHTML = `❌ 아쉽습니다. 실제 정답은 ${correctNum}번입니다. 오답노트에 자동 등록되었습니다.`; 
+            feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`; 
             feed.className = "feedback wrong";
             renderWrongNotesContainer(key, qData);
         }
@@ -785,7 +771,7 @@
         });
 
         if(unansCount > 0) {
-            if(!confirm(`아직 풀지 않은 문제가 ${unansCount}개 있습니다.\n이대로 제출하시겠습니까? (미입력 문항은 오답 처리됩니다)`)) return;
+            if(!confirm(`아직 풀지 않은 문제가 ${unansCount}개 있습니다.\n이대로 제출하시겠습니까? (미입력 문항은 모두 오답 처리됩니다)`)) return;
         }
 
         cards.forEach(card => {
@@ -799,7 +785,7 @@
             const expl = document.getElementById(`expl_${tabId}_${idx}`);
 
             if (!selected) {
-                feed.innerHTML = `❌ 미입력. 실제 정답은 ${correctNum}번입니다. 오답노트에 자동 등록되었습니다.`;
+                feed.innerHTML = `❌ 미입력. 실제 정답은 ${correctNum}번입니다.`;
                 feed.className = "feedback wrong";
                 renderWrongNotesContainer(key, qData);
             } else {
@@ -809,7 +795,7 @@
                     feed.innerHTML = "🎉 정답입니다!";
                     feed.className = "feedback correct";
                 } else {
-                    feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다. 오답노트에 자동 등록되었습니다.`;
+                    feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`;
                     feed.className = "feedback wrong";
                     renderWrongNotesContainer(key, qData);
                 }
@@ -828,7 +814,7 @@
         
         resultDiv.innerHTML = `
             <div style="padding: 25px; background: #f7fafc; border: 3px solid ${isPass ? 'var(--success-color)' : 'var(--error-color)'}; border-radius: 10px; margin-top: 20px;">
-                <h3 style="margin:0 0 15px 0; color: #2d3748;">📊 실제시험 채점 결과</h3>
+                <h3 style="margin:0 0 15px 0; color: #2d3748;">📊 실전시험 채점 결과</h3>
                 <p style="font-size:1.15rem; margin:8px 0;">총 ${total}문제 중 <b>${correctCount}</b>문제 정답</p>
                 <p style="font-size:1.4rem; margin:8px 0;">최종 점수: <b style="font-size: 1.6rem;">${score}점</b></p>
                 <p style="font-size:1.5rem; margin:15px 0 0 0; font-weight:bold;">${passText}</p>
@@ -847,24 +833,23 @@
         let wrongCard = document.createElement("div");
         wrongCard.className = "q-card";
         wrongCard.id = `wrong_card_${key}`;
-        wrongCard.style.borderLeft = "5px solid var(--error-color)";
+        wrongCard.style.borderLeft = "4px solid var(--error-color)";
 
         let optionsHtml = "";
         for(let oIdx = 0; oIdx < 4; oIdx++) {
             let optText = data.opts[oIdx] ? data.opts[oIdx] : `출제 기준 가이드 문항선 보기 ${oIdx+1}`;
-            let isAnswer = (oIdx+1 === data.ans);
             optionsHtml += `
-                <label class="option-item" style="cursor:default; ${isAnswer ? 'background-color:#f0fff4; border-color:#9ae6b4;' : ''}">
-                    ${oIdx+1}. ${optText} ${ isAnswer ? '<b style="color:var(--success-color); margin-left:auto;">👈 (정답)</b>' : '' }
+                <label class="option-item" style="cursor:default;">
+                    &nbsp;${oIdx+1}. ${optText} ${ (oIdx+1 === data.ans) ? '<b style="color:var(--success-color); margin-left:10px;">(정답)</b>' : '' }
                 </label>
             `;
         }
 
         wrongCard.innerHTML = `
-            <div class="sub-subject" style="color:var(--error-color); background:#fff5f5;">출처: ${data.prefix==='trap'?'함정':'기출 모의고사'} ${data.num}회 - ${data.index}번 문항</div>
+            <div class="sub-subject" style="color:var(--error-color);">출처: ${data.prefix==='trap'?'함정':'일반'} ${data.num}회 - ${data.index}번 문항</div>
             <div class="q-title">Q. ${data.qText}</div>
             <div class="options-list">${optionsHtml}</div>
-            <div class="explanation" style="display:block; border-left-color:var(--error-color);">💡 <b>복습 해설:</b> ${data.explanationText}</div>
+            <div class="explanation" style="display:block; background-color:#fff5f5;">💡 <b>복습 해설:</b> ${data.explanationText}</div>
         `;
         wrongBox.appendChild(wrongCard);
     }
@@ -879,7 +864,6 @@
         
         const btn = document.getElementById(`tab-btn-${tabId}`);
         if(btn) btn.classList.add("active");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     window.onload = function() { initApp(); }
