@@ -2,62 +2,992 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>드론 자격시험 마스터</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>드론 조종자 자격시험 25회 + 함정 10회 통합 스마트 마스터피스 시스템</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
-        .btn { padding: 10px 20px; cursor: pointer; background: #1a365d; color: white; border: none; border-radius: 5px; margin: 5px; }
+        :root {
+            --primary-color: #1a365d; --primary-hover: #2a4365; --trap-color: #d69e2e;
+            --success-color: #38a169; --error-color: #dc2626; --bg-color: #f7fafc;
+            --card-bg: #ffffff; --text-color: #2d3748; --border-color: #e2e8f0;
+        }
+        body { font-family: 'Pretendard', -apple-system, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; line-height: 1.6; }
+        header { background-color: var(--primary-color); color: white; padding: 25px 20px; text-align: center; }
+        header h1 { margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; }
+        header p { margin: 5px 0 0 0; font-size: 0.95rem; color: #cbd5e0; }
+        .section-title { width: 100%; text-align: center; font-size: 0.85rem; font-weight: bold; color: #4a5568; margin-top: 6px; text-transform: uppercase; letter-spacing: 1.5px; }
+        
+        /* PC 메뉴 고정 / 모바일은 공간 확보를 위해 상대 배치 */
+        .nav-container { background-color: #edf2f7; padding: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .nav-section-wrapper { margin-bottom: 4px; }
+        .nav-scroll-row { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+        
+        /* 컨트롤 패널 (모드 선택 및 리셋) */
+        .global-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .mode-selector label { margin-right: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; }
+        .mode-selector input[type="radio"] { transform: scale(1.3); margin-right: 8px; cursor: pointer; }
+        .action-buttons { display: flex; gap: 8px; }
+
+        .btn { padding: 6px 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.8rem; white-space: nowrap; transition: 0.2s; }
+        .btn-menu { background-color: white; color: var(--text-color); border: 1px solid var(--border-color); }
+        .btn-menu.active { background-color: var(--primary-color); color: white; }
+        .btn-trap { background-color: white; color: #b7791f; border: 1px solid var(--trap-color); }
+        .btn-trap.active { background-color: var(--trap-color); color: white; }
+        .btn-wrong { background-color: white; color: var(--error-color); border: 1px solid var(--error-color); padding: 6px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.8rem; }
+        .btn-wrong.active { background-color: var(--error-color); color: white; }
+        
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 20px; padding-bottom: 140px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .info-box { background-color: #ebf8ff; border-left: 4px solid var(--primary-color); padding: 15px; border-radius: 0 5px 5px 0; margin-bottom: 25px; }
+        .q-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .sub-subject { font-size: 0.85rem; color: #718096; margin-bottom: 5px; font-weight: bold; }
+        .q-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; line-height: 1.5; }
+        .options-list { margin-bottom: 15px; }
+        .option-item { margin-bottom: 10px; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 5px; cursor: pointer; display: flex; align-items: center; transition: background 0.2s; }
+        .option-item:hover { background-color: #f7fafc; }
+        .option-item input { margin-right: 12px; transform: scale(1.2); flex-shrink: 0; cursor: pointer; }
+        
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 5px; display: none; font-weight: bold; }
+        .feedback.correct { background-color: #c6f6d5; color: #22543d; display: block; }
+        .feedback.wrong { background-color: #fed7d7; color: #742a2a; display: block; }
+        .explanation { margin-top: 12px; padding: 15px; background-color: #f7fafc; border-left: 3px solid #cbd5e0; border-top: 1px dashed var(--border-color); display: none; font-size: 0.95rem; color: #4a5568; line-height: 1.6; }
+        
+        .theory-section { background-color: white; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 25px; }
+        .theory-section h3 { margin-top: 30px; margin-bottom: 15px; color: var(--primary-color); border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+        .theory-section ul { padding-left: 20px; margin-bottom: 20px; }
+        .theory-section ul li { line-height: 1.8; margin-bottom: 16px; text-align: justify; }
+        .theory-section ul li b { color: #111827; }
+        
+        .oral-q { font-weight: bold; color: #1a365d; margin-top: 20px; font-size: 1.05rem; }
+        .oral-a { color: #2d3748; padding-left: 15px; border-left: 3px solid #cbd5e0; margin: 8px 0 20px 0; background-color: #f8fafc; padding: 10px 15px; border-radius: 0 6px 6px 0; }
+        .loading-text { text-align: center; padding: 30px; font-weight: bold; color: var(--trap-color); font-size: 1.2rem; }
+        
+        .styled-table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .styled-table th { background-color: var(--primary-color); color: white; padding: 12px; text-align: left; font-weight: bold; }
+        .styled-table td { padding: 12px; border: 1px solid var(--border-color); }
+        .styled-table tr:nth-child(even) { background-color: #f8fafc; }
+        
+        footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; font-size: 0.85rem; color: #cbd5e0; background-color: var(--primary-color); position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 1020; }
+        
+        /* 플로팅 TOP 버튼 */
+        #btn-back-to-top { display: none; position: fixed; bottom: 25px; right: 25px; background-color: var(--primary-hover); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 0.85rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; line-height: 1.2; opacity: 0.9; }
+        #btn-back-to-top:hover { background-color: var(--primary-color); opacity: 1; }
+
+        @media (max-width: 768px) {
+            header { position: relative; padding: 15px 10px; }
+            header h1 { font-size: 1.2rem; }
+            /* 모바일 환경: 메뉴 고정 해제 (화면 가림 100% 해소) */
+            .nav-container { position: relative; padding: 5px 8px; }
+            .nav-scroll-row { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+            .nav-scroll-row::-webkit-scrollbar { height: 5px; }
+            .nav-scroll-row::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
+            .global-controls { flex-direction: column; gap: 10px; align-items: stretch; }
+            .action-buttons { justify-content: space-between; }
+            .container { margin-top: 15px; padding-bottom: 150px; }
+            .q-card { padding: 20px 15px; }
+            footer { flex-direction: column; gap: 5px; text-align: center; padding: 10px; position: static; }
+            #btn-back-to-top { bottom: 20px; right: 15px; width: 50px; height: 50px; font-size: 0.75rem; }
+        }
     </style>
 </head>
 <body>
-    <h1>드론 시험 통합 시스템</h1>
-    <div id="nav">
-        <button class="btn" onclick="exportData()">📤 데이터 내보내기</button>
-        <button class="btn" onclick="importData()">📥 데이터 불러오기</button>
-        <button class="btn" onclick="clearData()" style="background:#dc2626;">❌ 초기화</button>
+
+<div class="sync-nav" style="text-align: center; padding: 10px; background: #e2e8f0; border-bottom: 1px solid #cbd5e0;">
+    <button class="sync-btn" onclick="exportData()" style="padding: 6px 12px; cursor: pointer; border-radius: 6px; border: 1px solid #cbd5e0; background: white; font-weight: bold; font-size: 0.8rem;">📤 데이터 내보내기</button>
+    <button class="sync-btn" onclick="importData()" style="padding: 6px 12px; cursor: pointer; border-radius: 6px; border: 1px solid #cbd5e0; background: white; font-weight: bold; font-size: 0.8rem;">📥 데이터 불러오기</button>
+    <button class="sync-btn" onclick="if(confirm('모든 기록을 초기화하시겠습니까?')) {localStorage.clear(); location.reload();}" style="padding: 6px 12px; cursor: pointer; border-radius: 6px; border: 1px solid #dc2626; background: #fee2e2; color: #dc2626; font-weight: bold; font-size: 0.8rem;">❌ 전체 초기화</button>
+</div>
+
+<header>
+    <h1>🚁 신한글로벌인재교육원 드론과정 동기분들의 합격을 기원합니다!</h1>
+    <p>모의고사 25회분 + 고난도 함정 10회분 실시간 서버 원격 동기화 CBT 시스템</p>
+</header>
+
+<div class="nav-container" id="tabs-nav-bar"></div>
+
+<div class="container" id="main-pan-container">
+    <div id="wrong_notes" class="tab-content">
+        <div class="info-box" style="border-left-color: var(--error-color);">
+            <h3>🔄 전 범위 통합 실시간 크로스 오답노트</h3>
+            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다. (새로고침해도 보존됩니다!)</p>
+        </div>
+        <div class="quiz-container" id="container-wrong"></div>
     </div>
-    <div id="content"></div>
 
-    <script>
-        // 1. 데이터 내보내기 (안전한 Base64 압축)
-        function exportData() {
-            try {
-                const data = {
-                    answers: localStorage.getItem('drone_saved_answers') || '{}',
-                    wrong: localStorage.getItem('drone_wrong_notes') || '{}'
-                };
-                const code = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-                prompt("이 코드를 복사하세요:", code);
-            } catch(e) { alert("데이터 추출 실패"); }
-        }
+    <div id="how_to_use" class="tab-content active">
+        <div class="theory-section">
+            <h2>💡 드론 스마트 모의고사 시스템 전체 사용 매뉴얼</h2>
+            <p>상단 메뉴에서 원하는 회차 버튼을 누르면 <b>깃허브 원격 서버에서 해당 회차의 문제 텍스트 원본을 토시 하나 틀리지 않고 실시간 스트리밍</b>하여 화면에 매칭합니다.</p>
+            <h3>✅ 시스템 최적화 완료 안내</h3>
+            <p style="color:var(--success-color); font-weight:bold;">1번 선지 증발 현상(파싱 오류) 완벽 패치 및 웹페이지를 나갔다 들어와도 풀었던 답안 기록이 <b>리셋 전까지 영구 유지</b>되도록 로컬 저장소 캐시 시스템이 도입되었습니다!</p>
+        </div>
+    </div>
 
-        // 2. 데이터 불러오기 (오류 방지 로직 강화)
-        function importData() {
-            const code = prompt("코드를 입력하세요:");
-            if(!code) return;
-            try {
-                const decoded = JSON.parse(decodeURIComponent(escape(atob(code))));
-                localStorage.setItem('drone_saved_answers', decoded.answers);
-                localStorage.setItem('drone_wrong_notes', decoded.wrong);
-                alert("연동 완료! 페이지를 새로고침합니다.");
-                location.reload();
-            } catch(e) { 
-                alert("코드 형식이 잘못되었습니다. 올바른 코드를 입력해주세요."); 
-            }
-        }
+    <div id="oral_exam" class="tab-content">
+        <div class="theory-section">
+            <h2>🗣️ 초경량비행장치 무인멀티콥터 1종 구술평가 핵심 총정리</h2>
+            <div class="info-box" style="border-left-color: var(--trap-color); background-color: #fffaf0;">
+                <p>📌 대괄호 안의 숫자는 제공해 드린 정보가 어떤 참고자료(문서)에서 발췌되었는지 알려주는 **'출처 표시(인용 부호)'**입니다.</p>
+                <p><b>교육원 기준 기체 모델명:</b> EFT 616S-ED (1종 기체) [구술평가-4]</p>
+            </div>
 
-        // 3. 완전히 초기화 (화면이 안 뜰 때 사용)
-        function clearData() {
-            if(confirm("모든 데이터를 삭제하고 초기화할까요?")) {
-                localStorage.clear();
-                location.reload();
-            }
-        }
+            <h3>📊 교육용 기체(EFT 616S-ED) 제원 총정리 [구술평가-6]</h3>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>상세 제원 내용</th>
+                        <th>항목</th>
+                        <th>상세 제원 내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><b>모델명 / FC</b></td><td>EFT 616S-ED / K3A Pro</td><td><b>형식</b></td><td>헥사콥터 (Hexacopter)</td></tr>
+                    <tr><td><b>전장 / 전폭 / 전고</b></td><td>1,723mm / 1,723mm / 560mm</td><td><b>배터리 포함 중량</b></td><td>19 KG</td></tr>
+                    <tr><td><b>최대이륙중량</b></td><td>26 KG</td><td><b>최대 / 유효 탑재량</b></td><td>7 KG / 7 KG</td></tr>
+                    <tr><td><b>프로펠러 규격</b></td><td>30 inch (고정피치 1피치: 11 inch)</td><td><b>모터 규격</b></td><td>지름 81mm, 높이 20mm, 100KV</td></tr>
+                    <tr><td><b>모터 형식</b></td><td>브러시리스 모터 (BLDC Motor)</td><td><b>변속기(ESC) 용량</b></td><td>하비 100A</td></tr>
+                    <tr><td><b>배터리 전압 / 타입</b></td><td>44.4V (22.2V x 2) / LiPo (리튬폴리머)</td><td><b>배터리 셀 / 암페어</b></td><td>12S (6S x 2ea 직렬연결) / 16000mAh x 2ea</td></tr>
+                    <tr><td><b>조종기 모델 / 주파수</b></td><td>VD32 (SIYI VD32) / 2.4 - 2.483GHz</td><td><b>비행 성능</b></td><td>순항 3~5m/s, 최대 7m/s, 비행시간 20분</td></tr>
+                </tbody>
+            </table>
 
-        // 페이지 로드 시 안전 확인
-        window.onload = function() {
-            // 여기에 기존 UI 생성 로직을 넣으시면 됩니다.
-            document.getElementById('content').innerHTML = "시스템이 정상 작동 중입니다.";
+            <div class="info-box" style="border-left-color: var(--success-color);">
+                <h4>💡 구술시험 필수 암기 체크리스트 [구술평가-14, 84]</h4>
+                <p>1. FC의 역할 및 기능 | 2. 프로펠러 규격 해석 | 3. 자체이륙중량 vs 최대이륙중량 | 4. 모터 KV의 의미 | 5. 배터리 타입 및 관리 (리튬폴리머, 전압, 폐기) | 6. IMU 센서 구성 | 7. 안전성인증검사 규정 | 8. 비행승인 절차 | 9. 비행 원리</p>
+            </div>
+
+            <h3>📌 [Part 1] 기체 제원 및 필수 기본 질문 [구술평가-15~35]</h3>
+            
+            <div class="oral-q">Q1. 취득하고자 하는 자격증의 명칭은 무엇입니까?</div>
+            <div class="oral-a">초경량비행장치 무인멀티콥터 1종 조종자 증명(자격증)입니다.</div>
+
+            <div class="oral-q">Q2. 초경량비행장치란 무엇입니까?</div>
+            <div class="oral-a">항공기와 경량항공기 외에 공기의 반작용으로 뜰 수 있는 장치로서, 국토교통부령으로 정하는 기준에 해당하는 장치(무인동력비행장치 등)를 말합니다.</div>
+
+            <div class="oral-q">Q3. 1종 조종자 자격증의 무게 기준은 어떻게 되나요?</div>
+            <div class="oral-a">최대이륙중량 25kg 초과, 자체중량 150kg 이하입니다.</div>
+
+            <div class="oral-q">Q4. FC가 무엇이며, 어떤 역할을 하는지 설명해 보세요.</div>
+            <div class="oral-a">FC는 <b>Flight Controller</b>의 줄임말로, 비행제어장치(드론의 '뇌')입니다. GPS, 자이로, 가속도 센서 등으로부터 값을 받아 연산한 후 전자변속기(ESC)에 속도제어 신호를 전달하는 역할을 합니다.</div>
+
+            <div class="oral-q">Q5. 사용 중인 기체의 프로펠러 규격을 말해보세요.</div>
+            <div class="oral-a"><b>3011 규격</b>을 사용합니다. 앞의 '30'은 30인치(프로펠러의 총 길이)를 의미하며, 뒤의 '11'은 피치(프로펠러가 1회전 할 때 전진하는 물리적 이동 거리, 단위: 인치)를 뜻합니다.</div>
+
+            <div class="oral-q">Q6. 자체이륙중량과 최대이륙중량의 차이와 사용 중인 기체의 무게를 각각 말해보세요.</div>
+            <div class="oral-a">자체이륙중량은 배터리만 포함한 기체 자체의 무게로 저희 기체는 <b>19kg</b>이며, 최대이륙중량은 페이로드(탑재물)를 모두 포함하여 이륙할 수 있는 한계 한도 무게로 <b>26kg</b>입니다.</div>
+
+            <div class="oral-q">Q7. KV가 무엇을 의미하는지 설명하고, 사용 중인 기체가 몇 KV인지 말해보세요.</div>
+            <div class="oral-a">KV는 <b>1V 전압을 인가했을 때 모터가 1분 동안 회전하는 무부하 회전수(RPM)</b>입니다. 사용 중인 기체의 모터는 <b>100KV</b>입니다.</div>
+
+            <div class="oral-q">Q8. 사용하시는 배터리의 타입이 어떻게 되나요?</div>
+            <div class="oral-a"><b>리튬폴리머 (Li-Po)</b> 배터리입니다.</div>
+
+            <h3>📌 [Part 2] 주요 장치 센서 및 비행 원리 [구술평가-37~41, 74~82]</h3>
+
+            <div class="oral-q">Q9. IMU(관성측정장치)의 개념과 구성 센서에 대해 설명해보세요.</div>
+            <div class="oral-a">IMU는 관성측정장치이며 <b>가속도 센서, 자이로(각속도) 센서, 지자계(나침반) 센서</b>로 이루어져 있습니다.<br>
+            * <b>가속도 센서:</b> 중력에 대한 상대적인 위치와 선형 움직임을 측정하여 자이로 센서의 오차를 보정합니다.<br>
+            * <b>자이로 센서:</b> 세 축 방향의 각속도를 측정하여 기체의 수평을 유지하고 자세를 복원해 줍니다.<br>
+            * <b>지자계 센서:</b> 지구 자북을 측정하여 드론의 방위각 및 진행 방향 정보를 산출합니다.</div>
+
+            <div class="oral-q">Q10. 기체가 왼쪽으로 회전(Yawing)할 때 각 모터의 회전속도 변화를 설명해보세요.</div>
+            <div class="oral-a">기체의 반작용 토크 원리에 의하여, <b>오른쪽(시계 방향)으로 회전하는 모터들의 속도가 빨라지고</b>, 왼쪽(반시계 방향)으로 회전하는 모터들의 속도가 상대적으로 천천히 돕니다.</div>
+
+            <div class="oral-q">Q11. 운용하는 기체의 형식(구조)에 대해 말해주세요.</div>
+            <div class="oral-a">모터와 프로펠러가 6개인 <b>헥사콥터(Hexacopter)</b> 형식입니다. (4개인 경우는 쿼드콥터, 8개인 경우는 옥토콥터입니다.)</div>
+
+            <h3>📌 [Part 3] 행정 규정, 공역 및 비상 절차 [구술평가-42~73, 145~211]</h3>
+
+            <div class="oral-q">Q12. 안전성인증검사를 관할하는 기관과 검사의 종류, 대상 기준을 말씀해보세요.</div>
+            <div class="oral-a">관할 기관은 <b>항공안전기술원</b>입니다. 검사의 종류는 <b>초도검사, 정기검사, 수시검사, 재검사</b>가 있으며, 대상 기준은 최대이륙중량 <b>25kg 초과 기체</b>이며 유효기간은 비사업용 기준 2년(사업용 1년)입니다.</div>
+
+            <div class="oral-q">Q13. 멀티콥터 장치신고 기준 무게는 어떻게 되나요?</div>
+            <div class="oral-a">비사업용(취미용)인 경우 최대이륙중량 <b>2KG 초과</b> 기체이며, <b>사업용(영리 목적)일 경우에는 2KG 이하 기체도 의무적으로 신고</b>해야 합니다.</div>
+
+            <div class="oral-q">Q14. 비행승인 및 촬영승인을 관할하는 기관과 신청 방법은 무엇입니까?</div>
+            <div class="oral-a">비행승인 권한은 관할 <b>지방항공청</b>에 있습니다. 신청은 통합 행정 시스템인 <b>'드론원스탑 민원 서비스'</b>를 통하여 비행승인 요청서 및 촬영허가서를 통합 작성하여 신청합니다.</div>
+
+            <div class="oral-q">Q15. 사용하고 있는 리튬폴리머 배터리의 1셀당 정격전압과 완충전압은 얼마입니까?</div>
+            <div class="oral-a">1셀당 <b>정격(공칭) 전압은 3.7V</b>이며, <b>완전 충전(완충) 전압은 4.2V</b>입니다.</div>
+
+            <div class="oral-q">Q16. 배터리 폐기 절차에 대해서 말해보세요.</div>
+            <div class="oral-a">과거 교재에는 소금물 방전이 수록되었으나 최신 가이드라인에서는 유독가스 및 부식 쇼트 위험으로 금지(지양)하므로, <b>전기적 방전기나 기체 소모를 통해 완전히 방전(0V)시킨 후</b> 지자체 규정 폐배터리 수거함에 안전하게 폐기합니다.</div>
+
+            <div class="oral-q">Q17. 대한민국 대표 비행금지구역(P구역) 고유 번호와 범위를 말해보세요.</div>
+            <div class="oral-a">* <b>P-73:</b> 용산 대통령 집무실 및 관저 중심 반경 3.7km 공역<br>
+            * <b>P-518:</b> 휴전선 인근 및 경기북부, 강원북부 비행금지선<br>
+            * <b>원전 구역(18.6km):</b> P-61(고리), P-62(월성), P-63(한빛), P-64(한울), P-65(대전 원자력연구소)</div>
+
+            <div class="oral-q">Q18. 관제권이 무엇이며 반경 범위가 어떻게 되나요?</div>
+            <div class="oral-a">비행장 또는 공항과 그 주변의 교통안전을 위한 공역으로, 공항 참조점(ARP) 관제탑 중심으로 <b>반경 9.3km (5해리, 5NM) 이내</b>의 공역을 뜻합니다.</div>
+
+            <div class="oral-q">Q19. NOTAM(항공고시보)이란 무엇이며 최대 유효기간은 어떻게 되나요?</div>
+            <div class="oral-a">항공종사자들이 적시에 반드시 인지해야 하는 항공시설, 업무, 절차의 신설 및 위험 상태에 대해 긴급 전파하는 공고문이며, <b>최대 유효기간은 3개월</b>입니다.</div>
+
+            <div class="oral-q">Q20. 드론 운용 중 인명사고 발생 시 조치 및 대처 요령은 무엇입니까?</div>
+            <div class="oral-a">즉시 구호 조치 후 <b>119에 신고</b>하고, 관할 <b>지방항공청</b> 및 한국교통안전공단의 <b>초경량비행장치 사고조사업무팀</b>에 지체 없이 보고 및 신고를 진행합니다.</div>
+
+            <div class="oral-q">Q21. 비행 중 비상상황(GPS 오작동/통제불능 Fly-away) 발생 시 조치사항은 무엇입니까?</div>
+            <div class="oral-a"><b>1단계(최우선):</b> 주변 사람들에게 "위험합니다! 대피하세요!"라고 큰 소리로 복창하여 상황을 전파합니다.<br>
+            <b>2단계:</b> 조종기의 비행모드를 위성 신호 간섭을 차단하는 수동 자세제어 모드인 <b>ATTI 모드(에티 모드)로 즉시 전환</b>하여 조종사의 순수 키 조작으로 안전한 공터에 수동 비상 착륙시킵니다.</div>
+        </div>
+    </div>
+
+    <div id="theory" class="tab-content">
+        <div class="theory-section">
+            <h2>📖 초경량비행장치 무인멀티콥터 1종 필기 단권화 요약집</h2>
+            <p>※ 본 요약본은 학과 시험에 95% 이상 단골 출제되는 핵심 이론 및 2026년 최신 개정 행정 제도를 반영한 올인원 마스터 가이드입니다.</p>
+            
+            <hr>
+
+            <h3>1. 무인멀티콥터 운용 및 시스템 구조 (과목 1)</h3>
+            <ul>
+                <li><b>공식 용어 표준 규정 [이론1-214]:</b> 국제민간항공기구(ICAO) 등 항공 분야 공식 인정 용어는 <b>RPA</b> 또는 <b>RPAS (Remote Piloted Aircraft System)</b>입니다. 일상적인 UA, UAV는 공식 시험 기준 명칭이 아닙니다. RPAS는 비행체(RPA)와 지상통제시스템(RPS)을 모두 결합한 상위 시스템 개념입니다.</li>
+                <li><b>프로펠러 개수 명칭 [이론1-218]:</b> 2개(바이), 3개(트라이), 4개(쿼드), 5개(펜타), 6개(헥사), 8개(옥토), 12개(도데카). <br><b>*모터 고장 시 특성:</b> 쿼드콥터는 1개만 고장 나도 즉시 추락하나, 헥사콥터는 고장 난 방향으로 회전이 발생하나 제어가 가능하며, 옥토/도데카콥터는 일부 모터가 고장 나도 안정적인 호버링(제자리 비행)이 가능합니다.</li>
+                <li><b>프로펠러 설계 및 표기 [이론1-222, 223]:</b> 가볍고 강도가 높은 카본, 플라스틱, 나무 등을 사용하며, <b>금속 재질(철, 알루미늄)은 파손 시 극도로 위험하므로 절대로 사용하지 않습니다.</b> 프로펠러 표기 네 자리 숫자(예: 2388, 3011) 중 <b>앞 두 자리는 직경(인치), 뒤 두 자리는 피치(인치)</b>를 의미합니다.</li>
+                <li><b>비틀림 설계 메커니즘 [이론1-224]:</b> 프로펠러 회전 시 중심부(허브)는 느리고 바깥쪽 끝단(Tip)은 반경이 커서 압도적으로 빠릅니다. 이를 보완하여 날개 전 구간에 일정한 받음각을 형성하고 양력 효율을 최대로 끌어올리기 위해, <b>날개 안쪽(허브 쪽)의 장착각을 크고 바깥쪽 끝단의 장착각을 작게 꼬이도록 점진 설계</b>합니다.</li>
+                <li><b>모터 및 ESC 구동계 [이론1-227~233]:</b> 
+                    <br>- <b>브러시리스 모터(BLDC):</b> 브러시가 없어 소음이 적고 효율이 높으며 반영구적입니다. 대형 드론에 필수적입니다.
+                    <br>- <b>ESC (전자변속기):</b> FC의 명령을 받아 모터의 회전속도(RPM)를 제어하며, 배터리의 <b>직류(DC) 전원을 교류(AC) 전원으로 변환</b>해 주는 핵심 장치입니다.
+                    <br>- <b>KV 값:</b> 1V의 전압 인가 시 모터가 1분간 회전하는 수(RPM)를 뜻합니다.
+                </li>
+                <li><b>FC(비행제어장치) 내부 센서 역할 [이론1-234~247]:</b> 드론의 '뇌'이자 CPU에 해당합니다. <b>센서 신호 전송 빈도 순서는 자이로 &gt; 가속도 &gt; 지자기 &gt; GPS &gt; 고도 센서</b> 순으로 잦습니다.
+                    <br>- <b>자이로 센서:</b> 기체의 각속도(회전 변화율)를 측정하여 자세 제어 및 수평 복원을 수행합니다.
+                    <br>- <b>가속도 센서:</b> 기체의 선형 가속도 및 속도 변화를 측정하여 외풍 보정을 지원합니다.
+                    <br>- <b>지자기 센서(나침반):</b> 지구 자기장을 감지하여 방위각(북쪽 기준)을 계산합니다. 고압선 주변에서 오작동률이 높습니다.
+                    <br>- <b>기압 센서:</b> 대기압 변화를 감지하여 기체의 상대 고도를 유지(알티 홀드)합니다.
+                    <br>- <b>GPS 센서:</b> 위성 신호를 받아 위치(위도·경도)를 제어하며 자동 복귀(RTH)의 기반이 됩니다.
+                </li>
+                <li><b>⚠️ 기체 점검 페이크 오답 선지 [이론1-248]:</b> 멀티콥터 구성 요소를 묻는 시험에서 메인 로터/테일 로터(유인 헬기 부품), 리듀서(감속기), 라디에이터, 변속 기어 등은 단골 오답 선지입니다. 멀티콥터는 감속기 없이 모터와 프롬이 직접 연결되며 윤활유를 주입하지 않습니다.</li>
+            </ul>
+
+            <hr>
+
+            <h3>2. 항공 역학 및 비행 원리 (과목 2)</h3>
+            <ul>
+                <li><b>대기 중 4대 힘과 평형 [이론1-251~256]:</b> 중력(아래), 양력(위), 추력(전진), 항력(후방)이 작용합니다. 가속도 없이 일정하게 비행하는 <b>'등속 수평 비행' 상태를 유지하기 위해서는 양력 = 중력, 추력 = 항력의 완벽한 힘의 평형</b>을 이루어야 합니다.</li>
+                <li><b>베르누이 정리 및 압력 관계 [이론1-257~264]:</b> 유체(공기)의 속도와 압력은 반비례합니다. 에어포일 상부는 볼록하여 공기가 빠르게 흐르므로 압력이 감소하고, 하부는 압력이 증가하여 양력이 발생합니다.
+                    <br>- <b>압력 공식: $$전압(Total) = 정압(Static) + 동압(Dynamic)$$</b> 전압의 총량은 항상 일정하므로 속도/밀도 증가로 동압이 커지면 정압은 무조건 감소합니다.
+                    <br>- <b>계기별 이용 압력:</b> 대기 속도계는 <b>동압</b>을 이용하고, 고도계 및 승강계는 <b>정압(대기압)</b>을 이용합니다. (선회경사계는 압력에 영향을 받지 않는 독립 계기입니다.)
+                </li>
+                <li><b>항력의 분류 및 속도 변화 [이론1-266~269]:</b> 양력 발생 시 유도되는 '유도 항력'과 형태/마찰에 의한 '유해 항력(기생 항력)'으로 분류됩니다. 유해 항력에는 압력·마찰·조파·형상 항력이 포함되며, 날개 끝 와류로 인한 유도 항력은 포함되지 않습니다. <b>비행 속도를 2배 올리면 동압, 양력, 항력은 모두 속도의 제곱에 비례하므로 4배(400%) 증가합니다.</b> 또한 비행기의 안정성과 조종성은 철저히 반비례 관계입니다.</li>
+                <li><b>임계 받음각과 실속(Stall) [이론1-272~275]:</b> 받음각(AOA)은 상대풍과 날개 시위선(Chord Line)이 이루는 가변적인 각도입니다. 받음각이 한계(임계 받음각)를 넘어서는 순간 공기가 날개 표면에서 박리(분리)되어 와류가 발생하며, <b>양력이 급격히 감소하고 항력이 폭발적으로 증가하여 추락하는 실속(Stall) 현상</b>이 발생합니다. (기체 중심선과 시위선이 이루는 각도는 '붙임각/장착각'이라 하며 고정값입니다.)</li>
+                <li><b>특수 역학 현상 [이론1-276~282]:</b>
+                    <br>- <b>지면 효과 (Ground Effect):</b> 지면과 매우 가까운 고도(로터 직경 이하) 비행 시 하강 기류의 쿠션 작용으로 유도 항력이 감소하고 양력이 급증하는 현상입니다.
+                    <br>- <b>나선형 후류 (Spiraling Slipstream):</b> 프로펠러의 시계 방향 회전 와류가 동체를 타고 흐르다 꼬리 수직안정판 좌측을 타격하여, 꼬리는 우측으로 밀리고 <b>기수(머리)가 좌측으로 편향</b>되는 현상입니다.
+                    <br>- <b>벡터 vs 스칼라:</b> 크기와 방향성을 동시에 지닌 속도, 가속도, 양력, 충격량은 <b>벡터량</b>이며, 방향성 없이 크기만 존재하는 질량은 <b>스칼라량</b>입니다.
+                </li>
+                <li><b>기준 축에 따른 운동 모멘트 및 암기 팁 [이론1-283, 284]:</b>
+                    <br>1. <b>X축 (세로축):</b> 롤링 (Rolling, 옆놀이) $\rightarrow$ 에일러론 제어 (좌우 수평 이동) <b style="color:var(--primary-color);">[암기: 세로산 롤렉스]</b>
+                    <br>2. <b>Y축 (가로축):</b> 피칭 (Pitching, 키놀이) $\rightarrow$ 엘리베이터 제어 (전진 및 후진) <b style="color:var(--primary-color);">[암기: 피칭 가와이]</b>
+                    <br>3. <b>Z축 (수직축):</b> 요잉 (Yawing, 빗놀이) $\rightarrow$ 러더 제어 (제자리 좌우 회전) <b style="color:var(--primary-color);">[암기: 야윈 수지]</b>
+                    <br><b>*멀티콥터 기동 원리:</b> 우측 이동 시 좌측 모터 속도가 빨라지고 우측이 느려집니다. 즉 움직이려는 방향의 반대쪽 출력이 증가해야 기체가 기울어지며 추진력을 얻습니다.
+                </li>
+                <li><b>조종기 모드별 스틱 매칭 암기법 [이론1-287~295]:</b>
+                    <br>- <b>모드 1 [원스(1-S)]:</b> 모드 1은 <b>오른쪽 레버 상하에 스로틀</b>(상승/하강)이 위치함. (왼쪽 레버 상하 = 엘리베이터)
+                    <br>- <b>모드 2 [투셀(2-EL)]:</b> 모드 2는 <b>오른쪽 레버 상하에 엘리베이터</b>(전후진)가 위치함. 표준적이고 직관적인 국내 표준 방식.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h3>3. 배터리 관리 공식 및 화학 안전 (과목 3)</h3>
+            <ul>
+                <li><b>리튬 폴리머(Li-Po) 배터리 규격 [이론1-301~309]:</b> 
+                    <br>- <b>정격(공칭) 전압:</b> 셀당 3.7V / <b>완전 충전 전압:</b> 셀당 4.2V / <b>장기 보관 전압(스토리지):</b> 셀당 3.8V~3.85V.
+                    <br>- <b>⚠️ 영구 손상 한계선:</b> <b>셀당 3.3V 이하</b>로 떨어지면 배터리 셀이 복구 불가능하게 영구 손상되므로 즉시 비행을 중단해야 합니다. 메모리 효과가 없으므로 수시 충전이 가능합니다. 납축전지는 무겁고 효율이 낮아 드론용으로 부적합합니다.
+                    <br>- <b>배터리 표면 필수 표기 4대 사항:</b> 셀 수(S), 용량(mAh), 전압(V), 방전율(C-rate). (원재료 성분이나 제조 화학 물질은 필수 표기 사항이 아닙니다.)
+                </li>
+                <li><b>보관 및 폐기 프로토콜 [이론1-310~315]:</b> 완충 상태 장기 방치 시 가스가 차며 부풀어 오르는 <b>스웰링(Swelling) 현상</b>이 발생합니다. 보관 시에는 <b>40~50% 방전 상태로 맞춘 후 실온(5℃~25℃)의 서늘한 곳에 기체와 분리</b>하여 내화성 주머니(리포 세이프 백)에 넣어 보관해야 합니다. 60℃ 이상 노출은 금지됩니다. 배터리 셀 중 단 1개라도 문제가 발생하면 팩 전체를 폐기하는 것이 대원칙입니다.</li>
+                <li><b>🔥 소금물 방전법 공식 금지 [이론1-316, 317]:</b> 과거 교재에 등장하던 '소금물에 담가 폐기한다'는 방식은 유독가스 분출, 전극 부식 쇼트 및 발열 화재 위험으로 인해 <b>현재 안전 가이드라인에서는 절대 금지(지양)</b>하고 있습니다. 반드시 전기적 방전기를 통해 완전 방전(0V) 유도 후 지자체 규정에 맞춰 폐기합니다.</li>
+                <li><b>화재 발생 시 대처법 [이론1-318~322]:</b> 리튬폴리머 화재는 <b>D급 금속 화재</b>에 속하므로 일반 ABC 분말 소화기로는 내부 산소 차단이 불가능하여 진화할 수 없습니다. <b>전용 D급 금속 소화기를 사용하거나, 주변에 번질 위험이 없는 안전한 곳에서 대량의 물을 집중 주수하여 냉각 소화</b>해야 합니다.</li>
+            </ul>
+
+            <hr>
+
+            <h3>4. 항공 기상학 및 인적 요인 (과목 4)</h3>
+            <ul>
+                <li><b>지구 대기권의 층상 구조 [이론1-324~330]:</b> 지표면에서 위로 대류권 $\rightarrow$ 성층권 $\rightarrow$ 중간권 $\rightarrow$ 열권 순입니다.
+                    <br>- <b>대류권:</b> 수증기가 밀집해 대류 연직 운동이 발생하며 <b>실제 기상 현상이 일어나는 유일한 공간</b>입니다. 국제 표준 대기(ISA) 감률에 따라 <b>고도 1,000피트(ft) 상승 시마다 2℃씩 하강(1km당 6.5℃ 하강)</b>합니다.
+                    <br>- <b>성층권:</b> 오존층이 존재하여 고도가 올라갈수록 온도가 상승하는 <b>역전층 현상</b>이 나타나며 여객기 고도로 쓰입니다.
+                    <br>- <b>열권:</b> 최상층으로 전리층이 존재해 장거리 무선 통신 전파 이동을 가능하게 합니다.
+                </li>
+                <li><b>표준 대기압 정의 및 바람 [이론1-331~336]:</b>
+                    <br><b>$$1\text{ ATM} = 1013.25\text{ hPa} = 760\text{ mmHg(Torr)} = 29.92\text{ inHg}$$</b> (해수면 15℃, 완전 건조 공기 기준). 기온과 습도가 낮아 공기 밀도가 높을수록 양력과 추력이 커져 드론 비행 성능이 향상됩니다. 바람의 근본 원인은 <b>태양 복사열 불균형으로 인한 기압차(압력 차이)</b> 때문이며, 무조건 고기압에서 저기압으로 흐릅니다(기압경도력). 등압선 간격이 좁을수록 바람이 강합니다.
+                </li>
+                <li><b>코리올리 전향력 및 지구 역학 [이론1-337~339]:</b> 지구 자전으로 인하여 발생하는 가상의 힘으로 <b>북반구 진행 방향의 오른쪽</b>으로 물체를 휘게 만듭니다. 크기는 <b>극지방에서 최대, 적도 지방에서 최소(0)</b>가 됩니다. <b style="color:var(--primary-color);">[암기: 극대적소]</b> 이슬점(노점) 온도는 수증기가 포화 상태에 이르러 물방울로 변하기 시작할 때의 냉각 온도입니다.</li>
+                <li><b>구름의 종류와 위험 구름 [이론1-340~344]:</b> 
+                    <br>- <b>권층운(상층운):</b> 베일 형태로 달무리/해무리를 나타내 향후 비가 올 것을 예고합니다.
+                    <br>- <b>난층운(하층운):</b> 어두운 먹구름 형태로 넓은 지역에 지속적인 비구름과 폭풍을 동반합니다.
+                    <br>- <b>적란운(수직운):</b> 거대한 기둥 모양의 소나기구름(뇌운)으로, <b>소나기·폭풍·우박·번개를 무조건 동반하므로 드론 비행 시 가장 위험</b>합니다.
+                </li>
+                <li><b>전선 체계 및 안개 [이론1-345~353]:</b> 
+                    <br>- <b>한랭전선:</b> 찬 공기가 밀어내는 전선으로 기울기가 급해 적운형/적란운이 발달하며 좁은 지역에 강한 소나기를 뿌리고 이동이 빠릅니다.
+                    <br>- <b>온난전선:</b> 따뜻한 공기가 타고 올라가 완만하며 층운형 구름 발달, 넓은 지역 이슬비, 이동이 느립니다.
+                    <br>- <b>이류 안개 (해무):</b> 따뜻하고 습한 공기가 차가운 수면 위로 평행 이동 시 발생하며, <b>4~5m/s 수준의 약간의 바람이 불 때 아주 넓고 두껍게 발달</b>합니다. (복사안개는 맑은 날 밤~새벽 방사냉각으로 생기는 땅안개입니다.)
+                </li>
+                <li><b>바람의 종류 및 위험 난기류 [이론1-354~365]:</b> 낮에는 바다에서 육지로 <b>해풍</b>, 밤에는 육지에서 바다로 <b>육풍</b>이 붑니다. 낮에 골짜기에서 정상으로 <b>곡풍</b>, 밤에 정상에서 골짜기로 <b>산풍</b>이 붑니다. 푄 현상(높새바람)은 산맥을 넘으며 고온건조한 바람으로 바뀌는 현상입니다.
+                    <br>- <b>윈드시어:</b> 단거리 내 풍향·풍속이 급변하는 현상으로 이착륙 시 추락의 치명적 원인이 됩니다.
+                    <br>- <b>태풍:</b> 중심 최대 풍속 17m/s 이상인 열대성 저기압이며 우측이 위험반원입니다. <b>초속 14m/s 이상의 강풍주의보 발령 시 드론 비행은 법적으로 전면 금지</b>됩니다.
+                    <br>- <b>착빙(Icing):</b> 표면에 얼음이 얼면 무게 증가, 양력 급감, 항력 및 실속 속도가 증가해 극도로 위험하므로 미세 서리도 비행 전 전면 제거해야 합니다.
+                </li>
+                <li><b>⚠️ 강수 구분 함정과 저온 고도계 오차 [이론1-367~369]:</b> 눈, 비, 가랑비, 우박, 싸라기눈은 하늘에서 낙하하는 '강수'가 맞지만 <b>안개, 이슬, 서리, 황사 먼지는 강수 현상에 포함되지 않습니다.</b> 또한, 고도계를 수정하지 않고 기온이 매우 낮은 저온 지역(기압이 높은 곳)으로 비행해 가면 고도계 지시치보다 실제 기체의 진고도가 훨씬 낮아집니다. <b style="color:var(--error-color);">[지시고도 &gt; 진고도]</b> 조종사는 안전 고도라 착각하지만 지면과 충돌 위험 상태가 됩니다.</li>
+                <li><b>시각 수용기 특성 (인적 요인) [이론1-370~378]:</b> 인간 조종사 중심 최적화 모델인 SHELL 모델 구성 요소는 Software, Hardware, Environment, Liveware입니다. (예산 등은 제외).
+                    <br>- <b>간상체(Rods):</b> 망막 주변부 1억 개 존재, <b>야간 비행 시 활성화되어 흑백 명암 식별</b>, 청록색에 민감. <b style="color:var(--primary-color);">[암기: 간흑]</b>
+                    <br>- <b>추상체(Cones):</b> 망막 중심부 700만 개 집중, <b>주간 활성화되어 정밀 컬러 색채 구별</b>, 적색에 적극 반응. <b style="color:var(--primary-color);">[암기: 추칼]</b>
+                    <br>- <b>푸르키네 현상:</b> 밝은 곳에서 어두운 곳으로 급격히 바뀔 때, 적색 물체는 먼저 어둡게 보이고 청색/녹색 물체가 상대적으로 훨씬 밝고 뚜렷하게 인지되는 현상입니다.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h3>5. 항공 관계 법규 및 행정 처분 (과목 5)</h3>
+            <ul>
+                <li><b>항공법의 축 분류 및 적용 무게 [이론1-380~388]:</b> <b>항공안전법</b>(신고/등록, 자격증명, 준수사항), <b>항공사업법</b>(상업적 돈벌이, 사용사업 등록), <b>공항시설법</b>(공항 개발 및 항행안전시설)으로 나뉩니다. 국내법상 '항공시설법' 명칭은 없습니다. 2024~2026년 개정법 대원칙에 따라 <b>비행장치 무게를 측정할 때는 반드시 배터리 무게를 포함하여 산정</b>해야 합니다.</li>
+                <li><b>안전성 인증 대상 및 행정 기한 [이론1-389~400]:</b> 
+                    <br>- <b>안전성 인증 대상:</b> 최대이륙중량 25kg 초과 ~ 자체중량 150kg 이하 기체는 영리/비영리 불문 필수 대상입니다. 유효기간은 사업용 1년, 비사업용 2년입니다. 자체중량 150kg 초과 시 초경량 범위를 초과하여 일반 항공기 기준 '감항 인증'을 받아야 합니다.
+                    <br>- <b>기한 설정 (숫자 바꾸기 단골 함정):</b> 기체 보관장소, 소유자 성명 등 <b>변경 신고 및 이전 신고는 사유 발생일로부터 30일 이내</b>에 해야 하며, 기체 멸실·분실 시 행하는 <b>말소 신고는 사유 발생일로부터 15일 이내</b>에 해야 합니다. 실무 대행 기관은 한국교통안전공단(TS)입니다.
+                </li>
+                <li><b>2026년 최신 개정 행정 과태료 vs 형사 벌금 기준표 [이론1-407~410]</b>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>처벌 종류</th>
+                                <th>위반 행위 및 세부 내용</th>
+                                <th>법적 처벌 수위</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"><b>형사 처벌</b><br>(벌금/징역형)<br><span style="color:var(--error-color);">전과 기록 남음</span></td>
+                                <td>· <b>음주 비행</b> (혈중 알코올 농도 <b>0.02% 이상</b>)</td>
+                                <td><b>3년 이하의 징역</b> 또는 <b>3,000만 원 이하의 벌금</b></td>
+                            </tr>
+                            <tr>
+                                <td>· 군·경·공항 관제사의 음주 측정 요구 거부 시</td>
+                                <td>1년 이하의 징역 또는 1,000만 원 이하의 벌금</td>
+                            </tr>
+                            <tr>
+                                <td>· 영리 목적으로 관할 당국에 등록 없이 무단 사업 영위 시</td>
+                                <td>1년 이하의 징역 또는 1,000만 원 이하의 벌금</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4"><b>행정 처분</b><br>(과태료)<br>납부 시 행정 종결</td>
+                                <td>· 1종 기체와 같이 <b>안전성 인증 검사를 받지 않고 무단 비행</b>한 경우</td>
+                                <td><b>최대 500만 원 이하의 과태료</b></td>
+                            </tr>
+                            <tr>
+                                <td>· <b>조종자 자격증명 없이 비행</b>한 경우 (무면허 비행)<br>· 관제권 및 비행금지·제한공역에서 <b>사전 승인 없이 비행</b>한 경우</td>
+                                <td><b>최대 300만 원 이하의 과태료</b><br>(※ 전 항목 공통 <b>1차 위반 시 과태료 150만 원</b>으로 엄격 구별)</td>
+                            </tr>
+                            <tr>
+                                <td>· <b>조종자 준수사항 위반</b> (야간비행, 낙하물 투하, 위험 비행)<br>· 기체 신고 미실행 및 신고번호 미표시/거짓 표시<br>· 비행 시 자격증, 승인서 등 필수 서류 미소지 조종</td>
+                                <td><b>최대 100만 원 이하의 과태료</b></td>
+                            </tr>
+                            <tr>
+                                <td>· 소유자 정보의 변경 신고 또는 말소 신고 기한 위반 방치</td>
+                                <td>최대 50만 원 이하의 과태료</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+
+            <hr>
+
+            <h3>6. 실전 비행 조종 및 비상 절차 (과목 6)</h3>
+            <ul>
+                <li><b>Fly-away (통제 불능 및 GPS 상실) 프로토콜 [이론1-411~417]:</b> 비행 중 드론이 GPS 먹통, 센서 오류 등으로 조종력을 상실하고 흐르기 시작했을 때 최우선 행동 수칙입니다.
+                    <br>- <b>비상 1단계 (최우선):</b> 119 신고나 조작보다 앞서 주변 통행인 및 목격자들에게 <b>"위험합니다! 대피하세요!"라고 큰 소리로 복창하여 상황을 즉시 전파</b>해야 합니다.
+                    <br>- <b>비상 2단계:</b> 전파 직후 조종기의 비행 모드를 위성 보정을 끊는 <b>수동 자세제어 모드인 ATTI 모드(에티 모드)로 즉시 수동 전환</b>합니다. 위성 간섭을 끊고 조종사의 순수 키 조작으로 안전한 공터로 유도하여 수동 비상 착륙을 감행합니다.
+                </li>
+                <li><b>안전 거리 및 실무 점검 [이론1-418~424]:</b> 드론 이착륙 및 비행 시 주위 통행인, 장애물, 시설물 및 조종자 본인으로부터 <b>최소 15m 이상의 수평 안전거리를 무조건 확보</b>해야 합니다. 비행 전 기체와 약 30m 거리에서 무선 수신 반경을 필수 테스트하는 레인지 모드 테스트를 진행합니다.
+                    <br>- <b>⚠️ 이륙 전 점검 페이크 선지:</b> '스로틀 상승 비행 및 기동 제어 확인'은 비행 전 점검이 아닙니다. 이륙 시동 직후 약 1~2m 상공에서 호버링을 하며 센서 키 반응을 확인하는 <b>'이륙 직후 점검 사항'</b>에 해당합니다.
+                </li>
+                <li><b>공역 체계 및 사전 승인 면제 특례 [이론1-425~435]:</b> 최고층 등급인 A등급 공역은 시계비행이 불가능하며 오직 계기비행(IFR)만 수행합니다. 대한민국 공역 체계에서는 F등급 공역은 실제 운영하지 않으며 존재하지 않습니다. 드론은 비관제공역인 G등급 공역에서 승인 없이 비행 가능합니다. 지면/수면으로부터 200m 이상 높이 상공은 관제구로 정의됩니다.
+                    <br>- <b>사전 승인 면제 특례 (25kg 이하 기체):</b> 관제권과 P구역을 제외한 일반 공역에서 고도 150m 미만 비행 시 사전 승인서 없이 비행이 가능합니다. <b>[인구/건축물 밀집 지역 특례 신설]</b> 기체 중심 수평 거리 150m 및 해당 지역 가장 높은 장애물(빌딩 등) 상단 기준 150m까지는 고도 제한을 초과하더라도 승인 없이 비행할 수 있습니다. 군·경·소방 등 공공 목적 긴급 비행 시에는 사전 서류 없이 전화 유선 통보 및 구두 승인만으로 즉시 비행 가능합니다.
+                </li>
+                <li><b>자격 종별 최대이륙중량 기준 및 교관 자격 [이론1-436~444]:</b> 
+                    <br>- <b>1종:</b> 최대이륙중량 25kg 초과 ~ 자체중량 150kg 이하 (비행 경력 20시간 + 학과·실기·구술)
+                    <br>- <b>2종:</b> 최대이륙중량 7kg 초과 ~ 25kg 이하 (비행 경력 10시간 + 실기 약소 평가)
+                    <br>- <b>3종:</b> 최대이륙중량 2kg 초과 ~ 7kg 이하 (비행 경력 6시간 + 실기 호버링 평가)
+                    <br>- <b>4종:</b> 최대이륙중량 250g 초과 ~ 2kg 이하 (만 10세 이상 온라인 교육 수료)
+                    <br>※ 하루에 공식 인정되는 최대 비행 경력 시간은 <b>2시간</b>으로 제한됩니다.
+                    <br>- <b>지도조종자 (드론 교관 자격):</b> 만 18세 이상, 1종 자격증 소지 필수 및 <b>총 비행 조종 경력이 100시간 이상</b> 로그북에 입증되어야 합니다. 실기 채점관인 실기평가조종사는 150시간 이상이 요구됩니다.
+                </li>
+                <li><b>하늘의 최하위 양보 의무 [이론1-445]:</b> 동력을 이용하는 초경량비행장치(드론)는 다른 모든 유인 항공기, 경량 항공기는 물론, <b>동력이 없는 초경량비행장치(행글라이더, 패러글라이더 등)에게도 무조건 진로를 먼저 양보해야 하는 법적 최하위 양보 의무</b>를 지닙니다.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<button id="btn-back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    <span>⬆️</span>
+    <span>메뉴</span>
+</button>
+
+<footer>
+    <div class="footer-left">제작자 SM</div>
+    <div class="footer-right">Created on May 20, 2026 | Inquiries: chaesira@naver.com</div>
+</footer>
+
+<script>
+// 삽입 위치: <script> 태그 열자마자 맨 윗줄에 삽입
+function exportData() {
+    try {
+        const data = {
+            ans: localStorage.getItem('drone_saved_answers') || '{}',
+            wrong: localStorage.getItem('drone_wrong_notes') || '{}'
         };
-    </script>
+        const code = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+        prompt("아래 코드를 모두 복사하여 안전한 곳에 보관하세요:", code);
+    } catch(e) { alert("데이터 추출 중 오류가 발생했습니다."); }
+}
+
+function importData() {
+    const input = prompt("복사해둔 연동 코드를 붙여넣으세요:");
+    if(!input) return;
+    try {
+        const decoded = JSON.parse(decodeURIComponent(escape(atob(input))));
+        localStorage.setItem('drone_saved_answers', decoded.ans);
+        localStorage.setItem('drone_wrong_notes', decoded.wrong);
+        alert("데이터 연동이 완료되었습니다! 시스템을 새로고침합니다.");
+        location.reload();
+    } catch(e) { alert("코드 형식이 올바르지 않습니다."); }
+}
+    const githubUsername = "seungmuk0197-prog"; 
+    const githubRepo = "drone";           
+
+    let activeTabId = "how_to_use";
+    let wrongQuestionsMap = new Map();
+    // 로컬 스토리지에서 이전 모드를 불러오거나 기본값 적용
+    let currentMode = localStorage.getItem('drone_exam_mode') || 'practice';
+
+    function initApp() {
+        buildTabs();
+        
+        // 오답노트 보존 데이터 불러오기
+        restoreWrongNotes();
+
+        // 모드 라디오 버튼 상태 복구
+        let modeRadios = document.getElementsByName('exam_mode');
+        for(let r of modeRadios) { if(r.value === currentMode) r.checked = true; }
+        
+        switchTab("how_to_use");
+
+        window.addEventListener('scroll', () => {
+            const topBtn = document.getElementById('btn-back-to-top');
+            if(window.scrollY > 300) topBtn.style.display = 'flex';
+            else topBtn.style.display = 'none';
+        });
+    }
+
+    function buildTabs() {
+        const nav = document.getElementById("tabs-nav-bar");
+        nav.innerHTML = "";
+
+        // 컨트롤 패널
+        let controlWrap = document.createElement("div");
+        controlWrap.className = "global-controls";
+        controlWrap.innerHTML = `
+            <div class="mode-selector">
+                <label style="color:var(--primary-color);">
+                    <input type="radio" name="exam_mode" value="practice" onchange="setMode('practice')"> 📘 모의시험 (즉시해설)
+                </label>
+                <label style="color:var(--error-color);">
+                    <input type="radio" name="exam_mode" value="real" onchange="setMode('real')"> 📝 실전시험 (제출채점)
+                </label>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-menu" onclick="resetCurrentTab()">🔄 현재회차 리셋</button>
+                <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 기록 리셋</button>
+            </div>
+        `;
+        nav.appendChild(controlWrap);
+
+        // 기능형 대시보드
+        let funcWrap = document.createElement("div"); funcWrap.className = "nav-section-wrapper";
+        funcWrap.innerHTML = '<div class="section-title">─── 스마트 허브 대시보드 ───</div>';
+        let funcRow = document.createElement("div"); funcRow.className = "nav-scroll-row";
+        funcRow.innerHTML = `
+            <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
+            <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
+            <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
+            <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 오답노트 보관함</button>
+        `;
+        funcWrap.appendChild(funcRow); nav.appendChild(funcWrap);
+
+        // 모의고사 25회분
+        let mockWrap = document.createElement("div"); mockWrap.className = "nav-section-wrapper";
+        mockWrap.innerHTML = '<div class="section-title">─── 기출 모의고사 코스 (1~25회 완비) ───</div>';
+        let mockRow = document.createElement("div"); mockRow.className = "nav-scroll-row";
+        for(let i=1; i<=25; i++) {
+            mockRow.innerHTML += `<button class="btn btn-menu" id="tab-btn-exam${i}" onclick="loadGithubFile('exam', ${i})">${i}회</button>`;
+        }
+        mockWrap.appendChild(mockRow); nav.appendChild(mockWrap);
+
+        // 함정 10회분
+        let trapWrap = document.createElement("div"); trapWrap.className = "nav-section-wrapper";
+        trapWrap.innerHTML = '<div class="section-title">─── 최고 오답률 격파 함정문제 코스 (1~10회 완결) ───</div>';
+        let trapRow = document.createElement("div"); trapRow.className = "nav-scroll-row";
+        for(let i=1; i<=10; i++) {
+            trapRow.innerHTML += `<button class="btn btn-trap" id="tab-btn-trap${i}" onclick="loadGithubFile('trap', ${i})">함정 ${i}회</button>`;
+        }
+        trapWrap.appendChild(trapRow); nav.appendChild(trapWrap);
+    }
+
+   function setMode(mode) {
+    if(currentMode === mode) return;
+    
+    // 경고 문구에서 "초기화됩니다"라는 내용을 빼거나, 
+    // 실제 데이터는 지우지 않도록 수정합니다.
+    if(confirm(`[${mode === 'real' ? '실전시험' : '모의시험'}] 모드로 변경하시겠습니까?`)) {
+        currentMode = mode;
+        localStorage.setItem('drone_exam_mode', mode);
+        
+        // resetAll(true); // <--- 이 줄을 삭제하거나 주석 처리하세요.
+        
+        alert("모드가 변경되었습니다. 현재 페이지를 새로고침하여 적용합니다.");
+        location.reload(); // 데이터를 지우지 않고 화면만 새로고침하여 현재 답안 상태를 다시 불러옵니다.
+    } else {
+        document.querySelector(`input[name="exam_mode"][value="${currentMode}"]`).checked = true;
+    }
+}
+
+    // 1. 현재 회차 리셋 함수 (+로컬스토리지 삭제)
+    function resetCurrentTab(skipConfirm = false) {
+        const tabId = activeTabId;
+        if(tabId.includes('how_to_use') || tabId.includes('theory') || tabId.includes('oral_exam') || tabId.includes('wrong_notes')) {
+            if(!skipConfirm) alert("초기화할 문제지가 열려있지 않습니다. 모의고사나 함정 코스를 선택해 주세요.");
+            return;
+        }
+        if(!skipConfirm && !confirm("현재 화면의 답안과 채점 내역을 완전히 초기화하시겠습니까?")) return;
+        
+        // 로컬 스토리지 캐시 삭제
+        let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
+        let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
+        let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
+
+        for (let key in savedAnswers) {
+            if (key.startsWith(tabId + '_')) delete savedAnswers[key];
+        }
+        for (let key in savedWrongNotes) {
+            if (key.startsWith(tabId + '_')) {
+                delete savedWrongNotes[key];
+                let wrongCard = document.getElementById(`wrong_card_${key}`);
+                if (wrongCard) wrongCard.remove();
+            }
+        }
+        submittedTabs = submittedTabs.filter(t => t !== tabId);
+
+        localStorage.setItem('drone_saved_answers', JSON.stringify(savedAnswers));
+        localStorage.setItem('drone_submitted_tabs', JSON.stringify(submittedTabs));
+        localStorage.setItem('drone_wrong_notes', JSON.stringify(savedWrongNotes));
+
+        resetTabUI(tabId);
+        if(!skipConfirm) alert("현재 회차가 초기화되었습니다.");
+    }
+
+    // 2. 전체 리셋 함수 (+로컬스토리지 완전 삭제)
+    function resetAll(skipConfirm = false) {
+        if(!skipConfirm && !confirm("진행하신 모든 문제지의 풀이 내역과 오답노트가 삭제됩니다.\n진행하시겠습니까?")) return;
+        
+        localStorage.removeItem('drone_saved_answers');
+        localStorage.removeItem('drone_submitted_tabs');
+        localStorage.removeItem('drone_wrong_notes');
+        
+        document.getElementById("container-wrong").innerHTML = "";
+        wrongQuestionsMap.clear();
+        
+        document.querySelectorAll(".quiz-container").forEach(container => {
+            const tabId = container.id.replace('inside-', '');
+            if(tabId && tabId !== 'container-wrong') resetTabUI(tabId);
+        });
+        
+        if(!skipConfirm) alert("전체 데이터 리셋이 완료되었습니다.");
+    }
+
+    function resetTabUI(tabId) {
+        const cards = document.querySelectorAll(`#inside-${tabId} .q-card`);
+        cards.forEach(card => {
+            const radios = card.querySelectorAll(`input[type="radio"]`);
+            radios.forEach(r => r.checked = false);
+            
+            const feed = card.querySelector(".feedback");
+            const expl = card.querySelector(".explanation");
+            if(feed) feed.style.display = "none";
+            if(expl) expl.style.display = "none";
+        });
+        const scoreDiv = document.getElementById(`score-result-${tabId}`);
+        if(scoreDiv) scoreDiv.innerHTML = "";
+        const submitBtn = document.getElementById(`submit-btn-${tabId}`);
+        if(submitBtn) submitBtn.style.display = "inline-block";
+        
+        if(currentMode === 'real') {
+            const submitBox = document.getElementById(`submit-box-${tabId}`);
+            if(submitBox) submitBox.style.display = "block";
+        }
+    }
+
+    // 오답노트 캐시 데이터 복구 함수
+    function restoreWrongNotes() {
+        let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
+        for (let key in savedWrongNotes) {
+            renderWrongNotesContainer(key, savedWrongNotes[key], true);
+            wrongQuestionsMap.set(key, savedWrongNotes[key]);
+        }
+    }
+
+    function loadGithubFile(prefix, num) {
+        const tabId = prefix + num;
+        activeTabId = tabId;
+        
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
+        
+        let targetTab = document.getElementById(tabId);
+        let isAlreadyRendered = false;
+
+        if(!targetTab) {
+            targetTab = document.createElement("div");
+            targetTab.id = tabId;
+            targetTab.className = "tab-content active";
+            document.getElementById("main-pan-container").appendChild(targetTab);
+        } else {
+            targetTab.classList.add("active");
+            if(targetTab.querySelector('.quiz-container')) isAlreadyRendered = true;
+        }
+        
+        const btn = document.getElementById(`tab-btn-${tabId}`);
+        if(btn) btn.classList.add("active");
+
+        // ★ 탭 이동 시 렌더링된 시험지는 다시 로드하지 않음 (체크박스 상태 보존 핵심 원리)
+        if (isAlreadyRendered) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        targetTab.innerHTML = `<div class="loading-text">🔄 깃허브 원격 서버 연동 중... [제 ${num}회분] 데이터 수신 중...</div>`;
+
+        let urlWithBracket = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}%20(${num}).txt`;
+        let urlNormal = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/main/${prefix}${num}.txt`;
+
+        fetch(urlWithBracket)
+        .then(res => {
+            if(!res.ok) return fetch(urlNormal); 
+            return res;
+        })
+        .then(response => {
+            if(!response.ok) throw new Error("네트워크 파일 유실");
+            return response.text();
+        })
+        .then(text => {
+            parseAndRenderText(targetTab, tabId, text, prefix, num);
+        })
+        .catch(err => {
+            targetTab.innerHTML = `
+                <div class="info-box" style="border-left-color:var(--error-color); background-color:#fff5f5;">
+                    <h4 style="color:var(--error-color); margin:0 0 10px 0;">❌ 파일 연동 대기</h4>
+                    <p><b>원인:</b> 현재 파일이 깃허브 서버에 동기화 반영되는 중이거나 파일명 유격이 있습니다.</p>
+                </div>
+            `;
+        });
+    }
+
+    function parseAndRenderText(container, tabId, text, prefix, num) {
+        container.innerHTML = `
+            <div class="info-box" style="${prefix==='trap'?'border-left-color: var(--trap-color); background-color: #fffaf0;':''}">
+                <h3>📝 ${prefix==='trap'?'고난도 함정 코스 제':'통합 기출 모의고사 제'} ${num}회분</h3>
+                <p>현재 모드: <b>${currentMode === 'real' ? '실전시험 (채점 모드)' : '모의시험 (즉시 해설 모드)'}</b></p>
+            </div>
+            <div class="quiz-container" id="inside-${tabId}"></div>
+        `;
+
+        const quizBox = document.getElementById(`inside-${tabId}`);
+        let normalized = text.replace(/\r\n/g, "\n").trim();
+        let blocks = normalized.split(/\n(?=Q\d+)/i).map(b => b.trim()).filter(b => b.length > 0);
+        let index = 1;
+
+        blocks.forEach(block => {
+            let lines = block.split("\n").map(l => l.trim()).filter(l => l.length > 0);
+            
+            let qText = "";
+            let opts = ["", "", "", ""];
+            let ans = 1;
+            let explanationText = "";
+            let readingQuestion = false;
+
+            lines.forEach(line => {
+                if (/^Q\d+/i.test(line)) {
+                    qText = line.replace(/^Q\d+[\.\s:]*/i, "").trim();
+                    readingQuestion = true;
+                    return;
+                }
+                
+                let isAnswerLine = line.includes("정답") || line.startsWith("[정답]");
+
+                // ★ 선지 파싱 오류 초강력 보완 (1. 1) ① [1] (1) 등 모든 형태 완벽 분리)
+                let m1 = line.match(/^(?:①|1\)|1\.|1\s|\[1\]|\(1\)|1\,)\s*(.*)/);
+                let m2 = line.match(/^(?:②|2\)|2\.|2\s|\[2\]|\(2\)|2\,)\s*(.*)/);
+                let m3 = line.match(/^(?:③|3\)|3\.|3\s|\[3\]|\(3\)|3\,)\s*(.*)/);
+                let m4 = line.match(/^(?:④|4\)|4\.|4\s|\[4\]|\(4\)|4\,)\s*(.*)/);
+
+                if (isAnswerLine) {
+                    readingQuestion = false;
+                    let m = line.match(/[1234①②③④]/);
+                    if (m) {
+                        if (m[0] === '1' || m[0] === '①') ans = 1;
+                        if (m[0] === '2' || m[0] === '②') ans = 2;
+                        if (m[0] === '3' || m[0] === '③') ans = 3;
+                        if (m[0] === '4' || m[0] === '④') ans = 4;
+                    }
+                    let extra = line.replace(/^(?:\[정답\]|정답)\s*[:\.]?\s*[1234①②③④]/, "").trim();
+                    if (extra.length > 1 && !extra.startsWith("번")) explanationText += extra + " ";
+                } 
+                else if (m1 && !isAnswerLine) { opts[0] = m1[1].trim(); readingQuestion = false; }
+                else if (m2 && !isAnswerLine) { opts[1] = m2[1].trim(); readingQuestion = false; }
+                else if (m3 && !isAnswerLine) { opts[2] = m3[1].trim(); readingQuestion = false; }
+                else if (m4 && !isAnswerLine) { opts[3] = m4[1].trim(); readingQuestion = false; }
+                else if (line.startsWith("[해설]") || line.startsWith("해설:") || line.startsWith("[설명]")) {
+                    readingQuestion = false;
+                    explanationText += line.replace(/^(?:\[해설\]|해설:|\[설명\])/, "").trim() + " ";
+                }
+                else if (readingQuestion) {
+                    qText += " " + line;
+                }
+                else {
+                    if (opts[0] !== "") explanationText += line + " ";
+                }
+            });
+
+            if (!qText.trim()) return;
+            if (!explanationText.trim()) explanationText = `해당 문제의 공식 정답은 ${ans}번입니다. 이론 요약본의 관련 내용을 참고하여 복습해 주세요.`;
+
+            let card = document.createElement("div");
+            card.className = "q-card";
+            card.id = `card_${tabId}_${index}`;
+            
+            let optionsHtml = "";
+            for(let oIdx = 0; oIdx < 4; oIdx++) {
+                let optText = opts[oIdx] ? opts[oIdx] : `(보기 텍스트 파싱 오류 - 깃허브 원본 파일 포맷 확인 요망)`;
+                optionsHtml += `
+                    <label class="option-item">
+                        <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onclick="handleAnswerSelect('${tabId}','${index}',${oIdx+1},${ans})">
+                        &nbsp;${oIdx+1}. ${optText}
+                    </label>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="sub-subject">문항 번호: ${index}번</div>
+                <div class="q-title">Q${index}. ${qText}</div>
+                <div class="options-list">${optionsHtml}</div>
+                <div class="feedback" id="feed_${tabId}_${index}"></div>
+                <div class="explanation" id="expl_${tabId}_${index}">💡 <b>심층 해설:</b> ${explanationText}</div>
+            `;
+            quizBox.appendChild(card);
+
+            wrongQuestionsMap.set(`${tabId}_${index}`, { qText, opts, ans, explanationText, prefix, num, index });
+            index++;
+        });
+
+        // 실전 채점 모드 버튼 영역
+        let submitBox = document.createElement("div");
+        submitBox.id = `submit-box-${tabId}`;
+        submitBox.style.display = (currentMode === 'real') ? 'block' : 'none';
+        submitBox.style.textAlign = 'center';
+        submitBox.style.marginTop = '35px';
+        submitBox.innerHTML = `
+            <button id="submit-btn-${tabId}" class="btn btn-menu" style="background-color: var(--primary-color); color: white; padding: 18px 40px; font-size: 1.15rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border:none;" onclick="submitRealExam('${tabId}')">📝 실전시험 제출 및 채점하기</button>
+            <div id="score-result-${tabId}"></div>
+        `;
+        quizBox.appendChild(submitBox);
+
+        // ★ 로컬 스토리지에 저장된 사용자 답안 및 채점결과 복원 시스템
+        let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
+        let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
+
+        for(let i=1; i<index; i++) {
+            let key = `${tabId}_${i}`;
+            if(savedAnswers[key]) {
+                let selectedVal = savedAnswers[key];
+                let radio = quizBox.querySelector(`#card_${tabId}_${i} input[value="${selectedVal}"]`);
+                if(radio) {
+                    radio.checked = true;
+                    // 모의시험 모드라면 정답 피드백 바로 보여주기
+                    if (currentMode === 'practice') {
+                        let qData = wrongQuestionsMap.get(key);
+                        if(qData) handleAnswerSelect(tabId, i, selectedVal, qData.ans, true);
+                    }
+                }
+            }
+        }
+
+        // 실전시험 모드 제출 이력 복원
+        if (currentMode === 'real' && submittedTabs.includes(tabId)) {
+            submitRealExam(tabId, true);
+        }
+    }
+
+    // 답안 선택 시 저장 및 피드백 처리 함수
+    function handleAnswerSelect(tabId, idx, selectNum, correctNum, isRestore = false) {
+        
+        // 1. 유저가 직접 푼 경우 로컬스토리지에 저장
+        if (!isRestore) {
+            let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
+            savedAnswers[`${tabId}_${idx}`] = selectNum;
+            localStorage.setItem('drone_saved_answers', JSON.stringify(savedAnswers));
+        }
+
+        // 2. 실전 모드면 피드백 미노출하고 종료
+        if (currentMode === 'real' && !isRestore) return;
+        
+        // 3. 모의 모드 피드백
+        const feed = document.getElementById(`feed_${tabId}_${idx}`);
+        const expl = document.getElementById(`expl_${tabId}_${idx}`);
+        const key = `${tabId}_${idx}`;
+        const qData = wrongQuestionsMap.get(key);
+
+        if(selectNum === correctNum) {
+            feed.innerHTML = "🎉 정답입니다! 정확한 원리 관통 완료."; 
+            feed.className = "feedback correct";
+        } else {
+            feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`; 
+            feed.className = "feedback wrong";
+            renderWrongNotesContainer(key, qData, isRestore);
+        }
+        feed.style.display = "block";
+        if(expl) expl.style.display = "block";
+    }
+
+    // 실전시험 채점 함수
+    function submitRealExam(tabId, isRestore = false) {
+        const cards = document.querySelectorAll(`#inside-${tabId} .q-card`);
+        let total = cards.length;
+        let correctCount = 0;
+        let unansCount = 0;
+
+        if (!isRestore) {
+            cards.forEach(card => {
+                if(!card.querySelector(`input[type="radio"]:checked`)) unansCount++;
+            });
+            if(unansCount > 0) {
+                if(!confirm(`아직 풀지 않은 문제가 ${unansCount}개 있습니다.\n이대로 제출하시겠습니까? (미입력 문항은 모두 오답 처리됩니다)`)) return;
+            }
+        }
+
+        cards.forEach(card => {
+            const idx = card.id.split('_').pop();
+            const key = `${tabId}_${idx}`;
+            const qData = wrongQuestionsMap.get(key);
+            if (!qData) return; 
+            const correctNum = qData.ans;
+            
+            const selected = card.querySelector(`input[type="radio"]:checked`);
+            const feed = document.getElementById(`feed_${tabId}_${idx}`);
+            const expl = document.getElementById(`expl_${tabId}_${idx}`);
+
+            if (!selected) {
+                feed.innerHTML = `❌ 미입력. 실제 정답은 ${correctNum}번입니다.`;
+                feed.className = "feedback wrong";
+                renderWrongNotesContainer(key, qData, isRestore);
+            } else {
+                const selectNum = parseInt(selected.value);
+                if (selectNum === correctNum) {
+                    correctCount++;
+                    feed.innerHTML = "🎉 정답입니다!";
+                    feed.className = "feedback correct";
+                } else {
+                    feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`;
+                    feed.className = "feedback wrong";
+                    renderWrongNotesContainer(key, qData, isRestore);
+                }
+            }
+            feed.style.display = "block";
+            if(expl) expl.style.display = "block";
+        });
+
+        const score = Math.round((correctCount / total) * 100);
+        const resultDiv = document.getElementById(`score-result-${tabId}`);
+        const isPass = score >= 70;
+        
+        const passText = isPass 
+            ? `<span style="color:var(--success-color);">합격입니다! 🎉 (70점 이상)</span>` 
+            : `<span style="color:var(--error-color);">불합격입니다. 😢 (70점 미만)</span>`;
+        
+        resultDiv.innerHTML = `
+            <div style="padding: 25px; background: #f7fafc; border: 3px solid ${isPass ? 'var(--success-color)' : 'var(--error-color)'}; border-radius: 10px; margin-top: 20px;">
+                <h3 style="margin:0 0 15px 0; color: #2d3748;">📊 실전시험 채점 결과</h3>
+                <p style="font-size:1.15rem; margin:8px 0;">총 ${total}문제 중 <b>${correctCount}</b>문제 정답</p>
+                <p style="font-size:1.4rem; margin:8px 0;">최종 점수: <b style="font-size: 1.6rem;">${score}점</b></p>
+                <p style="font-size:1.5rem; margin:15px 0 0 0; font-weight:bold;">${passText}</p>
+            </div>
+        `;
+        
+        document.getElementById(`submit-btn-${tabId}`).style.display = "none";
+        
+        if (!isRestore) {
+            let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
+            if (!submittedTabs.includes(tabId)) {
+                submittedTabs.push(tabId);
+                localStorage.setItem('drone_submitted_tabs', JSON.stringify(submittedTabs));
+            }
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // 오답노트 보관함 렌더링 및 저장
+    function renderWrongNotesContainer(key, data, isRestore = false) {
+        const wrongBox = document.getElementById("container-wrong");
+        if(!wrongBox) return;
+        if(document.getElementById(`wrong_card_${key}`)) return;
+
+        let wrongCard = document.createElement("div");
+        wrongCard.className = "q-card";
+        wrongCard.id = `wrong_card_${key}`;
+        wrongCard.style.borderLeft = "4px solid var(--error-color)";
+
+        let optionsHtml = "";
+        for(let oIdx = 0; oIdx < 4; oIdx++) {
+            let optText = data.opts[oIdx] ? data.opts[oIdx] : `출제 기준 가이드 문항선 보기 ${oIdx+1}`;
+            optionsHtml += `
+                <label class="option-item" style="cursor:default;">
+                    &nbsp;${oIdx+1}. ${optText} ${ (oIdx+1 === data.ans) ? '<b style="color:var(--success-color); margin-left:10px;">(정답)</b>' : '' }
+                </label>
+            `;
+        }
+
+        wrongCard.innerHTML = `
+            <div class="sub-subject" style="color:var(--error-color);">출처: ${data.prefix==='trap'?'함정':'일반'} ${data.num}회 - ${data.index}번 문항</div>
+            <div class="q-title">Q. ${data.qText}</div>
+            <div class="options-list">${optionsHtml}</div>
+            <div class="explanation" style="display:block; background-color:#fff5f5;">💡 <b>복습 해설:</b> ${data.explanationText}</div>
+        `;
+        wrongBox.appendChild(wrongCard);
+
+        if (!isRestore) {
+            let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
+            savedWrongNotes[key] = data;
+            localStorage.setItem('drone_wrong_notes', JSON.stringify(savedWrongNotes));
+        }
+    }
+
+    function switchTab(tabId) {
+        activeTabId = tabId;
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
+        
+        const target = document.getElementById(tabId);
+        if(target) target.classList.add('active');
+        
+        const btn = document.getElementById(`tab-btn-${tabId}`);
+        if(btn) btn.classList.add("active");
+    }
+
+    window.onload = function() { initApp(); }
+</script>
 </body>
 </html>
