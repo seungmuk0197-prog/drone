@@ -16,12 +16,10 @@
         header p { margin: 5px 0 0 0; font-size: 0.95rem; color: #cbd5e0; }
         .section-title { width: 100%; text-align: center; font-size: 0.85rem; font-weight: bold; color: #4a5568; margin-top: 6px; text-transform: uppercase; letter-spacing: 1.5px; }
         
-        /* PC 메뉴 고정 / 모바일은 공간 확보를 위해 상대 배치 */
         .nav-container { background-color: #edf2f7; padding: 10px; position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .nav-section-wrapper { margin-bottom: 4px; }
         .nav-scroll-row { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
         
-        /* 컨트롤 패널 (모드 선택 및 리셋) */
         .global-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .mode-selector label { margin-right: 20px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; }
         .mode-selector input[type="radio"] { transform: scale(1.3); margin-right: 8px; cursor: pointer; }
@@ -71,14 +69,12 @@
         
         footer { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; font-size: 0.85rem; color: #cbd5e0; background-color: var(--primary-color); position: fixed; bottom: 0; width: 100%; box-sizing: border-box; z-index: 1020; }
         
-        /* 플로팅 TOP 버튼 */
         #btn-back-to-top { display: none; position: fixed; bottom: 25px; right: 25px; background-color: var(--primary-hover); color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 0.85rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; line-height: 1.2; opacity: 0.9; }
         #btn-back-to-top:hover { background-color: var(--primary-color); opacity: 1; }
 
         @media (max-width: 768px) {
             header { position: relative; padding: 15px 10px; }
             header h1 { font-size: 1.2rem; }
-            /* 모바일 환경: 메뉴 고정 해제 (화면 가림 100% 해소) */
             .nav-container { position: relative; padding: 5px 8px; }
             .nav-scroll-row { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
             .nav-scroll-row::-webkit-scrollbar { height: 5px; }
@@ -105,7 +101,7 @@
     <div id="wrong_notes" class="tab-content">
         <div class="info-box" style="border-left-color: var(--error-color);">
             <h3>🔄 전 범위 통합 실시간 크로스 오답노트</h3>
-            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다. (새로고침해도 보존됩니다!)</p>
+            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다. (새로고침해도 영구 보존됩니다!)</p>
         </div>
         <div class="quiz-container" id="container-wrong"></div>
     </div>
@@ -114,8 +110,20 @@
         <div class="theory-section">
             <h2>💡 드론 스마트 모의고사 시스템 전체 사용 매뉴얼</h2>
             <p>상단 메뉴에서 원하는 회차 버튼을 누르면 <b>깃허브 원격 서버에서 해당 회차의 문제 텍스트 원본을 토시 하나 틀리지 않고 실시간 스트리밍</b>하여 화면에 매칭합니다.</p>
-            <h3>✅ 시스템 최적화 완료 안내</h3>
-            <p style="color:var(--success-color); font-weight:bold;">1번 선지 증발 현상(파싱 오류) 완벽 패치 및 웹페이지를 나갔다 들어와도 풀었던 답안 기록이 <b>리셋 전까지 영구 유지</b>되도록 로컬 저장소 캐시 시스템이 도입되었습니다!</p>
+            
+            <hr style="margin: 25px 0; border:none; border-top: 1px solid var(--border-color);">
+            
+            <h3>📱 PC ↔ 모바일 기기 간 학습 데이터 연동 (수동 동기화)</h3>
+            <p style="margin-bottom:15px; color:#4a5568;">현재 시스템은 가입 없이 기기(브라우저) 자체 메모리에 데이터를 영구 보존합니다. PC에서 풀던 내용을 폰으로 옮기시려면 아래 기능을 사용해 주세요.</p>
+            
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 10px;">
+                <button class="btn btn-menu" style="background-color:#2b6cb0; color:white; border:none; padding:10px 15px;" onclick="exportData()">📤 데이터 내보내기 (복사)</button>
+                <button class="btn btn-menu" style="background-color:#2f855a; color:white; border:none; padding:10px 15px;" onclick="importData()">📥 데이터 불러오기 (붙여넣기)</button>
+            </div>
+            <p style="font-size:0.85rem; color:#718096; line-height:1.4;">
+                * <b>사용법:</b> PC에서 [내보내기] 클릭 후 발급된 코드를 복사하여 카카오톡 '나에게 보내기'로 전송하세요.<br>
+                * 폰에서 이 페이지에 접속한 뒤 [불러오기]를 누르고 해당 코드를 붙여넣기 하시면 기존 풀이 내역과 오답노트가 1초 만에 그대로 복원됩니다.
+            </p>
         </div>
     </div>
 
@@ -434,20 +442,31 @@
 
     let activeTabId = "how_to_use";
     let wrongQuestionsMap = new Map();
-    // 로컬 스토리지에서 이전 모드를 불러오거나 기본값 적용
     let currentMode = localStorage.getItem('drone_exam_mode') || 'practice';
+
+    // 탭 이동 시 위치 저장을 위한 헬퍼 함수
+    function setActiveTabAndSave(tabId) {
+        activeTabId = tabId;
+        localStorage.setItem('drone_active_tab', tabId);
+    }
 
     function initApp() {
         buildTabs();
         
-        // 오답노트 보존 데이터 불러오기
         restoreWrongNotes();
 
-        // 모드 라디오 버튼 상태 복구
         let modeRadios = document.getElementsByName('exam_mode');
         for(let r of modeRadios) { if(r.value === currentMode) r.checked = true; }
         
-        switchTab("how_to_use");
+        // ★ 핵심 추가: 브라우저를 다시 열었을 때 마지막 탭으로 자동 복귀
+        let lastTab = localStorage.getItem('drone_active_tab') || 'how_to_use';
+        if (lastTab.startsWith('exam')) {
+            loadGithubFile('exam', lastTab.replace('exam', ''));
+        } else if (lastTab.startsWith('trap')) {
+            loadGithubFile('trap', lastTab.replace('trap', ''));
+        } else {
+            switchTab(lastTab);
+        }
 
         window.addEventListener('scroll', () => {
             const topBtn = document.getElementById('btn-back-to-top');
@@ -460,7 +479,6 @@
         const nav = document.getElementById("tabs-nav-bar");
         nav.innerHTML = "";
 
-        // 컨트롤 패널
         let controlWrap = document.createElement("div");
         controlWrap.className = "global-controls";
         controlWrap.innerHTML = `
@@ -479,19 +497,17 @@
         `;
         nav.appendChild(controlWrap);
 
-        // 기능형 대시보드
         let funcWrap = document.createElement("div"); funcWrap.className = "nav-section-wrapper";
         funcWrap.innerHTML = '<div class="section-title">─── 스마트 허브 대시보드 ───</div>';
         let funcRow = document.createElement("div"); funcRow.className = "nav-scroll-row";
         funcRow.innerHTML = `
-            <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
+            <button class="btn btn-menu" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
             <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
             <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
             <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 오답노트 보관함</button>
         `;
         funcWrap.appendChild(funcRow); nav.appendChild(funcWrap);
 
-        // 모의고사 25회분
         let mockWrap = document.createElement("div"); mockWrap.className = "nav-section-wrapper";
         mockWrap.innerHTML = '<div class="section-title">─── 기출 모의고사 코스 (1~25회 완비) ───</div>';
         let mockRow = document.createElement("div"); mockRow.className = "nav-scroll-row";
@@ -500,7 +516,6 @@
         }
         mockWrap.appendChild(mockRow); nav.appendChild(mockWrap);
 
-        // 함정 10회분
         let trapWrap = document.createElement("div"); trapWrap.className = "nav-section-wrapper";
         trapWrap.innerHTML = '<div class="section-title">─── 최고 오답률 격파 함정문제 코스 (1~10회 완결) ───</div>';
         let trapRow = document.createElement("div"); trapRow.className = "nav-scroll-row";
@@ -514,16 +529,15 @@
         if(currentMode === mode) return;
         let modeName = (mode === 'real') ? '실전시험' : '모의시험';
         
-        if(confirm(`[${modeName}] 모드로 변경하시겠습니까?\n모드 전환 시 헷갈림 방지를 위해 진행 중이던 모든 답안 기록이 초기화됩니다.`)) {
+        if(confirm(`[${modeName}] 모드로 변경하시겠습니까?\n모드 전환 시 혼선을 방지하기 위해 진행 중이던 모든 답안 기록이 초기화됩니다.`)) {
             currentMode = mode;
             localStorage.setItem('drone_exam_mode', mode);
-            resetAll(true); // 모드 변경 시 전체 리셋 (자동 확인)
+            resetAll(true);
         } else {
             document.querySelector(`input[name="exam_mode"][value="${currentMode}"]`).checked = true;
         }
     }
 
-    // 1. 현재 회차 리셋 함수 (+로컬스토리지 삭제)
     function resetCurrentTab(skipConfirm = false) {
         const tabId = activeTabId;
         if(tabId.includes('how_to_use') || tabId.includes('theory') || tabId.includes('oral_exam') || tabId.includes('wrong_notes')) {
@@ -532,7 +546,6 @@
         }
         if(!skipConfirm && !confirm("현재 화면의 답안과 채점 내역을 완전히 초기화하시겠습니까?")) return;
         
-        // 로컬 스토리지 캐시 삭제
         let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
         let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
         let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
@@ -557,7 +570,6 @@
         if(!skipConfirm) alert("현재 회차가 초기화되었습니다.");
     }
 
-    // 2. 전체 리셋 함수 (+로컬스토리지 완전 삭제)
     function resetAll(skipConfirm = false) {
         if(!skipConfirm && !confirm("진행하신 모든 문제지의 풀이 내역과 오답노트가 삭제됩니다.\n진행하시겠습니까?")) return;
         
@@ -598,7 +610,35 @@
         }
     }
 
-    // 오답노트 캐시 데이터 복구 함수
+    function exportData() {
+        const data = {
+            answers: localStorage.getItem('drone_saved_answers') || '{}',
+            submitted: localStorage.getItem('drone_submitted_tabs') || '[]',
+            wrongNotes: localStorage.getItem('drone_wrong_notes') || '{}',
+            mode: localStorage.getItem('drone_exam_mode') || 'practice',
+            activeTab: localStorage.getItem('drone_active_tab') || 'how_to_use'
+        };
+        const encoded = btoa(encodeURIComponent(JSON.stringify(data)));
+        window.prompt("👇 아래 긴 코드를 복사해서 카카오톡 '나에게 보내기' 등으로 다른 기기에 전송하세요.\n(PC: Ctrl+C / 폰: 꾹 눌러서 복사)", encoded);
+    }
+
+    function importData() {
+        const encoded = window.prompt("PC나 다른 기기에서 복사해 온 '연동 코드'를 아래에 붙여넣기 하세요:");
+        if(!encoded) return;
+        try {
+            const data = JSON.parse(decodeURIComponent(atob(encoded)));
+            localStorage.setItem('drone_saved_answers', data.answers);
+            localStorage.setItem('drone_submitted_tabs', data.submitted);
+            localStorage.setItem('drone_wrong_notes', data.wrongNotes);
+            localStorage.setItem('drone_exam_mode', data.mode);
+            localStorage.setItem('drone_active_tab', data.activeTab);
+            alert("✅ 기기 간 데이터 연동이 성공적으로 완료되었습니다! 페이지를 새로고침합니다.");
+            location.reload();
+        } catch(e) {
+            alert("❌ 코드가 올바르지 않거나 일부가 누락되었습니다. 다시 완벽하게 복사해 주세요.");
+        }
+    }
+
     function restoreWrongNotes() {
         let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
         for (let key in savedWrongNotes) {
@@ -609,7 +649,7 @@
 
     function loadGithubFile(prefix, num) {
         const tabId = prefix + num;
-        activeTabId = tabId;
+        setActiveTabAndSave(tabId);
         
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
@@ -630,7 +670,6 @@
         const btn = document.getElementById(`tab-btn-${tabId}`);
         if(btn) btn.classList.add("active");
 
-        // ★ 탭 이동 시 렌더링된 시험지는 다시 로드하지 않음 (체크박스 상태 보존 핵심 원리)
         if (isAlreadyRendered) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
@@ -695,7 +734,6 @@
                 
                 let isAnswerLine = line.includes("정답") || line.startsWith("[정답]");
 
-                // ★ 선지 파싱 오류 초강력 보완 (1. 1) ① [1] (1) 등 모든 형태 완벽 분리)
                 let m1 = line.match(/^(?:①|1\)|1\.|1\s|\[1\]|\(1\)|1\,)\s*(.*)/);
                 let m2 = line.match(/^(?:②|2\)|2\.|2\s|\[2\]|\(2\)|2\,)\s*(.*)/);
                 let m3 = line.match(/^(?:③|3\)|3\.|3\s|\[3\]|\(3\)|3\,)\s*(.*)/);
@@ -741,7 +779,7 @@
                 let optText = opts[oIdx] ? opts[oIdx] : `(보기 텍스트 파싱 오류 - 깃허브 원본 파일 포맷 확인 요망)`;
                 optionsHtml += `
                     <label class="option-item">
-                        <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onclick="handleAnswerSelect('${tabId}','${index}',${oIdx+1},${ans})">
+                        <input type="radio" name="ans_${tabId}_${index}" value="${oIdx+1}" onchange="handleAnswerSelect('${tabId}','${index}',${oIdx+1},${ans})">
                         &nbsp;${oIdx+1}. ${optText}
                     </label>
                 `;
@@ -760,7 +798,6 @@
             index++;
         });
 
-        // 실전 채점 모드 버튼 영역
         let submitBox = document.createElement("div");
         submitBox.id = `submit-box-${tabId}`;
         submitBox.style.display = (currentMode === 'real') ? 'block' : 'none';
@@ -772,7 +809,6 @@
         `;
         quizBox.appendChild(submitBox);
 
-        // ★ 로컬 스토리지에 저장된 사용자 답안 및 채점결과 복원 시스템
         let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
         let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
 
@@ -783,7 +819,6 @@
                 let radio = quizBox.querySelector(`#card_${tabId}_${i} input[value="${selectedVal}"]`);
                 if(radio) {
                     radio.checked = true;
-                    // 모의시험 모드라면 정답 피드백 바로 보여주기
                     if (currentMode === 'practice') {
                         let qData = wrongQuestionsMap.get(key);
                         if(qData) handleAnswerSelect(tabId, i, selectedVal, qData.ans, true);
@@ -792,26 +827,21 @@
             }
         }
 
-        // 실전시험 모드 제출 이력 복원
         if (currentMode === 'real' && submittedTabs.includes(tabId)) {
             submitRealExam(tabId, true);
         }
     }
 
-    // 답안 선택 시 저장 및 피드백 처리 함수
     function handleAnswerSelect(tabId, idx, selectNum, correctNum, isRestore = false) {
         
-        // 1. 유저가 직접 푼 경우 로컬스토리지에 저장
         if (!isRestore) {
             let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
             savedAnswers[`${tabId}_${idx}`] = selectNum;
             localStorage.setItem('drone_saved_answers', JSON.stringify(savedAnswers));
         }
 
-        // 2. 실전 모드면 피드백 미노출하고 종료
         if (currentMode === 'real' && !isRestore) return;
         
-        // 3. 모의 모드 피드백
         const feed = document.getElementById(`feed_${tabId}_${idx}`);
         const expl = document.getElementById(`expl_${tabId}_${idx}`);
         const key = `${tabId}_${idx}`;
@@ -829,7 +859,6 @@
         if(expl) expl.style.display = "block";
     }
 
-    // 실전시험 채점 함수
     function submitRealExam(tabId, isRestore = false) {
         const cards = document.querySelectorAll(`#inside-${tabId} .q-card`);
         let total = cards.length;
@@ -905,7 +934,6 @@
         }
     }
 
-    // 오답노트 보관함 렌더링 및 저장
     function renderWrongNotesContainer(key, data, isRestore = false) {
         const wrongBox = document.getElementById("container-wrong");
         if(!wrongBox) return;
@@ -942,7 +970,7 @@
     }
 
     function switchTab(tabId) {
-        activeTabId = tabId;
+        setActiveTabAndSave(tabId);
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
         
