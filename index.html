@@ -105,7 +105,7 @@
     <div id="wrong_notes" class="tab-content">
         <div class="info-box" style="border-left-color: var(--error-color);">
             <h3>🔄 전 범위 통합 실시간 크로스 오답노트</h3>
-            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다.</p>
+            <p>틀린 문항들이 여기에 실시간 수집되어 복습 시험지로 자동 구성됩니다. (새로고침해도 보존됩니다!)</p>
         </div>
         <div class="quiz-container" id="container-wrong"></div>
     </div>
@@ -115,7 +115,7 @@
             <h2>💡 드론 스마트 모의고사 시스템 전체 사용 매뉴얼</h2>
             <p>상단 메뉴에서 원하는 회차 버튼을 누르면 <b>깃허브 원격 서버에서 해당 회차의 문제 텍스트 원본을 토시 하나 틀리지 않고 실시간 스트리밍</b>하여 화면에 매칭합니다.</p>
             <h3>✅ 시스템 최적화 완료 안내</h3>
-            <p style="color:var(--success-color); font-weight:bold;">1번 선지 증발 현상(파싱 오류) 완벽 패치 및 다른 탭으로 이동해도 풀었던 답안 기록이 <b>리셋 전까지 영구 유지</b>되도록 캐시 시스템이 도입되었습니다!</p>
+            <p style="color:var(--success-color); font-weight:bold;">1번 선지 증발 현상(파싱 오류) 완벽 패치 및 웹페이지를 나갔다 들어와도 풀었던 답안 기록이 <b>리셋 전까지 영구 유지</b>되도록 로컬 저장소 캐시 시스템이 도입되었습니다!</p>
         </div>
     </div>
 
@@ -434,13 +434,21 @@
 
     let activeTabId = "how_to_use";
     let wrongQuestionsMap = new Map();
-    let currentMode = "practice";
+    // 로컬 스토리지에서 이전 모드를 불러오거나 기본값 적용
+    let currentMode = localStorage.getItem('drone_exam_mode') || 'practice';
 
     function initApp() {
         buildTabs();
-        switchTab("how_to_use");
         
-        // 플로팅 버튼 스크롤 감지
+        // 오답노트 보존 데이터 불러오기
+        restoreWrongNotes();
+
+        // 모드 라디오 버튼 상태 복구
+        let modeRadios = document.getElementsByName('exam_mode');
+        for(let r of modeRadios) { if(r.value === currentMode) r.checked = true; }
+        
+        switchTab("how_to_use");
+
         window.addEventListener('scroll', () => {
             const topBtn = document.getElementById('btn-back-to-top');
             if(window.scrollY > 300) topBtn.style.display = 'flex';
@@ -452,13 +460,13 @@
         const nav = document.getElementById("tabs-nav-bar");
         nav.innerHTML = "";
 
-        // 컨트롤 패널 (모드 선택 및 리셋 영역 추가)
+        // 컨트롤 패널
         let controlWrap = document.createElement("div");
         controlWrap.className = "global-controls";
         controlWrap.innerHTML = `
             <div class="mode-selector">
                 <label style="color:var(--primary-color);">
-                    <input type="radio" name="exam_mode" value="practice" checked onchange="setMode('practice')"> 📘 모의시험 (즉시해설)
+                    <input type="radio" name="exam_mode" value="practice" onchange="setMode('practice')"> 📘 모의시험 (즉시해설)
                 </label>
                 <label style="color:var(--error-color);">
                     <input type="radio" name="exam_mode" value="real" onchange="setMode('real')"> 📝 실전시험 (제출채점)
@@ -466,12 +474,12 @@
             </div>
             <div class="action-buttons">
                 <button class="btn btn-menu" onclick="resetCurrentTab()">🔄 현재회차 리셋</button>
-                <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 리셋</button>
+                <button class="btn btn-wrong" onclick="resetAll()">🗑️ 전체 기록 리셋</button>
             </div>
         `;
         nav.appendChild(controlWrap);
 
-        // 기능형 대시보드 허브
+        // 기능형 대시보드
         let funcWrap = document.createElement("div"); funcWrap.className = "nav-section-wrapper";
         funcWrap.innerHTML = '<div class="section-title">─── 스마트 허브 대시보드 ───</div>';
         let funcRow = document.createElement("div"); funcRow.className = "nav-scroll-row";
@@ -479,7 +487,7 @@
             <button class="btn btn-menu active" id="tab-btn-how_to_use" onclick="switchTab('how_to_use')">💡 스마트 사용법</button>
             <button class="btn btn-menu" id="tab-btn-theory" onclick="switchTab('theory')">📖 핵심이론요약</button>
             <button class="btn btn-menu" id="tab-btn-oral_exam" onclick="switchTab('oral_exam')">🗣️ 구술평가자료</button>
-            <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 오답노트 문제구성</button>
+            <button class="btn btn-wrong" id="tab-btn-wrong_notes" onclick="switchTab('wrong_notes')">🔄 오답노트 보관함</button>
         `;
         funcWrap.appendChild(funcRow); nav.appendChild(funcWrap);
 
@@ -508,41 +516,64 @@
         
         if(confirm(`[${modeName}] 모드로 변경하시겠습니까?\n모드 전환 시 헷갈림 방지를 위해 진행 중이던 모든 답안 기록이 초기화됩니다.`)) {
             currentMode = mode;
-            document.getElementById("container-wrong").innerHTML = "";
-            wrongQuestionsMap.clear();
-            document.querySelectorAll(".quiz-container").forEach(container => {
-                const tabId = container.id.replace('inside-', '');
-                if(tabId && tabId !== 'container-wrong') resetTabUI(tabId);
-            });
-            document.querySelectorAll("[id^='submit-box-']").forEach(box => {
-                box.style.display = (mode === 'real') ? "block" : "none";
-            });
+            localStorage.setItem('drone_exam_mode', mode);
+            resetAll(true); // 모드 변경 시 전체 리셋 (자동 확인)
         } else {
-            // 취소 시 라디오버튼 원복
             document.querySelector(`input[name="exam_mode"][value="${currentMode}"]`).checked = true;
         }
     }
 
-    function resetCurrentTab() {
+    // 1. 현재 회차 리셋 함수 (+로컬스토리지 삭제)
+    function resetCurrentTab(skipConfirm = false) {
         const tabId = activeTabId;
         if(tabId.includes('how_to_use') || tabId.includes('theory') || tabId.includes('oral_exam') || tabId.includes('wrong_notes')) {
-            alert("초기화할 문제지가 열려있지 않습니다. 모의고사나 함정 코스를 선택해 주세요.");
+            if(!skipConfirm) alert("초기화할 문제지가 열려있지 않습니다. 모의고사나 함정 코스를 선택해 주세요.");
             return;
         }
-        if(!confirm("현재 화면의 답안과 채점 내역을 완전히 초기화하시겠습니까?")) return;
+        if(!skipConfirm && !confirm("현재 화면의 답안과 채점 내역을 완전히 초기화하시겠습니까?")) return;
+        
+        // 로컬 스토리지 캐시 삭제
+        let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
+        let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
+        let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
+
+        for (let key in savedAnswers) {
+            if (key.startsWith(tabId + '_')) delete savedAnswers[key];
+        }
+        for (let key in savedWrongNotes) {
+            if (key.startsWith(tabId + '_')) {
+                delete savedWrongNotes[key];
+                let wrongCard = document.getElementById(`wrong_card_${key}`);
+                if (wrongCard) wrongCard.remove();
+            }
+        }
+        submittedTabs = submittedTabs.filter(t => t !== tabId);
+
+        localStorage.setItem('drone_saved_answers', JSON.stringify(savedAnswers));
+        localStorage.setItem('drone_submitted_tabs', JSON.stringify(submittedTabs));
+        localStorage.setItem('drone_wrong_notes', JSON.stringify(savedWrongNotes));
+
         resetTabUI(tabId);
-        alert("현재 회차가 초기화되었습니다.");
+        if(!skipConfirm) alert("현재 회차가 초기화되었습니다.");
     }
 
-    function resetAll() {
-        if(!confirm("진행하신 모든 문제지의 풀이 내역과 오답노트가 삭제됩니다.\n진행하시겠습니까?")) return;
+    // 2. 전체 리셋 함수 (+로컬스토리지 완전 삭제)
+    function resetAll(skipConfirm = false) {
+        if(!skipConfirm && !confirm("진행하신 모든 문제지의 풀이 내역과 오답노트가 삭제됩니다.\n진행하시겠습니까?")) return;
+        
+        localStorage.removeItem('drone_saved_answers');
+        localStorage.removeItem('drone_submitted_tabs');
+        localStorage.removeItem('drone_wrong_notes');
+        
         document.getElementById("container-wrong").innerHTML = "";
         wrongQuestionsMap.clear();
+        
         document.querySelectorAll(".quiz-container").forEach(container => {
             const tabId = container.id.replace('inside-', '');
             if(tabId && tabId !== 'container-wrong') resetTabUI(tabId);
         });
-        alert("전체 데이터 리셋이 완료되었습니다.");
+        
+        if(!skipConfirm) alert("전체 데이터 리셋이 완료되었습니다.");
     }
 
     function resetTabUI(tabId) {
@@ -560,6 +591,20 @@
         if(scoreDiv) scoreDiv.innerHTML = "";
         const submitBtn = document.getElementById(`submit-btn-${tabId}`);
         if(submitBtn) submitBtn.style.display = "inline-block";
+        
+        if(currentMode === 'real') {
+            const submitBox = document.getElementById(`submit-box-${tabId}`);
+            if(submitBox) submitBox.style.display = "block";
+        }
+    }
+
+    // 오답노트 캐시 데이터 복구 함수
+    function restoreWrongNotes() {
+        let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
+        for (let key in savedWrongNotes) {
+            renderWrongNotesContainer(key, savedWrongNotes[key], true);
+            wrongQuestionsMap.set(key, savedWrongNotes[key]);
+        }
     }
 
     function loadGithubFile(prefix, num) {
@@ -570,9 +615,8 @@
         document.querySelectorAll('.btn-menu, .btn-trap, .btn-wrong').forEach(btn => btn.classList.remove('active'));
         
         let targetTab = document.getElementById(tabId);
-        let alreadyLoaded = false;
+        let isAlreadyRendered = false;
 
-        // ★ 탭 상태 영구 유지 캐싱 처리 로직 (재로딩 방지)
         if(!targetTab) {
             targetTab = document.createElement("div");
             targetTab.id = tabId;
@@ -580,16 +624,14 @@
             document.getElementById("main-pan-container").appendChild(targetTab);
         } else {
             targetTab.classList.add("active");
-            if(targetTab.querySelector('.quiz-container')) {
-                alreadyLoaded = true; // DOM 요소가 있다면 이미 로드되어 문제 풀이가 진행중인 상태
-            }
+            if(targetTab.querySelector('.quiz-container')) isAlreadyRendered = true;
         }
         
         const btn = document.getElementById(`tab-btn-${tabId}`);
         if(btn) btn.classList.add("active");
 
-        // ★ 이미 렌더링된 시험지는 다시 fetch(로딩)하지 않고 여기서 멈춤으로써, 체크했던 답안을 그대로 유지시킵니다.
-        if (alreadyLoaded) {
+        // ★ 탭 이동 시 렌더링된 시험지는 다시 로드하지 않음 (체크박스 상태 보존 핵심 원리)
+        if (isAlreadyRendered) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
@@ -631,10 +673,8 @@
         `;
 
         const quizBox = document.getElementById(`inside-${tabId}`);
-        
         let normalized = text.replace(/\r\n/g, "\n").trim();
         let blocks = normalized.split(/\n(?=Q\d+)/i).map(b => b.trim()).filter(b => b.length > 0);
-        
         let index = 1;
 
         blocks.forEach(block => {
@@ -653,7 +693,13 @@
                     return;
                 }
                 
-                let isAnswerLine = /^(?:\[정답\]|정답)\s*[:\.]?\s*[1234①②③④]/.test(line);
+                let isAnswerLine = line.includes("정답") || line.startsWith("[정답]");
+
+                // ★ 선지 파싱 오류 초강력 보완 (1. 1) ① [1] (1) 등 모든 형태 완벽 분리)
+                let m1 = line.match(/^(?:①|1\)|1\.|1\s|\[1\]|\(1\)|1\,)\s*(.*)/);
+                let m2 = line.match(/^(?:②|2\)|2\.|2\s|\[2\]|\(2\)|2\,)\s*(.*)/);
+                let m3 = line.match(/^(?:③|3\)|3\.|3\s|\[3\]|\(3\)|3\,)\s*(.*)/);
+                let m4 = line.match(/^(?:④|4\)|4\.|4\s|\[4\]|\(4\)|4\,)\s*(.*)/);
 
                 if (isAnswerLine) {
                     readingQuestion = false;
@@ -665,25 +711,12 @@
                         if (m[0] === '4' || m[0] === '④') ans = 4;
                     }
                     let extra = line.replace(/^(?:\[정답\]|정답)\s*[:\.]?\s*[1234①②③④]/, "").trim();
-                    if (extra.length > 1) explanationText += extra + " ";
+                    if (extra.length > 1 && !extra.startsWith("번")) explanationText += extra + " ";
                 } 
-                // ★ "텍스트 매칭 실패" 완벽 해결: 1., 1), ①, [1] 형태 및 "1 빈칸" 형태를 모두 정밀하게 걸러냄
-                else if (/^(①|1\)|1\.|1\s|\[1\])/.test(line)) {
-                    opts[0] = line.replace(/^(①|1\)|1\.|1\s|\[1\])\s*/, "").trim();
-                    readingQuestion = false;
-                } 
-                else if (/^(②|2\)|2\.|2\s|\[2\])/.test(line)) {
-                    opts[1] = line.replace(/^(②|2\)|2\.|2\s|\[2\])\s*/, "").trim();
-                    readingQuestion = false;
-                } 
-                else if (/^(③|3\)|3\.|3\s|\[3\])/.test(line)) {
-                    opts[2] = line.replace(/^(③|3\)|3\.|3\s|\[3\])\s*/, "").trim();
-                    readingQuestion = false;
-                } 
-                else if (/^(④|4\)|4\.|4\s|\[4\])/.test(line)) {
-                    opts[3] = line.replace(/^(④|4\)|4\.|4\s|\[4\])\s*/, "").trim();
-                    readingQuestion = false;
-                }
+                else if (m1 && !isAnswerLine) { opts[0] = m1[1].trim(); readingQuestion = false; }
+                else if (m2 && !isAnswerLine) { opts[1] = m2[1].trim(); readingQuestion = false; }
+                else if (m3 && !isAnswerLine) { opts[2] = m3[1].trim(); readingQuestion = false; }
+                else if (m4 && !isAnswerLine) { opts[3] = m4[1].trim(); readingQuestion = false; }
                 else if (line.startsWith("[해설]") || line.startsWith("해설:") || line.startsWith("[설명]")) {
                     readingQuestion = false;
                     explanationText += line.replace(/^(?:\[해설\]|해설:|\[설명\])/, "").trim() + " ";
@@ -727,22 +760,58 @@
             index++;
         });
 
-        // 실전 채점 모드용 버튼 (평소엔 숨김)
+        // 실전 채점 모드 버튼 영역
         let submitBox = document.createElement("div");
         submitBox.id = `submit-box-${tabId}`;
         submitBox.style.display = (currentMode === 'real') ? 'block' : 'none';
         submitBox.style.textAlign = 'center';
         submitBox.style.marginTop = '35px';
         submitBox.innerHTML = `
-            <button id="submit-btn-${tabId}" class="btn btn-menu" style="background-color: var(--primary-color); color: white; padding: 18px 40px; font-size: 1.15rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border:none;" onclick="submitRealExam('${tabId}')">📝 실제시험 제출 및 채점하기</button>
+            <button id="submit-btn-${tabId}" class="btn btn-menu" style="background-color: var(--primary-color); color: white; padding: 18px 40px; font-size: 1.15rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border:none;" onclick="submitRealExam('${tabId}')">📝 실전시험 제출 및 채점하기</button>
             <div id="score-result-${tabId}"></div>
         `;
         quizBox.appendChild(submitBox);
+
+        // ★ 로컬 스토리지에 저장된 사용자 답안 및 채점결과 복원 시스템
+        let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
+        let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
+
+        for(let i=1; i<index; i++) {
+            let key = `${tabId}_${i}`;
+            if(savedAnswers[key]) {
+                let selectedVal = savedAnswers[key];
+                let radio = quizBox.querySelector(`#card_${tabId}_${i} input[value="${selectedVal}"]`);
+                if(radio) {
+                    radio.checked = true;
+                    // 모의시험 모드라면 정답 피드백 바로 보여주기
+                    if (currentMode === 'practice') {
+                        let qData = wrongQuestionsMap.get(key);
+                        if(qData) handleAnswerSelect(tabId, i, selectedVal, qData.ans, true);
+                    }
+                }
+            }
+        }
+
+        // 실전시험 모드 제출 이력 복원
+        if (currentMode === 'real' && submittedTabs.includes(tabId)) {
+            submitRealExam(tabId, true);
+        }
     }
 
-    function handleAnswerSelect(tabId, idx, selectNum, correctNum) {
-        if (currentMode === 'real') return;
+    // 답안 선택 시 저장 및 피드백 처리 함수
+    function handleAnswerSelect(tabId, idx, selectNum, correctNum, isRestore = false) {
         
+        // 1. 유저가 직접 푼 경우 로컬스토리지에 저장
+        if (!isRestore) {
+            let savedAnswers = JSON.parse(localStorage.getItem('drone_saved_answers') || '{}');
+            savedAnswers[`${tabId}_${idx}`] = selectNum;
+            localStorage.setItem('drone_saved_answers', JSON.stringify(savedAnswers));
+        }
+
+        // 2. 실전 모드면 피드백 미노출하고 종료
+        if (currentMode === 'real' && !isRestore) return;
+        
+        // 3. 모의 모드 피드백
         const feed = document.getElementById(`feed_${tabId}_${idx}`);
         const expl = document.getElementById(`expl_${tabId}_${idx}`);
         const key = `${tabId}_${idx}`;
@@ -754,30 +823,33 @@
         } else {
             feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`; 
             feed.className = "feedback wrong";
-            renderWrongNotesContainer(key, qData);
+            renderWrongNotesContainer(key, qData, isRestore);
         }
         feed.style.display = "block";
         if(expl) expl.style.display = "block";
     }
 
-    function submitRealExam(tabId) {
+    // 실전시험 채점 함수
+    function submitRealExam(tabId, isRestore = false) {
         const cards = document.querySelectorAll(`#inside-${tabId} .q-card`);
         let total = cards.length;
         let correctCount = 0;
         let unansCount = 0;
 
-        cards.forEach(card => {
-            if(!card.querySelector(`input[type="radio"]:checked`)) unansCount++;
-        });
-
-        if(unansCount > 0) {
-            if(!confirm(`아직 풀지 않은 문제가 ${unansCount}개 있습니다.\n이대로 제출하시겠습니까? (미입력 문항은 모두 오답 처리됩니다)`)) return;
+        if (!isRestore) {
+            cards.forEach(card => {
+                if(!card.querySelector(`input[type="radio"]:checked`)) unansCount++;
+            });
+            if(unansCount > 0) {
+                if(!confirm(`아직 풀지 않은 문제가 ${unansCount}개 있습니다.\n이대로 제출하시겠습니까? (미입력 문항은 모두 오답 처리됩니다)`)) return;
+            }
         }
 
         cards.forEach(card => {
             const idx = card.id.split('_').pop();
             const key = `${tabId}_${idx}`;
             const qData = wrongQuestionsMap.get(key);
+            if (!qData) return; 
             const correctNum = qData.ans;
             
             const selected = card.querySelector(`input[type="radio"]:checked`);
@@ -787,7 +859,7 @@
             if (!selected) {
                 feed.innerHTML = `❌ 미입력. 실제 정답은 ${correctNum}번입니다.`;
                 feed.className = "feedback wrong";
-                renderWrongNotesContainer(key, qData);
+                renderWrongNotesContainer(key, qData, isRestore);
             } else {
                 const selectNum = parseInt(selected.value);
                 if (selectNum === correctNum) {
@@ -797,11 +869,11 @@
                 } else {
                     feed.innerHTML = `❌ 틀렸습니다. 실제 정답은 ${correctNum}번입니다.`;
                     feed.className = "feedback wrong";
-                    renderWrongNotesContainer(key, qData);
+                    renderWrongNotesContainer(key, qData, isRestore);
                 }
             }
             feed.style.display = "block";
-            expl.style.display = "block";
+            if(expl) expl.style.display = "block";
         });
 
         const score = Math.round((correctCount / total) * 100);
@@ -822,10 +894,19 @@
         `;
         
         document.getElementById(`submit-btn-${tabId}`).style.display = "none";
-        resultDiv.scrollIntoView({ behavior: 'smooth' });
+        
+        if (!isRestore) {
+            let submittedTabs = JSON.parse(localStorage.getItem('drone_submitted_tabs') || '[]');
+            if (!submittedTabs.includes(tabId)) {
+                submittedTabs.push(tabId);
+                localStorage.setItem('drone_submitted_tabs', JSON.stringify(submittedTabs));
+            }
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
-    function renderWrongNotesContainer(key, data) {
+    // 오답노트 보관함 렌더링 및 저장
+    function renderWrongNotesContainer(key, data, isRestore = false) {
         const wrongBox = document.getElementById("container-wrong");
         if(!wrongBox) return;
         if(document.getElementById(`wrong_card_${key}`)) return;
@@ -852,6 +933,12 @@
             <div class="explanation" style="display:block; background-color:#fff5f5;">💡 <b>복습 해설:</b> ${data.explanationText}</div>
         `;
         wrongBox.appendChild(wrongCard);
+
+        if (!isRestore) {
+            let savedWrongNotes = JSON.parse(localStorage.getItem('drone_wrong_notes') || '{}');
+            savedWrongNotes[key] = data;
+            localStorage.setItem('drone_wrong_notes', JSON.stringify(savedWrongNotes));
+        }
     }
 
     function switchTab(tabId) {
